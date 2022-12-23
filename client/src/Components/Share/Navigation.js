@@ -119,7 +119,7 @@ const StyledHistory = styled.div`
   visibility: ${({ focused }) => (focused ? "visible" : "hidden")};
   position: relative;
   top: -2px;
-  left: 39px;
+  left: 43px;
   width: 667px;
   height: 100%;
   border: 1px solid #babfc4;
@@ -173,13 +173,14 @@ const StyledButton = styled.button`
   border-radius: 3px;
   color: ${({ type }) => (type === 1 ? "#54759D" : "white")};
   background-color: ${({ type }) => (type === 1 ? "#E1ECF4" : "#0A95FF")};
+  cursor: pointer;
 `;
 
 const StyledMenu = styled.div`
   visibility: ${({ isFold }) => (isFold ? "visible" : "hidden")};
   position: relative;
   top: 1px;
-  left: -173px;
+  left: -172px;
   width: 240px;
   height: 300px;
   background-color: white;
