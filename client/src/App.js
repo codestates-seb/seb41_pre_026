@@ -8,9 +8,7 @@ function App() {
   //   method: "GET",
   //   body: "",
   // };
-
   // console.log(useRequest(url, option));
-
   return (
     <BrowserRouter>
       <Routes>
@@ -19,5 +17,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
