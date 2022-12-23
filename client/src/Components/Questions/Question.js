@@ -42,13 +42,17 @@ const SummaryContent = styled.div`
   flex-grow: 1;
   max-width: 100%;
   a {
+    text-decoration: none;
     font-size: 17px;
     color: #0074cc;
+    cursor: pointer;
+    user-select: auto;
   }
   div {
+    margin-top: 1x;
+    margin-bottom: 8px;
     fonst-size: 13px;
     color: #3b4045;
-    margin: -2, 0, 8;
   }
 `;
 
@@ -66,6 +70,8 @@ const Info = styled.div`
     gap: 4px;
   }
   ul {
+    margin: 4px 4px 0px 0px;
+    padding: 0px;
     flex-direction: row;
     line-height: 18px;
     float: left;
@@ -75,8 +81,8 @@ const Info = styled.div`
     display: inline-block;
     font-size: 12px;
     margin: 2px;
-    padding: 2px 4px;
-    border-radius: 10%;
+    padding: 4px 6px;
+    border-radius: 3px;
     color: #39739d;
     background-color: #e1ecf4;
   }
