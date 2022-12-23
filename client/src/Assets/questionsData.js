@@ -13,7 +13,7 @@ export const data = [
   },
   {
     id: 2,
-    vote: 0,
+    vote: 1,
     answerCount: 1,
     view: 10,
     title: "React Native 어쩌구 궁금해요 wppqfkkd",
@@ -22,6 +22,7 @@ export const data = [
     tags: ["tag3", "tag4"],
     mid: "sweety",
     createdAt: "2022-12-22 22:08:01",
+    isAdopted: true,
   },
   {
     id: 3,

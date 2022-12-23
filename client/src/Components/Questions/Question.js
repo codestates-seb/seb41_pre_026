@@ -23,6 +23,19 @@ const SummaryStats = styled.div`
   .stats-item-vote {
     color: #0c0d0e;
   }
+  .stats-item-answer {
+    color: #2f6f44;
+    border: 0.5px solid #2f6f44;
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
+  .stats-item-answer-adopted {
+    color: #ffffff;
+    background-color: #2f6f44;
+    border: 0.5px solid #2f6f44;
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
 `;
 
 const SummaryContent = styled.div`
@@ -62,19 +75,19 @@ const Info = styled.div`
     display: inline-block;
     font-size: 12px;
     margin: 2px;
-    padding: 2px;
-    border-box:
+    padding: 2px 4px;
+    border-radius: 10%;
     color: #39739d;
     background-color: #e1ecf4;
   }
 
-  .content-item-profile{
+  .content-item-profile {
     flex-wrap: wrap;
     margin-left: auto;
     justify-content: flex-end;
   }
 
-  span{
+  span {
     margin: 2px;
     font-size: 12px;
     color: #6a737c;
@@ -87,15 +100,21 @@ function Question({ question, id }) {
       <SummaryStats>
         <div className="stats-item-vote">
           <span>{question.vote} </span>
-          <span>votes</span>
+          <span>{question.vote === 1 ? "vote" : "votes"}</span>
         </div>
-        <div>
+        <div
+          className={
+            question.isAdopted
+              ? "stats-item-answer-adopted"
+              : "stats-item-answer"
+          }
+        >
           <span>{question.answerCount} </span>
-          <span>answers</span>
+          <span>{question.answerCount === 1 ? "answer" : "answers"}</span>
         </div>
         <div>
           <span>{question.view} </span>
-          <span>views</span>
+          <span>{question.view === 1 ? "view" : "views"}</span>
         </div>
       </SummaryStats>
       <SummaryContent key={question.id}>
