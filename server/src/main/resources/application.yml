@@ -2,18 +2,17 @@ spring:
   datasource:
     url: jdbc:h2:mem:test
 
-jpa:
-  hibernate:
-    ddl-auto: create
-  properties:
+  jpa:
     hibernate:
-      format_sql: true
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
 
-h2:
-  console:
-    enabled: true
-    path: /h2
-
+  h2:
+    console:
+      enabled: true
+      path: /h2
 
 logging:
   level:
