@@ -1,34 +1,30 @@
 import styled from "styled-components";
 
-const HeaderContainer = styled.header`
-  width: 580px;
-  height: 120px;
-  border: 2px solid;
+const StyledHeader = styled.header`
+  width: 700px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const StyledDiv = styled.div`
-  width: 571px;
-  height: 51px;
-  margin: 12px 0px;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  margin: 0px 0px 0px 20px;
 `;
 
-const AllQuestions = styled.h1`
+const StyledH1 = styled.h1`
   color: #232629;
   width: 456px;
   height: 38px;
-  font-size: 27px;
+  font-size: 32px;
   margin: 0px 12px 12px 0px;
   font-weight: 400;
   line-height: 35.1px;
 `;
 
-const AskBtn = styled.button`
+const StyledBtn = styled.button`
   color: #ffffff;
   width: 103px;
   height: 38px;
@@ -44,68 +40,51 @@ const AskBtn = styled.button`
   border-radius: 2px;
 `;
 
-const QuestionTotal = styled.div`
+const StyledSpan = styled.span`
+  height: 100%;
   color: #232629;
-  display: block;
-  font-size: 17px;
-  flex: 1 auto;
-  line-height: 22px;
+  font-size: 18px;
   font-weight: 400;
+  margin-top: 12px;
 `;
 
-const NewestSort = styled.button`
-  width: 63px;
-  height: 35px;
-  background-color: #ffffff;
-  color: rgb(59, 64, 69);
-  border: 1px solid;
-  border-color: hsl(210, 8%, 55%);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 12px;
-  margin-bottom: -1px;
-  margin-right: -1px;
-  padding: 9.6px;
-  position: relative;
-`;
+const StyledBtnDiv = styled.div`
+  button {
+    height: 35px;
+    border: 1px solid #838c95;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    color: rgb(59, 64, 69);
+  }
 
-const UnansweredSort = styled.button`
-  width: 94px;
-  height: 35px;
-  background-color: #ffffff;
-  color: rgb(59, 64, 69);
-  border: 1px solid;
-  border-color: hsl(210, 8%, 55%);
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 12px;
-  margin-bottom: -1px;
-  margin-right: -1px;
-  padding: 9.6px;
-  position: relative;
+  button:first-child {
+    border-right: 0px #838c95;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  button:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
 `;
 
 function Header() {
   return (
-    <HeaderContainer>
+    <StyledHeader>
       <StyledDiv>
-        <AllQuestions>All Questions</AllQuestions>
-        <AskBtn>Ask Question</AskBtn>
+        <StyledH1>All Questions</StyledH1>
+        <StyledBtn>Ask Question</StyledBtn>
       </StyledDiv>
       <StyledDiv>
-        <QuestionTotal>23,350,032 questions</QuestionTotal>
-        <div>
-          <NewestSort>Newest</NewestSort>
-          <UnansweredSort>Unanswered</UnansweredSort>
-        </div>
+        <StyledSpan>23,350,032 questions</StyledSpan>
+        <StyledBtnDiv>
+          <button>Newest</button>
+          <button>Unanswered</button>
+        </StyledBtnDiv>
       </StyledDiv>
-    </HeaderContainer>
+    </StyledHeader>
   );
 }
 
