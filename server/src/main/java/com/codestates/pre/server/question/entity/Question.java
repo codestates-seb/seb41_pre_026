@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Questions {
+public class Question {
 	@Id @GeneratedValue
 	private long questionId;
 
