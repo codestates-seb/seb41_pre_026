@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyledHeader = styled.header`
   width: 700px;
@@ -56,6 +57,7 @@ const StyledBtnDiv = styled.div`
     font-weight: 400;
     line-height: 12px;
     color: rgb(59, 64, 69);
+    cursor: pointer;
   }
 
   button:first-child {
@@ -68,9 +70,23 @@ const StyledBtnDiv = styled.div`
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   }
+
+  button:nth-of-type(${({ select }) => select}) {
+    background-color: #e3e6e8;
+  }
+
+  .none {
+    display: none;
+  }
 `;
 
 function Header() {
+  const [selecBtn, setSelecBtn] = useState(1);
+
+  const handleBtnColor = (e) => {
+    setSelecBtn(e.target.id);
+  };
+
   return (
     <StyledHeader>
       <StyledDiv>
@@ -79,9 +95,13 @@ function Header() {
       </StyledDiv>
       <StyledDiv>
         <StyledSpan>23,350,032 questions</StyledSpan>
-        <StyledBtnDiv>
-          <button>Newest</button>
-          <button>Unanswered</button>
+        <StyledBtnDiv select={selecBtn}>
+          <button id="1" onClick={handleBtnColor}>
+            Newest
+          </button>
+          <button id="2" onClick={handleBtnColor}>
+            Unanswered
+          </button>
         </StyledBtnDiv>
       </StyledDiv>
     </StyledHeader>
