@@ -58,6 +58,7 @@ const StyledBtnDiv = styled.div`
     line-height: 12px;
     color: rgb(59, 64, 69);
     cursor: pointer;
+    background-color: #ffffff;
   }
 
   button:first-child {
@@ -73,10 +74,6 @@ const StyledBtnDiv = styled.div`
 
   button:nth-of-type(${({ select }) => select}) {
     background-color: #e3e6e8;
-  }
-
-  .none {
-    display: none;
   }
 `;
 
