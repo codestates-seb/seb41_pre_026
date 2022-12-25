@@ -2,11 +2,12 @@ package com.codestates.pre.server.question.dto;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 import com.codestates.pre.server.tag.Tags;
 
+import lombok.Getter;
+
+@Getter
 public class QuestionPatchDto {
 	private long id; // questionId
 
@@ -15,4 +16,8 @@ public class QuestionPatchDto {
 	private String expecting;
 
 	private List<Tags> tags;
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

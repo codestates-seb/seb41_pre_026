@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 
 import org.aspectj.apache.bcel.generic.Tag;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public class QuestionResponseDto {
 	private long id; // questionId
 
