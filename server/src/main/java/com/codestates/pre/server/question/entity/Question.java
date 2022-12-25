@@ -24,9 +24,9 @@ public class Question {
 
 	private String expecting;
 
-	private LocalDateTime createdAt = LocalDateTime.now();
+	private LocalDateTime createdAt;
 
-	private LocalDateTime modifiedAt;
+	private LocalDateTime modifiedAt = LocalDateTime.now();
 
 	private int score;
 

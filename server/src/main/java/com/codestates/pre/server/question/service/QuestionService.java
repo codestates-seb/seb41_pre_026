@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +26,7 @@ public class QuestionService {
 
 	public Question creatQuestion(Question question) {
 		verifyStrLength(question);
+		question.setCreatedAt(LocalDateTime.now());
 		return questionRepository.save(question);
 	}
 
