@@ -8,17 +8,14 @@ const PostContainer = styled.div`
   overflow-wrap: break-word;
   p {
     color: #232629;
-    margin-block-end: 16.5px;
-    margin-block-start: 0px;
-    margin-bottom: 16.5px;
   }
   pre {
     background-color: #f6f6f6;
   }
   .tags {
-    display: block;
+    display: flex;
     font-size: 13px;
-    margin: 24px 12px 0px 0px;
+    margin: 0px 0px 16px;
     ul {
       margin: 4px 4px 0px 0px;
       padding: 0px;
@@ -37,15 +34,55 @@ const PostContainer = styled.div`
       background-color: #e1ecf4;
     }
   }
-  .profile {
+  .question-footer {
     align-items: flex-start;
     display: flex;
-    felx-wrap: wrap;
-    font-size: 13px;
-    justify-content: flex-end;
-    margin: 16px 16px 0px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    margin: 16px 16px 0px 0px;
     padding-top: 4px;
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #6a737c;
+      div {
+        display: block;
+        padding: 4px;
+        margin-right: 4px;
+      }
+      a {
+        text-decoration: none;
+        color: #6a737c;
+      }
+    }
+    .profile {
+      background-color: #d9eaf7;
+      align-items: flex-start;
+      display: flex;
+      felx-wrap: wrap;
+      font-size: 13px;
+      justify-content: flex-end;
+      text-align: left;
+      vertical-align: baseline;
+      margin: 0px 16px 0px 0px;
+      padding: 4px;
+      border-radius: 3px;
+    }
   }
+`;
+
+const markdown = `
+#heading
+    **bold**
+text
+\`\`\`
+    code block
+\`\`\`
+*incline*
+text \`background-color\`
+> quote
 `;
 
 function Post() {
@@ -61,7 +98,7 @@ function Post() {
       </p>
       <div>
         <pre>
-          <code> 이거 어떻게 해~~~ 나는 모르겠는디</code>
+          <code>이거 어떻게 해~~~ 나는 모르겠는디{markdown}</code>
         </pre>
       </div>
       <div className="tags">
@@ -71,7 +108,20 @@ function Post() {
           <li>css</li>
         </ul>
       </div>
-      <div className="profile">share & createdAt & profile</div>
+      <div className="question-footer">
+        <div className="menu">
+          <div>
+            <a href="/">Share</a>
+          </div>
+          <div>
+            <a href="/">Follow</a>
+          </div>
+        </div>
+        <div className="profile">
+          <img alt=""></img>
+          <span>user name</span>
+        </div>
+      </div>
     </PostContainer>
   );
 }

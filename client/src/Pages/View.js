@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { StyledBlueBtn } from "../Components/Share/Button";
 import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
+import Answer from "../Components/View/Answer";
 
 const Container = styled.div`
   max-width: 1100px;
@@ -13,7 +14,7 @@ const Container = styled.div`
   border-bottom-width: 0;
   border-left-width: 1px;
   border-right-width: 0;
-  padding: 24px;
+  padding: 60px;
   box-sizing: border-box;
   display: block;
   .question-header {
@@ -22,13 +23,20 @@ const Container = styled.div`
     flex-flow: row nowrap;
     text-align: left;
     justify-content: space-between;
-    margin-bottom: 0;
+    margin-bottom: 0px;
+    padding: 0px;
+    line-height: 17px;
+    .question-title {
+      display: block;
+      margin-bottom: 8px;
+    }
     p {
-      color: rgb(59, 64, 69);
+      color: #3b4045;
       font-size: 24px;
-      font-weight: normal;
-      line-height: 1.35;
-      margin-bottom: 8px !important;
+      font-weight: 400;
+    }
+    .button-container {
+      margin: 0px 0px 0px 12px;
     }
     a {
       cursor: pointer;
@@ -78,7 +86,7 @@ const Container = styled.div`
     }
     .question-content-post {
       display: block;
-      padding-right: 16px;
+      padding: 0px 16px;
       vertical-align: top;
     }
   }
@@ -88,10 +96,14 @@ function View() {
   return (
     <Container>
       <div className="question-header">
-        <p>Close to end of the page, element needs to disappear</p>
-        <StyledBlueBtn>
-          <a href="/">Ask Question</a>
-        </StyledBlueBtn>
+        <div className="question title">
+          <p>Close to end of the page, element needs to disappear</p>
+        </div>
+        <div className="button-container">
+          <StyledBlueBtn>
+            <a href="/">Ask Question</a>
+          </StyledBlueBtn>
+        </div>
       </div>
       <div className="question-info">
         <div>
@@ -115,6 +127,7 @@ function View() {
           <Post />
         </div>
       </div>
+      <Answer />
     </Container>
   );
 }
