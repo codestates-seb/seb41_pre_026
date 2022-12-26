@@ -4,4 +4,5 @@ import com.codestates.pre.server.answer.entity.Answer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnswerRepository extends JpaRepository<Answer,Long>{
+	Long countAnswerByMember_MemberId(Long memberId);
 }

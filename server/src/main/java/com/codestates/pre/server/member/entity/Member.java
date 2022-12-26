@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.question.entity.Question;
@@ -36,19 +37,45 @@ public class Member {
 
 	// private String image;
 
+	@Transient
+	private Long questionCount;
 
+	@Transient
+	private Long answerCount;
+
+	/*
 	@OneToMany(mappedBy = "member")
 	private List<Question> questions = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member")
 	private List<Answer> answers = new ArrayList<>();
 
-	//추후에 연관관계 매핑 후 추가
-
+	✏️Advanced~
+	 */
 
 	public Member(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 	}
+
+	/*
+	//  양방향
+	//  한 쪽의 엔티티만 추가해주는 실수를 하더라도 다른 쪽 엔티티를 추가해 주도록 qeustion쪽에도 member 추가
+	public void setQuestion(Question question) {
+		questions.add(question);
+		if (question.getMember() != this) {
+			question.setMember(this);
+		}
+	}
+
+	public void setAnswer(Answer answer) {
+		answers.add(answer);
+		if (answer.getMember() != this) {
+			answer.setMember(this);
+		}
+	}
+
+	✏️Advanced~
+	 */
 }

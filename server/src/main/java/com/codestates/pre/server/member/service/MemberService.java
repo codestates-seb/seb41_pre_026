@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.member.repository.MemberRepository;
+import com.codestates.pre.server.question.entity.Question;
+import com.codestates.pre.server.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 
 //트랙잭션 추후에 적용 (이벤트 퍼블리셔, 회원가입 이메일 전송 로직)
@@ -16,10 +19,16 @@ import com.codestates.pre.server.utils.CustomBeanUtils;
 public class MemberService {
 	private final MemberRepository memberRepository;
 	private final CustomBeanUtils<Member> beanUtils;
+	private final QuestionRepository questionRepository;
+	private final AnswerRepository answerRepository;
 
-	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
+	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils,
+		QuestionRepository questionRepository,
+		AnswerRepository answerRepository) {
 		this.memberRepository = memberRepository;
 		this.beanUtils = beanUtils;
+		this.questionRepository = questionRepository;
+		this.answerRepository = answerRepository;
 	}
 
 	public Member createMember(Member member) {
@@ -36,9 +45,11 @@ public class MemberService {
 		return memberRepository.save(updatedMember);
 	}
 
-	// 마이페이지 조회, findMember 메서드 명 괜찮을까? 컨트롤러에서 본인만 볼 수 있는 로직 추가 필요? or fe에서 처리?
 	public Member findMember(long memberId) {
-		return findVerifiedMember(memberId);
+		Member findMember = findVerifiedMember(memberId);
+		findMember.setQuestionCount(getQuestionCount(memberId));
+		findMember.setAnswerCount(getAnswersCount(memberId));
+		return findMember;
 	}
 
 	// 전체 회원 조회는 필요없다
@@ -62,4 +73,19 @@ public class MemberService {
 		if (member.isPresent())
 			throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
 	}
+
+	public Long getQuestionCount(Long memberId) {
+		Long questionCount = questionRepository.countQuestionByMember_MemberId(memberId);
+		return questionCount;
+	}
+
+	public Long getAnswersCount(Long memberId) {
+		Long answerCount = answerRepository.countAnswerByMember_MemberId(memberId);
+		return answerCount;
+	}
+
+	/*
+	- 회원이 작성한 질문 모아보기
+	- 회원이 작성한 답변 모아보기
+	 */
 }
