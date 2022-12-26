@@ -1,5 +1,7 @@
 package com.codestates.pre.server.answer.entity;
 
+import com.codestates.pre.server.member.entity.Member;
+import com.codestates.pre.server.question.entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,15 +37,18 @@ public class Answer {
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
 
-//    question:answer = 1:n
-//    @ManyToOne
-//    @JoinColumn(name="question_id") // 외래키 컬럼명 즉, question 클래스의 @id가 붙은 필드명
-//    private Question question;
-//
-//    // members:answer = 1:n
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private Member member;
+    //question:answer = 1:n
+    @ManyToOne
+    @JoinColumn(name="id") // 외래키 컬럼명 즉, question 클래스의 @id가 붙은 필드명
+    private Question question;
+
+    // members:answer = 1:n
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+//    @OneToMany(mappedBy = "answer" )
+//    private 타입 answerVote ;
 
 
 
