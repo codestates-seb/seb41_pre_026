@@ -3,6 +3,7 @@ package com.codestates.pre.server.answer.controller;
 
 import com.codestates.pre.server.answer.dto.AnswerPatchDto;
 import com.codestates.pre.server.answer.dto.AnswerPostDto;
+import com.codestates.pre.server.answer.dto.AnswerResponseDto;
 import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.answer.mapper.AnswerMapper;
 import com.codestates.pre.server.answer.service.AnswerService;
@@ -34,7 +35,7 @@ public class AnswerController {
 
     // question의 id에 맞는 답변을 등록
     @PostMapping("/{question-id}/add") // uri : /answer/1/add
-    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive Long questionId,
+    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
                                     @Valid @RequestBody AnswerPostDto requestBody ) {
 
         Answer answer = mapper.answerPostDtoToAnswer(requestBody); // 요청 바디 > dto > 엔티티
@@ -44,11 +45,11 @@ public class AnswerController {
     }
 
     //답변 수정
-    @PatchMapping("/{answer-id}")
+    @PatchMapping("/{answer-id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerPatchDto patchDto) {
-        // 답변을 작성한 사람이 맞는지 검증하는 로직 필요
 
+        // 답변을 작성한 사람이 맞는지 검증하는 로직 필요
         patchDto.setAnswerId(answerId);
 
         Answer answer =  answerService.updateAnswer (mapper.answerPatchDtoToAnswer(patchDto));
@@ -72,29 +73,26 @@ public class AnswerController {
 
     // 추천기능
     @PostMapping("/{answer-Id}/upVote")
-    public ResponseEntity upVote(@PathVariable("answer-Id") Long id) {
+    public ResponseEntity upVote(@PathVariable("answer-Id") long answerId) {
 
-        // 로그인이 되어있는 회원인지 검증한다.
+        // 로그인이 되어 있는지 검증 필요
+        Answer votedAnswerUp = answerService.upVote(answerId);
+        AnswerResponseDto response = mapper.answerToAnswerResponseDto(votedAnswerUp);
 
-        Answer answer = answerService.findById(id);
-
-        answerService.upVote(answer);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
     // 비추천기능
     @PostMapping("/{answer-Id}/downVote")
-    public ResponseEntity downVote(@PathVariable("answerId") Long id) {
+    public ResponseEntity downVote(@PathVariable("answerId") long answerId) {
 
-        // 로그인이 되어있는 회원인지 검증한다.
+        Answer votedAnswerDown = answerService.downVote(answerId);
 
-        Answer answer = answerService.findById(id);
+        AnswerResponseDto response = mapper.answerToAnswerResponseDto(votedAnswerDown);
 
-        answerService.downVote(answer);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

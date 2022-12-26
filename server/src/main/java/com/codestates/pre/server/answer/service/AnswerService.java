@@ -7,7 +7,6 @@ import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -50,15 +49,21 @@ public class AnswerService {
 
 
     // 추천 기능
-    public void upVote(Answer answer) {
+    public Answer upVote(long answerId) {
+        Answer findAnswer = findVerifiedAnswer(answerId);
+        findAnswer.setScore(findAnswer.getScore() + 1);
+        Answer updateAnswer = answerRepository.save(findAnswer);
 
-        answerRepository.save(answer);
+        return updateAnswer;
     }
 
     // 비추천 기능
-    public void downVote(Answer answer) {
+    public Answer downVote(long answerId) {
+        Answer findAnswer = findVerifiedAnswer(answerId);
+        findAnswer.setScore(findAnswer.getScore() - 1);
+        Answer updateAnswer = answerRepository.save(findAnswer);
 
-        answerRepository.save(answer);
+        return updateAnswer;
     }
 
     public Answer findVerifiedAnswer(Long answerId) {
@@ -66,14 +71,15 @@ public class AnswerService {
         // 답변이 DB에 존재하는지 검증
         // orElseThrow : 가져온 값이 null이면 예외
         Answer findAnswer = optionalAnswer.orElseThrow(() ->
-                new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+                new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
         return findAnswer;
 
 
     }
 
     // finById 메서드 적용(?)이 안돼서 그냥 만들었음
-    public Answer findById(Long id) {
-        return this.answerRepository.findById(id).get();
-    }
+//    public Answer findById(Long id) {
+//        return this.answerRepository.findById(id).get();
+//    }
+
 }
