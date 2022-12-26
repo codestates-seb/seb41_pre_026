@@ -13,6 +13,10 @@ spring:
     console:
       enabled: true
       path: /h2
+  sql:
+    init:
+      schema-locations: classpath*:db.h2/schema.sql
+      data-locations: classpath*:db.h2/data.sql
 
 logging:
   level:

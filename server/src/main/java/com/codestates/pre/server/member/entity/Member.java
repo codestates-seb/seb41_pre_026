@@ -1,6 +1,7 @@
 package com.codestates.pre.server.member.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.codestates.pre.server.answer.entity.Answer;
+import com.codestates.pre.server.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,15 +36,15 @@ public class Member {
 
 	// private String image;
 
-	/*
+
 	@OneToMany(mappedBy = "member")
-	private List<Quesiton> questions = new ArrayList<>();
+	private List<Question> questions = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member")
 	private List<Answer> answers = new ArrayList<>();
 
-	추후에 연관관계 매핑 후 추가
-	 */
+	//추후에 연관관계 매핑 후 추가
+
 
 	public Member(String name, String email, String password) {
 		this.name = name;
