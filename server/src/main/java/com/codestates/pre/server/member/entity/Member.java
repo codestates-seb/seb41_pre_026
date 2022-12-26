@@ -51,4 +51,12 @@ public class Member {
 		this.email = email;
 		this.password = password;
 	}
+
+	// 이거 없애시면 안됩니다. 하루종일 이 코드 하나침 - TH
+	public void setQuestion(Question question) {
+		questions.add(question);
+		if (question.getMember() != this) {
+			question.setMember(this);
+		}
+	}
 }

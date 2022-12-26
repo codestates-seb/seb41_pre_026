@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import org.aspectj.apache.bcel.generic.Tag;
 
+import com.codestates.pre.server.answer.entity.Answer;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,7 +14,7 @@ import lombok.Getter;
 public class QuestionResponseDto {
 	private long id; // questionId
 
-	private long mid; // memberId, Member와 연관관계 매핑 후 구현, 누가 쓴 글인지 확인 위함
+	// private long mid; // memberId, Member와 연관관계 매핑 후 구현, 누가 쓴 글인지 확인 위함
 
 	private String title;
 
@@ -26,8 +28,10 @@ public class QuestionResponseDto {
 
 	private Tag tags;
 
+	private boolean isAdopted;
+
 	// Todo Answers 와 연관관계 매핑 후 구현
-	// private Answer answer;
+	private Answer answer;
 
 	private LocalDateTime createdAt;
 

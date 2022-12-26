@@ -17,6 +17,9 @@ public class Question {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@Transient
+	private Long mid;
+
 	@Column(length = 256)
 	private String title;
 
@@ -30,19 +33,14 @@ public class Question {
 
 	private int score;
 
+	private boolean isAdopt; // answer 에서 채택여부 확인하는 변수
+
 	@OneToMany(mappedBy = "question")
 	private List<Answer> answers = new ArrayList<>();
 
-	// Todo QuestionTag 연관관계 매핑
-	// private QuestionTag QuestionTag;
-
-	// TODO member 엔티티 연관관계 매핑
-	// private Member member;
 	@ManyToOne
-	@JoinColumn(name = "member_id")
+	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 
-
-	// Todo answer 엔티티 연관관계 매핑
-	// private Answer answer;
+	// Todo QuestionTag 연관관계 매핑필요
 }
