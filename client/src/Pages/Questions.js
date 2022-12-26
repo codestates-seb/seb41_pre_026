@@ -25,7 +25,7 @@ function Questions() {
     setQuestions(data);
   }, []);
   return (
-    <>
+    <main>
       <Header />
       <QuestionListContainer>
         {questions
@@ -34,7 +34,7 @@ function Questions() {
             ))
           : null}
       </QuestionListContainer>
-    </>
+    </main>
   );
 }
 
