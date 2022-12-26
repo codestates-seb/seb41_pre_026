@@ -9,8 +9,7 @@ import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.member.repository.MemberRepository;
-import com.codestates.pre.server.question.entity.Question;
-import com.codestates.pre.server.respository.QuestionRepository;
+import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 
 //트랙잭션 추후에 적용 (이벤트 퍼블리셔, 회원가입 이메일 전송 로직)

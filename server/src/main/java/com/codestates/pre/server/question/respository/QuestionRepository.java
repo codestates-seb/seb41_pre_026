@@ -1,4 +1,4 @@
-package com.codestates.pre.server.respository;
+package com.codestates.pre.server.question.respository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

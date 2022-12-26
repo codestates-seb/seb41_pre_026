@@ -1,14 +1,5 @@
 package com.codestates.pre.server.member.dto;
 
-import java.beans.Transient;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.codestates.pre.server.answer.entity.Answer;
-import com.codestates.pre.server.answer.repository.AnswerRepository;
-import com.codestates.pre.server.question.entity.Question;
-import com.codestates.pre.server.respository.QuestionRepository;
-
 import lombok.Builder;
 import lombok.Getter;
 

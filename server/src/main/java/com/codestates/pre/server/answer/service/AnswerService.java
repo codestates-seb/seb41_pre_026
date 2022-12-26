@@ -7,7 +7,7 @@ import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.member.repository.MemberRepository;
 import com.codestates.pre.server.member.service.MemberService;
 import com.codestates.pre.server.question.service.QuestionService;
-import com.codestates.pre.server.respository.QuestionRepository;
+import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 
