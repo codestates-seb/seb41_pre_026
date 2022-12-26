@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
-import Footer from "./Components/Share/Footer";
+// import Footer from "./Components/Share/Footer";
 import { useState } from "react";
 import Login from "./Pages/Login";
 

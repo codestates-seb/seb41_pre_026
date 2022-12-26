@@ -116,6 +116,7 @@ const StyledDiv = styled.div`
   height: 170px;
   position: fixed;
   top: 50px;
+  z-index: 33;
 `;
 
 const StyledHistory = styled.div`
@@ -129,6 +130,7 @@ const StyledHistory = styled.div`
   border-radius: 7px;
   box-shadow: 0 4px 4px -4px #e2e3e4;
   background-color: white;
+  z-index: 33;
 
   ul {
     margin: 10px 0px 0px 10px;
@@ -188,7 +190,6 @@ const StyledMenu = styled.div`
   height: 300px;
   background-color: white;
   border: 1px solid #e3e6e8;
-  z-index: 333;
 `;
 
 const StyledIcons = styled.ol`
@@ -212,6 +213,9 @@ const StyledIcons = styled.ol`
       height: 25px;
       border-radius: 3px;
     }
+    svg {
+      fill: #525960;
+    }
     button {
       border: 0px;
       background-color: transparent;
@@ -219,14 +223,20 @@ const StyledIcons = styled.ol`
     :hover {
       background-color: #e0e3e5;
       cursor: pointer;
-      img {
-        filter: none !important;
+      button svg {
+        fill: black;
       }
     }
-  }
-  li:nth-child(3) img {
-    filter: invert(32%) sepia(19%) saturate(277%) hue-rotate(169deg)
-      brightness(95%) contrast(82%);
+    button: hover {
+      cursor: pointer;
+      svg {
+        fill: black;
+      }
+    }
+    button svg:hover {
+      cursor: pointer;
+      fill: black;
+    }
   }
 `;
 
@@ -234,6 +244,7 @@ function Navigation({ login }) {
   // const [isLogin, setIsLogin] = useState(false);
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
+  // const [iconFocuse, setIcF] = useState(false);
 
   const handleFocuse = (e) => {
     setFocused(!focused);
@@ -336,7 +347,7 @@ function Navigation({ login }) {
               </button>
             </li>
             <li>
-              <button>
+              <button onClick={handleLogin}>
                 <svg width="18" height="18" viewBox="0 0 18 18">
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>
                 </svg>
@@ -352,9 +363,9 @@ function Navigation({ login }) {
           </>
         )}
       </StyledNav>
-      <StyledDiv onClick={(e) => e.stopPropagation()}>
+      <StyledDiv>
         <StyledMenu isFold={isFold}></StyledMenu>
-        <StyledHistory focused={focused}>
+        <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>
               {searchData.slice(0, 4).map((data, idx) => {
