@@ -2,9 +2,15 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const StyledHeader = styled.header`
-  width: 700px;
+  width: 740px;
   display: flex;
   flex-direction: column;
+  padding: 20px 20px 15px 20px;
+  border-bottom: 1px solid #dadbdc;
+
+  .top {
+    margin: 0px 0px 15px 0px;
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -12,14 +18,14 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0px 0px 0px 20px;
+  margin: 0px 0px 0px 0px;
 `;
 
 const StyledH1 = styled.h1`
   color: #232629;
   width: 456px;
   height: 38px;
-  font-size: 32px;
+  font-size: 26px;
   margin: 0px 12px 12px 0px;
   font-weight: 400;
   line-height: 35.1px;
@@ -29,7 +35,7 @@ const StyledBtn = styled.button`
   color: #ffffff;
   width: 103px;
   height: 38px;
-  font-size: 13px;
+  font-size: 11px;
   background-color: #0a95ff;
   box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
   padding: 10.4px;
@@ -46,7 +52,6 @@ const StyledSpan = styled.span`
   color: #232629;
   font-size: 18px;
   font-weight: 400;
-  margin-top: 12px;
 `;
 
 const StyledBtnDiv = styled.div`
@@ -86,7 +91,7 @@ function Header() {
 
   return (
     <StyledHeader>
-      <StyledDiv>
+      <StyledDiv className="top">
         <StyledH1>All Questions</StyledH1>
         <StyledBtn>Ask Question</StyledBtn>
       </StyledDiv>
