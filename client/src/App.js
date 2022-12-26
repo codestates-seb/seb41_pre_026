@@ -1,8 +1,9 @@
-import Questions from "./Pages/Questions";
+// import Questions from "./Pages/Questions";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import Navigation from "./Components/Share/Navigation";
 import SideBar from "./Components/Share/SideBar";
+import View from "./Pages/View";
 
 const StyledBody = createGlobalStyle`
   * {
@@ -23,7 +24,7 @@ function App() {
       <Navigation />
       <SideBar />
       <Routes>
-        <Route path={"/"} element={<Questions />} />
+        <Route path={"/"} element={<View />} />
       </Routes>
     </BrowserRouter>
   );
