@@ -59,15 +59,20 @@ public class Member {
 		this.password = password;
 	}
 
+<<<<<<< feat/member
 	/*
 	//  양방향
 	//  한 쪽의 엔티티만 추가해주는 실수를 하더라도 다른 쪽 엔티티를 추가해 주도록 qeustion쪽에도 member 추가
+=======
+	// 이거 없애시면 안됩니다. 하루종일 이 코드 하나침 - TH
+>>>>>>> be
 	public void setQuestion(Question question) {
 		questions.add(question);
 		if (question.getMember() != this) {
 			question.setMember(this);
 		}
 	}
+<<<<<<< feat/member
 
 	public void setAnswer(Answer answer) {
 		answers.add(answer);
@@ -78,4 +83,6 @@ public class Member {
 
 	✏️Advanced~
 	 */
+=======
+>>>>>>> be
 }
