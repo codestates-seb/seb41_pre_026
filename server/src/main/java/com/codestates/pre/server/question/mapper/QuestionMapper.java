@@ -13,7 +13,6 @@ import com.codestates.pre.server.question.entity.Question;
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
 	Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
-	// Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto);
 	QuestionResponseDto questionToQuestionResponseDto(Question question);
 
 	default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {

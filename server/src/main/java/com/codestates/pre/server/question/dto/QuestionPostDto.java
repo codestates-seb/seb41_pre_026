@@ -2,7 +2,7 @@ package com.codestates.pre.server.question.dto;
 
 import java.util.List;
 
-import com.codestates.pre.server.tag.Tags;
+import com.codestates.pre.server.tag.Tag;
 
 import lombok.Getter;
 
@@ -14,5 +14,5 @@ public class QuestionPostDto {
 
 	private String expecting;
 
-	private List<Tags> tags; // todo Tags 객체로 받을지 리스트로 받을지 고민
+	private List<Tag> tags; // todo Tags 객체로 받을지 리스트로 받을지 고민
 }

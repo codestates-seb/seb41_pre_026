@@ -35,7 +35,6 @@ public class QuestionService {
 		Question findQuestion = findVerifiedQuestion(question.getId()); // 존재하는 게시물(Question)인지 검증
 
 		// todo 게시물을 작성한 사용자(Member)가 맞는지 검증하는 로직 필요
-		// todo update 하면 createdAt도 변경됨
 
 		Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
 		verifyStrLength(updatedQuestion);
@@ -57,7 +56,6 @@ public class QuestionService {
 
 	public void deleteQuestion(long questionId) {
 		// todo 포스트(Question)의 작성자가 맞는지 검증 로직 필요
-
 
 		Question question = findVerifiedQuestion(questionId);
 		questionRepository.delete(question);
@@ -81,7 +79,7 @@ public class QuestionService {
 	private void calculateStrLength(String str) {
 		if (str.length() <= 20) {
 			// Todo 리팩토링 포인트
-			// Todo 이후 ExcpetionCode에 20글자 보다 적다는 에러메세지 추가
+			// Todo PR이후 ExcpetionCode에 20글자 보다 적다는 에러메세지 추가
 			throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
 		}
 	}

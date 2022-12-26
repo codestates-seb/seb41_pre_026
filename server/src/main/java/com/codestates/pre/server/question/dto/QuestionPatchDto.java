@@ -3,7 +3,7 @@ package com.codestates.pre.server.question.dto;
 import java.util.List;
 
 
-import com.codestates.pre.server.tag.Tags;
+import com.codestates.pre.server.tag.Tag;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +19,5 @@ public class QuestionPatchDto {
 
 	private String expecting;
 
-	private List<Tags> tags;
+	private List<Tag> tags;
 }
