@@ -1,9 +1,8 @@
 package com.codestates.pre.server.member.mapper;
 
-import java.util.List;
-
 import org.mapstruct.Mapper;
 
+import com.codestates.pre.server.member.dto.MyPageResponseDto;
 import com.codestates.pre.server.member.dto.MemberPatchDto;
 import com.codestates.pre.server.member.dto.MemberPostDto;
 import com.codestates.pre.server.member.dto.MemberResponseDto;
@@ -14,4 +13,5 @@ public interface MemberMapper {
 	Member memberPostDtoToMember(MemberPostDto requestBody);
 	Member memberPatchDtoToMember(MemberPatchDto requestBody);
 	MemberResponseDto memberToMemberResponseDto(Member member);
+	MyPageResponseDto myPageResponseDto(Member member);
 }

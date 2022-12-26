@@ -47,8 +47,7 @@ public class MemberController {
 
 	// 회원 자신의 member-id만 받아와야 함 - 프론트에서 처리? 내가 로직?
 	@PatchMapping("/{member-id}")
-	public ResponseEntity patchMember(@
-		PathVariable("member-id") @Positive long memberId,
+	public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
 		@Valid @RequestBody MemberPatchDto requestBody) {
 		requestBody.setMemberId(memberId);
 
@@ -61,7 +60,7 @@ public class MemberController {
 	public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
 		Member member = memberService.findMember(memberId);
 
-		return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.OK);
+		return new ResponseEntity<>(new SingleResponseDto<>(mapper.myPageResponseDto(member)), HttpStatus.OK);
 	}
 
 	// 멤버 전체조회 x
