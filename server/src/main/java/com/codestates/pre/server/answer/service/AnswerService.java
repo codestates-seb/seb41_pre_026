@@ -4,6 +4,10 @@ import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
+import com.codestates.pre.server.member.repository.MemberRepository;
+import com.codestates.pre.server.member.service.MemberService;
+import com.codestates.pre.server.question.service.QuestionService;
+import com.codestates.pre.server.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +16,25 @@ import java.util.Optional;
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
+    private final MemberRepository memberRepository;
+    private final MemberService memberService;
+
+    private final QuestionService questionService;
     private final CustomBeanUtils<Answer> beanUtils;
 
-    public AnswerService(AnswerRepository answerRepository, CustomBeanUtils<Answer> beanUtils) {
+    public AnswerService(AnswerRepository answerRepository, QuestionRepository questionRepository, MemberRepository memberRepository, MemberService memberService, QuestionService questionService, CustomBeanUtils<Answer> beanUtils) {
 
         this.answerRepository = answerRepository;
+        this.questionRepository = questionRepository;
+        this.memberRepository = memberRepository;
+        this.memberService = memberService;
+        this.questionService = questionService;
         this.beanUtils = beanUtils;
     }
 
     // 답변 등록
     public Answer createAnswer(Answer answer) {
-        // Question question = questionService.find(questionid);
-        // question db에서 질문이 존재하는지를 검증해야 함
 
         return answerRepository.save(answer);
 
@@ -39,6 +50,16 @@ public class AnswerService {
 
         return answerRepository.save(updatingAnswer);
     }
+
+    // 답변 조회
+    public Answer findAnswer(Long answerId) {
+
+        Answer findAnswer = findVerifiedAnswer(answerId);
+        answerRepository.save(findAnswer);
+
+        return findAnswer;
+    }
+
 
     // 답변 삭제
     public void deleteAnswer(long answerId) {
