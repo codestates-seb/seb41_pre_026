@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "ANSWERS")
 public class Answer {
 
     @Id
@@ -47,7 +48,7 @@ public class Answer {
     @JoinColumn(name = "member_id")
     private Member member;
 
-//    @OneToMany(mappedBy = "answer" )
+//    @OneToMany(mappedBy = "answer")
 //    private 타입 answerVote ;
 
 
