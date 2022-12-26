@@ -6,7 +6,9 @@ public enum ExceptionCode {
 	MEMBER_NOT_FOUND(404, "Member not found"),
 	MEMBER_EXISTS(409, "Member exists"),
 	QUESTION_NOT_FOUND(404, "Question not found"),
-	ANSWER_NOT_FOUND(404, "Answer not found");
+	ANSWER_NOT_FOUND(404, "Answer not found"),
+
+	POST_UNDER_TWENTY(406, "Enter at least 20 characters");
 	//TAG_NOT_FOUND(404, "Tag not found");
 
 	@Getter
