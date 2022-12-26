@@ -8,6 +8,8 @@ import lombok.Getter;
 
 @Getter
 public class QuestionPostDto {
+	private long mid;
+
 	private String title;
 
 	private String problem;

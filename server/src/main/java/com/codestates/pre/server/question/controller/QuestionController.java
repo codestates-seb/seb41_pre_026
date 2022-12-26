@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codestates.pre.server.dto.MultiResponseDto;
 import com.codestates.pre.server.dto.SingleResponseDto;
+import com.codestates.pre.server.question.dto.QuestionDeleteDto;
 import com.codestates.pre.server.question.dto.QuestionPatchDto;
 import com.codestates.pre.server.question.dto.QuestionPostDto;
 import com.codestates.pre.server.question.entity.Question;
@@ -61,10 +62,12 @@ public class QuestionController {
 	}
 
 	@GetMapping("/{question-id}")
-	public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
+	public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId,
+										@RequestParam long mid) {
 		// TODO Member 엔티티 매핑 이후 @RequestParam 으로 mid(memberId)를 받아오는 코드가 추가되어야 합니다.
 
 		Question question = questionService.findQuestion(questionId);
+
 		return new ResponseEntity(
 			new SingleResponseDto(mapper.questionToQuestionResponseDto(question)), HttpStatus.OK
 		);
@@ -80,8 +83,11 @@ public class QuestionController {
 	}
 
 	@DeleteMapping("{question-id}")
-	public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionsId) {
-		questionService.deleteQuestion(questionsId);
+	public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionsId,
+										@RequestBody QuestionDeleteDto questionDeleteDto) {
+		Question question = mapper.questionDeleteDtoToQuestion(questionDeleteDto);
+		questionService.deleteQuestion(questionsId, question);
+
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 }

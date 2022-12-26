@@ -3,6 +3,7 @@ package com.codestates.pre.server.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
+	FORBIDDEN(403, "Forbidden"),
 	MEMBER_NOT_FOUND(404, "Member not found"),
 	MEMBER_EXISTS(409, "Member exists"),
 	QUESTION_NOT_FOUND(404, "Question not found"),
