@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import profileIMG from "../../Assets/profileIMG.jpg";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
@@ -11,6 +12,8 @@ const PostContainer = styled.div`
   }
   pre {
     background-color: #f6f6f6;
+    border-radius: 3px;
+    padding: 8px;
   }
   .tags {
     display: flex;
@@ -40,7 +43,7 @@ const PostContainer = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     text-align: left;
-    margin: 16px 16px 0px 0px;
+    margin: 16px 0px;
     padding-top: 4px;
     .menu {
       display: flex;
@@ -66,9 +69,20 @@ const PostContainer = styled.div`
       justify-content: flex-end;
       text-align: left;
       vertical-align: baseline;
-      margin: 0px 16px 0px 0px;
+      margin-left: auto;
       padding: 4px;
       border-radius: 3px;
+      img {
+        width: 22px;
+        height: 22px;
+        border-radius: 2px;
+        margin: 1px;
+      }
+      span {
+        margin: 2px;
+        font-size: 12px;
+        color: #6a737c;
+      }
     }
   }
 `;
@@ -118,8 +132,9 @@ function Post() {
           </div>
         </div>
         <div className="profile">
-          <img alt=""></img>
-          <span>user name</span>
+          <img src={profileIMG} alt=""></img>
+          <span>dongrri</span>
+          <span>asked 2022-12-25 00:02:34</span>
         </div>
       </div>
     </PostContainer>

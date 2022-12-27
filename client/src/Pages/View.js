@@ -3,6 +3,7 @@ import { StyledBlueBtn } from "../Components/Share/Button";
 import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
+import EditAnswer from "../Components/View/EditAnswer";
 
 const Container = styled.div`
   max-width: 1100px;
@@ -128,6 +129,7 @@ function View() {
         </div>
       </div>
       <Answer />
+      <EditAnswer />
     </Container>
   );
 }
