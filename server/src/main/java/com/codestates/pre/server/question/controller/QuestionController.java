@@ -76,6 +76,8 @@ public class QuestionController {
 	@GetMapping
 	public ResponseEntity getQuestions(@Positive @RequestParam int page,
 										@Positive @RequestParam int size) {
+		// todo tag 구현하고 @RequestionParam으로 type을 받아와야 함
+
 		Page<Question> questions = questionService.findQuestions(page - 1, size);
 		List<Question> content = questions.getContent();
 		return new ResponseEntity(
