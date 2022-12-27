@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.auth.utils.CustomAuthorityUtils;
@@ -27,21 +26,18 @@ public class MemberService {
 	//  PasswordEncoder를 이용해 패스워드를 암호화 위해 di
 	private	final PasswordEncoder passwordEncoder;
 	private final CustomAuthorityUtils authorityUtils;
-	private final StorageService storageService;
 
 
 
 	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils,
 		QuestionRepository questionRepository,
-		AnswerRepository answerRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils,
-		StorageService storageService) {
+		AnswerRepository answerRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
 		this.memberRepository = memberRepository;
 		this.beanUtils = beanUtils;
 		this.questionRepository = questionRepository;
 		this.answerRepository = answerRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.authorityUtils = authorityUtils;
-		this.storageService = storageService;
 	}
 
 	public Member createMember(Member member) {
@@ -60,16 +56,11 @@ public class MemberService {
 
 	// Multi form data를 받도록 수정
 	// 근데 이러케 하면 이미지파일 첨부 안할 시 수정이 안됨 ㅜㅜ, null값 받으면 이전 이미지로 수정하고 저장되도록..어더케...
-	public Member updateMember(Member member, MultipartFile profileImage) {
+	public Member updateMember(Member member) {
 		Member findMember = findVerifiedMember(member.getMemberId());
 
 		Member updatedMember = beanUtils.copyNonNullProperties(member, findMember);
 
-		// 이미지 정보 추가
-		updatedMember.setProfileImageName(profileImage.getOriginalFilename());
-
-		// 프로필 이미지 저장
-		storageService.storeImage(profileImage);
 		return memberRepository.save(updatedMember);
 	}
 

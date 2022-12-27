@@ -47,14 +47,12 @@ public class MemberController {
 		return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.CREATED);
 	}
 
-
-	// 회원 자신의 member-id만 받아와야 함 - 프론트에서 처리? 내가 로직?
-	@PatchMapping(value = "/{member-id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PatchMapping(value = "/{member-id}")
 	public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
-		@Valid @RequestPart MemberPatchDto requestBody, @RequestPart MultipartFile profileImage) {
+		@Valid @RequestBody MemberPatchDto requestBody) {
 		requestBody.setMemberId(memberId);
 
-		Member member = memberService.updateMember(mapper.memberPatchDtoToMember(requestBody), profileImage);
+		Member member = memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
 
 		return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.OK);
 	}
