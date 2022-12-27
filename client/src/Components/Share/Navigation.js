@@ -240,7 +240,7 @@ const StyledIcons = styled.ol`
   }
 `;
 
-function Navigation({ login }) {
+function Navigation({ login, isSide }) {
   // const [isLogin, setIsLogin] = useState(false);
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);

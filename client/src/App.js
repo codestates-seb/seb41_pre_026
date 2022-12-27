@@ -30,12 +30,16 @@ const StyledFrame = styled.div`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isSide, setIsSide] = useState(false);
   // const [isLocate, setIsLocate] = useState("/");
 
   return (
     <BrowserRouter>
       <StyledBody />
-      <Navigation login={{ isLogin, setIsLogin }} />
+      <Navigation
+        login={{ isLogin, setIsLogin }}
+        isSide={{ isSide, setIsSide }}
+      />
       <StyledFrame>
         <LeftSideBar />
         <Routes>
