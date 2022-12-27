@@ -31,7 +31,7 @@ public interface QuestionMapper {
 
 	default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {
 		Question question = new Question();
-		question.setId(questionPatchDto.getId());
+		question.setQuestionId(questionPatchDto.getId());
 		question.setProblem(questionPatchDto.getProblem());
 		question.setTitle(questionPatchDto.getTitle());
 		question.setExpecting(questionPatchDto.getExpecting());

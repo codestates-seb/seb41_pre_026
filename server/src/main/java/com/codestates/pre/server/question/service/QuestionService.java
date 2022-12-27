@@ -36,7 +36,7 @@ public class QuestionService {
 	}
 
 	public Question updateQuestion(Question question) {
-		Question findQuestion = findVerifiedQuestion(question.getId());
+		Question findQuestion = findVerifiedQuestion(question.getMid());
 
 		Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
 		verifyStrLength(updatedQuestion);
