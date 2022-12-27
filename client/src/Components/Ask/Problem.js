@@ -13,7 +13,6 @@ const StyledTitleContainer = styled.div`
 
 const StyledWrapper = styled.div`
   width: 790px;
-  height: 171px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;
@@ -35,7 +34,7 @@ const StyledWrapper = styled.div`
     margin: 0px 0px 4px 0px;
   }
 
-  input {
+  textarea {
     width: 760px;
     font-size: 13px;
     border: 1px solid #babfc3;
@@ -50,24 +49,25 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Title() {
+function Problem() {
   return (
     <StyledTitleContainer>
       <div>
         <StyledWrapper>
-          <label htmlFor="title">Title</label>
-          <label htmlFor="title">
-            Be specific and imagine you’re asking a question to another person.
+          <label htmlFor="problem">What are the details of your problem?</label>
+          <label htmlFor="problem">
+            Introduce the problem and expand on what you put in the title.
+            Minimum 20 characters.
           </label>
-          <input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></input>
+          <textarea></textarea>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
       <div>
         <Help
-          title={"Writing a good title"}
+          title={"Introduce the problem"}
           content={
-            "Your title should summarize the problem.\n\nYou might find that you have a better idea of your title after writing out the rest of the question."
+            "Explain how you encountered the problem you’re trying to solve, and any difficulties that have prevented you from solving it yourself."
           }
         ></Help>
       </div>
@@ -75,4 +75,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default Problem;

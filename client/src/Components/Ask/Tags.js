@@ -13,7 +13,6 @@ const StyledTitleContainer = styled.div`
 
 const StyledWrapper = styled.div`
   width: 790px;
-  height: 171px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;
@@ -50,24 +49,25 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Title() {
+function Tags() {
   return (
     <StyledTitleContainer>
       <div>
         <StyledWrapper>
-          <label htmlFor="title">Title</label>
-          <label htmlFor="title">
-            Be specific and imagine you’re asking a question to another person.
+          <label htmlFor="tags">Tags</label>
+          <label htmlFor="tags">
+            Add up to 5 tags to describe what your question is about. Start
+            typing to see suggestions.
           </label>
-          <input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></input>
+          <input placeholder="e.g. (Angular database swift)"></input>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
       <div>
         <Help
-          title={"Writing a good title"}
+          title={"Adding tags"}
           content={
-            "Your title should summarize the problem.\n\nYou might find that you have a better idea of your title after writing out the rest of the question."
+            "Tags help ensure that your question will get attention from the right people.\n\nTag things in more than one way so people can find them more easily. Add tags for product lines, projects, teams, and the specific technologies or languages used.\n\nLearn more about tagging"
           }
         ></Help>
       </div>
@@ -75,4 +75,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default Tags;

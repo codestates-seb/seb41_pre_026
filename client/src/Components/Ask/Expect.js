@@ -13,7 +13,6 @@ const StyledTitleContainer = styled.div`
 
 const StyledWrapper = styled.div`
   width: 790px;
-  height: 171px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;
@@ -35,7 +34,7 @@ const StyledWrapper = styled.div`
     margin: 0px 0px 4px 0px;
   }
 
-  input {
+  textarea {
     width: 760px;
     font-size: 13px;
     border: 1px solid #babfc3;
@@ -50,24 +49,27 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Title() {
+function Expect() {
   return (
     <StyledTitleContainer>
       <div>
         <StyledWrapper>
-          <label htmlFor="title">Title</label>
-          <label htmlFor="title">
-            Be specific and imagine you’re asking a question to another person.
+          <label htmlFor="problem">
+            What did you try and what were you expecting?
           </label>
-          <input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></input>
+          <label htmlFor="problem">
+            Describe what you tried, what you expected to happen, and what
+            actually resulted. Minimum 20 characters.
+          </label>
+          <textarea></textarea>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
       <div>
         <Help
-          title={"Writing a good title"}
+          title={"Expand on the problem"}
           content={
-            "Your title should summarize the problem.\n\nYou might find that you have a better idea of your title after writing out the rest of the question."
+            "Show what you’ve tried, tell us what happened, and why it didn’t meet your needs.\n\nNot all questions benefit from including code, but if your problem is better understood with code you’ve written, you should include a minimal, reproducible example.\n\nPlease make sure to post code and errors as text directly to the question (and not as images), and format them appropriately."
           }
         ></Help>
       </div>
@@ -75,4 +77,4 @@ function Title() {
   );
 }
 
-export default Title;
+export default Expect;
