@@ -9,6 +9,14 @@ const StyledTitleContainer = styled.div`
   div:nth-child(1) {
     height: auto;
   }
+
+  .invisible {
+    display: none;
+  }
+
+  .visible {
+    display: "";
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -50,7 +58,11 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Title() {
+function Title({ focus, handleFocusChange }) {
+  const handleFocus = () => {
+    handleFocusChange("Title");
+  };
+
   return (
     <StyledTitleContainer>
       <div>
@@ -59,11 +71,14 @@ function Title() {
           <label htmlFor="title">
             Be specific and imagine you’re asking a question to another person.
           </label>
-          <input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></input>
+          <input
+            placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            onFocus={handleFocus}
+          ></input>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div>
+      <div className={focus === "Title" ? "visible" : "invisible"}>
         <Help
           title={"Writing a good title"}
           content={

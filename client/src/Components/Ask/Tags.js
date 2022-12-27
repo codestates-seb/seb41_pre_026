@@ -9,6 +9,14 @@ const StyledTitleContainer = styled.div`
   div:nth-child(1) {
     height: auto;
   }
+
+  .invisible {
+    display: none;
+  }
+
+  .visible {
+    display: "";
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -49,7 +57,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Tags() {
+function Tags({ focus, handleFocusChange }) {
+  const handleFocus = () => {
+    handleFocusChange("Tags");
+  };
   return (
     <StyledTitleContainer>
       <div>
@@ -59,11 +70,14 @@ function Tags() {
             Add up to 5 tags to describe what your question is about. Start
             typing to see suggestions.
           </label>
-          <input placeholder="e.g. (Angular database swift)"></input>
+          <input
+            placeholder="e.g. (Angular database swift)"
+            onFocus={handleFocus}
+          ></input>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div>
+      <div className={focus === "Tags" ? "visible" : "invisible"}>
         <Help
           title={"Adding tags"}
           content={

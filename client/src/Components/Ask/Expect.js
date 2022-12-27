@@ -9,6 +9,14 @@ const StyledTitleContainer = styled.div`
   div:nth-child(1) {
     height: auto;
   }
+
+  .invisible {
+    display: none;
+  }
+
+  .visible {
+    display: "";
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -49,7 +57,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Expect() {
+function Expect({ focus, handleFocusChange }) {
+  const handleFocus = () => {
+    handleFocusChange("Expect");
+  };
   return (
     <StyledTitleContainer>
       <div>
@@ -61,11 +72,11 @@ function Expect() {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </label>
-          <textarea></textarea>
+          <textarea onFocus={handleFocus}></textarea>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div>
+      <div className={focus === "Expect" ? "visible" : "invisible"}>
         <Help
           title={"Expand on the problem"}
           content={

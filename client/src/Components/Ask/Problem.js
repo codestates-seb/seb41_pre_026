@@ -9,6 +9,14 @@ const StyledTitleContainer = styled.div`
   div:nth-child(1) {
     height: auto;
   }
+
+  .invisible {
+    display: none;
+  }
+
+  .visible {
+    display: "";
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -49,7 +57,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Problem() {
+function Problem({ focus, handleFocusChange }) {
+  const handleFocus = () => {
+    handleFocusChange("Problem");
+  };
   return (
     <StyledTitleContainer>
       <div>
@@ -59,11 +70,11 @@ function Problem() {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </label>
-          <textarea></textarea>
+          <textarea onFocus={handleFocus}></textarea>
           <StyledBlueBtn>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div>
+      <div className={focus === "Problem" ? "visible" : "invisible"}>
         <Help
           title={"Introduce the problem"}
           content={
