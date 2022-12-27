@@ -26,6 +26,6 @@ mail:
   address:
     admin: pre26@gmail.com
 jwt:
-  key: ${JWT_SECRET_KEY}     # 내컴퓨터의 환경변수에서 로드해오는 건데,, 프로젝트의 경우에는 수정이 필요 할 것 같군~
+  key: ${JWT_SECRET_KEY}     # GITHUB의 환경변수에서 가져오도록 수정하면 자동배포시 적용됨스
   access-token-expiration-minutes: 40
   refresh-token-expiration-minutes: 420
