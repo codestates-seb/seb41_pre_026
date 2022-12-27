@@ -105,7 +105,7 @@ public class SecurityConfiguration {
 			AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
 			JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
-			jwtAuthenticationFilter.setFilterProcessesUrl("/login"); // login url 수정 필요. 디폴트 request URL인 “/login”을 원하는대로 수정 가넝 아니면 프론트랑 협의봐~ 그냥 이걸로 가기로~
+			jwtAuthenticationFilter.setFilterProcessesUrl("/member");
 			jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
 			jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
