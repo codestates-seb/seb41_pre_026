@@ -43,4 +43,12 @@ public class Question {
 	private Member member;
 
 	// Todo QuestionTag 연관관계 매핑필요
+
+	public void addMember(Member member) {
+		if (this.member != null) {
+			this.member.getQuestions().remove(this);
+		}
+		this.member = member;
+		this.member.getQuestions().add(this);
+	}
 }

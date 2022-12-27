@@ -31,12 +31,12 @@ public class QuestionService {
 		verifyStrLength(question);
 		Member member = memberService.findMember(question.getMid());
 		question.setCreatedAt(LocalDateTime.now());
-		question.setMember(member);
+		question.addMember(member);
 		return questionRepository.save(question);
 	}
 
 	public Question updateQuestion(Question question) {
-		Question findQuestion = findVerifiedQuestion(question.getId()); // 존재하는 게시물(Question)인지 검증
+		Question findQuestion = findVerifiedQuestion(question.getId());
 
 		Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
 		verifyStrLength(updatedQuestion);
@@ -57,16 +57,12 @@ public class QuestionService {
 	}
 
 	public void deleteQuestion(long questionId, Question question) {
-		// todo 포스트(Question)의 작성자가 맞는지 검증 로직 필요 여기 에러해결중임다
-		// question의 mid와 memberId가 다르면 예외던지기
-		// if (question.getMid() != question.getMember().getMemberId()) {
-		// 	throw new BusinessLogicException(ExceptionCode.FORBIDDEN);
-		// }
-		System.out.println("mid = " + question.getMid());
-		System.out.println("memberId = " + question.getMember().getName());
+		Question verifiedQuestion = findVerifiedQuestion(questionId);
+		if (verifiedQuestion.getMember().getMemberId() != question.getMid()) {
+			throw new BusinessLogicException(ExceptionCode.FORBIDDEN);
+		}
 
-		Question deleteQuestion = findQuestion(questionId);
-		questionRepository.delete(deleteQuestion);
+		questionRepository.delete(verifiedQuestion);
 	}
 
 	@Transactional(readOnly = true)
@@ -87,14 +83,6 @@ public class QuestionService {
 	private void calculateStrLength(String str) {
 		if (str.length() <= 20) {
 			throw new BusinessLogicException(ExceptionCode.POST_UNDER_TWENTY);
-		}
-	}
-
-	private void compareMemberQuestion(long questionId) {
-		Question question = findVerifiedQuestion(questionId);
-		Member member = memberService.findMember(question.getMid());
-		if (question.getMid() != member.getMemberId()) {
-			throw new BusinessLogicException(ExceptionCode.FORBIDDEN);
 		}
 	}
 }
