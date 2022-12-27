@@ -5,14 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class AnswerPostDto {
 
-    private long id; //questionId
+    private long mid; // memberId
 
+    private long qid;
 
     @NotBlank // 답변 내용은 비어있으면 안됨
     private String answerContent;

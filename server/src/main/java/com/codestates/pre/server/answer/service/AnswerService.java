@@ -4,8 +4,10 @@ import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
+import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.member.repository.MemberRepository;
 import com.codestates.pre.server.member.service.MemberService;
+import com.codestates.pre.server.question.entity.Question;
 import com.codestates.pre.server.question.service.QuestionService;
 import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
@@ -38,7 +40,10 @@ public class AnswerService {
 
     // 답변 등록
     public Answer createAnswer(Answer answer) {
-
+        Member member = memberService.findMember(answer.getMid());
+        Question question = questionService.findQuestion(answer.getQid());
+        answer.addMember(member);
+        answer.addQuestion(question);
         return answerRepository.save(answer);
 
     }

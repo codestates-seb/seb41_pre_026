@@ -54,7 +54,6 @@ public class AnswerController {
                                       @Valid @RequestBody AnswerPatchDto patchDto) {
 
         // 답변을 작성한 사람이 맞는지 검증하는 로직 필요
-        patchDto.setAnswerId(answerId);
 
         Answer answer =  answerService.updateAnswer (mapper.answerPatchDtoToAnswer(patchDto));
 
