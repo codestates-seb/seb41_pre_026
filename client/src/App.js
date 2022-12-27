@@ -1,8 +1,12 @@
-// import Questions from "./Pages/Questions";
+import Questions from "./Pages/Questions";
+import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
 import Navigation from "./Components/Share/Navigation";
-import SideBar from "./Components/Share/SideBar";
+import LeftSideBar from "./Components/Share/LeftSideBar";
+import RightSideBar from "./Components/Share/RightSideBar";
+// import Footer from "./Components/Share/Footer";
+import { useState } from "react";
+import Login from "./Pages/Login";
 import View from "./Pages/View";
 
 const StyledBody = createGlobalStyle`
@@ -17,15 +21,34 @@ const StyledBody = createGlobalStyle`
   }
 `;
 
+const StyledFrame = styled.div`
+  display: flex;
+  position: relative;
+  top: 51px;
+  justify-content: center;
+`;
+
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSide, setIsSide] = useState(false);
+  // const [isLocate, setIsLocate] = useState("/");
+
   return (
     <BrowserRouter>
       <StyledBody />
-      <Navigation />
-      <SideBar />
-      <Routes>
-        <Route path={"/"} element={<View />} />
-      </Routes>
+      <Navigation
+        login={{ isLogin, setIsLogin }}
+        isSide={{ isSide, setIsSide }}
+      />
+      <StyledFrame>
+        {isSide ? <LeftSideBar /> : null}
+        <Routes>
+          <Route path={"/"} element={<Questions />} />
+          <Route path={"/view"} element={<View />} />
+          <Route path={"/login"} element={<Login />} />
+        </Routes>
+        <RightSideBar></RightSideBar>
+      </StyledFrame>
     </BrowserRouter>
   );
 }

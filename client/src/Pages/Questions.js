@@ -5,17 +5,15 @@ import styled from "styled-components";
 import { data } from "../Assets/questionsData";
 
 const QuestionListContainer = styled.div`
-  width: calc(100% - 164px);
-  bacground-color: #ffffff;
+  width: 780px;
+  background-color: #ffffff;
   border-radius: 0;
-  border: 1px solid #d6d9dc;
-  border-top-width: 0;
-  border-bottom-width: 0;
-  border-left-width: 1px;
-  border-right-width: 0;
-  padding: 24px;
-  box-sizing: border-box;
 }
+`;
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
 `;
 
 function Questions() {
@@ -25,7 +23,7 @@ function Questions() {
     setQuestions(data);
   }, []);
   return (
-    <main>
+    <StyledMain>
       <Header />
       <QuestionListContainer>
         {questions
@@ -34,7 +32,7 @@ function Questions() {
             ))
           : null}
       </QuestionListContainer>
-    </main>
+    </StyledMain>
   );
 }
 
