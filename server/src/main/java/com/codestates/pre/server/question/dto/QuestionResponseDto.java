@@ -22,16 +22,16 @@ public class QuestionResponseDto {
 
 	private String expecting;
 
-	private int score;
+	// private int score;
 
-	private String vote; // 내역 존재 시 U or D, 내역 없으면 null
+	// private String vote; // 내역 존재 시 U or D, 내역 없으면 null
 
-	private Tag tags;
+	// private Tag tags;
 
-	private boolean isAdopted;
+	// private boolean isAdopted;
 
 	// Todo Answers 와 연관관계 매핑 후 구현
-	private Answer answer;
+	// private Answer answer;
 
 	private LocalDateTime createdAt;
 

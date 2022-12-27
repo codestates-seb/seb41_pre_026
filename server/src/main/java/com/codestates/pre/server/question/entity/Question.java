@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Question {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-가	private long questionId;
+	private long questionId;
 
 	@Transient
 	private Long mid;

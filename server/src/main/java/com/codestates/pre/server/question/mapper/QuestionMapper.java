@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.question.dto.QuestionDeleteDto;
 import com.codestates.pre.server.question.dto.QuestionPatchDto;
@@ -27,7 +28,6 @@ public interface QuestionMapper {
 		System.out.println("memberId"+member.getMemberId());
 		return question;
 	}
-	QuestionResponseDto questionToQuestionResponseDto(Question question);
 
 	default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {
 		Question question = new Question();
@@ -40,6 +40,33 @@ public interface QuestionMapper {
 	}
 
 	Question questionDeleteDtoToQuestion(QuestionDeleteDto questionDeleteDto);
+
+	// QuestionResponseDto questionToQuestionResponseDto(Question question);
+	default QuestionResponseDto questionToQuestionResponseDto(Question question) {
+		if ( question == null ) {
+			return null;
+		}
+
+		long id = 0L;
+		String title = null;
+		String problem = null;
+		String expecting = null;
+		LocalDateTime createdAt = null;
+		LocalDateTime modifiedAt = null;
+
+		id = question.getQuestionId();
+		title = question.getTitle();
+		problem = question.getProblem();
+		expecting = question.getExpecting();
+		createdAt = question.getCreatedAt();
+		modifiedAt = question.getModifiedAt();
+
+		// boolean isAdopted = false;
+
+		QuestionResponseDto questionResponseDto = new QuestionResponseDto( id, title, problem, expecting, createdAt, modifiedAt );
+
+		return questionResponseDto;
+	}
 
 	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
 }
