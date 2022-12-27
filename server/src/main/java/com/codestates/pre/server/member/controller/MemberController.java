@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.codestates.pre.server.dto.SingleResponseDto;
 import com.codestates.pre.server.member.dto.MemberPatchDto;
@@ -46,12 +49,12 @@ public class MemberController {
 
 
 	// 회원 자신의 member-id만 받아와야 함 - 프론트에서 처리? 내가 로직?
-	@PatchMapping("/{member-id}")
+	@PatchMapping(value = "/{member-id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
 	public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
-		@Valid @RequestBody MemberPatchDto requestBody) {
+		@Valid @RequestPart MemberPatchDto requestBody, @RequestPart MultipartFile profileImage) {
 		requestBody.setMemberId(memberId);
 
-		Member member = memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
+		Member member = memberService.updateMember(mapper.memberPatchDtoToMember(requestBody), profileImage);
 
 		return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.OK);
 	}
