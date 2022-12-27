@@ -69,8 +69,8 @@ public class SecurityConfiguration {
 				.antMatchers(HttpMethod.POST, "/*/answers").hasRole("USER")
 				.antMatchers(HttpMethod.PATCH, "/*/answers/**").hasRole("USER")
 				//.antMatchers(HttpMethod.PATCH, "/*/answers/{answer-id}").hasRole("USER")) 에다가 memberid로.. 수정 어쩌고..가능하게 어케 하지
-				.antMatchers(HttpMethod.GET, "/*/answers/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/*/answers").permitAll()
+				//.antMatchers(HttpMethod.GET, "/*/answers/**").permitAll()
+				//.antMatchers(HttpMethod.GET, "/*/answers").permitAll()
 				.antMatchers(HttpMethod.DELETE, "/*/answers/**").hasRole("USER") // /answers로 끝내도 되나....... 모르겠음 ㅋㅋ
 				// 만약 vote, tag기능 추가 된다면 해당 기능도 권한 설정 필요
 				.anyRequest().permitAll()
