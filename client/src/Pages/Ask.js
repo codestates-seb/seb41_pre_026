@@ -15,20 +15,69 @@ const StyledDiv = styled.div`
 
 function Ask() {
   const [focus, setFocus] = useState("Title");
-
-  console.log(focus);
+  const [isWritten, setIsWritten] = useState([]);
+  const [title, setTitle] = useState("");
+  const [problem, setProblem] = useState("");
+  const [expect, setExpect] = useState("");
+  const [tags, setTags] = useState("");
 
   const handleFocusChange = (focus) => {
     setFocus(focus);
   };
 
+  const handleIsWrittenChange = (el) => {
+    setIsWritten([...isWritten, el]);
+  };
+
+  const handleTitleChange = (title) => {
+    setTitle(title);
+  };
+
+  const handleProblemChange = (problem) => {
+    setProblem(problem);
+  };
+
+  const handleExpectChange = (expect) => {
+    setExpect(expect);
+  };
+
+  const handleTagsChange = (tag) => {
+    setTags(tag);
+  };
+
   return (
     <main>
       <Header focus={focus} handleFocusChange={handleFocusChange} />
-      <Title focus={focus} handleFocusChange={handleFocusChange} />
-      <Problem focus={focus} handleFocusChange={handleFocusChange} />
-      <Expect focus={focus} handleFocusChange={handleFocusChange} />
-      <Tags focus={focus} handleFocusChange={handleFocusChange} />
+      <Title
+        focus={focus}
+        handleFocusChange={handleFocusChange}
+        title={title}
+        handleTitleChange={handleTitleChange}
+      />
+      <Problem
+        focus={focus}
+        handleFocusChange={handleFocusChange}
+        problem={problem}
+        handleProblemChange={handleProblemChange}
+        isWritten={isWritten}
+        handleIsWrittenChange={handleIsWrittenChange}
+      />
+      <Expect
+        focus={focus}
+        handleFocusChange={handleFocusChange}
+        expect={expect}
+        handleExpectChange={handleExpectChange}
+        isWritten={isWritten}
+        handleIsWrittenChange={handleIsWrittenChange}
+      />
+      <Tags
+        focus={focus}
+        handleFocusChange={handleFocusChange}
+        tags={tags}
+        handleTagsChange={handleTagsChange}
+        isWritten={isWritten}
+        handleIsWrittenChange={handleIsWrittenChange}
+      />
       <StyledDiv>
         <StyledBlueBtn>Review your question</StyledBlueBtn>
         <StyledTransRedBtn>Discard draft</StyledTransRedBtn>

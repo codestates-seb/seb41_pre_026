@@ -17,6 +17,11 @@ const StyledTitleContainer = styled.div`
   .visible {
     display: "";
   }
+
+  .disabledDiv {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -57,21 +62,51 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Problem({ focus, handleFocusChange }) {
+function Problem({
+  focus,
+  handleFocusChange,
+  problem,
+  handleProblemChange,
+  isWritten,
+  handleIsWrittenChange,
+}) {
   const handleFocus = () => {
     handleFocusChange("Problem");
   };
+
+  const handleOnChange = (event) => {
+    handleProblemChange(event.target.value);
+  };
+
+  const handleBtnClick = () => {
+    handleFocusChange("Expect");
+    handleIsWrittenChange("Problem");
+  };
+
   return (
     <StyledTitleContainer>
-      <div>
+      <div
+        className={
+          focus === "Problem" || isWritten.find((el) => el === "Problem")
+            ? null
+            : "disabledDiv"
+        }
+      >
         <StyledWrapper>
           <label htmlFor="problem">What are the details of your problem?</label>
           <label htmlFor="problem">
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </label>
-          <textarea onFocus={handleFocus}></textarea>
-          <StyledBlueBtn>Next</StyledBlueBtn>
+          <textarea
+            onFocus={handleFocus}
+            onChange={handleOnChange}
+            value={problem}
+            disabled={focus !== "Problem" ? "disabled" : ""}
+          ></textarea>
+          {problem.length > 20 ? (
+            <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
+          ) : null}
         </StyledWrapper>
       </div>
       <div className={focus === "Problem" ? "visible" : "invisible"}>

@@ -17,6 +17,11 @@ const StyledTitleContainer = styled.div`
   .visible {
     display: "";
   }
+
+  .disabledDiv {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -57,13 +62,34 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Tags({ focus, handleFocusChange }) {
+function Tags({
+  focus,
+  handleFocusChange,
+  tags,
+  handleTagsChange,
+  isWritten,
+  handleIsWrittenChange,
+}) {
   const handleFocus = () => {
     handleFocusChange("Tags");
   };
+
+  const handleOnChange = (event) => {
+    handleTagsChange(event.target.value);
+  };
+
+  const handleBtnClick = () => {
+    handleIsWrittenChange("Tags");
+  };
   return (
     <StyledTitleContainer>
-      <div>
+      <div
+        className={
+          focus === "Tags" || isWritten.find((el) => el === "Tags")
+            ? null
+            : "disabledDiv"
+        }
+      >
         <StyledWrapper>
           <label htmlFor="tags">Tags</label>
           <label htmlFor="tags">
@@ -73,8 +99,13 @@ function Tags({ focus, handleFocusChange }) {
           <input
             placeholder="e.g. (Angular database swift)"
             onFocus={handleFocus}
+            onChange={handleOnChange}
+            value={tags}
+            disabled={focus !== "Tags" ? "disabled" : ""}
           ></input>
-          <StyledBlueBtn>Next</StyledBlueBtn>
+          {tags.length > 1 ? (
+            <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
+          ) : null}
         </StyledWrapper>
       </div>
       <div className={focus === "Tags" ? "visible" : "invisible"}>

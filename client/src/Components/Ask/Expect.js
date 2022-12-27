@@ -17,6 +17,11 @@ const StyledTitleContainer = styled.div`
   .visible {
     display: "";
   }
+
+  .disabledDiv {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 `;
 
 const StyledWrapper = styled.div`
@@ -57,23 +62,53 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Expect({ focus, handleFocusChange }) {
+function Expect({
+  focus,
+  handleFocusChange,
+  expect,
+  handleExpectChange,
+  isWritten,
+  handleIsWrittenChange,
+}) {
   const handleFocus = () => {
     handleFocusChange("Expect");
   };
+
+  const handleOnChange = (event) => {
+    handleExpectChange(event.target.value);
+  };
+
+  const handleBtnClick = () => {
+    handleFocusChange("Tags");
+    handleIsWrittenChange("Expect");
+  };
+
   return (
     <StyledTitleContainer>
-      <div>
+      <div
+        className={
+          focus === "Expect" || isWritten.find((el) => el === "Expect")
+            ? null
+            : "disabledDiv"
+        }
+      >
         <StyledWrapper>
-          <label htmlFor="problem">
+          <label htmlFor="Expect">
             What did you try and what were you expecting?
           </label>
-          <label htmlFor="problem">
+          <label htmlFor="Expect">
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </label>
-          <textarea onFocus={handleFocus}></textarea>
-          <StyledBlueBtn>Next</StyledBlueBtn>
+          <textarea
+            onFocus={handleFocus}
+            onChange={handleOnChange}
+            value={expect}
+            disabled={focus !== "Expect" ? "disabled" : ""}
+          ></textarea>
+          {expect.length > 20 ? (
+            <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
+          ) : null}
         </StyledWrapper>
       </div>
       <div className={focus === "Expect" ? "visible" : "invisible"}>
