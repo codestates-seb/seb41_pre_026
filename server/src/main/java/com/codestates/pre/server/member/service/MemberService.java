@@ -59,6 +59,7 @@ public class MemberService {
 	}
 
 	// Multi form data를 받도록 수정
+	// 근데 이러케 하면 이미지파일 첨부 안할 시 수정이 안됨 ㅜㅜ, null값 받으면 이전 이미지로 수정하고 저장되도록..어더케...
 	public Member updateMember(Member member, MultipartFile profileImage) {
 		Member findMember = findVerifiedMember(member.getMemberId());
 
