@@ -1,7 +1,6 @@
 import Questions from "./Pages/Questions";
 import styled from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";

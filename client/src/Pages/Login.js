@@ -1,5 +1,10 @@
+
+import styled from "styled-components";
+
+const StyledDiv = styled.div``;
+
 function Login() {
-  return <></>;
+  return <StyledDiv></StyledDiv>;
 }
 
 export default Login;
