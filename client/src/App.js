@@ -7,6 +7,7 @@ import RightSideBar from "./Components/Share/RightSideBar";
 // import Footer from "./Components/Share/Footer";
 import { useState } from "react";
 import Login from "./Pages/Login";
+import Home from "./Pages/Home";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -20,9 +21,8 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSide, setIsSide] = useState(false);
   const location = useLocation();
-
-  console.log(location.pathname);
-
+  const unSideList = ["/login", "/"];
+  console.log(location.pathname, unSideList.includes(location.pathname));
   return (
     <>
       <Navigation
@@ -30,12 +30,17 @@ function App() {
         isSide={{ isSide, setIsSide }}
       />
       <StyledFrame>
-        {isSide && location.pathname !== "/login" ? <LeftSideBar /> : null}
+        {isSide && !unSideList.includes(location.pathname) ? (
+          <LeftSideBar />
+        ) : null}
         <Routes>
-          <Route path={"/"} element={<Questions />} />
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/question"} element={<Questions />} />
           <Route path={"/login"} element={<Login />} />
         </Routes>
-        {location.pathname !== "/login" ? <RightSideBar></RightSideBar> : null}
+        {!unSideList.includes(location.pathname) ? (
+          <RightSideBar></RightSideBar>
+        ) : null}
       </StyledFrame>
     </>
   );

@@ -371,10 +371,16 @@ function Navigation({ login, isSide }) {
           <button
             onClick={() => {
               setIsFold(!isFold);
-              isSide.setIsSide(!isSide.isSide);
             }}
           >
             x
+          </button>
+          <button
+            onClick={() => {
+              navigate("/question");
+            }}
+          >
+            question
           </button>
         </StyledMenu>
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
