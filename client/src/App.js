@@ -1,53 +1,6 @@
-import Questions from "./Pages/Questions";
-import styled from "styled-components";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navigation from "./Components/Share/Navigation";
-import LeftSideBar from "./Components/Share/LeftSideBar";
-import RightSideBar from "./Components/Share/RightSideBar";
-// import Footer from "./Components/Share/Footer";
-import { useState } from "react";
-import Login from "./Pages/Login";
-
-const StyledBody = createGlobalStyle`
-  * {
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  
-  body {
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-    box-sizing: border-box;
-  }
-`;
-
-const StyledFrame = styled.div`
-  display: flex;
-  position: relative;
-  top: 51px;
-  justify-content: center;
-`;
+import Ask from "./Pages/Ask";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isSide, setIsSide] = useState(false);
-  // const [isLocate, setIsLocate] = useState("/");
-
-  return (
-    <BrowserRouter>
-      <StyledBody />
-      <Navigation
-        login={{ isLogin, setIsLogin }}
-        isSide={{ isSide, setIsSide }}
-      />
-      <StyledFrame>
-        {isSide ? <LeftSideBar /> : null}
-        <Routes>
-          <Route path={"/"} element={<Questions />} />
-          <Route path={"/login"} element={<Login />} />
-        </Routes>
-        <RightSideBar></RightSideBar>
-      </StyledFrame>
-    </BrowserRouter>
-  );
+  return <Ask></Ask>;
 }
 export default App;
