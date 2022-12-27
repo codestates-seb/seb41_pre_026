@@ -113,7 +113,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   width: 100%;
   min-width: 1240px;
-  height: 170px;
+  height: 1px;
   position: fixed;
   top: 50px;
   z-index: 33;
@@ -122,10 +122,10 @@ const StyledDiv = styled.div`
 const StyledHistory = styled.div`
   visibility: ${({ focused }) => (focused ? "visible" : "hidden")};
   position: relative;
-  top: -2px;
+  top: 3px;
   left: 43px;
   width: 667px;
-  height: 100%;
+  height: 174px;
   border: 1px solid #babfc4;
   border-radius: 7px;
   box-shadow: 0 4px 4px -4px #e2e3e4;
