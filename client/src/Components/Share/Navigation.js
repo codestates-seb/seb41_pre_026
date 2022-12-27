@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import menu from "../../Assets/menu.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -105,6 +105,9 @@ const StyledSearch = styled.div`
   input {
     width: 93%;
     border: 0px;
+    :focus {
+      outline: none;
+    }
   }
 `;
 
@@ -243,6 +246,7 @@ const StyledIcons = styled.ol`
 function Navigation({ login, isSide }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
+  const navigate = useNavigate();
   // const [iconFocuse, setIcF] = useState(false);
 
   const handleFocuse = (e) => {
@@ -251,10 +255,6 @@ function Navigation({ login, isSide }) {
 
   const handleFold = (e) => {
     setIsFold(!isFold);
-  };
-
-  const handleLogin = (e) => {
-    login.setIsLogin(!login.isLogin);
   };
 
   useEffect(() => {
@@ -346,7 +346,7 @@ function Navigation({ login, isSide }) {
               </button>
             </li>
             <li>
-              <button onClick={handleLogin}>
+              <button onClick={() => navigate("/login")}>
                 <svg width="18" height="18" viewBox="0 0 18 18">
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>
                 </svg>
@@ -355,7 +355,11 @@ function Navigation({ login, isSide }) {
           </StyledIcons>
         ) : (
           <>
-            <StyledButton type={1} onClick={handleLogin} className="login">
+            <StyledButton
+              type={1}
+              onClick={() => navigate("/login")}
+              className="login"
+            >
               {login.isLogin ? "Log out" : "Log in"}
             </StyledButton>
             <StyledButton type={2}>Sign up</StyledButton>
@@ -367,10 +371,16 @@ function Navigation({ login, isSide }) {
           <button
             onClick={() => {
               setIsFold(!isFold);
-              isSide.setIsSide(!isSide.isSide);
             }}
           >
             x
+          </button>
+          <button
+            onClick={() => {
+              navigate("/question");
+            }}
+          >
+            question
           </button>
         </StyledMenu>
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
