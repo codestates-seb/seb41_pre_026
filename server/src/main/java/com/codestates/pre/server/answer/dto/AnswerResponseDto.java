@@ -18,7 +18,7 @@ public class AnswerResponseDto {
 
     private int score;
 
-    private Long id; //questionId
+    private Long questionId; //questionId
 
     private long memberId;
 
