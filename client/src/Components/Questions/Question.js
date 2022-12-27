@@ -5,7 +5,7 @@ const QuestionContainer = styled.div`
   width: auto;
   display: flex;
   border-bottom: 1px solid #e3e6e8;
-  padding: 16px;
+  padding: 0px 0px 0px 0px;
 `;
 
 const SummaryStats = styled.div`
