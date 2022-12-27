@@ -104,7 +104,11 @@ function Expect({
             onFocus={handleFocus}
             onChange={handleOnChange}
             value={expect}
-            disabled={focus !== "Expect" ? "disabled" : ""}
+            disabled={
+              focus === "Expect" || isWritten.find((el) => el === "Expect")
+                ? ""
+                : "disabled"
+            }
           ></textarea>
           {expect.length > 20 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>

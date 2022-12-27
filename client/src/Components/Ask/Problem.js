@@ -102,7 +102,11 @@ function Problem({
             onFocus={handleFocus}
             onChange={handleOnChange}
             value={problem}
-            disabled={focus !== "Problem" ? "disabled" : ""}
+            disabled={
+              focus === "Problem" || isWritten.find((el) => el === "Problem")
+                ? ""
+                : "disabled"
+            }
           ></textarea>
           {problem.length > 20 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
