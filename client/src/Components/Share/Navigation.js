@@ -241,7 +241,6 @@ const StyledIcons = styled.ol`
 `;
 
 function Navigation({ login, isSide }) {
-  // const [isLogin, setIsLogin] = useState(false);
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   // const [iconFocuse, setIcF] = useState(false);
@@ -269,12 +268,12 @@ function Navigation({ login, isSide }) {
   return (
     <nav>
       <StyledNav>
-        {login.isLogin ? null : (
+        {isSide.isSide ? null : (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>
         )}
-        <Link to={"/login"} className="logo">
+        <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
         </Link>
         <nav>
@@ -364,7 +363,16 @@ function Navigation({ login, isSide }) {
         )}
       </StyledNav>
       <StyledDiv>
-        <StyledMenu isFold={isFold}></StyledMenu>
+        <StyledMenu isFold={isFold}>
+          <button
+            onClick={() => {
+              setIsFold(!isFold);
+              isSide.setIsSide(!isSide.isSide);
+            }}
+          >
+            x
+          </button>
+        </StyledMenu>
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>

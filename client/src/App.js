@@ -41,7 +41,7 @@ function App() {
         isSide={{ isSide, setIsSide }}
       />
       <StyledFrame>
-        <LeftSideBar />
+        {isSide ? <LeftSideBar /> : null}
         <Routes>
           <Route path={"/"} element={<Questions />} />
           <Route path={"/login"} element={<Login />} />
