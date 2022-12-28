@@ -26,12 +26,12 @@ const StyledForm = styled.div`
   }
 `;
 
-function LoginForm() {
+function LoginForm({ handleLogin }) {
   return (
     <StyledForm>
       <LoginInput label="Email" />
       <LoginInput label="Password" />
-      <StyledBlueBtn>Log in</StyledBlueBtn>
+      <StyledBlueBtn onClick={handleLogin}>Log in</StyledBlueBtn>
     </StyledForm>
   );
 }

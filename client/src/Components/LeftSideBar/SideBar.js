@@ -27,11 +27,9 @@ const StyledLi = styled.li`
     border-right: 3px solid #f48255;
   }
 `;
-function SideBar({ data, setCurNav, curNav }) {
+function SideBar({ handleCurNav, curNav }) {
   const label = ["Home", "Public", "Questions"];
-  const handleCurNav = (e) => {
-    setCurNav(e.target.text);
-  };
+
   return (
     <>
       <StyledLi curNav={curNav} onClick={(e) => e.target}>
