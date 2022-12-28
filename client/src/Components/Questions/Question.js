@@ -1,34 +1,36 @@
 import styled from "styled-components";
 
 const QuestionContainer = styled.div`
-  position: relative;
-  width: auto;
   display: flex;
+  width: 100%;
+  height: auto;
   border-bottom: 1px solid #e3e6e8;
-  padding: 0px 0px 0px 0px;
+  padding: 16px;
 `;
 
 const SummaryStats = styled.div`
-  gap: 4px;
-  margin-right: 16px;
-  margin-bottom: 4px;
-  width: 108px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: flex-end;
+  width: 25%;
   font-size: 13px;
   color: #6a737c;
+  gap: 6px;
+  margin: 0px 15px 0px 0px;
+  padding: 3px 0px 0px 0px;
+
   .stats-item-vote {
     color: #0c0d0e;
   }
+
   .stats-item-answer {
     color: #2f6f44;
     border: 0.5px solid #2f6f44;
     border-radius: 3px;
     padding: 2px 4px;
   }
+
   .stats-item-answer-adopted {
     color: #ffffff;
     background-color: #2f6f44;
@@ -39,62 +41,48 @@ const SummaryStats = styled.div`
 `;
 
 const SummaryContent = styled.div`
-  flex-grow: 1;
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: #545b5d;
+
   a {
     text-decoration: none;
     font-size: 17px;
     color: #0074cc;
-    cursor: pointer;
-    user-select: auto;
-  }
-  div {
-    margin-top: 1x;
-    margin-bottom: 8px;
-    fonst-size: 13px;
-    color: #3b4045;
   }
 `;
 
 const Info = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
-  column-gap: 6px;
-  row-gap: 8px;
+  margin: 0px !important;
 
   .content-item-tags {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  ul {
-    margin: 4px 4px 0px 0px;
-    padding: 0px;
-    flex-direction: row;
-    line-height: 18px;
-    float: left;
-  }
-  li {
-    list-style: none !important;
-    display: inline-block;
-    font-size: 12px;
-    margin: 2px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    color: #39739d;
-    background-color: #e1ecf4;
+
+    ul {
+      flex-direction: row;
+      float: left;
+      margin: 0px 0px 3px 0px;
+      padding: 0px;
+    }
+
+    li {
+      list-style: none !important;
+      display: inline-block;
+      font-size: 12px;
+      border-radius: 3px;
+      color: #39739d;
+      background-color: #e1ecf4;
+      padding: 4px 6px;
+    }
   }
 
   .content-item-profile {
-    flex-wrap: wrap;
-    margin-left: auto;
-    justify-content: flex-end;
-  }
-
-  span {
-    margin: 2px;
+    margin: 0px 0px 0px auto;
     font-size: 12px;
     color: #6a737c;
   }
