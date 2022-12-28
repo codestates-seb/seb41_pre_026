@@ -41,9 +41,10 @@ public class AnswerService {
     // 답변 등록
     public Answer createAnswer(Answer answer) {
         Member member = memberService.findMember(answer.getMid());
-        Question question = questionService.findQuestion(answer.getQid());
+        Question question = questionService.findVerifiedQuestion(answer.getQid());
         answer.addMember(member);
         answer.addQuestion(question);
+        questionService.getAnswerCount(question.getQuestionId());
         return answerRepository.save(answer);
 
     }
