@@ -1,6 +1,5 @@
 package com.codestates.pre.server.member.dto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import com.codestates.pre.server.validator.NotSpace;

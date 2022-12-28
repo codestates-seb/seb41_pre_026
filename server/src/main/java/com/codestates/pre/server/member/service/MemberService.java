@@ -1,10 +1,13 @@
 package com.codestates.pre.server.member.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codestates.pre.server.answer.repository.AnswerRepository;
+import com.codestates.pre.server.auth.utils.CustomAuthorityUtils;
 import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.member.entity.Member;
@@ -20,22 +23,39 @@ public class MemberService {
 	private final CustomBeanUtils<Member> beanUtils;
 	private final QuestionRepository questionRepository;
 	private final AnswerRepository answerRepository;
+	//  PasswordEncoder를 이용해 패스워드를 암호화 위해 di
+	private	final PasswordEncoder passwordEncoder;
+	private final CustomAuthorityUtils authorityUtils;
+
+
 
 	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils,
 		QuestionRepository questionRepository,
-		AnswerRepository answerRepository) {
+		AnswerRepository answerRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
 		this.memberRepository = memberRepository;
 		this.beanUtils = beanUtils;
 		this.questionRepository = questionRepository;
 		this.answerRepository = answerRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.authorityUtils = authorityUtils;
 	}
 
 	public Member createMember(Member member) {
 		verifyExistsEmail(member.getEmail());
+		// PasswordEncoder를 이용해 패스워드를 암호화
+		String encryptedPassword = passwordEncoder.encode(member.getPassword());
+		// 암호화 된 패스워드를 password 필드에 다시 할당
+		member.setPassword(encryptedPassword);
+
+		// DB에 User Role 저장
+		List<String> roles = authorityUtils.createRoles(member.getEmail());
+		member.setRoles(roles);
 
 		return memberRepository.save(member);
 	}
 
+	// Multi form data를 받도록 수정
+	// 근데 이러케 하면 이미지파일 첨부 안할 시 수정이 안됨 ㅜㅜ, null값 받으면 이전 이미지로 수정하고 저장되도록..어더케...
 	public Member updateMember(Member member) {
 		Member findMember = findVerifiedMember(member.getMemberId());
 
