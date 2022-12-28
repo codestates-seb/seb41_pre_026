@@ -31,6 +31,7 @@ const StyledNav = styled.div`
     border: 0px;
     margin: 0px;
     padding: 0px;
+    cursor: pointer;
 
     :hover {
       background-color: #e0e3e5;
