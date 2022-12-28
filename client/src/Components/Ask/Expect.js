@@ -53,6 +53,12 @@ const StyledWrapper = styled.div`
     border: 1px solid #babfc3;
     border-radius: 3px;
     padding: 7.8px 9.1px;
+    outline-color: #0074cc;
+  }
+
+  textarea:focus {
+    border: 1px solid #379fef;
+    outline: 4px solid #e1ecf4;
   }
 
   button {

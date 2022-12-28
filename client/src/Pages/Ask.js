@@ -28,7 +28,7 @@ function Ask() {
   const [title, setTitle] = useState("");
   const [problem, setProblem] = useState("");
   const [expect, setExpect] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
 
   const handleFocusChange = (focus) => {
     setFocus(focus);
@@ -67,7 +67,7 @@ function Ask() {
     setTitle("");
     setProblem("");
     setExpect("");
-    setTags("");
+    setTags([]);
   };
 
   return (

@@ -51,6 +51,11 @@ const StyledWrapper = styled.div`
     padding: 7.8px 9.1px;
   }
 
+  input:focus {
+    border: 1px solid #379fef;
+    outline: 4px solid #e1ecf4;
+  }
+
   button {
     width: 50px;
     height: 38px;
