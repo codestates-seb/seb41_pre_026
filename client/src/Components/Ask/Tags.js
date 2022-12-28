@@ -140,7 +140,6 @@ function Tags({
   };
 
   const handleNextBtnClick = () => {
-    handleIsWrittenChange("Tags");
     handleTagsChange(selectedTags);
     handleFocusChange("Done");
   };
@@ -157,6 +156,7 @@ function Tags({
       handleTagsChange(selectedTags);
       event.target.value = "";
     }
+    handleIsWrittenChange("Tags");
   };
 
   return (
