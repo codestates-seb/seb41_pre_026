@@ -29,6 +29,10 @@ const StyledUl = styled.ul`
 function LeftSideBar() {
   const [curNav, setCurNav] = useState("Home");
 
+  const handleCurNav = (e) => {
+    setCurNav(e.target.text);
+  };
+
   useEffect(() => {
     console.log(curNav);
   }, [curNav]);
@@ -36,7 +40,7 @@ function LeftSideBar() {
   return (
     <StyledNav>
       <StyledUl>
-        <SideBar curNav={curNav} setCurNav={setCurNav} />
+        <SideBar curNav={curNav} handleCurNav={handleCurNav} />
       </StyledUl>
     </StyledNav>
   );

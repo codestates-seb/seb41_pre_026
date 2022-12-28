@@ -19,29 +19,32 @@ const StyledFrame = styled.div`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [isSide, setIsSide] = useState(false);
+
   const location = useLocation();
   const unSideList = ["/login", "/", "/sign"];
-  console.log(location.pathname, unSideList.includes(location.pathname));
+  // console.log(location.pathname, unSideList.includes(location.pathname));
+
+  const handleLogin = () => setIsLogin(!isLogin);
+  const curPageBy = () => !unSideList.includes(location.pathname);
+
+  console.log(curPageBy());
+
   return (
     <>
-      <Navigation
-        login={{ isLogin, setIsLogin }}
-        isSide={{ isSide, setIsSide }}
-      />
+      <Navigation isLogin={isLogin} curPageBy={curPageBy} />
       <StyledFrame>
-        {isSide && !unSideList.includes(location.pathname) ? (
-          <LeftSideBar />
-        ) : null}
+        {curPageBy() ? <LeftSideBar /> : null}
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/question"} element={<Questions />} />
-          <Route path={"/login"} element={<Login />} />
+          <Route
+            path={"/login"}
+            element={<Login />}
+            handleLogin={handleLogin}
+          />
           <Route path={"/sign"} element={<Sign />} />
         </Routes>
-        {!unSideList.includes(location.pathname) ? (
-          <RightSideBar></RightSideBar>
-        ) : null}
+        {curPageBy() ? <RightSideBar></RightSideBar> : null}
       </StyledFrame>
     </>
   );
