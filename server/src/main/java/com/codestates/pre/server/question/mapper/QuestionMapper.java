@@ -46,7 +46,20 @@ public interface QuestionMapper {
 
 	QuestionResponseDto questionToQuestionResponseDto(Question question);
 
-	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
+	default List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions) {
+		if ( questions == null ) {
+			return null;
+		}
+
+		List<QuestionResponseDto> list = new ArrayList<QuestionResponseDto>( questions.size() );
+		for ( Question question : questions ) {
+			question.setMid(question.getMember().getMemberId());
+			list.add( questionToQuestionResponseDto( question ) );
+		}
+		System.out.println(questions.size());
+
+		return list;
+	}
 
 
 	default QuestionGetResponseDto questionToQuestionGetResponseDto(Question question) {
