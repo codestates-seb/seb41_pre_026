@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SideBar from "../LeftSideBar/SideBar";
-import { useEffect, useState } from "react";
 
 const StyledNav = styled.nav`
   width: 169px;
@@ -27,19 +26,10 @@ const StyledUl = styled.ul`
 `;
 
 function LeftSideBar() {
-  const [curNav, setCurNav] = useState("Home");
-  const handleCurNav = (e) => {
-    setCurNav(e.target.text);
-  };
-
-  useEffect(() => {
-    console.log(curNav);
-  }, [curNav]);
-
   return (
     <StyledNav>
       <StyledUl>
-        <SideBar curNav={curNav} handleCurNav={handleCurNav} />
+        <SideBar />
       </StyledUl>
     </StyledNav>
   );
