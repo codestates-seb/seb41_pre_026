@@ -2,9 +2,11 @@ package com.codestates.pre.server.question.mapper;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.mapstruct.Mapper;
 
+import com.codestates.pre.server.answer.dto.AnswerResponseDto;
 import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.question.dto.QuestionDeleteDto;
@@ -46,42 +48,42 @@ public interface QuestionMapper {
 
 	QuestionResponseDto questionToQuestionResponseDto(Question question);
 
+
+
 	default QuestionGetResponseDto questionToQuestionGetResponseDto(Question question) {
-		if ( question == null ) {
-			return null;
-		}
+		List<Answer> answers = question.getAnswers();
 
-		long id = 0L;
-		long mid = 0L;
-		String title = null;
-		String problem = null;
-		String expecting = null;
-		int score = 0;
+		QuestionGetResponseDto questionGetResponseDto = new QuestionGetResponseDto();
 
-		if ( question.getMid() != null ) {
-			mid = question.getMid();
-		}
-
-		id = question.getQuestionId();
-		mid = question.getMid();
-		title = question.getTitle();
-		problem = question.getProblem();
-		expecting = question.getExpecting();
-		score = question.getScore();
-
-		List<Tag> tags = null;
-		String vote = null;
-		LocalDateTime created = null;
-		LocalDateTime modified = null;
-		Answer answer = null;
-		long view = 0L;
-
-		created = question.getCreatedAt();
-		modified = question.getModifiedAt();
-
-		QuestionGetResponseDto questionGetResponseDto = new QuestionGetResponseDto( id, mid, title, problem, expecting, tags, score, vote, created, modified, answer, view );
+		questionGetResponseDto.setId(question.getQuestionId());
+		questionGetResponseDto.setMid(question.getMid());
+		questionGetResponseDto.setTitle(question.getTitle());
+		questionGetResponseDto.setProblem(question.getProblem());
+		questionGetResponseDto.setExpecting(question.getExpecting());
+		questionGetResponseDto.setScore(question.getScore());
+		questionGetResponseDto.setAnswers(
+			questionToAnswerResponseDtos(answers)
+		);
 
 		return questionGetResponseDto;
 	}
+
+	default List<AnswerResponseDto> questionToAnswerResponseDtos(List<Answer> answers) {
+
+		return answers
+			.stream()
+			.map(answer -> AnswerResponseDto
+				.builder()
+				.answerId(answer.getAnswerId())
+				.answerContent(answer.getAnswerContent())
+				.creationAt(answer.getCreationAt())
+				.modifiedAt(answer.getModifiedAt())
+				.score(answer.getScore())
+				.questionId(answer.getQuestion().getQuestionId())
+				.memberId(answer.getMember().getMemberId())
+				.build()
+		).collect(Collectors.toList());
+	}
 	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
+
 }
