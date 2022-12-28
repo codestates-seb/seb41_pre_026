@@ -32,6 +32,7 @@ function App() {
   };
 
   const curPageBy = () => {
+    if (!isLogin && location.pathname === "/") return false;
     return !unSideList.includes(location.pathname);
   };
 
