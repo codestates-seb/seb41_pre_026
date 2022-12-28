@@ -99,27 +99,23 @@ text \`background-color\`
 > quote
 `;
 
-function Post() {
+function Post({ data }) {
   return (
     <PostContainer>
-      <p>
-        본문: I have this JS code that I use to add and remove a class while
-        scrolling down from the top of a page, but what I want is to do is also
-        disappear when you come close to the end of the page or go back to its
-        old state after some scrolling (from right: 7px to right: -150px, for
-        example). I copied the same JS code and changed the scrollTop,
-        scrollBottom and it didnt work.
-      </p>
+      <p>{data.question.problem}</p>
       <div>
         <pre>
-          <code>이거 어떻게 해~~~ 나는 모르겠는디{markdown}</code>
+          <code>
+            {data.question.expecting}
+            {markdown}
+          </code>
         </pre>
       </div>
       <div className="tags">
         <ul>
-          <li>javascript</li>
-          <li>html</li>
-          <li>css</li>
+          {data.question.tags.map((tag, idx) => (
+            <li key={idx}>{tag}</li>
+          ))}
         </ul>
       </div>
       <div className="question-footer">
@@ -133,8 +129,8 @@ function Post() {
         </div>
         <div className="profile">
           <img src={profileIMG} alt=""></img>
-          <span>dongrri</span>
-          <span>asked 2022-12-25 00:02:34</span>
+          <span>{data.question.mid}</span>
+          <span>asked {data.question.created}</span>
         </div>
       </div>
     </PostContainer>

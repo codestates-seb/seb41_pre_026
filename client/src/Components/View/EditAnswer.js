@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledBlueBtn } from "../Share/Button";
 
 const EditorContainer = styled.div`
   border-top: 1px solid #e3e6e8;
@@ -22,6 +23,12 @@ function EditAnswer() {
     <EditorContainer>
       <div className="edit-answer-header">
         <p>Your Answer</p>
+        <div>editor</div>
+        <div>
+          <StyledBlueBtn>
+            <div>Post Your Answer</div>
+          </StyledBlueBtn>
+        </div>
       </div>
     </EditorContainer>
   );

@@ -54,7 +54,7 @@ const VoteContainer = styled.div`
   }
 `;
 
-function Vote() {
+function Vote({ qScore }) {
   return (
     <VoteContainer>
       <button>
@@ -62,7 +62,9 @@ function Vote() {
           <path />
         </svg>
       </button>
-      <div>2</div>
+      <div>
+        <span>{qScore}</span>
+      </div>
       <button>
         <svg className="arrow-down">
           <path />

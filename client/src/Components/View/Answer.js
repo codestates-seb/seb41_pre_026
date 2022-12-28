@@ -89,7 +89,7 @@ function Answer() {
   return (
     <AnswerContainer>
       <div className="answers-header">
-        <p>4 answers</p>
+        <p>2 answers</p>
       </div>
       <div className="answer-content">
         <div className="answer-content-vote">

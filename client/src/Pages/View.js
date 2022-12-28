@@ -4,6 +4,8 @@ import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
+import { viewData } from "../Assets/viewData";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   max-width: 1100px;
@@ -94,11 +96,18 @@ const Container = styled.div`
 `;
 
 function View() {
+  const [data, setData] = useState(viewData);
+  const qScore = data.question.score;
+
+  useEffect(() => {
+    setData(viewData);
+  }, []);
+
   return (
     <Container>
       <div className="question-header">
         <div className="question title">
-          <p>Close to end of the page, element needs to disappear</p>
+          <p>{data.question.title}</p>
         </div>
         <div className="button-container">
           <StyledBlueBtn>
@@ -109,23 +118,23 @@ function View() {
       <div className="question-info">
         <div>
           <span className="question-info-description">Asked </span>
-          <span className="question-info-data">9 days ago</span>
+          <span className="question-info-data">{data.question.created}</span>
         </div>
         <div>
           <span className="question-info-description">Modified </span>
-          <span className="question-info-data">5 days ago</span>
+          <span className="question-info-data">{data.question.modified}</span>
         </div>
         <div>
           <span className="question-info-description">Viewed </span>
-          <span className="question-info-data">92 times</span>
+          <span className="question-info-data">{data.question.view} times</span>
         </div>
       </div>
       <div className="question-content">
         <div className="question-content-vote">
-          <Vote />
+          <Vote qScore={qScore} />
         </div>
         <div className="question-content-post">
-          <Post />
+          <Post data={data} />
         </div>
       </div>
       <Answer />
