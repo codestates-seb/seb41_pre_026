@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
-  width: 1060px;
   display: flex;
   flex-direction: column;
 
   div {
-    width: 1200px;
+    width: 1215px;
     height: 130px;
     background-image: url("https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368");
     background-repeat: no-repeat;
