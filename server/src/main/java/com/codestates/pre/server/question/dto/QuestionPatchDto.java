@@ -13,6 +13,8 @@ import lombok.Setter;
 public class QuestionPatchDto {
 	private long id; // questionId
 
+	private long mid;
+
 	private String title;
 
 	private String problem;

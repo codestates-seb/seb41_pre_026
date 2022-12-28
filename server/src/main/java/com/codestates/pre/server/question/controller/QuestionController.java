@@ -54,7 +54,7 @@ public class QuestionController {
 		@RequestBody QuestionPatchDto questionPatchDto) {
 		questionPatchDto.setId(questionId);
 
-		Question question = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
+		Question question = questionService.updateQuestion(questionId, mapper.questionPatchDtoToQuestion(questionPatchDto));
 
 		return new ResponseEntity(
 			new SingleResponseDto(mapper.questionToQuestionResponseDto(question)), HttpStatus.OK
@@ -66,16 +66,18 @@ public class QuestionController {
 										@RequestParam long mid) {
 		// TODO Member 엔티티 매핑 이후 @RequestParam 으로 mid(memberId)를 받아오는 코드가 추가되어야 합니다.
 
-		Question question = questionService.findQuestion(questionId);
+		Question question = questionService.findQuestion(questionId, mid);
 
 		return new ResponseEntity(
-			new SingleResponseDto(mapper.questionToQuestionResponseDto(question)), HttpStatus.OK
+			new SingleResponseDto(mapper.questionToQuestionGetResponseDto(question)), HttpStatus.OK
 		);
 	}
 
 	@GetMapping
 	public ResponseEntity getQuestions(@Positive @RequestParam int page,
 										@Positive @RequestParam int size) {
+		// todo tag 구현하고 @RequestionParam으로 type을 받아와야 함
+
 		Page<Question> questions = questionService.findQuestions(page - 1, size);
 		List<Question> content = questions.getContent();
 		return new ResponseEntity(

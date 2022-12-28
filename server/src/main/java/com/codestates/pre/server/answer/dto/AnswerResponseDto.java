@@ -1,10 +1,12 @@
 package com.codestates.pre.server.answer.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
 public class AnswerResponseDto {
@@ -18,7 +20,7 @@ public class AnswerResponseDto {
 
     private int score;
 
-    private Long id; //questionId
+    private Long questionId; //questionId
 
     private long memberId;
 
