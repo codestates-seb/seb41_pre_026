@@ -28,25 +28,25 @@ public interface AnswerMapper {
     }
     Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
 
-    // AnswerResponseDto answerToAnswerResponseDto(Answer answer);
+    AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 
-    default AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
-        if ( answer == null ) {
-            return null;
-        }
-
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto();
-
-        answerResponseDto.setAnswerId( answer.getAnswerId() );
-        answerResponseDto.setMemberId(answer.getMember().getMemberId());
-        answerResponseDto.setAnswerContent( answer.getAnswerContent() );
-        answerResponseDto.setCreationAt( answer.getCreationAt() );
-        answerResponseDto.setModifiedAt( answer.getModifiedAt() );
-        answerResponseDto.setScore( answer.getScore() );
-        answerResponseDto.setQuestionId( answer.getQuestion().getQuestionId() );
-
-        return answerResponseDto;
-    }
+    // default AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
+    //     if ( answer == null ) {
+    //         return null;
+    //     }
+    //
+    //     AnswerResponseDto answerResponseDto = new AnswerResponseDto();
+    //
+    //     answerResponseDto.setAnswerId( answer.getAnswerId() );
+    //     answerResponseDto.setMemberId(answer.getMember().getMemberId());
+    //     answerResponseDto.setAnswerContent( answer.getAnswerContent() );
+    //     answerResponseDto.setCreationAt( answer.getCreationAt() );
+    //     answerResponseDto.setModifiedAt( answer.getModifiedAt() );
+    //     answerResponseDto.setScore( answer.getScore() );
+    //     answerResponseDto.setQuestionId( answer.getQuestion().getQuestionId() );
+    //
+    //     return answerResponseDto;
+    // }
 
     List<AnswerResponseDto> answerToAnswerResponseDtos(List<Answer> members);
 
