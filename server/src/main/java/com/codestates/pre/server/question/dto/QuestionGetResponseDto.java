@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.codestates.pre.server.answer.dto.AnswerResponseDto;
-import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.tag.Tag;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +14,7 @@ import lombok.Setter;
 public class QuestionGetResponseDto {
 	private long id;
 	private long mid;
-	private long answerId;
+	// private long answerId;
 	private String title;
 	private String problem;
 	private String expecting;

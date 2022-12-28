@@ -30,7 +30,7 @@ public class Question {
 
 	private String expecting;
 
-	private int answerCount;
+	private int answerCount = 0;
 
 	private LocalDateTime createdAt;
 
@@ -41,11 +41,10 @@ public class Question {
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answers = new ArrayList<>();
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID")
 	private Member member;
 
-	// Todo QuestionTag 연관관계 매핑필요
 
 	public void addMember(Member member) {
 		if (this.member != null) {
@@ -53,5 +52,13 @@ public class Question {
 		}
 		this.member = member;
 		this.member.getQuestions().add(this);
+	}
+
+	public void plusAnswerCount () {
+		answerCount++;
+	}
+
+	public void minusAnswerCount () {
+		answerCount--;
 	}
 }

@@ -1,6 +1,7 @@
 package com.codestates.pre.server.question.mapper;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,11 +16,9 @@ import com.codestates.pre.server.question.dto.QuestionPatchDto;
 import com.codestates.pre.server.question.dto.QuestionPostDto;
 import com.codestates.pre.server.question.dto.QuestionResponseDto;
 import com.codestates.pre.server.question.entity.Question;
-import com.codestates.pre.server.tag.Tag;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-	// Question questionPostDtoToQuestion(QuestionPostDto questionPostDto);
 	default Question questionPostDtoToQuestion(QuestionPostDto questionPostDto) {
 		Question question = new Question();
 		Member member = new Member();
@@ -29,7 +28,6 @@ public interface QuestionMapper {
 		question.setProblem( questionPostDto.getProblem() );
 		question.setExpecting( questionPostDto.getExpecting() );
 		member.setMemberId(questionPostDto.getMid());
-		System.out.println("memberId"+member.getMemberId());
 		return question;
 	}
 
@@ -48,6 +46,7 @@ public interface QuestionMapper {
 
 	QuestionResponseDto questionToQuestionResponseDto(Question question);
 
+	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
 
 
 	default QuestionGetResponseDto questionToQuestionGetResponseDto(Question question) {
@@ -61,6 +60,8 @@ public interface QuestionMapper {
 		questionGetResponseDto.setProblem(question.getProblem());
 		questionGetResponseDto.setExpecting(question.getExpecting());
 		questionGetResponseDto.setScore(question.getScore());
+		questionGetResponseDto.setCreated(question.getCreatedAt());
+		questionGetResponseDto.setModified(question.getModifiedAt());
 		questionGetResponseDto.setAnswers(
 			questionToAnswerResponseDtos(answers)
 		);
@@ -84,6 +85,4 @@ public interface QuestionMapper {
 				.build()
 		).collect(Collectors.toList());
 	}
-	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
-
 }
