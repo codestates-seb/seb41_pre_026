@@ -111,8 +111,9 @@ export const StyledTagsInput = styled.div`
     flex: 1;
     border: none;
     font-size: 12px;
-    padding: 4px 0 0 0;
+    padding: 4px 0px 0px 0px;
     height: 25px;
+    margin: 0px 0px 0px 6px;
     :focus {
       outline: transparent;
     }

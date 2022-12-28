@@ -82,11 +82,11 @@ function Problem({
 
   const handleOnChange = (event) => {
     handleProblemChange(event.target.value);
+    handleIsWrittenChange("Problem");
   };
 
   const handleBtnClick = () => {
     handleFocusChange("Expect");
-    handleIsWrittenChange("Problem");
   };
 
   return (

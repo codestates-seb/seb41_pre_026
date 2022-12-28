@@ -82,11 +82,11 @@ function Expect({
 
   const handleOnChange = (event) => {
     handleExpectChange(event.target.value);
+    handleIsWrittenChange("Expect");
   };
 
   const handleBtnClick = () => {
     handleFocusChange("Tags");
-    handleIsWrittenChange("Expect");
   };
 
   return (
