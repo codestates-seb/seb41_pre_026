@@ -163,9 +163,7 @@ function Tags({
     <StyledTitleContainer>
       <div
         className={
-          focus === 3 ||
-          isWritten.find((el) => el === "Tags") ||
-          selectedTags.length > 0
+          focus === 3 || isWritten.find((el) => el === "Tags")
             ? null
             : "disabledDiv"
         }
