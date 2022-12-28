@@ -58,7 +58,14 @@ const StyledWrapper = styled.div`
   }
 `;
 
-function Title({ focus, handleFocusChange, title, handleTitleChange }) {
+function Title({
+  focus,
+  handleFocusChange,
+  title,
+  handleTitleChange,
+  isWritten,
+  handleIsWrittenChange,
+}) {
   const handleFocus = () => {
     handleFocusChange("Title");
   };
@@ -69,6 +76,7 @@ function Title({ focus, handleFocusChange, title, handleTitleChange }) {
 
   const handleBtnClick = () => {
     handleFocusChange("Problem");
+    handleIsWrittenChange("Title");
   };
 
   return (

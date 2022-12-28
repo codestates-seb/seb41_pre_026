@@ -12,6 +12,10 @@ const StyledDiv = styled.div`
     margin: 0px 0px 0px 16px;
   }
 
+  .invisible {
+    display: none;
+  }
+
   .disabledBtn {
     cursor: not-allowed;
     opacity: 0.3;
@@ -74,6 +78,8 @@ function Ask() {
         handleFocusChange={handleFocusChange}
         title={title}
         handleTitleChange={handleTitleChange}
+        isWritten={isWritten}
+        handleIsWrittenChange={handleIsWrittenChange}
       />
       <Problem
         focus={focus}
@@ -107,7 +113,7 @@ function Ask() {
           Review your question
         </StyledBlueBtn>
         <StyledTransRedBtn
-          className={focus !== "Done" ? "disabledBtn" : ""}
+          className={title.length < 15 ? "disabledBtn" : ""}
           onClick={handleTransRedBtnClick}
         >
           Discard draft
