@@ -4,10 +4,10 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
-// import Footer from "./Components/Share/Footer";
 import { useState } from "react";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
+import Sign from "./Pages/Sign";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -37,6 +37,7 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route path={"/question"} element={<Questions />} />
           <Route path={"/login"} element={<Login />} />
+          <Route path={"/sign"} element={<Sign />} />
         </Routes>
         {!unSideList.includes(location.pathname) ? (
           <RightSideBar></RightSideBar>

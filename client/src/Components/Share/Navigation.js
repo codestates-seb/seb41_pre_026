@@ -50,10 +50,6 @@ const StyledNav = styled.div`
     :hover {
       background-color: #e0e3e5;
     }
-
-    img {
-      margin: 5px 0px 0px 0px;
-    }
   }
 
   nav {
@@ -362,7 +358,9 @@ function Navigation({ login, isSide }) {
             >
               {login.isLogin ? "Log out" : "Log in"}
             </StyledButton>
-            <StyledButton type={2}>Sign up</StyledButton>
+            <StyledButton type={2} onClick={() => navigate("/sign")}>
+              Sign up
+            </StyledButton>
           </>
         )}
       </StyledNav>
