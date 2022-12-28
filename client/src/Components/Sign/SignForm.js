@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import SginInput from "./SignInput";
-import ReCAPTCHA from "react-google-recaptcha";
+import { ReCAPTCHA } from "react-google-recaptcha";
 import { useState } from "react";
 
 const StyledForm = styled.div`
