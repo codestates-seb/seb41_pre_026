@@ -18,6 +18,10 @@ spring:
       schema-locations: classpath*:db.h2/schema.sql
       data-locations: classpath*:db.h2/data.sql
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 logging:
   level:
     org.hibernate.SQL: debug
