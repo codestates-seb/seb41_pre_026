@@ -8,10 +8,12 @@ import org.mapstruct.Mapper;
 import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.question.dto.QuestionDeleteDto;
+import com.codestates.pre.server.question.dto.QuestionGetResponseDto;
 import com.codestates.pre.server.question.dto.QuestionPatchDto;
 import com.codestates.pre.server.question.dto.QuestionPostDto;
 import com.codestates.pre.server.question.dto.QuestionResponseDto;
 import com.codestates.pre.server.question.entity.Question;
+import com.codestates.pre.server.tag.Tag;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
@@ -32,6 +34,7 @@ public interface QuestionMapper {
 	default Question questionPatchDtoToQuestion(QuestionPatchDto questionPatchDto) {
 		Question question = new Question();
 		question.setQuestionId(questionPatchDto.getId());
+		question.setMid(questionPatchDto.getMid());
 		question.setProblem(questionPatchDto.getProblem());
 		question.setTitle(questionPatchDto.getTitle());
 		question.setExpecting(questionPatchDto.getExpecting());
@@ -41,32 +44,44 @@ public interface QuestionMapper {
 
 	Question questionDeleteDtoToQuestion(QuestionDeleteDto questionDeleteDto);
 
-	// QuestionResponseDto questionToQuestionResponseDto(Question question);
-	default QuestionResponseDto questionToQuestionResponseDto(Question question) {
+	QuestionResponseDto questionToQuestionResponseDto(Question question);
+
+	default QuestionGetResponseDto questionToQuestionGetResponseDto(Question question) {
 		if ( question == null ) {
 			return null;
 		}
 
 		long id = 0L;
+		long mid = 0L;
 		String title = null;
 		String problem = null;
 		String expecting = null;
-		LocalDateTime createdAt = null;
-		LocalDateTime modifiedAt = null;
+		int score = 0;
+
+		if ( question.getMid() != null ) {
+			mid = question.getMid();
+		}
 
 		id = question.getQuestionId();
+		mid = question.getMid();
 		title = question.getTitle();
 		problem = question.getProblem();
 		expecting = question.getExpecting();
-		createdAt = question.getCreatedAt();
-		modifiedAt = question.getModifiedAt();
+		score = question.getScore();
 
-		// boolean isAdopted = false;
+		List<Tag> tags = null;
+		String vote = null;
+		LocalDateTime created = null;
+		LocalDateTime modified = null;
+		Answer answer = null;
+		long view = 0L;
 
-		QuestionResponseDto questionResponseDto = new QuestionResponseDto( id, title, problem, expecting, createdAt, modifiedAt );
+		created = question.getCreatedAt();
+		modified = question.getModifiedAt();
 
-		return questionResponseDto;
+		QuestionGetResponseDto questionGetResponseDto = new QuestionGetResponseDto( id, mid, title, problem, expecting, tags, score, vote, created, modified, answer, view );
+
+		return questionGetResponseDto;
 	}
-
 	List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions);
 }

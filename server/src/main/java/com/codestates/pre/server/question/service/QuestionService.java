@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.exception.BusinessLogicException;
 import com.codestates.pre.server.exception.ExceptionCode;
 import com.codestates.pre.server.member.entity.Member;
@@ -26,6 +27,7 @@ public class QuestionService {
 	private final CustomBeanUtils<Question> beanUtils;
 	private final QuestionRepository questionRepository;
 	private final MemberService memberService;
+	private final AnswerRepository answerRepository;
 
 	public Question creatQuestion(Question question) {
 		verifyStrLength(question);
@@ -35,8 +37,13 @@ public class QuestionService {
 		return questionRepository.save(question);
 	}
 
-	public Question updateQuestion(Question question) {
-		Question findQuestion = findVerifiedQuestion(question.getMid());
+	public Question updateQuestion(long questionId, Question question) {
+		Question findQuestion = findVerifiedQuestion(question.getQuestionId());
+		Question verifiedQuestion = findVerifiedQuestion(questionId);
+
+		if (verifiedQuestion.getMember().getMemberId() != question.getMid()) {
+			throw new BusinessLogicException(ExceptionCode.FORBIDDEN);
+		}
 
 		Question updatedQuestion = beanUtils.copyNonNullProperties(question, findQuestion);
 		verifyStrLength(updatedQuestion);
@@ -46,14 +53,17 @@ public class QuestionService {
 	}
 
 	@Transactional(readOnly = true)
-	public Question findQuestion(long questionsId) {
+	public Question findQuestion(long questionsId, long mid) {
 		Question findQuestion = findVerifiedQuestion(questionsId);
+		findQuestion.setMid(mid);
 		return findQuestion;
 	}
 
 	@Transactional(readOnly = true)
 	public Page<Question> findQuestions(int page, int size) {
-		return questionRepository.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
+		// todo answerCount 를 계산하는 로직이 필요합니다.
+
+		return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
 	}
 
 	public void deleteQuestion(long questionId, Question question) {
@@ -85,4 +95,10 @@ public class QuestionService {
 			throw new BusinessLogicException(ExceptionCode.POST_UNDER_TWENTY);
 		}
 	}
+
+	// public void getAnswerCount(long questionId) {
+	// 	Question findQuestion = findVerifiedQuestion(questionId);
+	// 	int answerCount = answerRepository.countAnswerByQuestion_QuestionId(findQuestion.getQuestionId()) + 1;
+	// 	findQuestion.setAnswerCount(answerCount);
+	// }
 }

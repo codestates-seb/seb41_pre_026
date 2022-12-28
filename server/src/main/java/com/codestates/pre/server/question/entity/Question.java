@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
+import org.springframework.data.jpa.repository.Query;
+
 import com.codestates.pre.server.answer.entity.Answer;
 import com.codestates.pre.server.member.entity.Member;
 import lombok.Getter;
@@ -27,15 +30,15 @@ public class Question {
 
 	private String expecting;
 
+	private int answerCount;
+
 	private LocalDateTime createdAt;
 
 	private LocalDateTime modifiedAt = LocalDateTime.now();
 
 	private int score;
 
-	private boolean isAdopt; // answer 에서 채택여부 확인하는 변수
-
-	@OneToMany(mappedBy = "question")
+	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answers = new ArrayList<>();
 
 	@ManyToOne
