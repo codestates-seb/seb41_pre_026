@@ -1,23 +1,49 @@
-// import useRequest from "./Components/Share/Request";
 import Questions from "./Pages/Questions";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import styled from "styled-components";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Navigation from "./Components/Share/Navigation";
+import LeftSideBar from "./Components/Share/LeftSideBar";
+import RightSideBar from "./Components/Share/RightSideBar";
+import { useState } from "react";
+import Login from "./Pages/Login";
+import Home from "./Pages/Home";
+import Sign from "./Pages/Sign";
+
+const StyledFrame = styled.div`
+  display: flex;
+  position: relative;
+  top: 51px;
+  justify-content: center;
+  height: 94%;
+`;
 
 function App() {
-  // const url = "http://43.200.68.32:8080";
-  // const option = {
-  //   method: "GET",
-  //   body: "",
-  // };
-
-  // console.log(useRequest(url, option));
-
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSide, setIsSide] = useState(false);
+  const location = useLocation();
+  const unSideList = ["/login", "/", "/sign"];
+  console.log(location.pathname, unSideList.includes(location.pathname));
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<Questions />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Navigation
+        login={{ isLogin, setIsLogin }}
+        isSide={{ isSide, setIsSide }}
+      />
+      <StyledFrame>
+        {isSide && !unSideList.includes(location.pathname) ? (
+          <LeftSideBar />
+        ) : null}
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/question"} element={<Questions />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/sign"} element={<Sign />} />
+        </Routes>
+        {!unSideList.includes(location.pathname) ? (
+          <RightSideBar></RightSideBar>
+        ) : null}
+      </StyledFrame>
+    </>
   );
 }
-
 export default App;
