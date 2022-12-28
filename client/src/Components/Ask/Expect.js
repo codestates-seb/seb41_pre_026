@@ -77,7 +77,7 @@ function Expect({
   handleIsWrittenChange,
 }) {
   const handleFocus = () => {
-    handleFocusChange("Expect");
+    handleFocusChange(2);
   };
 
   const handleOnChange = (event) => {
@@ -86,14 +86,14 @@ function Expect({
   };
 
   const handleBtnClick = () => {
-    handleFocusChange("Tags");
+    handleFocusChange(3);
   };
 
   return (
     <StyledTitleContainer>
       <div
         className={
-          focus === "Expect" || isWritten.find((el) => el === "Expect")
+          focus === 2 || isWritten.find((el) => el === "Expect")
             ? null
             : "disabledDiv"
         }
@@ -111,17 +111,17 @@ function Expect({
             onChange={handleOnChange}
             value={expect}
             disabled={
-              focus === "Expect" || isWritten.find((el) => el === "Expect")
+              focus === 2 || isWritten.find((el) => el === "Expect")
                 ? ""
                 : "disabled"
             }
           ></textarea>
-          {expect.length > 20 && focus === "Expect" ? (
+          {expect.length > 20 && focus === 2 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === "Expect" ? "visible" : "invisible"}>
+      <div className={focus === 2 ? "visible" : "invisible"}>
         <Help
           title={"Expand on the problem"}
           content={

@@ -136,12 +136,12 @@ function Tags({
   const [selectedTags, setSelectedTags] = useState([]);
 
   const handleFocus = () => {
-    handleFocusChange("Tags");
+    handleFocusChange(3);
   };
 
   const handleNextBtnClick = () => {
     handleTagsChange(selectedTags);
-    handleFocusChange("Done");
+    handleFocusChange(4);
   };
 
   const removeTags = (indexToRemove) => {
@@ -163,7 +163,7 @@ function Tags({
     <StyledTitleContainer>
       <div
         className={
-          focus === "Tags" ||
+          focus === 3 ||
           isWritten.find((el) => el === "Tags") ||
           selectedTags.length > 0
             ? null
@@ -202,7 +202,7 @@ function Tags({
               }
               onFocus={handleFocus}
               disabled={
-                focus === "Tags" || isWritten.find((el) => el === "Tags")
+                focus === 3 || isWritten.find((el) => el === "Tags")
                   ? null
                   : "disabled"
               }
@@ -211,7 +211,7 @@ function Tags({
           <StyledBlueBtn onClick={handleNextBtnClick}>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div className={focus === "Tags" ? "visible" : "invisible"}>
+      <div className={focus === 3 ? "visible" : "invisible"}>
         <Help
           title={"Adding tags"}
           content={

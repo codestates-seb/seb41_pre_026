@@ -72,7 +72,7 @@ function Title({
   handleIsWrittenChange,
 }) {
   const handleFocus = () => {
-    handleFocusChange("Title");
+    handleFocusChange(0);
   };
 
   const handleOnChange = (event) => {
@@ -80,7 +80,7 @@ function Title({
   };
 
   const handleBtnClick = () => {
-    handleFocusChange("Problem");
+    handleFocusChange(1);
     handleIsWrittenChange("Title");
   };
 
@@ -98,12 +98,12 @@ function Title({
             onChange={handleOnChange}
             value={title}
           ></input>
-          {focus === "Title" && title.length >= 15 ? (
+          {focus === 0 && title.length >= 15 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === "Title" ? "visible" : "invisible"}>
+      <div className={focus === 0 ? "visible" : "invisible"}>
         <Help
           title={"Writing a good title"}
           content={

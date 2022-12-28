@@ -77,7 +77,7 @@ function Problem({
   handleIsWrittenChange,
 }) {
   const handleFocus = () => {
-    handleFocusChange("Problem");
+    handleFocusChange(1);
   };
 
   const handleOnChange = (event) => {
@@ -86,14 +86,14 @@ function Problem({
   };
 
   const handleBtnClick = () => {
-    handleFocusChange("Expect");
+    handleFocusChange(2);
   };
 
   return (
     <StyledTitleContainer>
       <div
         className={
-          focus === "Problem" || isWritten.find((el) => el === "Problem")
+          focus === 1 || isWritten.find((el) => el === "Problem")
             ? null
             : "disabledDiv"
         }
@@ -109,17 +109,17 @@ function Problem({
             onChange={handleOnChange}
             value={problem}
             disabled={
-              focus === "Problem" || isWritten.find((el) => el === "Problem")
+              focus === 1 || isWritten.find((el) => el === "Problem")
                 ? ""
                 : "disabled"
             }
           ></textarea>
-          {problem.length > 20 && focus === "Problem" ? (
+          {problem.length > 20 && focus === 1 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === "Problem" ? "visible" : "invisible"}>
+      <div className={focus === 1 ? "visible" : "invisible"}>
         <Help
           title={"Introduce the problem"}
           content={
