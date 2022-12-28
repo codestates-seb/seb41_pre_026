@@ -110,7 +110,7 @@ function Expect({
                 : "disabled"
             }
           ></textarea>
-          {expect.length > 20 ? (
+          {expect.length > 20 && focus === "Expect" ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>

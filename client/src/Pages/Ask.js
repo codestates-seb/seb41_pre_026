@@ -11,6 +11,11 @@ const StyledDiv = styled.div`
   button:nth-child(2) {
     margin: 0px 0px 0px 16px;
   }
+
+  .disabledBtn {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 `;
 
 function Ask() {
@@ -43,6 +48,22 @@ function Ask() {
 
   const handleTagsChange = (tag) => {
     setTags(tag);
+  };
+
+  const handleBlueBtnClick = () => {
+    console.log("title", title);
+    console.log("problem", problem);
+    console.log("expect", expect);
+    console.log("tags", tags);
+  };
+
+  const handleTransRedBtnClick = () => {
+    setFocus("Title");
+    setIsWritten([]);
+    setTitle("");
+    setProblem("");
+    setExpect("");
+    setTags("");
   };
 
   return (
@@ -79,8 +100,18 @@ function Ask() {
         handleIsWrittenChange={handleIsWrittenChange}
       />
       <StyledDiv>
-        <StyledBlueBtn>Review your question</StyledBlueBtn>
-        <StyledTransRedBtn>Discard draft</StyledTransRedBtn>
+        <StyledBlueBtn
+          className={focus !== "Done" ? "disabledBtn" : ""}
+          onClick={handleBlueBtnClick}
+        >
+          Review your question
+        </StyledBlueBtn>
+        <StyledTransRedBtn
+          className={focus !== "Done" ? "disabledBtn" : ""}
+          onClick={handleTransRedBtnClick}
+        >
+          Discard draft
+        </StyledTransRedBtn>
       </StyledDiv>
     </main>
   );

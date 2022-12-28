@@ -108,7 +108,7 @@ function Problem({
                 : "disabled"
             }
           ></textarea>
-          {problem.length > 20 ? (
+          {problem.length > 20 && focus === "Problem" ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>

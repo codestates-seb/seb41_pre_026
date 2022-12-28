@@ -80,6 +80,7 @@ function Tags({
 
   const handleBtnClick = () => {
     handleIsWrittenChange("Tags");
+    handleFocusChange("Done");
   };
   return (
     <StyledTitleContainer>
@@ -101,9 +102,13 @@ function Tags({
             onFocus={handleFocus}
             onChange={handleOnChange}
             value={tags}
-            disabled={focus !== "Tags" ? "disabled" : ""}
+            disabled={
+              focus === "Tags" || isWritten.find((el) => el === "Tags")
+                ? null
+                : "disabled"
+            }
           ></input>
-          {tags.length > 1 ? (
+          {tags.length > 1 && focus === "Tags" ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
