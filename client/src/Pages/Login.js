@@ -40,7 +40,7 @@ function Login() {
       </svg>
       <LoginForm></LoginForm>
       <p>
-        Don’t have an account?<Link>Sign up</Link>
+        Don’t have an account?<Link to={"/sign"}>Sign up</Link>
       </p>
     </StyledDiv>
   );

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-  margin: 0px 100px 0px 0px;
+  margin: 0px 150px 160px 0px;
   ul {
     margin: 0px;
     padding: 0px;
@@ -17,6 +17,12 @@ const StyledDiv = styled.div`
       fill: #0a95ff;
       margin: 0px 10px 0px 0px;
     }
+  }
+  p:first-child {
+    font-size: 26px;
+    color: black;
+    margin-bottom: 30px;
+    line-height: 1;
   }
   p {
     font-size: 12px;
@@ -36,10 +42,10 @@ const StyledDiv = styled.div`
 function Guide() {
   return (
     <StyledDiv>
-      <h2>
+      <p>
         Join the Stack Overflow
         <br /> community
-      </h2>
+      </p>
       <ul>
         <li>
           <svg width="26" height="26">
