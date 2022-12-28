@@ -43,7 +43,7 @@ const StyledNav = styled.div`
   }
 
   .logo {
-    width: 169px;
+    width: 171px;
     height: 100%;
     border: 0px;
     margin: 0px;
@@ -54,8 +54,32 @@ const StyledNav = styled.div`
     }
   }
 
-  nav {
-    height: 26px;
+  nav ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    gap: 5px;
+
+    li {
+      float: left;
+      padding: 6px 12px 6px 12px;
+    }
+
+    li a {
+      display: block;
+      width: 100%;
+      margin: 0px;
+    }
+
+    li:hover {
+      background-color: #e0e3e5;
+      border-radius: 30px;
+      cursor: pointer;
+      a {
+        color: black;
+      }
+    }
   }
 
   a {
@@ -65,28 +89,10 @@ const StyledNav = styled.div`
     font-weight: 400;
     color: #696969;
   }
-
-  .login {
-    margin: 0px 5px 0px 5px;
-  }
-
-  nav {
-    display: flex;
-
-    div {
-      height: 30px;
-
-      :hover {
-        border-radius: 30px;
-        background-color: #e0e3e5;
-        cursor: pointer;
-      }
-    }
-  }
 `;
 
 const StyledSearch = styled.div`
-  width: 665px;
+  width: ${({ isLogin }) => (isLogin ? "702px" : "665px")};
   height: 33px !important;
   display: flex;
   align-items: center;
@@ -180,6 +186,7 @@ const StyledButton = styled.button`
   color: ${({ type }) => (type === 1 ? "#54759D" : "white")};
   background-color: ${({ type }) => (type === 1 ? "#E1ECF4" : "#0A95FF")};
   cursor: pointer;
+  margin: 0px 0px 0px 10px;
 `;
 
 const StyledIcons = styled.ol`
@@ -230,7 +237,7 @@ const StyledIcons = styled.ol`
   }
 `;
 
-function Navigation({ isLogin, curPageBy }) {
+function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   const navigate = useNavigate();
@@ -251,7 +258,7 @@ function Navigation({ isLogin, curPageBy }) {
   return (
     <nav>
       <StyledNav>
-        {!curPageBy() ? (
+        {!onSide || !curPageBy() ? (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>
@@ -260,25 +267,28 @@ function Navigation({ isLogin, curPageBy }) {
           <img src={logo} alt="logo" />
         </Link>
         <nav>
-          {isLogin ? (
-            <div>
-              <Link to={"/"}>Products</Link>
-            </div>
-          ) : (
-            <>
-              <div>
-                <Link to={"/"}>About</Link>
-              </div>
-              <div>
+          <ul>
+            {isLogin ? (
+              <li>
                 <Link to={"/"}>Products</Link>
-              </div>
-              <div>
-                <Link to={"/"}>For Teams</Link>
-              </div>
-            </>
-          )}
+              </li>
+            ) : (
+              <>
+                <li>
+                  <a href="https://stackoverflow.co/">About</a>
+                </li>
+                <li>
+                  <Link to={"/"}>Products</Link>
+                </li>
+                <li>
+                  <a href="https://stackoverflow.co/teams/">For Teams</a>
+                </li>
+              </>
+            )}
+          </ul>
         </nav>
         <StyledSearch
+          isLogin={isLogin}
           focused={focused}
           onClick={(e) => {
             e.stopPropagation();
@@ -352,7 +362,11 @@ function Navigation({ isLogin, curPageBy }) {
         )}
       </StyledNav>
       <StyledDiv>
-        <TopMenu handleFold={handleFold} isFold={isFold} />
+        <TopMenu
+          handleFold={handleFold}
+          isFold={isFold}
+          handleOnside={handleOnside}
+        />
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>
