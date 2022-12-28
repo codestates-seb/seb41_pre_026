@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledLi = styled.li`
   height: 34px;
   a {
-    width: 99%;
+    width: 100%;
     height: 100%;
     display: flex;
     font-size: 12px;
@@ -33,8 +33,6 @@ function SideBar() {
   const label = ["/", "/question", "/tags"];
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <>
       <StyledLi>
@@ -48,10 +46,10 @@ function SideBar() {
       <p>Public</p>
       <StyledLi>
         <Link
-          to={"/questions"}
+          to={"/question"}
           className={location.pathname === label[1] ? "active" : null}
         >
-          Questionss
+          Questions
         </Link>
       </StyledLi>
       <StyledLi>

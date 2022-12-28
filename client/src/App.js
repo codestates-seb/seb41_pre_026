@@ -14,35 +14,47 @@ const StyledFrame = styled.div`
   position: relative;
   top: 51px;
   justify-content: center;
+  height: 94%;
 `;
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+  const [onSide, setOnSide] = useState(false);
   const location = useLocation();
-  const unSideList = ["/login", "/", "/sign"];
-  // console.log(location.pathname, unSideList.includes(location.pathname));
+  const unSideList = ["/login", "/sign"];
 
-  const handleLogin = () => setIsLogin(!isLogin);
-  const curPageBy = () => !unSideList.includes(location.pathname);
+  const handleLogin = () => {
+    setIsLogin(!isLogin);
+  };
 
-  console.log(curPageBy());
+  const handleOnside = () => {
+    setOnSide(!onSide);
+  };
+
+  const curPageBy = () => {
+    return !unSideList.includes(location.pathname);
+  };
 
   return (
     <>
-      <Navigation isLogin={isLogin} curPageBy={curPageBy} />
+      <Navigation
+        isLogin={isLogin}
+        onSide={onSide}
+        handleOnside={handleOnside}
+        curPageBy={curPageBy}
+      />
       <StyledFrame>
-        {curPageBy() ? <LeftSideBar /> : null}
+        {onSide && curPageBy() ? <LeftSideBar /> : null}
         <Routes>
-          <Route path={"/"} element={<Home />} />
+          <Route path={"/"} element={<Home isLogin={isLogin} />} />
           <Route path={"/question"} element={<Questions />} />
           <Route
             path={"/login"}
-            element={<Login />}
-            handleLogin={handleLogin}
+            element={<Login handleLogin={handleLogin} />}
           />
           <Route path={"/sign"} element={<Sign />} />
         </Routes>
-        {curPageBy() ? <RightSideBar></RightSideBar> : null}
+        {onSide && curPageBy() ? <RightSideBar></RightSideBar> : null}
       </StyledFrame>
     </>
   );
