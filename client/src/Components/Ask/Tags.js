@@ -197,7 +197,9 @@ function Tags({
               onKeyUp={(event) =>
                 event.key === "Enter" ? addTags(event) : null
               }
-              placeholder="e.g. (Angular database swift)"
+              placeholder={
+                selectedTags.length > 0 ? "" : "e.g. (Angular database swift)"
+              }
               onFocus={handleFocus}
               disabled={
                 focus === "Tags" || isWritten.find((el) => el === "Tags")
