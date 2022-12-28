@@ -47,9 +47,8 @@ public class AnswerService {
 		Question question = questionService.findVerifiedQuestion(answer.getQid());
 		answer.addMember(member);
 		answer.addQuestion(question);
-		// questionService.getAnswerCount(question.getQuestionId());
+		question.plusAnswerCount();
 		return answerRepository.save(answer);
-
 	}
 
 	// 답변 수정
@@ -80,8 +79,7 @@ public class AnswerService {
 	public void deleteAnswer(long answerId) {
 		Answer findAnswer = findVerifiedAnswer(answerId);
 		Question question = questionService.findVerifiedQuestion(findAnswer.getQuestion().getQuestionId());
-		// questionService.getAnswerCount(question.getQuestionId());
-
+		question.minusAnswerCount();
 		answerRepository.delete(findAnswer);
 	}
 

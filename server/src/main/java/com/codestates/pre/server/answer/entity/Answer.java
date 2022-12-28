@@ -47,12 +47,12 @@ public class Answer {
 
 
     //question:answer = 1:n
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="question_id") // 외래키 컬럼명 즉, question 클래스의 @id가 붙은 필드명
     private Question question;
 
     // members:answer = 1:n
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

@@ -22,6 +22,4 @@ public class QuestionResponseDto {
 	private long mid;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
-
-	// private boolean isAdopted;
 }
