@@ -12,7 +12,7 @@ import TopMenu from "../Navigation/TopMenu";
 const StyledNav = styled.div`
   width: 100%;
   min-width: 1240px;
-  height: 47px;
+  height: 51px;
   display: flex;
   align-items: center;
   justify-content: center;

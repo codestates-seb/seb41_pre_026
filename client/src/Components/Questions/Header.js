@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const StyledHeader = styled.header`
-  width: 740px;
+  width: 100%
   display: flex;
   flex-direction: column;
   padding: 20px 20px 15px 20px;
