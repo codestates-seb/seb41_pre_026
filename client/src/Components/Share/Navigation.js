@@ -7,7 +7,10 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { searchData } from "../../Assets/searchData";
 import profile from "../../Assets/profile.jpg";
+<<<<<<< HEAD
+=======
 import TopMenu from "../Navigation/TopMenu";
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
 
 const StyledNav = styled.div`
   width: 100%;
@@ -230,11 +233,78 @@ const StyledIcons = styled.ol`
   }
 `;
 
+<<<<<<< HEAD
+const StyledIcons = styled.ol`
+  display: flex;
+  margin: 0px 0px 0px 10px;
+  height: 100%;
+  list-style-type: none;
+  padding: 0px;
+  float: left;
+  li:first-child {
+    width: 50px;
+  }
+  li {
+    width: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 3px;
+    }
+    svg {
+      fill: #525960;
+    }
+    button {
+      border: 0px;
+      background-color: transparent;
+    }
+    :hover {
+      background-color: #e0e3e5;
+      cursor: pointer;
+      button svg {
+        fill: black;
+      }
+    }
+    button: hover {
+      cursor: pointer;
+      svg {
+        fill: black;
+      }
+    }
+    button svg:hover {
+      cursor: pointer;
+      fill: black;
+    }
+  }
+`;
+
+function Navigation({ login, isSide }) {
+  const [focused, setFocused] = useState(false);
+  const [isFold, setIsFold] = useState(false);
+  // const [iconFocuse, setIcF] = useState(false);
+
+  const handleFocuse = (e) => {
+    setFocused(!focused);
+  };
+
+  const handleFold = (e) => {
+    setIsFold(!isFold);
+  };
+=======
 function Navigation({ isLogin, curPageBy }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   const navigate = useNavigate();
   // const [iconFocuse, setIcF] = useState(false);
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
+
+  const handleLogin = (e) => {
+    login.setIsLogin(!login.isLogin);
+  };
 
   useEffect(() => {
     document.querySelector("body").addEventListener("click", (e) => {
@@ -251,16 +321,28 @@ function Navigation({ isLogin, curPageBy }) {
   return (
     <nav>
       <StyledNav>
+<<<<<<< HEAD
+        {isSide.isSide ? null : (
+          <button onClick={handleFold} className="menu">
+            <img src={menu} alt="menu" />
+          </button>
+        )}
+=======
         {!curPageBy() ? (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>
         ) : null}
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
         <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
         </Link>
         <nav>
+<<<<<<< HEAD
+          {login.isLogin ? (
+=======
           {isLogin ? (
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
             <div>
               <Link to={"/"}>Products</Link>
             </div>
@@ -295,7 +377,11 @@ function Navigation({ isLogin, curPageBy }) {
             }}
           ></input>
         </StyledSearch>
+<<<<<<< HEAD
+        {login.isLogin ? (
+=======
         {isLogin ? (
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
           <StyledIcons>
             <li>
               <img src={profile} alt="profile img"></img>
@@ -329,7 +415,11 @@ function Navigation({ isLogin, curPageBy }) {
               </button>
             </li>
             <li>
+<<<<<<< HEAD
+              <button onClick={handleLogin}>
+=======
               <button onClick={() => navigate("/login")}>
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
                 <svg width="18" height="18" viewBox="0 0 18 18">
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>
                 </svg>
@@ -338,6 +428,12 @@ function Navigation({ isLogin, curPageBy }) {
           </StyledIcons>
         ) : (
           <>
+<<<<<<< HEAD
+            <StyledButton type={1} onClick={handleLogin} className="login">
+              {login.isLogin ? "Log out" : "Log in"}
+            </StyledButton>
+            <StyledButton type={2}>Sign up</StyledButton>
+=======
             <StyledButton
               type={1}
               onClick={() => navigate("/login")}
@@ -348,11 +444,25 @@ function Navigation({ isLogin, curPageBy }) {
             <StyledButton type={2} onClick={() => navigate("/sign")}>
               Sign up
             </StyledButton>
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
           </>
         )}
       </StyledNav>
       <StyledDiv>
+<<<<<<< HEAD
+        <StyledMenu isFold={isFold}>
+          <button
+            onClick={() => {
+              setIsFold(!isFold);
+              isSide.setIsSide(!isSide.isSide);
+            }}
+          >
+            x
+          </button>
+        </StyledMenu>
+=======
         <TopMenu handleFold={handleFold} isFold={isFold} />
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>

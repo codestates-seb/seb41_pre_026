@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+
+=======
 import { Link } from "react-router-dom";
+>>>>>>> 136ef218c2ebee72fa90ef54f94517d163336b44
 import styled from "styled-components";
 import LoginForm from "../Components/Login/LoginForm";
 
