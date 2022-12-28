@@ -21,7 +21,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSide, setIsSide] = useState(false);
   const location = useLocation();
-  const unSideList = ["/login", "/"];
+  const unSideList = ["/login", "/", "/sign"];
   console.log(location.pathname, unSideList.includes(location.pathname));
   return (
     <>
