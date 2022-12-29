@@ -3,7 +3,7 @@ import Vote from "./Vote";
 import profile2 from "../../Assets/proimg2.jpg";
 
 const AnswerContainer = styled.div`
-  border-top: 1px solid #e3e6e8;
+  border-bottom: 1px solid #e3e6e8;
   box-sizing: border-box;
   display: block;
   margin-top: 20px;
@@ -11,13 +11,6 @@ const AnswerContainer = styled.div`
   text-align: left;
   vertical-align: baseline;
   width: 727px;
-  .answers-header {
-    p {
-      font-size: 19px;
-      font-weight: 400;
-      color: #232629;
-    }
-  }
   .answer-content {
     box-sizing: border-box;
     display: grid;
@@ -85,25 +78,16 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer() {
+function Answer({ answerData, id }) {
+  const score = answerData.score;
   return (
     <AnswerContainer>
-      <div className="answers-header">
-        <p>2 answers</p>
-      </div>
       <div className="answer-content">
         <div className="answer-content-vote">
-          <Vote />
+          <Vote score={score} />
         </div>
         <div className="answer-content-post">
-          <p>
-            Some model objects in R require native serialization methods to be
-            saved and reloaded from file—h2o objects (and thus the tidymodels
-            objects that wrap them) are an example of one that does. The
-            tidymodels and vetiver teams at Posit recently collaborated on a
-            package, bundle, that provides a consistent interface to native
-            serialization methods. The docs on h2o are here.
-          </p>
+          <p>{answerData.answer}</p>
           <div className="answer-footer">
             <div className="menu">
               <div>
@@ -115,8 +99,8 @@ function Answer() {
             </div>
             <div className="profile">
               <img src={profile2} alt=""></img>
-              <span>lmimoh</span>
-              <span>answerd 2022-12-27 10:48:06</span>
+              <span>{answerData.mid}</span>
+              <span>answerd {answerData.created}</span>
             </div>
           </div>
         </div>

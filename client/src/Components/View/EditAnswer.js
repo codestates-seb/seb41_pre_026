@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
-import MarkdownEditor from "../Share/MarkdownEditor";
+import Editor from "../Share/Editor";
 
 const EditorContainer = styled.div`
-  border-top: 1px solid #e3e6e8;
   box-sizing: border-box;
   display: block;
   margin-top: 20px;
@@ -28,12 +27,10 @@ function EditAnswer() {
       <div className="edit-answer-header">
         <p>Your Answer</p>
         <div className="editor">
-          <MarkdownEditor />
+          <Editor />
         </div>
         <div>
-          <StyledBlueBtn>
-            <div>Post Your Answer</div>
-          </StyledBlueBtn>
+          <StyledBlueBtn>Post Your Answer</StyledBlueBtn>
         </div>
       </div>
     </EditorContainer>

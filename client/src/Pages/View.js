@@ -95,12 +95,33 @@ const Container = styled.div`
   }
 `;
 
+const AnswerListContainer = styled.div`
+  border-top: 1px solid #e3e6e8;
+  box-sizing: border-box;
+  display: block;
+  text-align: left;
+  vertical-align: baseline;
+  width: 727px;
+  .answers-header {
+    margin-top: 20px;
+    padding-top: 10px;
+    span {
+      font-size: 19px;
+      font-weight: 400;
+      color: #232629;
+      padding-right: 10px;
+    }
+  }
+`;
+
 function View() {
   const [data, setData] = useState(viewData);
-  const qScore = data.question.score;
+  const [answers, setAnswers] = useState(viewData.answers);
+  const score = data.question.score;
 
   useEffect(() => {
     setData(viewData);
+    setAnswers(viewData.answers);
   }, []);
 
   return (
@@ -131,13 +152,23 @@ function View() {
       </div>
       <div className="question-content">
         <div className="question-content-vote">
-          <Vote qScore={qScore} />
+          <Vote score={score} />
         </div>
         <div className="question-content-post">
           <Post data={data} />
         </div>
       </div>
-      <Answer />
+      <AnswerListContainer>
+        <div className="answers-header">
+          <span>{data.question.answerCount}</span>
+          <span>{data.question.answerCount === 1 ? "Answer" : "Answers"}</span>
+        </div>
+        {answers
+          ? answers.map((answerData, idx) => (
+              <Answer key={idx} answerData={answerData} />
+            ))
+          : null}
+      </AnswerListContainer>
       <EditAnswer />
     </Container>
   );

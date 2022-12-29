@@ -13,6 +13,7 @@ export const viewData = {
     view: 92,
     created: "2022-12-23 00:02:34",
     modified: "2022-12-25 20:11:08",
+    answerCount: 2,
   },
   answers: [
     {
@@ -30,7 +31,7 @@ export const viewData = {
       mid: "sweety",
       created: "2022-12-28 12:12:12",
       modified: "2022-12-28 23:23:23",
-      score: 0,
+      score: 1,
       vote: null,
       answer:
         "dummy: Some model objects in R require native serialization methods to be saved and reloaded from file—h2o objects (and thus the tidymodels objects that wrap them) are an example of one that does. The tidymodels and vetiver teams at Posit recently collaborated on a package, bundle, that provides a consistent interface to native serialization methods. The docs on h2o are here.",
