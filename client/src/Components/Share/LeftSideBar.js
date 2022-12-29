@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SideBar from "../LeftSideBar/SideBar";
+import { useLocation } from "react-router-dom";
 
 const StyledNav = styled.nav`
   width: 169px;
@@ -35,12 +36,19 @@ const StyledUl = styled.ul`
 `;
 
 function LeftSideBar() {
+  const location = useLocation().pathname;
+  const unSideList = ["/login", "/sign", "/ask", "/"];
+
   return (
-    <StyledNav>
-      <StyledUl>
-        <SideBar />
-      </StyledUl>
-    </StyledNav>
+    <>
+      {unSideList.includes(location) ? null : (
+        <StyledNav>
+          <StyledUl>
+            <SideBar />
+          </StyledUl>
+        </StyledNav>
+      )}
+    </>
   );
 }
 
