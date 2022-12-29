@@ -64,25 +64,25 @@ const StyledWrapper = styled.div`
 `;
 
 function Title({
-  focus,
-  handleFocusChange,
+  isFocus,
+  handleIsFocus,
   title,
-  handleTitleChange,
+  handleTitle,
   isWritten,
-  handleIsWrittenChange,
+  handleIsWritten,
   compRef,
 }) {
-  const handleFocus = () => {
-    handleFocusChange(0);
+  const handleOnFocus = () => {
+    handleIsFocus(0);
   };
 
   const handleOnChange = (event) => {
-    handleTitleChange(event.target.value);
+    handleTitle(event.target.value);
   };
 
   const handleBtnClick = () => {
-    handleFocusChange(1);
-    handleIsWrittenChange("Title");
+    handleIsFocus(1);
+    handleIsWritten("Title");
   };
 
   return (
@@ -96,16 +96,16 @@ function Title({
           <input
             ref={(el) => (compRef.current[0] = el)}
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            onFocus={handleFocus}
+            onFocus={handleOnFocus}
             onChange={handleOnChange}
             value={title}
           ></input>
-          {focus === 0 && title.length >= 15 ? (
+          {isFocus === 0 && title.length >= 15 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === 0 ? "visible" : "invisible"}>
+      <div className={isFocus === 0 ? "visible" : "invisible"}>
         <Help
           title={"Writing a good title"}
           content={

@@ -126,23 +126,23 @@ export const StyledTagsInput = styled.div`
 `;
 
 function Tags({
-  focus,
-  handleFocusChange,
+  isFocus,
+  handleIsFocus,
   tags,
-  handleTagsChange,
+  handleTags,
   isWritten,
-  handleIsWrittenChange,
+  handleIsWritten,
   compRef,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
 
-  const handleFocus = () => {
-    handleFocusChange(3);
+  const handleOnFocus = () => {
+    handleIsFocus(3);
   };
 
   const handleNextBtnClick = () => {
-    handleTagsChange(selectedTags);
-    handleFocusChange(4);
+    handleTags(selectedTags);
+    handleIsFocus(4);
   };
 
   const removeTags = (indexToRemove) => {
@@ -154,17 +154,17 @@ function Tags({
     const filtered = selectedTags.filter((el) => el === newTag);
     if (newTag !== "" && filtered.length === 0 && e.key === "Enter") {
       setSelectedTags([...selectedTags, newTag]);
-      handleTagsChange(selectedTags);
+      handleTags(selectedTags);
       e.target.value = "";
     }
-    handleIsWrittenChange("Tags");
+    handleIsWritten("Tags");
   };
 
   return (
     <StyledTitleContainer>
       <div
         className={
-          focus !== 3 && !isWritten.find((el) => el === "Tags")
+          isFocus !== 3 && !isWritten.find((el) => el === "Tags")
             ? "disabledDiv"
             : ""
         }
@@ -198,9 +198,9 @@ function Tags({
               placeholder={
                 !selectedTags.length ? "e.g. (Angular database swift)" : ""
               }
-              onFocus={handleFocus}
+              onFocus={handleOnFocus}
               disabled={
-                focus !== 3 && !isWritten.find((el) => el === "Tags")
+                isFocus !== 3 && !isWritten.find((el) => el === "Tags")
                   ? "disabled"
                   : ""
               }
@@ -209,7 +209,7 @@ function Tags({
           <StyledBlueBtn onClick={handleNextBtnClick}>Next</StyledBlueBtn>
         </StyledWrapper>
       </div>
-      <div className={focus === 3 ? "visible" : "invisible"}>
+      <div className={isFocus === 3 ? "visible" : "invisible"}>
         <Help
           title={"Adding tags"}
           content={

@@ -25,7 +25,7 @@ const StyledDiv = styled.div`
 `;
 
 function Ask() {
-  const [focus, setFocus] = useState(0);
+  const [isFocus, setIsFocus] = useState(0);
   const [isWritten, setIsWritten] = useState([]);
   const [title, setTitle] = useState("");
   const [problem, setProblem] = useState("");
@@ -35,38 +35,38 @@ function Ask() {
   const compRef = useRef([]);
 
   useEffect(() => {
-    if (focus > 0) {
-      compRef.current[focus].scrollIntoView({
+    if (isFocus > 0) {
+      compRef.current[isFocus].scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     }
     setTimeout(() => {
-      compRef.current[focus].focus();
+      compRef.current[isFocus].focus();
     }, 200);
-  }, [focus]);
+  }, [isFocus]);
 
-  const handleFocusChange = (focus) => {
-    setFocus(focus);
+  const handleIsFocus = (isFocus) => {
+    setIsFocus(isFocus);
   };
 
-  const handleIsWrittenChange = (el) => {
+  const handleIsWritten = (el) => {
     setIsWritten([...isWritten, el]);
   };
 
-  const handleTitleChange = (title) => {
+  const handleTitle = (title) => {
     setTitle(title);
   };
 
-  const handleProblemChange = (problem) => {
+  const handleProblem = (problem) => {
     setProblem(problem);
   };
 
-  const handleExpectChange = (expect) => {
+  const handleExpect = (expect) => {
     setExpect(expect);
   };
 
-  const handleTagsChange = (tag) => {
+  const handleTags = (tag) => {
     setTags(tag);
   };
 
@@ -82,60 +82,60 @@ function Ask() {
     setProblem("");
     setExpect("");
     setTags([]);
-    setFocus(0);
+    setIsFocus(0);
     setIsWritten([]);
   };
 
   return (
     <main>
-      <Header focus={focus} handleFocusChange={handleFocusChange} />
+      <Header isFocus={isFocus} handleIsFocus={handleIsFocus} />
       <div>
         <Title
-          focus={focus}
-          handleFocusChange={handleFocusChange}
+          isFocus={isFocus}
+          handleIsFocus={handleIsFocus}
           title={title}
-          handleTitleChange={handleTitleChange}
+          handleTitle={handleTitle}
           isWritten={isWritten}
-          handleIsWrittenChange={handleIsWrittenChange}
+          handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
       <div>
         <Problem
-          focus={focus}
-          handleFocusChange={handleFocusChange}
+          isFocus={isFocus}
+          handleIsFocus={handleIsFocus}
           problem={problem}
-          handleProblemChange={handleProblemChange}
+          handleProblem={handleProblem}
           isWritten={isWritten}
-          handleIsWrittenChange={handleIsWrittenChange}
+          handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
       <div>
         <Expect
-          focus={focus}
-          handleFocusChange={handleFocusChange}
+          isFocus={isFocus}
+          handleIsFocus={handleIsFocus}
           expect={expect}
-          handleExpectChange={handleExpectChange}
+          handleExpect={handleExpect}
           isWritten={isWritten}
-          handleIsWrittenChange={handleIsWrittenChange}
+          handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
       <div>
         <Tags
-          focus={focus}
-          handleFocusChange={handleFocusChange}
+          isFocus={isFocus}
+          handleIsFocus={handleIsFocus}
           tags={tags}
-          handleTagsChange={handleTagsChange}
+          handleTags={handleTags}
           isWritten={isWritten}
-          handleIsWrittenChange={handleIsWrittenChange}
+          handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
       <StyledDiv ref={(el) => (compRef.current[4] = el)}>
         <StyledBlueBtn
-          className={focus !== 4 ? "disabledBtn" : ""}
+          className={isFocus !== 4 ? "disabledBtn" : ""}
           onClick={handleSubmit}
         >
           Review your question

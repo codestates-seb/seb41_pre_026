@@ -69,32 +69,32 @@ const StyledWrapper = styled.div`
 `;
 
 function Problem({
-  focus,
-  handleFocusChange,
+  isFocus,
+  handleIsFocus,
   problem,
-  handleProblemChange,
+  handleProblem,
   isWritten,
-  handleIsWrittenChange,
+  handleIsWritten,
   compRef,
 }) {
-  const handleFocus = () => {
-    handleFocusChange(1);
+  const handleOnFocus = () => {
+    handleIsFocus(1);
   };
 
   const handleOnChange = (event) => {
-    handleProblemChange(event.target.value);
-    handleIsWrittenChange("Problem");
+    handleProblem(event.target.value);
+    handleIsWritten("Problem");
   };
 
   const handleBtnClick = () => {
-    handleFocusChange(2);
+    handleIsFocus(2);
   };
 
   return (
     <StyledTitleContainer>
       <div
         className={
-          focus !== 1 && !isWritten.find((el) => el === "Problem")
+          isFocus !== 1 && !isWritten.find((el) => el === "Problem")
             ? "disabledDiv"
             : ""
         }
@@ -107,21 +107,21 @@ function Problem({
           </label>
           <textarea
             ref={(el) => (compRef.current[1] = el)}
-            onFocus={handleFocus}
+            onFocus={handleOnFocus}
             onChange={handleOnChange}
             value={problem}
             disabled={
-              focus !== 1 && !isWritten.find((el) => el === "Problem")
+              isFocus !== 1 && !isWritten.find((el) => el === "Problem")
                 ? "disabled"
                 : ""
             }
           ></textarea>
-          {problem.length > 20 && focus === 1 ? (
+          {problem.length > 20 && isFocus === 1 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === 1 ? "visible" : "invisible"}>
+      <div className={isFocus === 1 ? "visible" : "invisible"}>
         <Help
           title={"Introduce the problem"}
           content={
