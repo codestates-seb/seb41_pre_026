@@ -31,7 +31,7 @@ import com.codestates.pre.server.question.service.QuestionService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:3000", maxAge = 3600)
 @RequiredArgsConstructor
 @Validated
 @RestController

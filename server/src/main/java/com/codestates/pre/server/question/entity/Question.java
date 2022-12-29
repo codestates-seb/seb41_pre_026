@@ -26,8 +26,10 @@ public class Question {
 	@Column(length = 256)
 	private String title;
 
+	@Column(nullable = false, columnDefinition = "Text")
 	private String problem;
 
+	@Column(nullable = false, columnDefinition = "Text")
 	private String expecting;
 
 	private int answerCount = 0;

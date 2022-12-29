@@ -9,7 +9,6 @@ import com.codestates.pre.server.answer.mapper.AnswerMapper;
 import com.codestates.pre.server.answer.service.AnswerService;
 import com.codestates.pre.server.dto.MultiResponseDto;
 import com.codestates.pre.server.dto.SingleResponseDto;
-import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +20,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@CrossOrigin(origins="http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/answers")
 @Validated
-@CrossOrigin
 public class AnswerController {
     private final AnswerService answerService;
     private final MemberService memberService;

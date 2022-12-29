@@ -40,10 +40,9 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-			.headers().frameOptions().sameOrigin() // 웹 브라우저에서 H2 웹 콘솔을 정상적으로 사용하기 위한 설정, // frameOptions()는 HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그에서 페이지를 렌더링 할지의 여부를 결정하는 기능
+			.headers().frameOptions().disable() // 웹 브라우저에서 H2 웹 콘솔을 정상적으로 사용하기 위한 설정, // frameOptions()는 HTML 태그 중에서 <frame>이나 <iframe>, <object> 태그에서 페이지를 렌더링 할지의 여부를 결정하는 기능
 			.and()
 			.csrf().disable()
-			.cors(withDefaults())
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.formLogin().disable()
@@ -55,6 +54,8 @@ public class SecurityConfiguration {
 			.apply(new CustomFilterConfigurer())
 			.and() // 전체적으로 해당 멤버만 수정또는 삭제 가능하도록 수정되어야 할 수도 있다리 ㅋㅋ ;
 			.authorizeHttpRequests(authorize -> authorize
+				.antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
+
 				.antMatchers(HttpMethod.POST, "/*/members").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER")
 				.antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
