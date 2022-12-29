@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import menu from "../../Assets/menu.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -241,6 +241,8 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation().pathname;
+  const unTopMenu = ["/question", "/tags"];
   // const [iconFocuse, setIcF] = useState(false);
 
   useEffect(() => {
@@ -258,7 +260,7 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
   return (
     <nav>
       <StyledNav>
-        {!onSide || !curPageBy() ? (
+        {!unTopMenu.includes(location) ? (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>

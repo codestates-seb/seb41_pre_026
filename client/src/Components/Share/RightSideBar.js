@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const StyledNav = styled.nav`
   width: 228px;
@@ -7,10 +8,17 @@ const StyledNav = styled.nav`
 `;
 
 function RightSideBar() {
+  const location = useLocation().pathname;
+  const unSideList = ["/login", "/sign", "/ask", "/tags", "/"];
+
   return (
-    <StyledNav>
-      <nav></nav>
-    </StyledNav>
+    <>
+      {unSideList.includes(location) ? null : (
+        <StyledNav>
+          <nav></nav>
+        </StyledNav>
+      )}
+    </>
   );
 }
 

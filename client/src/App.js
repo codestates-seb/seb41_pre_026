@@ -1,6 +1,6 @@
 import Questions from "./Pages/Questions";
 import styled from "styled-components";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
 import Home from "./Pages/Home";
+import Tags from "./Pages/Tags";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -21,8 +22,6 @@ const StyledFrame = styled.div`
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [onSide, setOnSide] = useState(false);
-  const location = useLocation();
-  const unSideList = ["/login", "/sign", "/ask"];
 
   const handleLogin = () => {
     setIsLogin(!isLogin);
@@ -32,26 +31,19 @@ function App() {
     value ? setOnSide(value) : setOnSide(!onSide);
   };
 
-  const curPageBy = () => {
-    if (!isLogin && location.pathname === "/") return false;
-    return !unSideList.includes(location.pathname);
-  };
-
   return (
     <>
       <Navigation
         isLogin={isLogin}
         onSide={onSide}
         handleOnside={handleOnside}
-        curPageBy={curPageBy}
       />
       <StyledFrame>
-        {onSide && curPageBy() ? <LeftSideBar /> : null}
+        <LeftSideBar isLogin={isLogin} />
         <Routes>
           <Route
             path={"/"}
-            // element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
-            element={<Home />}
+            element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
           />
           <Route
             path={"/question"}
@@ -63,8 +55,9 @@ function App() {
           />
           <Route path={"/sign"} element={<Sign />} />
           <Route path={"/ask"} element={<Ask />} />
+          <Route path={"/tags"} element={<Tags />} />
         </Routes>
-        {onSide && curPageBy() ? <RightSideBar></RightSideBar> : null}
+        <RightSideBar isLogin={isLogin} />
       </StyledFrame>
     </>
   );
