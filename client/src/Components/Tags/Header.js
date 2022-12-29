@@ -7,6 +7,7 @@ const StyledHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0px 0px 10px 0px;
 
   h1 {
     font-size: 27px;
