@@ -93,9 +93,9 @@ function Expect({
     <StyledTitleContainer>
       <div
         className={
-          focus === 2 || isWritten.find((el) => el === "Expect")
-            ? null
-            : "disabledDiv"
+          focus !== 2 && !isWritten.find((el) => el === "Expect")
+            ? "disabledDiv"
+            : ""
         }
       >
         <StyledWrapper>
@@ -111,9 +111,9 @@ function Expect({
             onChange={handleOnChange}
             value={expect}
             disabled={
-              focus === 2 || isWritten.find((el) => el === "Expect")
-                ? ""
-                : "disabled"
+              focus !== 2 && !isWritten.find((el) => el === "Expect")
+                ? "disabled"
+                : ""
             }
           ></textarea>
           {expect.length > 20 && focus === 2 ? (

@@ -69,7 +69,7 @@ export const StyledTagsInput = styled.div`
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    margin: 4px 0 0 0;
+    margin: 0px 0px 0px 0px;
 
     > .tag {
       width: auto;
@@ -163,9 +163,9 @@ function Tags({
     <StyledTitleContainer>
       <div
         className={
-          focus === 3 || isWritten.find((el) => el === "Tags")
-            ? null
-            : "disabledDiv"
+          focus !== 3 && !isWritten.find((el) => el === "Tags")
+            ? "disabledDiv"
+            : ""
         }
       >
         <StyledWrapper>
@@ -200,9 +200,9 @@ function Tags({
               }
               onFocus={handleFocus}
               disabled={
-                focus === 3 || isWritten.find((el) => el === "Tags")
-                  ? null
-                  : "disabled"
+                focus !== 3 && !isWritten.find((el) => el === "Tags")
+                  ? "disabled"
+                  : ""
               }
             />
           </StyledTagsInput>

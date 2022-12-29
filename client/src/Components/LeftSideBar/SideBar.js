@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledLi = styled.li`
   height: 34px;
   a {
-    width: 99%;
+    width: 100%;
     height: 100%;
     display: flex;
     font-size: 12px;
@@ -21,43 +21,41 @@ const StyledLi = styled.li`
       color: black;
     }
   }
+
   .active {
     font-weight: 600 !important;
     color: black !important;
     border-right: 3px solid #f48255;
   }
 `;
-function SideBar({ data, setCurNav, curNav }) {
-  const label = ["Home", "Public", "Questions"];
-  const handleCurNav = (e) => {
-    setCurNav(e.target.text);
-  };
+
+function SideBar() {
+  const label = ["/", "/question", "/tags"];
+  const location = useLocation();
+
   return (
     <>
-      <StyledLi curNav={curNav} onClick={(e) => e.target}>
+      <StyledLi>
         <Link
           to={"/"}
-          onClick={handleCurNav}
-          className={label[0] === curNav ? "active" : null}
+          className={location.pathname === label[0] ? "active" : null}
         >
           Home
         </Link>
       </StyledLi>
       <p>Public</p>
-      <StyledLi curNav={curNav}>
+      <StyledLi>
         <Link
-          to={"/"}
-          onClick={handleCurNav}
-          className={label[1] === curNav ? "active" : null}
+          to={"/question"}
+          className={location.pathname === label[1] ? "active" : null}
         >
           Questions
         </Link>
       </StyledLi>
-      <StyledLi curNav={curNav}>
+      <StyledLi>
         <Link
-          to={"/"}
-          onClick={handleCurNav}
-          className={label[2] === curNav ? "active" : null}
+          to={"/tags"}
+          className={location.pathname === label[2] ? "active" : null}
         >
           Tags
         </Link>

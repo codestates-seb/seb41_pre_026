@@ -93,9 +93,9 @@ function Problem({
     <StyledTitleContainer>
       <div
         className={
-          focus === 1 || isWritten.find((el) => el === "Problem")
-            ? null
-            : "disabledDiv"
+          focus !== 1 && !isWritten.find((el) => el === "Problem")
+            ? "disabledDiv"
+            : ""
         }
       >
         <StyledWrapper>
@@ -109,9 +109,9 @@ function Problem({
             onChange={handleOnChange}
             value={problem}
             disabled={
-              focus === 1 || isWritten.find((el) => el === "Problem")
-                ? ""
-                : "disabled"
+              focus !== 1 && !isWritten.find((el) => el === "Problem")
+                ? "disabled"
+                : ""
             }
           ></textarea>
           {problem.length > 20 && focus === 1 ? (

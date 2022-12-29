@@ -1,11 +1,12 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createGlobalStyle } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 
-const StyledBody = createGlobalStyle`
+const StyledGlobal = createGlobalStyle`
   * {
     font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
   }
 
   html {
@@ -16,7 +17,6 @@ const StyledBody = createGlobalStyle`
     height : 100%;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
-    box-sizing: border-box;
 
     #root {
       height : 100%;
@@ -26,8 +26,10 @@ const StyledBody = createGlobalStyle`
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <StyledBody />
-    <App />
-  </React.StrictMode>
+  <>
+    <StyledGlobal />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </>
 );
