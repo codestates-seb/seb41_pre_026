@@ -66,7 +66,7 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
         className="home"
         onClick={() => {
           handleFold();
-          handleOnside();
+          handleOnside(true);
           navigate("/");
         }}
       >
@@ -77,7 +77,7 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
         <button
           onClick={() => {
             handleFold();
-            handleOnside();
+            handleOnside(true);
             navigate("/question");
           }}
         >
@@ -90,7 +90,7 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
           className="tags"
           onClick={() => {
             handleFold();
-            handleOnside();
+            handleOnside(true);
             navigate("/tags");
           }}
         >

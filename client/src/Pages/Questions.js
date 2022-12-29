@@ -17,12 +17,14 @@ const StyledMain = styled.main`
   width: 808px;
 `;
 
-function Questions() {
+function Questions({ setOnSide }) {
   const [questions, setQuestions] = useState(null);
 
   useEffect(() => {
     setQuestions(data);
-  }, []);
+    setOnSide(true);
+  }, [setOnSide]);
+
   return (
     <StyledMain>
       <Header />

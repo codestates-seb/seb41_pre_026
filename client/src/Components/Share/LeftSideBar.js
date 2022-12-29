@@ -14,14 +14,23 @@ const StyledUl = styled.ul`
   flex-direction: column;
   margin: 28px 0px 0px 0px;
   padding: 0px 0px 0px 10px;
+
   p {
     font-size: 12px;
     font-weight: 500;
     color: #525960;
     margin: 20px 0px 10px 0px;
   }
-  li:nth-of-type(n + 2) {
-    padding: 0px 0px 0px 20px;
+
+  .active {
+    a {
+      font-weight: 600 !important;
+      color: black !important;
+      border-right: 3px solid #f48255;
+    }
+    svg {
+      fill: black;
+    }
   }
 `;
 

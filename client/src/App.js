@@ -15,7 +15,6 @@ const StyledFrame = styled.div`
   position: relative;
   top: 51px;
   justify-content: center;
-  height: 94%;
 `;
 
 function App() {
@@ -28,8 +27,8 @@ function App() {
     setIsLogin(!isLogin);
   };
 
-  const handleOnside = () => {
-    setOnSide(!onSide);
+  const handleOnside = (value = null) => {
+    value ? setOnSide(value) : setOnSide(!onSide);
   };
 
   const curPageBy = () => {
@@ -48,8 +47,14 @@ function App() {
       <StyledFrame>
         {onSide && curPageBy() ? <LeftSideBar /> : null}
         <Routes>
-          <Route path={"/"} element={<Home isLogin={isLogin} />} />
-          <Route path={"/question"} element={<Questions />} />
+          <Route
+            path={"/"}
+            element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
+          />
+          <Route
+            path={"/question"}
+            element={<Questions setOnSide={setOnSide} />}
+          />
           <Route
             path={"/login"}
             element={<Login handleLogin={handleLogin} />}

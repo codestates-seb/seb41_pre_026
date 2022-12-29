@@ -55,4 +55,40 @@ export const data = [
     mid: "lmimoh",
     createdAt: "2022-12-22 13:00:57",
   },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
+  },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
+  },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
+  },
 ];
