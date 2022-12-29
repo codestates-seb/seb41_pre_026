@@ -29,8 +29,8 @@ export const viewData = {
     {
       id: 2,
       mid: "sweety",
-      created: "2022-12-28 12:12:12",
-      modified: "2022-12-28 23:23:23",
+      created: "2023-01-02 00:01:02",
+      modified: "2023-01-02 23:23:23",
       score: 1,
       vote: null,
       answer:

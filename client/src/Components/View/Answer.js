@@ -6,7 +6,7 @@ const AnswerContainer = styled.div`
   border-bottom: 1px solid #e3e6e8;
   box-sizing: border-box;
   display: block;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-top: 10px;
   text-align: left;
   vertical-align: baseline;

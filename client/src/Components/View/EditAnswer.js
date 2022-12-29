@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import Editor from "../Share/Editor";
@@ -10,28 +11,34 @@ const EditorContainer = styled.div`
   text-align: left;
   vertical-align: baseline;
   width: 727px;
-  .edit-answer-header {
-    p {
-      font-size: 19px;
-      font-weight: 400;
-      color: #232629;
-    }
+  p {
+    font-size: 19px;
+    font-weight: 400;
+    color: #232629;
+    margin: 0px;
   }
-  .eidtor {
-    height: 200px;
+  .editor {
+    margin-top: 20px;
+  }
+  .button-container {
+    margin-top: 10px;
   }
 `;
 function EditAnswer() {
+  const [value, setValue] = useState("**Hello world!!!**");
+
+  const handleClick = () => {
+    console.log(value);
+  };
+
   return (
     <EditorContainer>
-      <div className="edit-answer-header">
-        <p>Your Answer</p>
-        <div className="editor">
-          <Editor />
-        </div>
-        <div>
-          <StyledBlueBtn>Post Your Answer</StyledBlueBtn>
-        </div>
+      <p>Your Answer</p>
+      <div className="editor">
+        <Editor value={value} setValue={setValue} />
+      </div>
+      <div className="button-container">
+        <StyledBlueBtn onClick={handleClick}>Post Your Answer</StyledBlueBtn>
       </div>
     </EditorContainer>
   );

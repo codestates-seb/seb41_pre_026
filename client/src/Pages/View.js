@@ -109,7 +109,7 @@ const AnswerListContainer = styled.div`
       font-size: 19px;
       font-weight: 400;
       color: #232629;
-      padding-right: 10px;
+      padding-right: 6px;
     }
   }
 `;

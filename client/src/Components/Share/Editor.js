@@ -1,9 +1,9 @@
-import { useState } from "react";
+// import { useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 
-export default function Editor() {
-  const [value, setValue] = useState("**Hello world!!!**");
-  console.log(value);
+export default function Editor({ value, setValue }) {
+  // const [value, setValue] = useState("**Hello world!!!**");
+  // console.log(value);
 
   return (
     <div className="container">
