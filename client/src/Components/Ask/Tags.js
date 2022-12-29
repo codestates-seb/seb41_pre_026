@@ -196,7 +196,7 @@ function Tags({
                 event.key === "Enter" ? addTags(event) : null
               }
               placeholder={
-                selectedTags.length > 0 ? "" : "e.g. (Angular database swift)"
+                !selectedTags.length ? "e.g. (Angular database swift)" : ""
               }
               onFocus={handleFocus}
               disabled={
