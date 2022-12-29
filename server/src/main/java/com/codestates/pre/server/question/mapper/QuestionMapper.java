@@ -75,6 +75,7 @@ public interface QuestionMapper {
 		questionGetResponseDto.setScore(question.getScore());
 		questionGetResponseDto.setCreated(question.getCreatedAt());
 		questionGetResponseDto.setModified(question.getModifiedAt());
+		questionGetResponseDto.setAnswerCount(question.getAnswerCount());
 		questionGetResponseDto.setAnswers(
 			questionToAnswerResponseDtos(answers)
 		);
