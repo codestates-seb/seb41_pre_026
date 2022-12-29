@@ -84,7 +84,6 @@ function Problem({
   const handleOnChange = (event) => {
     handleProblemChange(event.target.value);
     handleIsWrittenChange("Problem");
-    console.log(compRef.current[1]);
   };
 
   const handleBtnClick = () => {

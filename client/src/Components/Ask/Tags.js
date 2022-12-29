@@ -132,6 +132,7 @@ function Tags({
   handleTagsChange,
   isWritten,
   handleIsWrittenChange,
+  compRef,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -190,6 +191,7 @@ function Tags({
               ))}
             </ul>
             <input
+              ref={(el) => (compRef.current[3] = el)}
               className="tag-input"
               type="text"
               onKeyUp={(event) =>

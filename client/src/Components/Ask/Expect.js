@@ -75,6 +75,7 @@ function Expect({
   handleExpectChange,
   isWritten,
   handleIsWrittenChange,
+  compRef,
 }) {
   const handleFocus = () => {
     handleFocusChange(2);
@@ -107,6 +108,7 @@ function Expect({
             actually resulted. Minimum 20 characters.
           </label>
           <textarea
+            ref={(el) => (compRef.current[2] = el)}
             onFocus={handleFocus}
             onChange={handleOnChange}
             value={expect}

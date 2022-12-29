@@ -76,18 +76,18 @@ function Ask() {
   };
 
   const handleReset = () => {
-    setFocus("Title");
-    setIsWritten([]);
     setTitle("");
     setProblem("");
     setExpect("");
     setTags([]);
+    setFocus(0);
+    setIsWritten([]);
   };
 
   return (
     <main>
       <Header focus={focus} handleFocusChange={handleFocusChange} />
-      <div ref={(el) => (compRef.current[0] = el)}>
+      <div>
         <Title
           focus={focus}
           handleFocusChange={handleFocusChange}
@@ -109,7 +109,7 @@ function Ask() {
           compRef={compRef}
         />
       </div>
-      <div ref={(el) => (compRef.current[2] = el)}>
+      <div>
         <Expect
           focus={focus}
           handleFocusChange={handleFocusChange}
@@ -117,9 +117,10 @@ function Ask() {
           handleExpectChange={handleExpectChange}
           isWritten={isWritten}
           handleIsWrittenChange={handleIsWrittenChange}
+          compRef={compRef}
         />
       </div>
-      <div ref={(el) => (compRef.current[3] = el)}>
+      <div>
         <Tags
           focus={focus}
           handleFocusChange={handleFocusChange}
@@ -127,6 +128,7 @@ function Ask() {
           handleTagsChange={handleTagsChange}
           isWritten={isWritten}
           handleIsWrittenChange={handleIsWrittenChange}
+          compRef={compRef}
         />
       </div>
       <StyledDiv ref={(el) => (compRef.current[4] = el)}>

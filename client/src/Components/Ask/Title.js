@@ -70,6 +70,7 @@ function Title({
   handleTitleChange,
   isWritten,
   handleIsWrittenChange,
+  compRef,
 }) {
   const handleFocus = () => {
     handleFocusChange(0);
@@ -93,6 +94,7 @@ function Title({
             Be specific and imagine you’re asking a question to another person.
           </label>
           <input
+            ref={(el) => (compRef.current[0] = el)}
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
             onFocus={handleFocus}
             onChange={handleOnChange}
