@@ -75,6 +75,7 @@ function Problem({
   handleProblemChange,
   isWritten,
   handleIsWrittenChange,
+  compRef,
 }) {
   const handleFocus = () => {
     handleFocusChange(1);
@@ -83,6 +84,7 @@ function Problem({
   const handleOnChange = (event) => {
     handleProblemChange(event.target.value);
     handleIsWrittenChange("Problem");
+    console.log(compRef.current[1]);
   };
 
   const handleBtnClick = () => {
@@ -105,6 +107,7 @@ function Problem({
             Minimum 20 characters.
           </label>
           <textarea
+            ref={(el) => (compRef.current[1] = el)}
             onFocus={handleFocus}
             onChange={handleOnChange}
             value={problem}

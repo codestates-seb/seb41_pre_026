@@ -38,6 +38,9 @@ function Ask() {
         behavior: "smooth",
         block: "start",
       });
+      setTimeout(() => {
+        compRef.current[focus].focus();
+      }, 200);
     }
   }, [focus]);
 
@@ -65,14 +68,14 @@ function Ask() {
     setTags(tag);
   };
 
-  const handleBlueBtnClick = () => {
+  const handleSubmit = () => {
     console.log("title", title);
     console.log("problem", problem);
     console.log("expect", expect);
     console.log("tags", tags);
   };
 
-  const handleTransRedBtnClick = () => {
+  const handleReset = () => {
     setFocus("Title");
     setIsWritten([]);
     setTitle("");
@@ -92,9 +95,10 @@ function Ask() {
           handleTitleChange={handleTitleChange}
           isWritten={isWritten}
           handleIsWrittenChange={handleIsWrittenChange}
+          compRef={compRef}
         />
       </div>
-      <div ref={(el) => (compRef.current[1] = el)}>
+      <div>
         <Problem
           focus={focus}
           handleFocusChange={handleFocusChange}
@@ -102,6 +106,7 @@ function Ask() {
           handleProblemChange={handleProblemChange}
           isWritten={isWritten}
           handleIsWrittenChange={handleIsWrittenChange}
+          compRef={compRef}
         />
       </div>
       <div ref={(el) => (compRef.current[2] = el)}>
@@ -127,13 +132,13 @@ function Ask() {
       <StyledDiv ref={(el) => (compRef.current[4] = el)}>
         <StyledBlueBtn
           className={focus !== 4 ? "disabledBtn" : ""}
-          onClick={handleBlueBtnClick}
+          onClick={handleSubmit}
         >
           Review your question
         </StyledBlueBtn>
         <StyledTransRedBtn
           className={title.length < 15 ? "disabledBtn" : ""}
-          onClick={handleTransRedBtnClick}
+          onClick={handleReset}
         >
           Discard draft
         </StyledTransRedBtn>
