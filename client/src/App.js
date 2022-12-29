@@ -8,6 +8,7 @@ import { useState } from "react";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Sign from "./Pages/Sign";
+import Ask from "./Pages/Ask";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [onSide, setOnSide] = useState(false);
   const location = useLocation();
-  const unSideList = ["/login", "/sign"];
+  const unSideList = ["/login", "/sign", "/ask"];
 
   const handleLogin = () => {
     setIsLogin(!isLogin);
@@ -54,6 +55,7 @@ function App() {
             element={<Login handleLogin={handleLogin} />}
           />
           <Route path={"/sign"} element={<Sign />} />
+          <Route path={"/ask"} element={<Ask />} />
         </Routes>
         {onSide && curPageBy() ? <RightSideBar></RightSideBar> : null}
       </StyledFrame>

@@ -149,13 +149,13 @@ function Tags({
     setSelectedTags(selectedTags.filter((_, index) => index !== indexToRemove));
   };
 
-  const addTags = (event) => {
-    let newTag = event.target.value.trim();
+  const addTags = (e) => {
+    let newTag = e.target.value.trim();
     const filtered = selectedTags.filter((el) => el === newTag);
     if (newTag !== "" && filtered.length === 0) {
       setSelectedTags([...selectedTags, newTag]);
       handleTagsChange(selectedTags);
-      event.target.value = "";
+      e.target.value = "";
     }
     handleIsWrittenChange("Tags");
   };
@@ -194,9 +194,7 @@ function Tags({
               ref={(el) => (compRef.current[3] = el)}
               className="tag-input"
               type="text"
-              onKeyUp={(event) =>
-                event.key === "Enter" ? addTags(event) : null
-              }
+              onKeyUp={addTags}
               placeholder={
                 !selectedTags.length ? "e.g. (Angular database swift)" : ""
               }

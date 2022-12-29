@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { StyledBlueBtn } from "../Share/Button";
+import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled.header`
   width: 100%
@@ -19,6 +21,12 @@ const StyledDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 0px 0px 0px 0px;
+
+  .ask {
+    height: 38px;
+    padding: 10px 10px 10px 10px;
+    line-height: 12px;
+  }
 `;
 
 const StyledH1 = styled.h1`
@@ -29,22 +37,6 @@ const StyledH1 = styled.h1`
   margin: 0px 12px 12px 0px;
   font-weight: 400;
   line-height: 35.1px;
-`;
-
-const StyledBtn = styled.button`
-  color: #ffffff;
-  width: 103px;
-  height: 38px;
-  font-size: 11px;
-  background-color: #0a95ff;
-  box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
-  padding: 10.4px;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 400;
-  white-space: nowrap;
-  border-color: #0a95ff;
-  border-radius: 2px;
 `;
 
 const StyledSpan = styled.span`
@@ -84,6 +76,7 @@ const StyledBtnDiv = styled.div`
 
 function Header() {
   const [selecBtn, setSelecBtn] = useState(1);
+  const navigate = useNavigate();
 
   const handleBtnColor = (e) => {
     setSelecBtn(e.target.id);
@@ -93,7 +86,9 @@ function Header() {
     <StyledHeader>
       <StyledDiv className="top">
         <StyledH1>All Questions</StyledH1>
-        <StyledBtn>Ask Question</StyledBtn>
+        <StyledBlueBtn className="ask" onClick={() => navigate("/ask")}>
+          Ask Question
+        </StyledBlueBtn>
       </StyledDiv>
       <StyledDiv>
         <StyledSpan>23,350,032 questions</StyledSpan>

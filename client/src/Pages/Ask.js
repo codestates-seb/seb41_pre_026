@@ -33,15 +33,13 @@ function Ask() {
   const compRef = useRef([]);
 
   useEffect(() => {
-    if (focus > 0) {
-      compRef.current[focus].scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      setTimeout(() => {
-        compRef.current[focus].focus();
-      }, 200);
-    }
+    compRef.current[focus].scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    setTimeout(() => {
+      compRef.current[focus].focus();
+    }, 200);
   }, [focus]);
 
   const handleFocusChange = (focus) => {
