@@ -100,7 +100,7 @@ function Title({
             onChange={handleOnChange}
             value={title}
           ></input>
-          {isFocus === 0 && title.length >= 15 ? (
+          {isFocus === 0 && title.length >= 20 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
