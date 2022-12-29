@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import axios from "axios";
 import Header from "../Components/Ask/Header";
 import Title from "../Components/Ask/Title";
 import Problem from "../Components/Ask/Problem";
@@ -71,10 +72,22 @@ function Ask() {
   };
 
   const handleSubmit = () => {
-    console.log("title", title);
-    console.log("problem", problem);
-    console.log("expect", expect);
-    console.log("tags", tags);
+    axios
+      .post(
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions",
+        {
+          mid: 1,
+          problem: problem,
+          expecting: expect,
+          title: title,
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const handleReset = () => {
