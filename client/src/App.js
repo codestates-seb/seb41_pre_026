@@ -6,9 +6,10 @@ import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
 import { useState } from "react";
 import Login from "./Pages/Login";
-import Home from "./Pages/Home";
+// import Home from "./Pages/Home";
 import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
+import Home from "./Pages/Home";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -49,7 +50,8 @@ function App() {
         <Routes>
           <Route
             path={"/"}
-            element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
+            // element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
+            element={<Home />}
           />
           <Route
             path={"/question"}
