@@ -8,6 +8,7 @@ import { useState } from "react";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Sign from "./Pages/Sign";
+import Ask from "./Pages/Ask";
 import View from "./Pages/View";
 
 const StyledFrame = styled.div`
@@ -20,31 +21,45 @@ const StyledFrame = styled.div`
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const [isSide, setIsSide] = useState(false);
+  const [onSide, setOnSide] = useState(false);
   const location = useLocation();
-  const unSideList = ["/login", "/", "/sign"];
-  console.log(location.pathname, unSideList.includes(location.pathname));
+  const unSideList = ["/login", "/sign", "/ask"];
+
+  const handleLogin = () => {
+    setIsLogin(!isLogin);
+  };
+
+  const handleOnside = () => {
+    setOnSide(!onSide);
+  };
+
+  const curPageBy = () => {
+    if (!isLogin && location.pathname === "/") return false;
+    return !unSideList.includes(location.pathname);
+  };
+
   return (
     <>
       <Navigation
-        login={{ isLogin, setIsLogin }}
-        isSide={{ isSide, setIsSide }}
+        isLogin={isLogin}
+        onSide={onSide}
+        handleOnside={handleOnside}
+        curPageBy={curPageBy}
       />
       <StyledFrame>
-        {isSide && !unSideList.includes(location.pathname) ? (
-          <LeftSideBar />
-        ) : null}
+        {onSide && curPageBy() ? <LeftSideBar /> : null}
         <Routes>
-          <Route path={"/"} element={<Home />} />
+          <Route path={"/"} element={<Home isLogin={isLogin} />} />
           <Route path={"/question"} element={<Questions />} />
-          <Route path={"/"} element={<Questions />} />
           <Route path={"/view"} element={<View />} />
-          <Route path={"/login"} element={<Login />} />
+          <Route
+            path={"/login"}
+            element={<Login handleLogin={handleLogin} />}
+          />
           <Route path={"/sign"} element={<Sign />} />
+          <Route path={"/ask"} element={<Ask />} />
         </Routes>
-        {!unSideList.includes(location.pathname) ? (
-          <RightSideBar></RightSideBar>
-        ) : null}
+        {onSide && curPageBy() ? <RightSideBar></RightSideBar> : null}
       </StyledFrame>
     </>
   );

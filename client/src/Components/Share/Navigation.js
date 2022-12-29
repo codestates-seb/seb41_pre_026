@@ -7,11 +7,12 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { searchData } from "../../Assets/searchData";
 import profile from "../../Assets/profile.jpg";
+import TopMenu from "../Navigation/TopMenu";
 
 const StyledNav = styled.div`
   width: 100%;
   min-width: 1240px;
-  height: 47px;
+  height: 51px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +31,7 @@ const StyledNav = styled.div`
     border: 0px;
     margin: 0px;
     padding: 0px;
+    cursor: pointer;
 
     :hover {
       background-color: #e0e3e5;
@@ -41,7 +43,7 @@ const StyledNav = styled.div`
   }
 
   .logo {
-    width: 169px;
+    width: 171px;
     height: 100%;
     border: 0px;
     margin: 0px;
@@ -52,8 +54,32 @@ const StyledNav = styled.div`
     }
   }
 
-  nav {
-    height: 26px;
+  nav ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    display: flex;
+    gap: 5px;
+
+    li {
+      float: left;
+      padding: 6px 12px 6px 12px;
+    }
+
+    li a {
+      display: block;
+      width: 100%;
+      margin: 0px;
+    }
+
+    li:hover {
+      background-color: #e0e3e5;
+      border-radius: 30px;
+      cursor: pointer;
+      a {
+        color: black;
+      }
+    }
   }
 
   a {
@@ -63,28 +89,10 @@ const StyledNav = styled.div`
     font-weight: 400;
     color: #696969;
   }
-
-  .login {
-    margin: 0px 5px 0px 5px;
-  }
-
-  nav {
-    display: flex;
-
-    div {
-      height: 30px;
-
-      :hover {
-        border-radius: 30px;
-        background-color: #e0e3e5;
-        cursor: pointer;
-      }
-    }
-  }
 `;
 
 const StyledSearch = styled.div`
-  width: 665px;
+  width: ${({ isLogin }) => (isLogin ? "702px" : "665px")};
   height: 33px !important;
   display: flex;
   align-items: center;
@@ -178,17 +186,7 @@ const StyledButton = styled.button`
   color: ${({ type }) => (type === 1 ? "#54759D" : "white")};
   background-color: ${({ type }) => (type === 1 ? "#E1ECF4" : "#0A95FF")};
   cursor: pointer;
-`;
-
-const StyledMenu = styled.div`
-  visibility: ${({ isFold }) => (isFold ? "visible" : "hidden")};
-  position: relative;
-  top: 1px;
-  left: -172px;
-  width: 240px;
-  height: 300px;
-  background-color: white;
-  border: 1px solid #e3e6e8;
+  margin: 0px 0px 0px 10px;
 `;
 
 const StyledIcons = styled.ol`
@@ -239,59 +237,58 @@ const StyledIcons = styled.ol`
   }
 `;
 
-function Navigation({ login, isSide }) {
+function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   const navigate = useNavigate();
   // const [iconFocuse, setIcF] = useState(false);
 
-  const handleFocuse = (e) => {
-    setFocused(!focused);
-  };
-
-  const handleFold = (e) => {
-    setIsFold(!isFold);
-  };
-
   useEffect(() => {
     document.querySelector("body").addEventListener("click", (e) => {
       if (focused) {
-        handleFocuse();
+        setFocused(!focused);
       }
     });
   }, [focused]);
 
+  const handleFold = () => {
+    setIsFold(!isFold);
+  };
+
   return (
     <nav>
       <StyledNav>
-        {isSide.isSide ? null : (
+        {!onSide || !curPageBy() ? (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>
-        )}
+        ) : null}
         <Link to={"/"} className="logo">
           <img src={logo} alt="logo" />
         </Link>
         <nav>
-          {login.isLogin ? (
-            <div>
-              <Link to={"/"}>Products</Link>
-            </div>
-          ) : (
-            <>
-              <div>
-                <Link to={"/"}>About</Link>
-              </div>
-              <div>
+          <ul>
+            {isLogin ? (
+              <li>
                 <Link to={"/"}>Products</Link>
-              </div>
-              <div>
-                <Link to={"/"}>For Teams</Link>
-              </div>
-            </>
-          )}
+              </li>
+            ) : (
+              <>
+                <li>
+                  <a href="https://stackoverflow.co/">About</a>
+                </li>
+                <li>
+                  <Link to={"/"}>Products</Link>
+                </li>
+                <li>
+                  <a href="https://stackoverflow.co/teams/">For Teams</a>
+                </li>
+              </>
+            )}
+          </ul>
         </nav>
         <StyledSearch
+          isLogin={isLogin}
           focused={focused}
           onClick={(e) => {
             e.stopPropagation();
@@ -303,12 +300,12 @@ function Navigation({ login, isSide }) {
             placeholder="Search..."
             onFocus={() => {
               if (!focused) {
-                handleFocuse();
+                setFocused(!focused);
               }
             }}
           ></input>
         </StyledSearch>
-        {login.isLogin ? (
+        {isLogin ? (
           <StyledIcons>
             <li>
               <img src={profile} alt="profile img"></img>
@@ -356,7 +353,7 @@ function Navigation({ login, isSide }) {
               onClick={() => navigate("/login")}
               className="login"
             >
-              {login.isLogin ? "Log out" : "Log in"}
+              {isLogin ? "Log out" : "Log in"}
             </StyledButton>
             <StyledButton type={2} onClick={() => navigate("/sign")}>
               Sign up
@@ -365,22 +362,11 @@ function Navigation({ login, isSide }) {
         )}
       </StyledNav>
       <StyledDiv>
-        <StyledMenu isFold={isFold}>
-          <button
-            onClick={() => {
-              setIsFold(!isFold);
-            }}
-          >
-            x
-          </button>
-          <button
-            onClick={() => {
-              navigate("/question");
-            }}
-          >
-            question
-          </button>
-        </StyledMenu>
+        <TopMenu
+          handleFold={handleFold}
+          isFold={isFold}
+          handleOnside={handleOnside}
+        />
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>

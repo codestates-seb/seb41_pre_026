@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { data } from "../Assets/questionsData";
 
 const QuestionListContainer = styled.div`
-  width: 780px;
+  width: 100%
   background-color: #ffffff;
   border-radius: 0;
 }
@@ -14,6 +14,7 @@ const QuestionListContainer = styled.div`
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
+  width: 808px;
 `;
 
 function Questions() {

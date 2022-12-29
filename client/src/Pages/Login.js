@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
   }
 `;
 
-function Login() {
+function Login({ handleLogin }) {
   return (
     <StyledDiv>
       <svg width="32" height="37" viewBox="0 0 32 37">
@@ -38,7 +38,7 @@ function Login() {
           fill="#F48024"
         ></path>
       </svg>
-      <LoginForm></LoginForm>
+      <LoginForm handleLogin={handleLogin}></LoginForm>
       <p>
         Don’t have an account?<Link to={"/sign"}>Sign up</Link>
       </p>
