@@ -8,6 +8,8 @@ import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
 import { useEffect, useState, useRef } from "react";
 
 const StyledDiv = styled.div`
+  margin: 0px 0px 100px 0px;
+
   button:nth-child(2) {
     margin: 0px 0px 0px 16px;
   }
@@ -33,10 +35,12 @@ function Ask() {
   const compRef = useRef([]);
 
   useEffect(() => {
-    compRef.current[focus].scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    if (focus > 0) {
+      compRef.current[focus].scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
     setTimeout(() => {
       compRef.current[focus].focus();
     }, 200);

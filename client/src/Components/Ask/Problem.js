@@ -25,7 +25,7 @@ const StyledTitleContainer = styled.div`
 `;
 
 const StyledWrapper = styled.div`
-  width: 790px;
+  width: 850px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;

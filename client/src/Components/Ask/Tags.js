@@ -26,7 +26,7 @@ const StyledTitleContainer = styled.div`
 `;
 
 const StyledWrapper = styled.div`
-  width: 790px;
+  width: 850px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;
@@ -152,7 +152,7 @@ function Tags({
   const addTags = (e) => {
     let newTag = e.target.value.trim();
     const filtered = selectedTags.filter((el) => el === newTag);
-    if (newTag !== "" && filtered.length === 0) {
+    if (newTag !== "" && filtered.length === 0 && e.key === "Enter") {
       setSelectedTags([...selectedTags, newTag]);
       handleTagsChange(selectedTags);
       e.target.value = "";
