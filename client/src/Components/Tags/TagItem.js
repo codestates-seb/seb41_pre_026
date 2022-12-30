@@ -7,18 +7,18 @@ const StyledDiv = styled.div`
   font-size: 12px;
   border-radius: 3px;
 
-  .tagContainer {
+  .tagWrapper {
     width: 245px;
-    height: 176px;
+    height: 177px;
     padding: 12px;
   }
 
-  .tagName {
+  .nameContainer {
     display: flex;
     justify-content: space-between;
     margin: 0px 0px 0px 0px;
 
-    .tagSpan {
+    .name {
       background-color: #e1ecf4;
       color: #39739d;
       border-radius: 2px;
@@ -26,13 +26,18 @@ const StyledDiv = styled.div`
     }
   }
 
-  .tagExplain {
+  .explainContainer {
     margin: 12px 0px 12px 0px;
+    max-height: 70px;
+  }
+
+  .explain {
     color: #3b4045;
+    font-size: 12.5px;
   }
 
   .total {
-    width: 85px;
+    width: 80px;
     color: #838c95;
   }
 `;
@@ -40,12 +45,14 @@ const StyledDiv = styled.div`
 function TagItem({ tag }) {
   return (
     <StyledDiv>
-      <div className="tagContainer">
-        <div className="tagName">
-          <span className="tagSpan">{tag.name}</span>
+      <div className="tagWrapper">
+        <div className="nameContainer">
+          <span className="name">{tag.name}</span>
         </div>
-        <div className="tagExplain">{tag.explain}</div>
-        <div className="total">{`${tag.total} question`}</div>
+        <div className="explainContainer">
+          <div className="explain">{`${tag.explain.substr(0, 130)} ...`}</div>
+        </div>
+        <div className="total">{`${tag.total}\nquestion`}</div>
       </div>
     </StyledDiv>
   );
