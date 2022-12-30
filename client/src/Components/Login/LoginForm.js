@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
+import useLogin from "./useLogin";
 import LoginInput from "./LoginInput";
+// import login from "../../util/login";
 
 const StyledForm = styled.div`
   display: flex;
@@ -37,17 +39,26 @@ const StyledForm = styled.div`
 function LoginForm({ handleLogin }) {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [checkId, setCheckId] = useState(true);
+  const [checkPw, setCheckPw] = useState(true);
 
   const handleId = (e) => setId(e.target.value);
   const handlePw = (e) => setPw(e.target.value);
+  const handleCheckId = () => setCheckId(!checkId);
+  const handleCheckPw = () => setCheckPw(!checkPw);
   const handleSubmit = () => {
     const idRegExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-    if (!idRegExp.test(id)) {
-      console.log("e");
+    if (idRegExp.test(id)) {
+      handleCheckId();
+    }
+
+    if (checkPw.length < 8) {
+      handleCheckPw();
     }
   };
 
+  useLogin();
   return (
     <StyledForm>
       <LoginInput
@@ -55,12 +66,14 @@ function LoginForm({ handleLogin }) {
         handleId={handleId}
         place="aaa@bbb.ccc"
         label="Email"
+        checkId={checkId}
       />
       <LoginInput
         value={pw}
         handlePw={handlePw}
         place="Write.."
         label="Password"
+        checkPw={checkPw}
       />
       <StyledBlueBtn onClick={handleSubmit}>Log in</StyledBlueBtn>
     </StyledForm>
