@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
+import EditProfile from "./EditProfile";
+
+// import EditProfile from "./EditProfile";
+// import DeleteProfile from "./DeleteProfile";
 
 const StyledSettings = styled.div`
   display: flex;
@@ -11,7 +15,7 @@ const StyledSideBar = styled.ul`
   display: flex;
   flex-direction: column;
   width: 186px;
-  margin: 0px 0px 0px 0px;
+  margin: 0px 20px 0px 0px;
   padding: 0px;
 
   p {
@@ -69,6 +73,7 @@ function Settings() {
           </button>
         </StyledBtnDiv>
       </StyledSideBar>
+      <EditProfile />
     </StyledSettings>
   );
 }
