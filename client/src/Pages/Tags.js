@@ -4,7 +4,7 @@ import Header from "../Components/Tags/Header";
 import TagContainer from "../Components/Tags/TagContainer";
 
 const StyledTags = styled.section`
-  width: 1037px;
+  width: 1005px;
   padding: 24px 0px 100px 24px;
 `;
 
