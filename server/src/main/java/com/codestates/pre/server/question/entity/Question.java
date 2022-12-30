@@ -40,6 +40,8 @@ public class Question {
 
 	private int score;
 
+	private String tags;
+
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answers = new ArrayList<>();
 

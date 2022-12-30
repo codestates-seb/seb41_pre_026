@@ -16,5 +16,5 @@ public class QuestionPostDto {
 
 	private String expecting;
 
-	private List<Tag> tags; // todo Tags 객체로 받을지 리스트로 받을지 고민
+	private String tags; // todo Tags 객체로 받을지 리스트로 받을지 고민
 }

@@ -18,7 +18,7 @@ public class QuestionGetResponseDto {
 	private String title;
 	private String problem;
 	private String expecting;
-	private List<Tag> tags;
+	private String tags;
 	private int score;
 	private String vote;
 	private LocalDateTime created;

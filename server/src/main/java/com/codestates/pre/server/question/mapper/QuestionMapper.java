@@ -27,6 +27,7 @@ public interface QuestionMapper {
 		question.setTitle( questionPostDto.getTitle() );
 		question.setProblem( questionPostDto.getProblem() );
 		question.setExpecting( questionPostDto.getExpecting() );
+		question.setTags(questionPostDto.getTags());
 		member.setMemberId(questionPostDto.getMid());
 		return question;
 	}
@@ -38,6 +39,7 @@ public interface QuestionMapper {
 		question.setProblem(questionPatchDto.getProblem());
 		question.setTitle(questionPatchDto.getTitle());
 		question.setExpecting(questionPatchDto.getExpecting());
+		question.setTags(questionPatchDto.getTags());
 		question.setModifiedAt(LocalDateTime.now());
 		return question;
 	}
@@ -56,7 +58,6 @@ public interface QuestionMapper {
 			question.setMid(question.getMember().getMemberId());
 			list.add( questionToQuestionResponseDto( question ) );
 		}
-		System.out.println(questions.size());
 
 		return list;
 	}
@@ -79,6 +80,7 @@ public interface QuestionMapper {
 		questionGetResponseDto.setAnswers(
 			questionToAnswerResponseDtos(answers)
 		);
+		questionGetResponseDto.setTags(question.getTags());
 
 		return questionGetResponseDto;
 	}

@@ -21,5 +21,5 @@ public class QuestionPatchDto {
 
 	private String expecting;
 
-	private List<Tag> tags;
+	private String tags;
 }
