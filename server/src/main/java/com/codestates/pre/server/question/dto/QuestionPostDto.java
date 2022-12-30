@@ -2,7 +2,7 @@ package com.codestates.pre.server.question.dto;
 
 import java.util.List;
 
-import com.codestates.pre.server.tag.Tag;
+import com.codestates.pre.server.tag.entity.Tag;
 
 import lombok.Getter;
 
