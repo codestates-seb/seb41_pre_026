@@ -11,6 +11,7 @@ import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
 import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
+import Member from "./Pages/Member";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ function App() {
           <Route path={"/sign"} element={<Sign />} />
           <Route path={"/ask"} element={<Ask />} />
           <Route path={"/tags"} element={<Tags />} />
+          <Route path={"/member"} element={<Member />} />
         </Routes>
         <RightSideBar isLogin={isLogin} />
       </StyledFrame>
