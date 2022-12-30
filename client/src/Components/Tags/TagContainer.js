@@ -7,7 +7,7 @@ const StyledGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  grid-gap: 10px;
+  grid-gap: 15px;
 `;
 
 function TagContainer({ search }) {
