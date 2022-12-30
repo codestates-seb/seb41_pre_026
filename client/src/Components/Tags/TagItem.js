@@ -51,7 +51,10 @@ function TagItem({ tag, search }) {
           <span className="name">{tag.name}</span>
         </div>
         <div className="explainContainer">
-          <div className="explain">{`${tag.explain.substr(0, 130)} ...`}</div>
+          <div className="explain">{`${tag.tagExplain.substr(
+            0,
+            130
+          )} ...`}</div>
         </div>
         <div className="total">{`${tag.total}\nquestion`}</div>
       </div>

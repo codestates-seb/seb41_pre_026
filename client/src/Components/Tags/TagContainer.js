@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import TagItem from "./TagItem";
-import { data } from "../../Assets/tagsData";
+import axios from "axios";
+import { useState } from "react";
 
 const StyledGrid = styled.div`
   width: 100%;
@@ -10,10 +11,20 @@ const StyledGrid = styled.div`
 `;
 
 function TagContainer({ search }) {
+  const [tags, setTags] = useState([]);
+  axios
+    .get("http://43.200.68.32:8080/tags")
+    .then(function (response) {
+      setTags(response.data.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     <StyledGrid>
-      {data.map((tag) => (
-        <TagItem key={tag.id} tag={tag} search={search} />
+      {tags.map((tag) => (
+        <TagItem key={tag.tagId} tag={tag} search={search} />
       ))}
     </StyledGrid>
   );
