@@ -22,12 +22,18 @@ const StyledDiv = styled.div`
         background-color: #e1ecf4;
         color: #39739d;
         border-radius: 2px;
-        padding: 5px 6px;
+        padding: 6px 6px;
+        line-height: 14px;
+      }
+
+      .name:hover {
+        background-color: #d0e3f1;
+        color: #2c5877;
       }
     }
 
     .explainContainer {
-      margin: 12px 0px 12px 0px;
+      margin: 12px 10px 12px 0px;
       max-height: 70px;
 
       .explain {
@@ -53,7 +59,7 @@ function TagItem({ tag, search }) {
         <div className="explainContainer">
           <div className="explain">{`${tag.tagExplain.substr(
             0,
-            130
+            110
           )} ...`}</div>
         </div>
         <div className="total">{`${tag.total}\nquestion`}</div>
