@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const StyledProfile = styled.div`
   display: flex;
+  margin: 0px 0px 0px 10px;
+  padding: 10px 0px 0px 0px;
 `;
 
 const StyledStatsWrapper = styled.div`
