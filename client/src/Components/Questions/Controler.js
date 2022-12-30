@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import render from "./render";
+import render from "../../util/render";
 
 const StyledControler = styled.div`
   display: flex;
