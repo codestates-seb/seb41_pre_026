@@ -78,7 +78,7 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
           onClick={() => {
             handleFold();
             handleOnside(true);
-            navigate("/question");
+            navigate("/questions");
           }}
         >
           <svg width="18" height="18" viewBox="0 0 18 18">

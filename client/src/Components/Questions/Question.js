@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const QuestionContainer = styled.div`
   display: flex;
   width: 100%;
   height: auto;
   border-bottom: 1px solid #e3e6e8;
-  padding: 16px;
+  padding: 16px 24px 16px 16px;
 `;
 
 const SummaryStats = styled.div`
@@ -13,7 +14,7 @@ const SummaryStats = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  width: 25%;
+  width: 17%;
   font-size: 13px;
   color: #6a737c;
   gap: 6px;
@@ -46,6 +47,15 @@ const SummaryContent = styled.div`
   gap: 5px;
   font-size: 12px;
   color: #545b5d;
+  width: 83%;
+
+  .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 
   a {
     text-decoration: none;
@@ -78,6 +88,7 @@ const Info = styled.div`
       color: #39739d;
       background-color: #e1ecf4;
       padding: 4px 6px;
+      margin: 0px 5px 0px 5px;
     }
   }
 
@@ -88,13 +99,14 @@ const Info = styled.div`
   }
 `;
 
-function Question({ question, id }) {
+function Question({ question }) {
+  const tags = ["tag1", "tag2", "tag3", "tag4", "tag5"];
   return (
     <QuestionContainer>
       <SummaryStats>
         <div className="stats-item-vote">
-          <span>{question.vote} </span>
-          <span>{question.vote === 1 ? "vote" : "votes"}</span>
+          <span>{0} </span>
+          <span>{question.vote < 2 ? "vote" : "votes"}</span>
         </div>
         <div
           className={
@@ -104,20 +116,22 @@ function Question({ question, id }) {
           }
         >
           <span>{question.answerCount} </span>
-          <span>{question.answerCount === 1 ? "answer" : "answers"}</span>
+          <span>{question.answerCount < 2 ? "answer" : "answers"}</span>
         </div>
         <div>
           <span>{question.view} </span>
-          <span>{question.view === 1 ? "view" : "views"}</span>
+          <span>{question.view < 2 ? "view" : "views"}</span>
         </div>
       </SummaryStats>
-      <SummaryContent key={question.id}>
-        <a href="/">{question.title}</a>
-        <div>{question.excerpt}</div>
+      <SummaryContent>
+        <Link to={"/questions"} state={{ id: question.questionId }}>
+          {question.title}
+        </Link>
+        <div className="content">{question.problem}</div>
         <Info>
           <div className="content-item-tags">
             <ul>
-              {question.tags.map((tag, idx) => (
+              {tags.map((tag, idx) => (
                 <li key={idx}>{tag}</li>
               ))}
             </ul>
