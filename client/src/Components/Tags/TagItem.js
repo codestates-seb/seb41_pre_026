@@ -11,34 +11,35 @@ const StyledDiv = styled.div`
     width: 245px;
     height: 177px;
     padding: 12px;
-  }
 
-  .nameContainer {
-    display: flex;
-    justify-content: space-between;
-    margin: 0px 0px 0px 0px;
+    .nameContainer {
+      display: flex;
+      justify-content: space-between;
+      margin: 0px 0px 0px 0px;
+      cursor: pointer;
 
-    .name {
-      background-color: #e1ecf4;
-      color: #39739d;
-      border-radius: 2px;
-      padding: 5px 6px;
+      .name {
+        background-color: #e1ecf4;
+        color: #39739d;
+        border-radius: 2px;
+        padding: 5px 6px;
+      }
     }
-  }
 
-  .explainContainer {
-    margin: 12px 0px 12px 0px;
-    max-height: 70px;
-  }
+    .explainContainer {
+      margin: 12px 0px 12px 0px;
+      max-height: 70px;
 
-  .explain {
-    color: #3b4045;
-    font-size: 12.5px;
-  }
+      .explain {
+        color: #3b4045;
+        font-size: 12.5px;
+      }
+    }
 
-  .total {
-    width: 80px;
-    color: #838c95;
+    .total {
+      width: 80px;
+      color: #838c95;
+    }
   }
 `;
 
