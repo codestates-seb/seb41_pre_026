@@ -4,8 +4,9 @@ import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
-import { viewData } from "../Assets/viewData";
+// import { viewData } from "../Assets/viewData";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   max-width: 1100px;
@@ -115,20 +116,28 @@ const AnswerListContainer = styled.div`
 `;
 
 function View() {
-  const [data, setData] = useState(viewData);
-  const [answers, setAnswers] = useState(viewData.answers);
-  const score = data.question.score;
-
+  // const [data, setData] = useState(viewData);
+  // const [answers, setAnswers] = useState(viewData.answers);
+  const [data, setData] = useState({});
+  const [answers, setAnswers] = useState([]);
+  const score = data.score;
+  // const location = useLocation();
   useEffect(() => {
-    setData(viewData);
-    setAnswers(viewData.answers);
+    axios({
+      method: "get",
+      url: "http://43.200.68.32:8080/questions/3?mid=1",
+    }).then((res) => {
+      setData(res.data.data);
+      setAnswers(res.data.data.answers);
+      // console.log(answers);
+    });
   }, []);
 
   return (
     <Container>
       <div className="question-header">
         <div className="question title">
-          <p>{data.question.title}</p>
+          <p>{data.title}</p>
         </div>
         <div className="button-container">
           <StyledBlueBtn>
@@ -139,15 +148,15 @@ function View() {
       <div className="question-info">
         <div>
           <span className="question-info-description">Asked </span>
-          <span className="question-info-data">{data.question.created}</span>
+          <span className="question-info-data">{data.created}</span>
         </div>
         <div>
           <span className="question-info-description">Modified </span>
-          <span className="question-info-data">{data.question.modified}</span>
+          <span className="question-info-data">{data.modified}</span>
         </div>
         <div>
           <span className="question-info-description">Viewed </span>
-          <span className="question-info-data">{data.question.view} times</span>
+          <span className="question-info-data">{data.view} times</span>
         </div>
       </div>
       <div className="question-content">
@@ -160,8 +169,8 @@ function View() {
       </div>
       <AnswerListContainer>
         <div className="answers-header">
-          <span>{data.question.answerCount}</span>
-          <span>{data.question.answerCount === 1 ? "Answer" : "Answers"}</span>
+          <span>{data.answerCount}</span>
+          <span>{data.answerCount === 1 ? "Answer" : "Answers"}</span>
         </div>
         {answers
           ? answers.map((answerData, idx) => (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import Editor from "../Share/Editor";
+import axios from "axios";
 
 const EditorContainer = styled.div`
   box-sizing: border-box;
@@ -28,7 +29,19 @@ function EditAnswer() {
   const [value, setValue] = useState("**Hello world!!!**");
 
   const handleClick = () => {
-    console.log(value);
+    console.log(value); // post 요청 보내야됨
+
+    axios({
+      method: "post",
+      url: "http://43.200.68.32:8080/answers/",
+      data: {
+        mid: 2,
+        qid: 3,
+        answerContent: value,
+      },
+    }).then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (

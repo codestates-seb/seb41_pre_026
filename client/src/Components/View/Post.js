@@ -102,20 +102,20 @@ text \`background-color\`
 function Post({ data }) {
   return (
     <PostContainer>
-      <p>{data.question.problem}</p>
+      <p>{data.problem}</p>
       <div>
         <pre>
           <code>
-            {data.question.expecting}
+            {data.expecting}
             {markdown}
           </code>
         </pre>
       </div>
       <div className="tags">
         <ul>
-          {data.question.tags.map((tag, idx) => (
-            <li key={idx}>{tag}</li>
-          ))}
+          {data.tags
+            ? data.tags.map((tag, idx) => <li key={idx}>{tag}</li>)
+            : (data.tags = [])}
         </ul>
       </div>
       <div className="question-footer">
@@ -129,8 +129,8 @@ function Post({ data }) {
         </div>
         <div className="profile">
           <img src={profileIMG} alt=""></img>
-          <span>{data.question.mid}</span>
-          <span>asked {data.question.created}</span>
+          <span>{data.mid}</span>
+          <span>asked {data.created}</span>
         </div>
       </div>
     </PostContainer>
