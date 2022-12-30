@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.codestates.pre.server.answer.dto.AnswerResponseDto;
-import com.codestates.pre.server.tag.Tag;
+import com.codestates.pre.server.tag.entity.Tag;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -3,7 +3,7 @@ package com.codestates.pre.server.question.dto;
 import java.time.LocalDateTime;
 
 
-import com.codestates.pre.server.tag.Tag;
+import com.codestates.pre.server.tag.entity.Tag;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
