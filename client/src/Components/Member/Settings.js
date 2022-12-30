@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import EditProfile from "./EditProfile";
-// import DeleteProfile from "./DeleteProfile";
+import DeleteProfile from "./DeleteProfile";
 
 const StyledSettings = styled.div`
   display: flex;
@@ -71,8 +71,7 @@ function Settings() {
           </button>
         </StyledBtnDiv>
       </StyledSideBar>
-      <EditProfile />
-      {/* {selecComp ? <EditProfile /> : <DeleteProfile />} */}
+      {Number(selecBtn) === 1 ? <EditProfile /> : <DeleteProfile />}
     </StyledSettings>
   );
 }

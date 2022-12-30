@@ -114,6 +114,11 @@ function Header({ handleSelect }) {
     handleSelect();
   };
 
+  const handleClick = (e) => {
+    setSelecBtn(2);
+    handleSelect();
+  };
+
   return (
     <StyledHeader>
       <StyledMemberWrapper>
@@ -136,7 +141,7 @@ function Header({ handleSelect }) {
           </div>
         </StyledMemberInfo>
         <div>
-          <StyledWhiteBtn>Edit Profile</StyledWhiteBtn>
+          <StyledWhiteBtn onClick={handleClick}>Edit Profile</StyledWhiteBtn>
         </div>
       </StyledMemberWrapper>
       <StyledBtnDiv select={selecBtn}>

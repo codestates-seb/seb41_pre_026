@@ -93,7 +93,11 @@ function DeleteProfile() {
       <div className="check">
         <StyledCheck onClick={handleClick}>
           <div>
-            <input type="checkbox" checked={isCheck}></input>
+            <input
+              type="checkbox"
+              checked={isCheck}
+              onChange={handleClick}
+            ></input>
           </div>
           <p>
             I have read the information stated above and understand the
