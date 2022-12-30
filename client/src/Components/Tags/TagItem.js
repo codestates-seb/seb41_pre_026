@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
@@ -50,10 +51,16 @@ const StyledDiv = styled.div`
 `;
 
 function TagItem({ tag, search }) {
+  const navigate = useNavigate();
+
   return tag.name.includes(search) ? (
     <StyledDiv>
       <div className="tagWrapper">
-        <div className="nameContainer">
+        <div
+          className="nameContainer"
+          role="presentation"
+          onClick={() => navigate("/question")}
+        >
           <span className="name">{tag.name}</span>
         </div>
         <div className="explainContainer">
