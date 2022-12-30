@@ -3,15 +3,17 @@ import styled from "styled-components";
 import LoginForm from "../Components/Login/LoginForm";
 
 const StyledDiv = styled.div`
-  padding: 0px 0px 120px 0px;
+  padding: 180px 0px 120px 0px;
   display: flex;
   flex-direction: column;
   height: 100%;
   align-items: center;
   justify-content: center;
+
   svg {
     margin: 0px 0px 25px 0px;
   }
+
   p {
     font-size: 13px;
     margin: 35px 0px 0px 0px;

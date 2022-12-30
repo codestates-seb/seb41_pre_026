@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`
   width: 100%;
-  height: 28px;
+  height: 32px;
   border-radius: 3px;
-  border: 1px solid #babfc4;
-  padding: 0px 0px 3px 0px;
+  border: 1px solid red;
+  padding: 0px 0px 1px 5px;
 
   :focus {
     outline: none;
@@ -14,26 +14,39 @@ const StyledInput = styled.input`
     box-shadow: 0px 0px 4px 4px #d3e5f2;
   }
   ::placeholder {
-    font-size: 11px;
-    padding: 0px 0px 0px 5px;
+    font-size: 12px;
     line-height: 2;
   }
 `;
-function LoginInput({ label, place, handleId, handlePw }) {
+function LoginInput({
+  label,
+  place,
+  handleId,
+  handlePw,
+  checkId,
+  checkPw,
+  refs,
+  handleSubmit,
+}) {
   const [isFocused, setIsFocused] = useState(false);
+  const checkType = () => (label === "Email" ? checkId : checkPw);
   return (
     <div>
       <label htmlFor={label}>{label}</label>
       <StyledInput
+        autoComplete="off"
+        className={checkType() ? "margin" : ""}
         isFocused={isFocused}
-        type="text"
+        type={label === "Email" ? "text" : "password"}
         id={label}
         placeholder={place ? place : null}
         onFocus={() => setIsFocused(!isFocused)}
         onBlur={() => setIsFocused(!isFocused)}
         onChange={label === "Email" ? handleId : handlePw}
+        onKeyUp={(e) => (e.keyCode === 13 ? handleSubmit() : null)}
+        ref={label === "Email" ? refs[0] : refs[1]}
       ></StyledInput>
-      <span>{label} is not valid</span>
+      <span className={checkType() ? "none" : ""}>{label} is not valid</span>
     </div>
   );
 }
