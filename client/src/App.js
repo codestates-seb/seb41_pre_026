@@ -6,7 +6,6 @@ import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
 import { useState } from "react";
 import Login from "./Pages/Login";
-// import Home from "./Pages/Home";
 import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
 import Home from "./Pages/Home";
@@ -46,9 +45,10 @@ function App() {
             element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
           />
           <Route
-            path={"/question"}
+            path={"/questions"}
             element={<Questions setOnSide={setOnSide} />}
           />
+          {/* <Route path={"/question"} element={<View />} /> */}
           <Route
             path={"/login"}
             element={<Login handleLogin={handleLogin} />}
