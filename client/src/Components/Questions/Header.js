@@ -74,7 +74,7 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header() {
+function Header({ isRef }) {
   const [selecBtn, setSelecBtn] = useState(1);
   const navigate = useNavigate();
 
@@ -85,7 +85,7 @@ function Header() {
   return (
     <StyledHeader>
       <StyledDiv className="top">
-        <StyledH1>All Questions</StyledH1>
+        <StyledH1 ref={isRef}>All Questions</StyledH1>
         <StyledBlueBtn className="ask" onClick={() => navigate("/ask")}>
           Ask Question
         </StyledBlueBtn>
