@@ -1,7 +1,7 @@
 import Header from "../Components/Questions/Header";
 import Question from "../Components/Questions/Question";
 import styled from "styled-components";
-import useRequest from "../Components/Share/Request";
+import useRequest from "../Components/Share/useRequest";
 import Controler from "../Components/Questions/Controler";
 import { useState } from "react";
 
