@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-// import EditProfile from "./EditProfile";
-import DeleteProfile from "./DeleteProfile";
+import { useState } from "react";
 import EditProfile from "./EditProfile";
+// import DeleteProfile from "./DeleteProfile";
 
 const StyledSettings = styled.div`
   display: flex;
@@ -54,15 +53,6 @@ const StyledBtnDiv = styled.div`
 
 function Settings() {
   const [selecBtn, setSelecBtn] = useState(1);
-  const [selecComp, setSelecComp] = useState(true);
-
-  useEffect(() => {
-    if (selecBtn === 1) {
-      setSelecComp(true);
-    } else if (selecBtn === 2) {
-      setSelecComp(false);
-    }
-  }, [selecBtn]);
 
   const handleBtnColor = (e) => {
     setSelecBtn(e.target.id);
@@ -81,7 +71,8 @@ function Settings() {
           </button>
         </StyledBtnDiv>
       </StyledSideBar>
-      {selecComp ? <EditProfile /> : <DeleteProfile />}
+      <EditProfile />
+      {/* {selecComp ? <EditProfile /> : <DeleteProfile />} */}
     </StyledSettings>
   );
 }
