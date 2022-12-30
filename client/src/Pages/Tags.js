@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Header from "../Components/Tags/Header";
 import TagContainer from "../Components/Tags/TagContainer";
@@ -8,10 +9,16 @@ const StyledTags = styled.section`
 `;
 
 function Tags() {
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (search) => {
+    setSearch(search);
+  };
+
   return (
     <StyledTags>
-      <Header />
-      <TagContainer />
+      <Header search={search} handleSearch={handleSearch} />
+      <TagContainer search={search} />
     </StyledTags>
   );
 }

@@ -9,11 +9,11 @@ const StyledGrid = styled.div`
   grid-gap: 10px;
 `;
 
-function TagContainer() {
+function TagContainer({ search }) {
   return (
     <StyledGrid>
       {data.map((tag) => (
-        <TagItem key={tag.id} tag={tag} />
+        <TagItem key={tag.id} tag={tag} search={search} />
       ))}
     </StyledGrid>
   );

@@ -42,8 +42,8 @@ const StyledDiv = styled.div`
   }
 `;
 
-function TagItem({ tag }) {
-  return (
+function TagItem({ tag, search }) {
+  return tag.name.includes(search) ? (
     <StyledDiv>
       <div className="tagWrapper">
         <div className="nameContainer">
@@ -55,7 +55,7 @@ function TagItem({ tag }) {
         <div className="total">{`${tag.total}\nquestion`}</div>
       </div>
     </StyledDiv>
-  );
+  ) : null;
 }
 
 export default TagItem;

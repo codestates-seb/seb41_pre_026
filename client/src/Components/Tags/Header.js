@@ -109,20 +109,24 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header() {
+function Header({ search, handleSearch }) {
   const [isFocus, setIsFocus] = useState(false);
   const [selecBtn, setSelecBtn] = useState(1);
 
-  const HandleFocus = () => {
+  const handleFocus = () => {
     setIsFocus(true);
   };
 
-  const HandleBlur = () => {
+  const handleBlur = () => {
     setIsFocus(false);
   };
 
   const handleBtnColor = (e) => {
     setSelecBtn(e.target.id);
+  };
+
+  const handleOnChange = (e) => {
+    handleSearch(e.target.value);
   };
 
   return (
@@ -145,8 +149,10 @@ function Header() {
           <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
           <input
             placeholder="Filter by tag name"
-            onFocus={HandleFocus}
-            onBlur={HandleBlur}
+            value={search}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleOnChange}
           />
         </div>
         <StyledBtnDiv select={selecBtn}>
