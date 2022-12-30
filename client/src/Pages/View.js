@@ -6,6 +6,7 @@ import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
 // import { viewData } from "../Assets/viewData";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Container = styled.div`
@@ -121,7 +122,13 @@ function View() {
   const [data, setData] = useState({});
   const [answers, setAnswers] = useState([]);
   const score = data.score;
+
+  const navigate = useNavigate();
   // const location = useLocation();
+
+  const handleClick = () => {
+    navigate("/ask");
+  };
   useEffect(() => {
     axios({
       method: "get",
@@ -140,9 +147,7 @@ function View() {
           <p>{data.title}</p>
         </div>
         <div className="button-container">
-          <StyledBlueBtn>
-            <a href="/">Ask Question</a>
-          </StyledBlueBtn>
+          <StyledBlueBtn onClick={handleClick}>Ask Question</StyledBlueBtn>
         </div>
       </div>
       <div className="question-info">

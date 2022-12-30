@@ -87,30 +87,11 @@ const PostContainer = styled.div`
   }
 `;
 
-const markdown = `
-#heading
-    **bold**
-text
-\`\`\`
-    code block
-\`\`\`
-*incline*
-text \`background-color\`
-> quote
-`;
-
 function Post({ data }) {
   return (
     <PostContainer>
       <p>{data.problem}</p>
-      <div>
-        <pre>
-          <code>
-            {data.expecting}
-            {markdown}
-          </code>
-        </pre>
-      </div>
+      <p>{data.expecting}</p>
       <div className="tags">
         <ul>
           {data.tags
