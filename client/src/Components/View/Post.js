@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import profileIMG from "../../Assets/profileIMG.jpg";
+import Editor from "../Share/Editor";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
@@ -7,14 +8,6 @@ const PostContainer = styled.div`
   font-size: 15px;
   text-align: left;
   overflow-wrap: break-word;
-  p {
-    color: #232629;
-  }
-  pre {
-    background-color: #f6f6f6;
-    border-radius: 3px;
-    padding: 8px;
-  }
   .tags {
     display: flex;
     font-size: 13px;
@@ -90,8 +83,8 @@ const PostContainer = styled.div`
 function Post({ data }) {
   return (
     <PostContainer>
-      <p>{data.problem}</p>
-      <p>{data.expecting}</p>
+      <Editor value={data.problem} />
+      <Editor value={data.expecting} />
       <div className="tags">
         <ul>
           {data.tags
@@ -103,6 +96,9 @@ function Post({ data }) {
         <div className="menu">
           <div>
             <a href="/">Share</a>
+          </div>
+          <div>
+            <a href="/">Edit</a>
           </div>
           <div>
             <a href="/">Follow</a>

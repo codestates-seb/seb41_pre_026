@@ -2,19 +2,16 @@ import MDEditor from "@uiw/react-md-editor";
 import styled from "styled-components";
 
 const Container = styled.div`
-  .preview {
-    display: none;
-  }
+  padding-top: 16px;
 `;
-export default function Editor({ value, setValue }) {
+export default function Editor({ value, setValue, type }) {
   return (
     <Container>
-      <MDEditor value={value} onChange={setValue} preview={"edit"} />
-      <MDEditor.Markdown
-        className="preview"
-        source={value}
-        style={{ whiteSpace: "pre-wrap" }}
-      />
+      {type ? ( // type =1 : editor, 설정 안하면 preview
+        <MDEditor value={value} onChange={setValue} preview={"edit"} />
+      ) : (
+        <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap" }} />
+      )}
     </Container>
   );
 }

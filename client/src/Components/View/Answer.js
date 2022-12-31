@@ -1,10 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Vote from "./Vote";
 import profile2 from "../../Assets/proimg2.jpg";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Editor from "../Share/Editor";
 
 const AnswerContainer = styled.div`
   border-bottom: 1px solid #e3e6e8;
@@ -83,6 +81,7 @@ const AnswerContainer = styled.div`
 `;
 
 function Answer({ answerData, id }) {
+  const [content, setContent] = useState(answerData.answerContent);
   const score = answerData.score;
 
   return (
@@ -92,90 +91,14 @@ function Answer({ answerData, id }) {
           <Vote score={score} />
         </div>
         <div className="answer-content-post">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                return inline ? (
-                  // 강조 (``)
-                  <code
-                    style={{
-                      background: "#f6f6f6",
-                      padding: "2px",
-                      borderRadius: "3px",
-                    }}
-                    {...props}
-                  >
-                    {children}
-                  </code>
-                ) : match ? (
-                  // 코드 (```)
-                  <SyntaxHighlighter
-                    style={nord}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children)
-                      .replace(/\n$/, "")
-                      .replace(/\n&nbsp;\n/g, "")
-                      .replace(/\n&nbsp\n/g, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <SyntaxHighlighter
-                    style={nord}
-                    language="textile"
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                );
-              },
-              // 인용문 (>)
-              blockquote({ node, children, ...props }) {
-                return (
-                  <div
-                    style={{
-                      background: "#f0f0f0",
-                      padding: "1px 15px",
-                      borderRadius: "10px",
-                    }}
-                    {...props}
-                  >
-                    {children}
-                  </div>
-                );
-              },
-              img({ node, ...props }) {
-                return (
-                  <img
-                    style={{ maxWidth: "60vw" }}
-                    src={props.src.replace("../../../../public/", "/")}
-                    alt="MarkdownRenderer__Image"
-                  />
-                );
-              },
-              em({ node, children, ...props }) {
-                return (
-                  <span style={{ fontStyle: "italic" }} {...props}>
-                    {children}
-                  </span>
-                );
-              },
-            }}
-          >
-            {answerData.answerContent
-              .replace(/\n\s\n\s/gi, "\n\n&nbsp;\n\n")
-              .replace(/\*\*/gi, "@$_%!^")
-              .replace(/@\$_%!\^/gi, "**")
-              .replace(/<\/?u>/gi, "*")}
-          </ReactMarkdown>
+          <Editor value={content} setValue={setContent} />
           <div className="answer-footer">
             <div className="menu">
               <div>
                 <a href="/">Share</a>
+              </div>
+              <div>
+                <a href="/">Edit</a>
               </div>
               <div>
                 <a href="/">Follow</a>

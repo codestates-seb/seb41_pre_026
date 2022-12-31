@@ -4,7 +4,6 @@ import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
-// import { viewData } from "../Assets/viewData";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -117,8 +116,6 @@ const AnswerListContainer = styled.div`
 `;
 
 function View() {
-  // const [data, setData] = useState(viewData);
-  // const [answers, setAnswers] = useState(viewData.answers);
   const [data, setData] = useState({});
   const [answers, setAnswers] = useState([]);
   const score = data.score;
@@ -136,7 +133,6 @@ function View() {
     }).then((res) => {
       setData(res.data.data);
       setAnswers(res.data.data.answers);
-      // console.log(answers);
     });
   }, []);
 

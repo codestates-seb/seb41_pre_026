@@ -29,18 +29,17 @@ function EditAnswer() {
   const [value, setValue] = useState("**Hello world!!!**");
 
   const handleClick = () => {
-    console.log(value); // post 요청 보내야됨
-
     axios({
       method: "post",
       url: "http://43.200.68.32:8080/answers/",
       data: {
-        mid: 2,
+        mid: 3,
         qid: 3,
         answerContent: value,
       },
     }).then((res) => {
       console.log(res.data);
+      window.location.replace("/question");
     });
   };
 
@@ -48,7 +47,7 @@ function EditAnswer() {
     <EditorContainer>
       <p>Your Answer</p>
       <div className="editor">
-        <Editor value={value} setValue={setValue} />
+        <Editor value={value} setValue={setValue} type={1} />
       </div>
       <div className="button-container">
         <StyledBlueBtn onClick={handleClick}>Post Your Answer</StyledBlueBtn>
