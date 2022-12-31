@@ -15,7 +15,7 @@ public class QuestionResponseDto {
 	private String title;
 	private String problem;
 	private String expecting;
-	private String vote; // 내역 존재 시 U or D, 내역 없으면 null
+	private int score; // 내역 존재 시 U or D, 내역 없으면 null
 	private String tags;
 	private long answerCount;
 	private int view;
