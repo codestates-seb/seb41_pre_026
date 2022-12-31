@@ -7,8 +7,7 @@ import axios from "axios";
 const EditorContainer = styled.div`
   box-sizing: border-box;
   display: block;
-  margin-top: 20px;
-  padding-top: 10px;
+  padding-top: 20px;
   text-align: left;
   vertical-align: baseline;
   width: 727px;
@@ -19,10 +18,10 @@ const EditorContainer = styled.div`
     margin: 0px;
   }
   .editor {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .button-container {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 `;
 function EditAnswer({ handleChange, qid }) {

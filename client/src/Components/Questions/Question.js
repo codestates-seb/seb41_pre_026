@@ -14,7 +14,7 @@ const SummaryStats = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  width: 17%;
+  width: 15%;
   font-size: 13px;
   color: #6a737c;
   gap: 6px;
@@ -47,7 +47,7 @@ const SummaryContent = styled.div`
   gap: 5px;
   font-size: 12px;
   color: #545b5d;
-  width: 83%;
+  width: 85%;
 
   .content {
     overflow: hidden;

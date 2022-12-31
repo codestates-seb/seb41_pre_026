@@ -5,7 +5,7 @@ import profile2 from "../../Assets/proimg2.jpg";
 import Editor from "../Share/Editor";
 
 const AnswerContainer = styled.div`
-  border-bottom: 1px solid #e3e6e8;
+  border-bottom: 1px solid #dadbdc;
   box-sizing: border-box;
   display: block;
   margin-top: 10px;

@@ -5,15 +5,15 @@ import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import RightSideBar from "../Components/Share/RightSideBar";
 
 const Container = styled.div`
-  max-width: 1100px;
-  width: calc(100% - 164px);
+  max-width: 1036px;
+  width: 1036px;
   background-color: #ffffff;
-  padding: 60px;
+  padding: 20px 0px 40px 40px;
   box-sizing: border-box;
   display: block;
   .question-header {
@@ -45,7 +45,7 @@ const Container = styled.div`
     }
   }
   .question-info {
-    border-bottom: 1px solid #e3e6e8;
+    border-bottom: 1px solid #dadbdc;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -89,10 +89,15 @@ const Container = styled.div`
       vertical-align: top;
     }
   }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const AnswerListContainer = styled.div`
-  border-top: 1px solid #e3e6e8;
+  border-top: 1px solid #dadbdc;
   box-sizing: border-box;
   display: block;
   text-align: left;
@@ -128,7 +133,7 @@ function View() {
       setAnswers(res.data.data.answers);
       console.log(res);
     });
-  }, [change]);
+  }, [change, qid]);
 
   const handleClick = () => {
     navigate("/ask");
@@ -160,26 +165,31 @@ function View() {
           <span className="question-info-data">{data.view} times</span>
         </div>
       </div>
-      <div className="question-content">
-        <div className="question-content-vote">
-          <Vote score={score} />
+      <div className="flex">
+        <div className="contents">
+          <div className="question-content">
+            <div className="question-content-vote">
+              <Vote score={score} />
+            </div>
+            <div className="question-content-post">
+              <Post data={data} />
+            </div>
+          </div>
+          <AnswerListContainer>
+            <div className="answers-header">
+              <span>{data.answerCount}</span>
+              <span>{data.answerCount === 1 ? "Answer" : "Answers"}</span>
+            </div>
+            {answers
+              ? answers.map((answerData, idx) => (
+                  <Answer key={idx} answerData={answerData} />
+                ))
+              : null}
+          </AnswerListContainer>
+          <EditAnswer handleChange={handleChange} qid={qid} />
         </div>
-        <div className="question-content-post">
-          <Post data={data} />
-        </div>
+        <RightSideBar />
       </div>
-      <AnswerListContainer>
-        <div className="answers-header">
-          <span>{data.answerCount}</span>
-          <span>{data.answerCount === 1 ? "Answer" : "Answers"}</span>
-        </div>
-        {answers
-          ? answers.map((answerData, idx) => (
-              <Answer key={idx} answerData={answerData} />
-            ))
-          : null}
-      </AnswerListContainer>
-      <EditAnswer handleChange={handleChange} qid={qid} />
     </Container>
   );
 }
