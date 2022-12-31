@@ -38,6 +38,7 @@ public class Question {
 
 	private LocalDateTime modifiedAt = LocalDateTime.now();
 
+	@Column
 	private int score;
 
 	private String tags;
