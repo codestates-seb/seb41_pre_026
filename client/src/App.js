@@ -10,6 +10,7 @@ import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
 import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
+import Member from "./Pages/Member";
 import View from "./Pages/View";
 
 const StyledFrame = styled.div`
@@ -58,6 +59,7 @@ function App() {
           <Route path={"/sign"} element={<Sign />} />
           <Route path={"/ask"} element={<Ask />} />
           <Route path={"/tags"} element={<Tags />} />
+          <Route path={"/member"} element={<Member />} />
         </Routes>
         {location !== "/question" ? <RightSideBar isLogin={isLogin} /> : null}
       </StyledFrame>

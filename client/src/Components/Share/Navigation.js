@@ -272,7 +272,7 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
           <ul>
             {isLogin ? (
               <li>
-                <Link to={"/"}>Products</Link>
+                <Link to={"/member"}>Products</Link>
               </li>
             ) : (
               <>
@@ -280,7 +280,7 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
                   <a href="https://stackoverflow.co/">About</a>
                 </li>
                 <li>
-                  <Link to={"/"}>Products</Link>
+                  <Link to={"/member"}>Products</Link>
                 </li>
                 <li>
                   <a href="https://stackoverflow.co/teams/">For Teams</a>
