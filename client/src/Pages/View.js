@@ -7,17 +7,12 @@ import EditAnswer from "../Components/View/EditAnswer";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 1100px;
   width: calc(100% - 164px);
   background-color: #ffffff;
-  border-radius: 0;
-  border: 1px solid #d6d9dc;
-  border-top-width: 0;
-  border-bottom-width: 0;
-  border-left-width: 1px;
-  border-right-width: 0;
   padding: 60px;
   box-sizing: border-box;
   display: block;
@@ -61,7 +56,6 @@ const Container = styled.div`
     vertical-align: baseline;
     align-items: flex-end;
     div {
-      box-sizing: border-box;
       display: block;
       line-height: 17px;
       margin-bottom: 8px;
@@ -82,12 +76,13 @@ const Container = styled.div`
     grid-template-columns: 52px 675px;
     text-align: left;
     vertical-align: baseline;
+
     .question-content-vote {
       display: block;
       margin-top: 8px;
       padding-right: 16px;
-      vertical-align: top;
     }
+
     .question-content-post {
       display: block;
       padding: 0px 16px;
@@ -118,23 +113,28 @@ const AnswerListContainer = styled.div`
 function View() {
   const [data, setData] = useState({});
   const [answers, setAnswers] = useState([]);
+  const [change, setChange] = useState(false);
   const score = data.score;
 
   const navigate = useNavigate();
-  // const location = useLocation();
+  const qid = useLocation().state.id;
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://43.200.68.32:8080/questions/${qid}?mid=1`,
+    }).then((res) => {
+      setData(res.data.data);
+      setAnswers(res.data.data.answers);
+      console.log(res);
+    });
+  }, [change]);
 
   const handleClick = () => {
     navigate("/ask");
   };
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://43.200.68.32:8080/questions/3?mid=1",
-    }).then((res) => {
-      setData(res.data.data);
-      setAnswers(res.data.data.answers);
-    });
-  }, []);
+
+  const handleChange = () => setChange(!change);
 
   return (
     <Container>
@@ -179,7 +179,7 @@ function View() {
             ))
           : null}
       </AnswerListContainer>
-      <EditAnswer />
+      <EditAnswer handleChange={handleChange} qid={qid} />
     </Container>
   );
 }

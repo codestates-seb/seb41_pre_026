@@ -25,7 +25,7 @@ const EditorContainer = styled.div`
     margin-top: 10px;
   }
 `;
-function EditAnswer() {
+function EditAnswer({ handleChange, qid }) {
   const [value, setValue] = useState("**Hello world!!!**");
 
   const handleClick = () => {
@@ -34,12 +34,12 @@ function EditAnswer() {
       url: "http://43.200.68.32:8080/answers/",
       data: {
         mid: 3,
-        qid: 3,
+        qid,
         answerContent: value,
       },
     }).then((res) => {
       console.log(res.data);
-      window.location.replace("/question");
+      handleChange();
     });
   };
 

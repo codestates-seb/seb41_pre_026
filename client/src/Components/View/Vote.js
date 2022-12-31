@@ -2,32 +2,24 @@ import styled from "styled-components";
 
 const VoteContainer = styled.div`
   width: 40px;
-  align-items: strech;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
-  vertical-align: baseline;
+  align-items: center;
+
   button {
-    align-items: flex-start;
-    appearance: auto;
     background-color: #ffffff;
-    border-bottom-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-top-width: 0px;
+    border: 0px;
     display: block;
     margin: 2px;
   }
+
   div {
-    align-items: center;
     color: #6a737c;
     font-size: 21px;
     text-align: center;
-    padding-left: 12px;
-    padding-bottom: 4px;
   }
+
   .arrow-up {
     aria-hidden: true;
     width: 36px;
