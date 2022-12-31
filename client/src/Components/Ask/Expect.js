@@ -25,7 +25,7 @@ const StyledTitleContainer = styled.div`
 `;
 
 const StyledWrapper = styled.div`
-  width: 790px;
+  width: 850px;
   background-color: #ffffff;
   margin: 0px 0px 6px 0px;
   padding: 24px;
@@ -69,32 +69,32 @@ const StyledWrapper = styled.div`
 `;
 
 function Expect({
-  focus,
-  handleFocusChange,
+  isFocus,
+  handleIsFocus,
   expect,
-  handleExpectChange,
+  handleExpect,
   isWritten,
-  handleIsWrittenChange,
+  handleIsWritten,
   compRef,
 }) {
-  const handleFocus = () => {
-    handleFocusChange(2);
+  const handleOnFocus = () => {
+    handleIsFocus(2);
   };
 
   const handleOnChange = (event) => {
-    handleExpectChange(event.target.value);
-    handleIsWrittenChange("Expect");
+    handleExpect(event.target.value);
+    handleIsWritten("Expect");
   };
 
   const handleBtnClick = () => {
-    handleFocusChange(3);
+    handleIsFocus(3);
   };
 
   return (
     <StyledTitleContainer>
       <div
         className={
-          focus !== 2 && !isWritten.find((el) => el === "Expect")
+          isFocus !== 2 && !isWritten.find((el) => el === "Expect")
             ? "disabledDiv"
             : ""
         }
@@ -109,21 +109,21 @@ function Expect({
           </label>
           <textarea
             ref={(el) => (compRef.current[2] = el)}
-            onFocus={handleFocus}
+            onFocus={handleOnFocus}
             onChange={handleOnChange}
             value={expect}
             disabled={
-              focus !== 2 && !isWritten.find((el) => el === "Expect")
+              isFocus !== 2 && !isWritten.find((el) => el === "Expect")
                 ? "disabled"
                 : ""
             }
           ></textarea>
-          {expect.length > 20 && focus === 2 ? (
+          {expect.length > 20 && isFocus === 2 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
         </StyledWrapper>
       </div>
-      <div className={focus === 2 ? "visible" : "invisible"}>
+      <div className={isFocus === 2 ? "visible" : "invisible"}>
         <Help
           title={"Expand on the problem"}
           content={

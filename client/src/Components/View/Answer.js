@@ -5,7 +5,7 @@ import profile2 from "../../Assets/proimg2.jpg";
 import Editor from "../Share/Editor";
 
 const AnswerContainer = styled.div`
-  border-bottom: 1px solid #e3e6e8;
+  border-bottom: 1px solid #dadbdc;
   box-sizing: border-box;
   display: block;
   margin-top: 10px;
@@ -83,12 +83,15 @@ const AnswerContainer = styled.div`
 function Answer({ answerData, id }) {
   const [content, setContent] = useState(answerData.answerContent);
   const score = answerData.score;
+  const vote = answerData.vote;
+  const subject = "answers";
+  const aid = answerData.id;
 
   return (
     <AnswerContainer>
       <div className="answer-content">
         <div className="answer-content-vote">
-          <Vote score={score} />
+          <Vote score={score} vote={vote} subject={subject} aid={aid} />
         </div>
         <div className="answer-content-post">
           <Editor value={content} setValue={setContent} />

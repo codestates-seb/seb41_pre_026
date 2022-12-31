@@ -31,8 +31,9 @@ function LoginInput({
   const [isFocused, setIsFocused] = useState(false);
   const checkType = () => (label === "Email" ? checkId : checkPw);
   return (
-    <div>
+    <form>
       <label htmlFor={label}>{label}</label>
+      <input hidden="hidden" />
       <StyledInput
         autoComplete="off"
         className={checkType() ? "margin" : ""}
@@ -47,7 +48,7 @@ function LoginInput({
         ref={label === "Email" ? refs[0] : refs[1]}
       ></StyledInput>
       <span className={checkType() ? "none" : ""}>{label} is not valid</span>
-    </div>
+    </form>
   );
 }
 

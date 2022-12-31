@@ -4,7 +4,7 @@ import { StyledBlueBtn } from "../Share/Button";
 import { useNavigate } from "react-router-dom";
 
 const StyledHeader = styled.header`
-  width: 100%
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px 20px 15px 20px;

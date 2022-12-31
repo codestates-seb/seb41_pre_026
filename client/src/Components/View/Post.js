@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import profileIMG from "../../Assets/profileIMG.jpg";
 import Editor from "../Share/Editor";
@@ -86,22 +87,22 @@ function Post({ data }) {
       <Editor value={data.problem} />
       <Editor value={data.expecting} />
       <div className="tags">
-        <ul>
+        {/* <ul>
           {data.tags
             ? data.tags.map((tag, idx) => <li key={idx}>{tag}</li>)
             : (data.tags = [])}
-        </ul>
+        </ul> */}
       </div>
       <div className="question-footer">
         <div className="menu">
           <div>
-            <a href="/">Share</a>
+            <Link to="/question">Share</Link>
           </div>
           <div>
-            <a href="/">Edit</a>
+            <Link to="/question">Edit</Link>
           </div>
           <div>
-            <a href="/">Follow</a>
+            <Link to="/question">Follow</Link>
           </div>
         </div>
         <div className="profile">

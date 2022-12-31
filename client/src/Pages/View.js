@@ -5,20 +5,15 @@ import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import RightSideBar from "../Components/Share/RightSideBar";
 
 const Container = styled.div`
-  max-width: 1100px;
-  width: calc(100% - 164px);
+  max-width: 1036px;
+  width: 1036px;
   background-color: #ffffff;
-  border-radius: 0;
-  border: 1px solid #d6d9dc;
-  border-top-width: 0;
-  border-bottom-width: 0;
-  border-left-width: 1px;
-  border-right-width: 0;
-  padding: 60px;
+  padding: 20px 0px 40px 40px;
   box-sizing: border-box;
   display: block;
   .question-header {
@@ -50,7 +45,7 @@ const Container = styled.div`
     }
   }
   .question-info {
-    border-bottom: 1px solid #e3e6e8;
+    border-bottom: 1px solid #dadbdc;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -61,7 +56,6 @@ const Container = styled.div`
     vertical-align: baseline;
     align-items: flex-end;
     div {
-      box-sizing: border-box;
       display: block;
       line-height: 17px;
       margin-bottom: 8px;
@@ -82,22 +76,28 @@ const Container = styled.div`
     grid-template-columns: 52px 675px;
     text-align: left;
     vertical-align: baseline;
+
     .question-content-vote {
       display: block;
       margin-top: 8px;
       padding-right: 16px;
-      vertical-align: top;
     }
+
     .question-content-post {
       display: block;
       padding: 0px 16px;
       vertical-align: top;
     }
   }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 const AnswerListContainer = styled.div`
-  border-top: 1px solid #e3e6e8;
+  border-top: 1px solid #dadbdc;
   box-sizing: border-box;
   display: block;
   text-align: left;
@@ -118,23 +118,30 @@ const AnswerListContainer = styled.div`
 function View() {
   const [data, setData] = useState({});
   const [answers, setAnswers] = useState([]);
+  const [change, setChange] = useState(false);
   const score = data.score;
+  const vote = data.vote;
+  const subject = "questions";
 
   const navigate = useNavigate();
-  // const location = useLocation();
+  const qid = useLocation().state.id;
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://43.200.68.32:8080/questions/${qid}?mid=1`,
+    }).then((res) => {
+      setData(res.data.data);
+      setAnswers(res.data.data.answers);
+      console.log(res);
+    });
+  }, [change, qid]);
 
   const handleClick = () => {
     navigate("/ask");
   };
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://43.200.68.32:8080/questions/3?mid=1",
-    }).then((res) => {
-      setData(res.data.data);
-      setAnswers(res.data.data.answers);
-    });
-  }, []);
+
+  const handleChange = () => setChange(!change);
 
   return (
     <Container>
@@ -160,26 +167,31 @@ function View() {
           <span className="question-info-data">{data.view} times</span>
         </div>
       </div>
-      <div className="question-content">
-        <div className="question-content-vote">
-          <Vote score={score} />
+      <div className="flex">
+        <div className="contents">
+          <div className="question-content">
+            <div className="question-content-vote">
+              <Vote score={score} vote={vote} subject={subject} qid={qid} />
+            </div>
+            <div className="question-content-post">
+              <Post data={data} />
+            </div>
+          </div>
+          <AnswerListContainer>
+            <div className="answers-header">
+              <span>{data.answerCount}</span>
+              <span>{data.answerCount === 1 ? "Answer" : "Answers"}</span>
+            </div>
+            {answers
+              ? answers.map((answerData, idx) => (
+                  <Answer key={idx} answerData={answerData} />
+                ))
+              : null}
+          </AnswerListContainer>
+          <EditAnswer handleChange={handleChange} qid={qid} />
         </div>
-        <div className="question-content-post">
-          <Post data={data} />
-        </div>
+        <RightSideBar />
       </div>
-      <AnswerListContainer>
-        <div className="answers-header">
-          <span>{data.answerCount}</span>
-          <span>{data.answerCount === 1 ? "Answer" : "Answers"}</span>
-        </div>
-        {answers
-          ? answers.map((answerData, idx) => (
-              <Answer key={idx} answerData={answerData} />
-            ))
-          : null}
-      </AnswerListContainer>
-      <EditAnswer />
     </Container>
   );
 }

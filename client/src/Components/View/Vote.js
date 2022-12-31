@@ -1,35 +1,27 @@
-import { useState } from "react";
-// import axios from "axios";
+// import { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const VoteContainer = styled.div`
   width: 40px;
-  align-items: strech;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: left;
-  vertical-align: baseline;
+  align-items: center;
+
   button {
-    align-items: flex-start;
-    appearance: auto;
     background-color: #ffffff;
-    border-bottom-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-top-width: 0px;
+    border: 0px;
     display: block;
     margin: 2px;
   }
+
   div {
-    align-items: center;
     color: #6a737c;
     font-size: 21px;
     text-align: center;
-    padding-left: 12px;
-    padding-bottom: 4px;
   }
+
   .arrow-up {
     aria-hidden: true;
     width: 36px;
@@ -56,37 +48,43 @@ const VoteContainer = styled.div`
   }
 `;
 
-function Vote({ score }) {
-  const [isUpClicked, setIsUpClicked] = useState(null);
-  const [isDownClicked, setIsDownClicked] = useState(null);
+function Vote({ score, vote, subject, qid, aid }) {
+  // const [isUpClicked, setIsUpClicked] = useState(vote);
+  // const [isDownClicked, setIsDownClicked] = useState(null);
+  // let method = "";
+
+  // if (vote === null) {
+  //   method = "post";
+  // } else {
+  //   method = "patch";
+  // }
 
   const handleClickUp = () => {
-    isUpClicked ? setIsUpClicked("") : setIsUpClicked("u");
+    // isUpClicked === "u" ? setIsUpClicked(null) : setIsUpClicked("u");
 
-    // axios({
-    //   method: "post",
-    //   url: `http://43.200.68.32:8080/votes/${}/3/upVote`, //question or answer
-    //   data: {
-    //     mid: 3,
-    //     vote: "u",
-    //   },
-    // }).then((res) => {
-    //   console.log(res.data);
-    // });
+    axios({
+      method: `post`, // `${method}`
+      url: `http://43.200.68.32:8080/${subject}/upVote/${
+        subject === "questions" ? qid : aid
+      }`,
+    }).then((res) => {
+      console.log(res.data);
+      window.location.replace(`/question/${qid}`);
+    });
   };
-  const handleClickDown = () => {
-    isDownClicked ? setIsDownClicked("") : setIsDownClicked("d");
 
-    // axios({
-    //   method: "post",
-    //   url: `http://43.200.68.32:8080/votes/${}/3/downVote`, //question or answer
-    //   data: {
-    //     mid: 3,
-    //     vote: "d",
-    //   },
-    // }).then((res) => {
-    //   console.log(res.data);
-    // });
+  const handleClickDown = () => {
+    // isDownClicked === "d" ? setIsDownClicked(null) : setIsDownClicked("d");
+
+    axios({
+      method: "patch", //`${method}`
+      url: `http://43.200.68.32:8080/${subject}/downVote/${
+        subject === "questions" ? qid : aid
+      }`,
+    }).then((res) => {
+      console.log(res.data);
+      window.location.replace(`/question/${qid}`);
+    });
   };
 
   return (

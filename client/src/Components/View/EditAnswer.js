@@ -7,8 +7,7 @@ import axios from "axios";
 const EditorContainer = styled.div`
   box-sizing: border-box;
   display: block;
-  margin-top: 20px;
-  padding-top: 10px;
+  padding-top: 20px;
   text-align: left;
   vertical-align: baseline;
   width: 727px;
@@ -19,13 +18,13 @@ const EditorContainer = styled.div`
     margin: 0px;
   }
   .editor {
-    margin-top: 20px;
-  }
-  .button-container {
     margin-top: 10px;
   }
+  .button-container {
+    margin-top: 20px;
+  }
 `;
-function EditAnswer() {
+function EditAnswer({ handleChange, qid }) {
   const [value, setValue] = useState("**Hello world!!!**");
 
   const handleClick = () => {
@@ -34,12 +33,12 @@ function EditAnswer() {
       url: "http://43.200.68.32:8080/answers/",
       data: {
         mid: 3,
-        qid: 3,
+        qid,
         answerContent: value,
       },
     }).then((res) => {
       console.log(res.data);
-      window.location.replace("/question");
+      handleChange();
     });
   };
 
