@@ -109,7 +109,7 @@ public class AnswerController {
     }
 
 
-        @PatchMapping("/downVote/{answer-id}")
+        @PostMapping("/downVote/{answer-id}")
     public ResponseEntity downVoteAnswer(@PathVariable("answer-id") long answerId) {
 
         Answer votedAnswer = answerService.downVote(answerId);

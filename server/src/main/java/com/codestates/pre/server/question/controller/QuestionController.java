@@ -114,7 +114,7 @@ public class QuestionController {
 
 
 	// 질문 비추천
-	@PatchMapping("/downVote/{question-Id}")
+	@PostMapping("/downVote/{question-Id}")
 	public ResponseEntity downVoteAnswer(@PathVariable("question-Id") long questionId) {
 
 		Question votedQuestionDown = questionService.downVote(questionId);
