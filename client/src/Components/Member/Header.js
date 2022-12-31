@@ -31,8 +31,8 @@ const StyledMemberInfo = styled.div`
   align-items: center;
 
   img {
-    width: 130px;
-    height: 130px;
+    width: 145px;
+    height: 145px;
     margin: 8px 8px 8px 8px;
     border-radius: 3px;
   }
@@ -81,7 +81,7 @@ const StyledMemberInfo = styled.div`
 const StyledBtnDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0px 0px 0px 10px;
+  margin: 0px 0px 0px 9px;
 
   button {
     height: 29px;

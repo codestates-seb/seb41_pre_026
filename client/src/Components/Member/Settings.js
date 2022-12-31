@@ -45,6 +45,10 @@ const StyledBtnDiv = styled.div`
     background-color: #e3e6e8;
   }
 
+  button:nth-child(1) {
+    margin: 0px 0px 3px 0px;
+  }
+
   button:nth-of-type(${({ select }) => select}) {
     color: #ffffff;
     background-color: #f48225;
