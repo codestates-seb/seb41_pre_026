@@ -13,15 +13,24 @@ const StyledMember = styled.section`
 
 function Member() {
   const [selected, setSelected] = useState("1");
+  const [toEdit, setToEdit] = useState(false);
 
   const handleSelect = (select) => {
     setSelected(select);
   };
 
+  const handleToEdit = (gotoEdit) => {
+    setToEdit(gotoEdit);
+  };
+
   return (
     <StyledMember>
-      <Header handleSelect={handleSelect} />
-      {selected === "1" ? <Profile /> : <Settings />}
+      <Header handleSelect={handleSelect} handleToEdit={handleToEdit} />
+      {selected === "1" ? (
+        <Profile />
+      ) : (
+        <Settings toEdit={toEdit} handleToEdit={handleToEdit} />
+      )}
     </StyledMember>
   );
 }

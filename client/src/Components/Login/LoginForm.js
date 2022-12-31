@@ -84,7 +84,7 @@ function LoginForm({ handleLogin }) {
 
     axios
       .post(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/",
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/member",
         {
           username: "mino2@gmail.com",
           password: "aaaa1111!",

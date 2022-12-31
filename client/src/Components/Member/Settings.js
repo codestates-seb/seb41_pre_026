@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditProfile from "./EditProfile";
 import DeleteProfile from "./DeleteProfile";
 
@@ -55,11 +55,20 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Settings() {
+function Settings({ toEdit, handleToEdit }) {
   const [selecBtn, setSelecBtn] = useState(1);
 
-  const handleBtnColor = (e) => {
+  useEffect(() => {
+    toEdit ? setSelecBtn("1") : setSelecBtn(selecBtn);
+  }, [toEdit]);
+
+  const handleEdit = (e) => {
     setSelecBtn(e.target.id);
+  };
+
+  const handleDelete = (e) => {
+    setSelecBtn(e.target.id);
+    handleToEdit(false);
   };
 
   return (
@@ -67,15 +76,15 @@ function Settings() {
       <StyledSideBar>
         <p>Personal Information</p>
         <StyledBtnDiv select={selecBtn}>
-          <button id="1" onClick={handleBtnColor}>
+          <button id="1" onClick={handleEdit}>
             Edit profile
           </button>
-          <button id="2" onClick={handleBtnColor}>
+          <button id="2" onClick={handleDelete}>
             Delete profile
           </button>
         </StyledBtnDiv>
       </StyledSideBar>
-      {Number(selecBtn) === 1 ? <EditProfile /> : <DeleteProfile />}
+      {Number(selecBtn) === 1 || toEdit ? <EditProfile /> : <DeleteProfile />}
     </StyledSettings>
   );
 }

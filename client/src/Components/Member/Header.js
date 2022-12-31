@@ -107,18 +107,19 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header({ handleSelect }) {
+function Header({ handleSelect, handleToEdit }) {
   const [selecBtn, setSelecBtn] = useState(1);
   const [memberInfo, setMemberInfo] = useState([]);
 
-  const handleBtnColor = (e) => {
+  const handleBtn = (e) => {
     setSelecBtn(e.target.id);
     handleSelect(e.target.id);
   };
 
-  const handleClick = (e) => {
+  const handleEditBtn = (e) => {
     setSelecBtn("2");
-    handleSelect(selecBtn);
+    handleSelect("2");
+    handleToEdit(true);
   };
 
   axios
@@ -154,14 +155,14 @@ function Header({ handleSelect }) {
           </div>
         </StyledMemberInfo>
         <div>
-          <StyledWhiteBtn onClick={handleClick}>Edit Profile</StyledWhiteBtn>
+          <StyledWhiteBtn onClick={handleEditBtn}>Edit Profile</StyledWhiteBtn>
         </div>
       </StyledMemberWrapper>
       <StyledBtnDiv select={selecBtn}>
-        <button id="1" onClick={handleBtnColor}>
+        <button id="1" onClick={handleBtn}>
           Profile
         </button>
-        <button id="2" onClick={handleBtnColor}>
+        <button id="2" onClick={handleBtn}>
           Settings
         </button>
       </StyledBtnDiv>
