@@ -1,3 +1,5 @@
+// import { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const VoteContainer = styled.div`
@@ -46,10 +48,48 @@ const VoteContainer = styled.div`
   }
 `;
 
-function Vote({ score }) {
+function Vote({ score, vote, subject, qid, aid }) {
+  // const [isUpClicked, setIsUpClicked] = useState(vote);
+  // const [isDownClicked, setIsDownClicked] = useState(null);
+  // let method = "";
+
+  // if (vote === null) {
+  //   method = "post";
+  // } else {
+  //   method = "patch";
+  // }
+
+  const handleClickUp = () => {
+    // isUpClicked === "u" ? setIsUpClicked(null) : setIsUpClicked("u");
+
+    axios({
+      method: `post`, // `${method}`
+      url: `http://43.200.68.32:8080/${subject}/upVote/${
+        subject === "questions" ? qid : aid
+      }`,
+    }).then((res) => {
+      console.log(res.data);
+      window.location.replace(`/question/${qid}`);
+    });
+  };
+
+  const handleClickDown = () => {
+    // isDownClicked === "d" ? setIsDownClicked(null) : setIsDownClicked("d");
+
+    axios({
+      method: "patch", //`${method}`
+      url: `http://43.200.68.32:8080/${subject}/downVote/${
+        subject === "questions" ? qid : aid
+      }`,
+    }).then((res) => {
+      console.log(res.data);
+      window.location.replace(`/question/${qid}`);
+    });
+  };
+
   return (
     <VoteContainer>
-      <button>
+      <button onClick={handleClickUp}>
         <svg className="arrow-up">
           <path />
         </svg>
@@ -57,7 +97,7 @@ function Vote({ score }) {
       <div>
         <span>{score}</span>
       </div>
-      <button>
+      <button onClick={handleClickDown}>
         <svg className="arrow-down">
           <path />
         </svg>

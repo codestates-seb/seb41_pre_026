@@ -120,6 +120,8 @@ function View() {
   const [answers, setAnswers] = useState([]);
   const [change, setChange] = useState(false);
   const score = data.score;
+  const vote = data.vote;
+  const subject = "questions";
 
   const navigate = useNavigate();
   const qid = useLocation().state.id;
@@ -169,7 +171,7 @@ function View() {
         <div className="contents">
           <div className="question-content">
             <div className="question-content-vote">
-              <Vote score={score} />
+              <Vote score={score} vote={vote} subject={subject} qid={qid} />
             </div>
             <div className="question-content-post">
               <Post data={data} />

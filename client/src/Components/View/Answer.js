@@ -83,12 +83,15 @@ const AnswerContainer = styled.div`
 function Answer({ answerData, id }) {
   const [content, setContent] = useState(answerData.answerContent);
   const score = answerData.score;
+  const vote = answerData.vote;
+  const subject = "answers";
+  const aid = answerData.id;
 
   return (
     <AnswerContainer>
       <div className="answer-content">
         <div className="answer-content-vote">
-          <Vote score={score} />
+          <Vote score={score} vote={vote} subject={subject} aid={aid} />
         </div>
         <div className="answer-content-post">
           <Editor value={content} setValue={setContent} />
