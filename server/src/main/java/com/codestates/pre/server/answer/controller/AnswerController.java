@@ -39,11 +39,11 @@ public class AnswerController {
 
     // question의 id에 맞는 답변을 등록
     @PostMapping
-    public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto ) {
+    public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto) {
 
         Answer answer = answerService.createAnswer(mapper.answerPostDtoToAnswer(answerPostDto));
 
-       return new ResponseEntity<>(
+        return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)), HttpStatus.CREATED);
     }
 
@@ -54,16 +54,16 @@ public class AnswerController {
 
         // 답변을 작성한 사람이 맞는지 검증하는 로직 필요
 
-        Answer answer =  answerService.updateAnswer (mapper.answerPatchDtoToAnswer(patchDto));
+        Answer answer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(patchDto));
 
-        return new ResponseEntity<> (
+        return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)),
                 HttpStatus.OK); // 응답 제공
     }
 
     // 답변 조회
     @GetMapping("/{answer-id}")
-    public ResponseEntity getAnswer(@PathVariable("answer-id") @Positive Long answerId) {
+    public ResponseEntity getAnswer(@PathVariable("answer-id") @Positive long answerId) {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)), HttpStatus.OK);
@@ -88,16 +88,20 @@ public class AnswerController {
 
         // 로그인이 되어있는지 검증
         // 답변 작성자가 맞는지 검증
-         answerService.deleteAnswer(answerId);
+        answerService.deleteAnswer(answerId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // 추천기능
-    @PostMapping("/{answer-Id}/upVote")
-    public ResponseEntity upVote(@PathVariable("answer-Id") long answerId) {
+    @PostMapping("/upVote/{answer-Id}")
+    public ResponseEntity upVoteAnswer(@PathVariable("answer-Id") long answerId) {
 
-        // 로그인이 되어 있는지 검증 필요
+        // TO DO
+        // 1. 회원만 추천할 수 있어야 한다. > db에서 이메일 검증
+        // 2. 평판의 점수가 15 이상인 사람만 가능해야 할 것
+        // 3. 이미 추천한 사람일 경우 다시 추천 불가 > 예외 던지기
+
         Answer votedAnswerUp = answerService.upVote(answerId);
         AnswerResponseDto response = mapper.answerToAnswerResponseDto(votedAnswerUp);
 
@@ -105,18 +109,14 @@ public class AnswerController {
     }
 
 
-    // 비추천기능
-    @PostMapping("/{answer-Id}/downVote")
-    public ResponseEntity downVote(@PathVariable("answerId") long answerId) {
+        @PatchMapping("/downVote/{answer-id}")
+    public ResponseEntity downVoteAnswer(@PathVariable("answer-id") long answerId) {
 
-        Answer votedAnswerDown = answerService.downVote(answerId);
+        Answer votedAnswer = answerService.downVote(answerId);
 
-        AnswerResponseDto response = mapper.answerToAnswerResponseDto(votedAnswerDown);
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.answerToAnswerResponseDto(votedAnswer)),
+                HttpStatus.OK);
 
     }
-
-
-
 }
