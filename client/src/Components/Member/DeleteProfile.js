@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 
@@ -61,6 +62,22 @@ function DeleteProfile() {
     setIsCheck(!isCheck);
   };
 
+  const handleDelete = () => {
+    axios
+      .delete(
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/15",
+        {
+          memberId: 15,
+        }
+      )
+      .then(function (response) {
+        // console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <StyledDelete>
       <div className="delete">Delete Profile</div>
@@ -105,7 +122,10 @@ function DeleteProfile() {
             the deletion of my profile.
           </p>
         </StyledCheck>
-        <StyledBlueBtn className={isCheck ? "checked" : ""}>
+        <StyledBlueBtn
+          className={isCheck ? "checked" : ""}
+          onClick={handleDelete}
+        >
           Delete profile
         </StyledBlueBtn>
       </div>

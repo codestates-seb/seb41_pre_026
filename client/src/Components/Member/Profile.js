@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useState } from "react";
 
 const StyledProfile = styled.div`
   display: flex;
@@ -64,17 +66,30 @@ const StyledPosts = styled.div`
 `;
 
 function Profile() {
+  const [memberInfo, setMemberInfo] = useState([]);
+
+  axios
+    .get(
+      "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+    )
+    .then(function (response) {
+      setMemberInfo(response.data.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return (
     <StyledProfile>
       <StyledStatsWrapper>
         <p>Stats</p>
         <StyledStats>
           <StyledCard>
-            <p>0</p>
+            <p>{memberInfo.answerCount}</p>
             <p>answers</p>
           </StyledCard>
           <StyledCard>
-            <p>0</p>
+            <p>{memberInfo.questionCount}</p>
             <p>questions</p>
           </StyledCard>
         </StyledStats>

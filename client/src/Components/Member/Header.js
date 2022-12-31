@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 import { StyledWhiteBtn } from "../Share/Button";
 import profile from "../../Assets/profile.jpg";
 import cake from "../../Assets/cake.png";
@@ -108,16 +109,28 @@ const StyledBtnDiv = styled.div`
 
 function Header({ handleSelect }) {
   const [selecBtn, setSelecBtn] = useState(1);
+  const [memberInfo, setMemberInfo] = useState([]);
 
   const handleBtnColor = (e) => {
     setSelecBtn(e.target.id);
-    handleSelect();
+    handleSelect(e.target.id);
   };
 
   const handleClick = (e) => {
-    setSelecBtn(2);
-    handleSelect();
+    setSelecBtn("2");
+    handleSelect(selecBtn);
   };
+
+  axios
+    .get(
+      "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+    )
+    .then(function (response) {
+      setMemberInfo(response.data.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   return (
     <StyledHeader>
@@ -126,7 +139,7 @@ function Header({ handleSelect }) {
           <img src={profile} alt="profile" />
           <div className="info">
             <div className="name">
-              <span>name</span>
+              <span>{memberInfo.name}</span>
             </div>
             <ul>
               <li>

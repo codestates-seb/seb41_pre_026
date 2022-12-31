@@ -12,16 +12,16 @@ const StyledMember = styled.section`
 `;
 
 function Member() {
-  const [selected, setSelected] = useState(true);
+  const [selected, setSelected] = useState("1");
 
-  const handleSelect = () => {
-    setSelected(!selected);
+  const handleSelect = (select) => {
+    setSelected(select);
   };
 
   return (
     <StyledMember>
       <Header handleSelect={handleSelect} />
-      {selected ? <Profile /> : <Settings />}
+      {selected === "1" ? <Profile /> : <Settings />}
     </StyledMember>
   );
 }
