@@ -63,7 +63,7 @@ public class AnswerService {
 	}
 
 	// 답변 조회
-	public Answer findAnswer(Long answerId) {
+	public Answer findAnswer(long answerId) {
 		Answer findAnswer = findVerifiedAnswer(answerId);
 		answerRepository.save(findAnswer);
 
@@ -75,6 +75,7 @@ public class AnswerService {
 		return answerRepository.findAll(PageRequest.of(page, size,
 			Sort.by("answerId").descending()));
 	}
+
 	// 답변 삭제
 	public void deleteAnswer(long answerId) {
 		Answer findAnswer = findVerifiedAnswer(answerId);
@@ -91,7 +92,7 @@ public class AnswerService {
 
 		return updateAnswer;
 	}
-
+//
 	// 비추천 기능
 	public Answer downVote(long answerId) {
 		Answer findAnswer = findVerifiedAnswer(answerId);
@@ -101,7 +102,17 @@ public class AnswerService {
 		return updateAnswer;
 	}
 
-	public Answer findVerifiedAnswer(Long answerId) {
+	// 답변 vote 기능 : 원하는 값으로 수정할 수 있음
+//	public Answer downVote (long answerId,int score) {
+//		Answer findAnswer = findVerifiedAnswer(answerId);
+//		findAnswer.setScore(score);
+//		//findAnswer.setScore(findAnswer.getScore() + 1);
+//		Answer updateAnswer = answerRepository.save(findAnswer);
+//
+//		return updateAnswer;
+
+
+	public Answer findVerifiedAnswer(long answerId) {
 		Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
 		// 답변이 DB에 존재하는지 검증
 		// orElseThrow : 가져온 값이 null이면 예외
@@ -110,10 +121,5 @@ public class AnswerService {
 		return findAnswer;
 
 	}
-
-	// finById 메서드 적용(?)이 안돼서 그냥 만들었음
-	//    public Answer findById(Long id) {
-	//        return this.answerRepository.findById(id).get();
-	//    }
 
 }
