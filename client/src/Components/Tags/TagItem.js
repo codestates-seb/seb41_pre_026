@@ -59,7 +59,7 @@ function TagItem({ tag, search }) {
         <div
           className="nameContainer"
           role="presentation"
-          onClick={() => navigate("/question")}
+          onClick={() => navigate("/questions")}
         >
           <span className="name">{tag.name}</span>
         </div>
