@@ -1,6 +1,6 @@
 import Questions from "./Pages/Questions";
 import styled from "styled-components";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
@@ -11,6 +11,7 @@ import Ask from "./Pages/Ask";
 import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
+import View from "./Pages/View";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -22,6 +23,7 @@ const StyledFrame = styled.div`
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [onSide, setOnSide] = useState(false);
+  const location = useLocation().pathname;
 
   const handleLogin = () => {
     setIsLogin(!isLogin);
@@ -49,7 +51,7 @@ function App() {
             path={"/questions"}
             element={<Questions setOnSide={setOnSide} />}
           />
-          {/* <Route path={"/question"} element={<View />} /> */}
+          <Route path={"/question"} element={<View />} />
           <Route
             path={"/login"}
             element={<Login handleLogin={handleLogin} />}
@@ -59,7 +61,7 @@ function App() {
           <Route path={"/tags"} element={<Tags />} />
           <Route path={"/member"} element={<Member />} />
         </Routes>
-        <RightSideBar isLogin={isLogin} />
+        {location !== "/question" ? <RightSideBar isLogin={isLogin} /> : null}
       </StyledFrame>
     </>
   );
