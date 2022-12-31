@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import LoginInput from "./LoginInput";
+import axios from "axios";
 
 const StyledForm = styled.div`
   display: flex;
@@ -81,7 +82,16 @@ function LoginForm({ handleLogin }) {
       return;
     }
 
-    console.log("로그인 로직을 구현하시오.");
+    axios
+      .post(
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/",
+        {
+          username: "mino2@gmail.com",
+          password: "aaaa1111!",
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
   };
 
   return (
