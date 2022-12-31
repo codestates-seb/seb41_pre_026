@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { CookiesProvider } from "react-cookie";
 
 const StyledGlobal = createGlobalStyle`
   * {
@@ -28,8 +29,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
     <StyledGlobal />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CookiesProvider>
   </>
 );
