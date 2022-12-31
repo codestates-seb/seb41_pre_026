@@ -23,7 +23,7 @@ const StyledHeader = styled.div`
 `;
 
 const StyledHelp = styled.section`
-  width: 790px;
+  width: 850px;
   background-color: #ebf4fb;
   margin: 0px 0px 6px 0px;
   padding: 24px;

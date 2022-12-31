@@ -2,17 +2,20 @@ import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import SginInput from "./SignInput";
 import { ReCAPTCHA } from "react-google-recaptcha";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 316px;
-  height: 644px;
+  height: auto;
   border: 1px solid #dedfdf;
   border-radius: 5px;
   padding: 24px;
   box-shadow: 0px 7px 35px 18px #dedfdf, 1px 2px 1px 1px #dedfdf;
+  margin: 90px 0px 0px 0px;
   label {
     display: block;
     font-size: 15px;
@@ -22,10 +25,11 @@ const StyledForm = styled.div`
   }
 
   button {
-    margin: 10px 0px 0px 0px;
+    margin: 10px 0px 10px 0px;
     padding: 8px;
     font-weight: 400;
   }
+
   p {
     margin: 0px;
     font-size: 11.6px;
@@ -54,13 +58,33 @@ const StyledForm = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 0px 0px 5px 0px;
     span {
-      font-size: 11px;
+      font-size: 11px !important;
+      color: black !important;
     }
     svg {
       margin: 2px 0px 0px 31px;
       fill: #6a737c;
     }
+  }
+
+  .guide {
+    padding: 0px 0px 0px 5px;
+    font-size: 12px;
+    color: #d03c3e;
+  }
+
+  .none {
+    display: none;
+  }
+
+  .margin {
+    margin: 0px 0px 10px 0px;
+  }
+
+  .border {
+    border: 1px solid #d03c3e;
   }
 `;
 
@@ -68,31 +92,105 @@ function SignForm() {
   const [nickName, setNickName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
+  const [checkName, setCheckName] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkPwd, setCheckPwd] = useState(false);
+  const refs = useRef([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const idRegExp =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (nickName.length > 0) {
+      setCheckName(true);
+    } else {
+      setCheckName(false);
+    }
+
+    if (idRegExp.test(email)) {
+      setCheckEmail(true);
+    } else {
+      setCheckEmail(false);
+    }
+
+    if (pwd.length >= 8) {
+      setCheckPwd(true);
+    } else {
+      setCheckPwd(false);
+    }
+  }, [email, pwd, nickName]);
 
   const handleNickName = (value) => {
     setNickName(value);
-    console.log(nickName);
+    // console.log(nickName);
   };
 
   const handleEmail = (value) => {
     setEmail(value);
-    console.log(email);
+    // console.log(email);
   };
 
   const handlePwd = (value) => {
     setPwd(value);
-    console.log(pwd);
+    // console.log(pwd);
   };
 
   const handleSubmit = () => {
-    console.log("submit");
+    if (!checkName) {
+      refs.current[0].focus();
+      return;
+    }
+
+    if (!checkEmail) {
+      refs.current[1].focus();
+      return;
+    }
+
+    if (!checkPwd) {
+      refs.current[2].focus();
+      return;
+    }
+
+    axios
+      .post(
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members",
+        {
+          name: nickName,
+          email: email,
+          password: pwd,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
     <StyledForm>
-      <SginInput label="Display Name" handler={handleNickName} />
-      <SginInput label="Email" handler={handleEmail} />
-      <SginInput label="Password" handler={handlePwd} />
+      <SginInput
+        label="Display Name"
+        handler={handleNickName}
+        place="Write.."
+        check={checkName}
+        refs={refs}
+      />
+      <SginInput
+        label="Email"
+        handler={handleEmail}
+        place="aaa@bbb.ccc"
+        check={checkEmail}
+        refs={refs}
+      />
+      <SginInput
+        label="Password"
+        handler={handlePwd}
+        place="Write.."
+        check={checkPwd}
+        refs={refs}
+      />
       <p>
         Passwords must contain at least eight characters,
         <br />
