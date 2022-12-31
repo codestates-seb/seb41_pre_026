@@ -4,7 +4,8 @@ export const data = [
     vote: 2,
     answerCount: 3,
     view: 20,
-    title: "React 어쩌구 궁금해요",
+    title:
+      "React 어쩌구 궁금해요, 늘어난 제목입니다. 신나게 늘려볼까요? React 어쩌구 궁금해요, 한번 더 늘려야 하네요 고고고",
     excerpt:
       "I have created an app in which if I am using TouchableOpacity to perform any action or navigate but the issue is that I need to click button multiple times also it takes time to navigate to next place....",
     tags: [
@@ -12,6 +13,7 @@ export const data = [
       "tag2 궁금하자나",
       "tag3 언제 내려가니",
       "tag4 바로지금이 정답",
+      "tag5 바로지금이 정답",
     ],
     mid: "dongrri",
     createdAt: "2022-12-23 00:02:34",
@@ -40,6 +42,42 @@ export const data = [
     tags: ["c", "c++", "c#"],
     mid: "gimhae-person",
     createdAt: "2022-12-22 19:45:18",
+  },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
+  },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
+  },
+  {
+    id: 4,
+    vote: 6,
+    answerCount: 4,
+    view: 6,
+    title: "Java칩 프라푸치노 먹고싶다",
+    excerpt:
+      "I have been trying to send TCP hex packets over IP with the use of the react-native-tcp library. I have coded a very, very simple app that tries to do this. However, the function sendPackets in the ...",
+    tags: ["java", "spring"],
+    mid: "lmimoh",
+    createdAt: "2022-12-22 13:00:57",
   },
   {
     id: 4,

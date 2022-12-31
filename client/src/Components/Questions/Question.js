@@ -1,34 +1,37 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const QuestionContainer = styled.div`
-  position: relative;
-  width: auto;
   display: flex;
+  width: 100%;
+  height: auto;
   border-bottom: 1px solid #e3e6e8;
-  padding: 0px 0px 0px 0px;
+  padding: 16px 24px 16px 16px;
 `;
 
 const SummaryStats = styled.div`
-  gap: 4px;
-  margin-right: 16px;
-  margin-bottom: 4px;
-  width: 108px;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
-  flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: flex-end;
+  width: 17%;
   font-size: 13px;
   color: #6a737c;
+  gap: 6px;
+  margin: 0px 15px 0px 0px;
+  padding: 3px 0px 0px 0px;
+
   .stats-item-vote {
     color: #0c0d0e;
   }
+
   .stats-item-answer {
     color: #2f6f44;
     border: 0.5px solid #2f6f44;
     border-radius: 3px;
     padding: 2px 4px;
   }
+
   .stats-item-answer-adopted {
     color: #ffffff;
     background-color: #2f6f44;
@@ -39,74 +42,71 @@ const SummaryStats = styled.div`
 `;
 
 const SummaryContent = styled.div`
-  flex-grow: 1;
-  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: #545b5d;
+  width: 83%;
+
+  .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
   a {
     text-decoration: none;
     font-size: 17px;
     color: #0074cc;
-    cursor: pointer;
-    user-select: auto;
-  }
-  div {
-    margin-top: 1x;
-    margin-bottom: 8px;
-    fonst-size: 13px;
-    color: #3b4045;
   }
 `;
 
 const Info = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
-  column-gap: 6px;
-  row-gap: 8px;
+  margin: 0px !important;
 
   .content-item-tags {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  ul {
-    margin: 4px 4px 0px 0px;
-    padding: 0px;
-    flex-direction: row;
-    line-height: 18px;
-    float: left;
-  }
-  li {
-    list-style: none !important;
-    display: inline-block;
-    font-size: 12px;
-    margin: 2px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    color: #39739d;
-    background-color: #e1ecf4;
+
+    ul {
+      flex-direction: row;
+      float: left;
+      margin: 0px 0px 3px 0px;
+      padding: 0px;
+    }
+
+    li {
+      list-style: none !important;
+      display: inline-block;
+      font-size: 12px;
+      border-radius: 3px;
+      color: #39739d;
+      background-color: #e1ecf4;
+      padding: 4px 6px;
+      margin: 0px 5px 0px 5px;
+    }
   }
 
   .content-item-profile {
-    flex-wrap: wrap;
-    margin-left: auto;
-    justify-content: flex-end;
-  }
-
-  span {
-    margin: 2px;
+    margin: 0px 0px 0px auto;
     font-size: 12px;
     color: #6a737c;
   }
 `;
 
-function Question({ question, id }) {
+function Question({ question }) {
+  const tags = ["tag1", "tag2", "tag3", "tag4", "tag5"];
   return (
     <QuestionContainer>
       <SummaryStats>
         <div className="stats-item-vote">
-          <span>{question.vote} </span>
-          <span>{question.vote === 1 ? "vote" : "votes"}</span>
+          <span>{0} </span>
+          <span>{question.vote < 2 ? "vote" : "votes"}</span>
         </div>
         <div
           className={
@@ -116,20 +116,22 @@ function Question({ question, id }) {
           }
         >
           <span>{question.answerCount} </span>
-          <span>{question.answerCount === 1 ? "answer" : "answers"}</span>
+          <span>{question.answerCount < 2 ? "answer" : "answers"}</span>
         </div>
         <div>
           <span>{question.view} </span>
-          <span>{question.view === 1 ? "view" : "views"}</span>
+          <span>{question.view < 2 ? "view" : "views"}</span>
         </div>
       </SummaryStats>
-      <SummaryContent key={question.id}>
-        <a href="/">{question.title}</a>
-        <div>{question.excerpt}</div>
+      <SummaryContent>
+        <Link to={"/questions"} state={{ id: question.questionId }}>
+          {question.title}
+        </Link>
+        <div className="content">{question.problem}</div>
         <Info>
           <div className="content-item-tags">
             <ul>
-              {question.tags.map((tag, idx) => (
+              {tags.map((tag, idx) => (
                 <li key={idx}>{tag}</li>
               ))}
             </ul>
