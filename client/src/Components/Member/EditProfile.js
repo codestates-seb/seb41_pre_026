@@ -139,7 +139,7 @@ function EditProfile() {
   const handleCancel = () => {
     axios
       .get(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/16"
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
       )
       .then(function (response) {
         setName(response.data.data.name);
