@@ -24,23 +24,31 @@ class Cookie {
   }
 
   listDown(name) {
+    this.cookies.set(
+      "list",
+      this.cookies
+        .get("list")
+        .split(" ")
+        .filter((el) => el !== name)
+        .join(" ")
+    );
     if (this.cookies.get("list").length === 0) {
       this.cookies.remove("list");
-    } else {
-      this.cookies.set(
-        "list",
-        this.cookies
-          .get("list")
-          .split(" ")
-          .filter((el) => el !== name)
-          .join(" ")
-      );
     }
   }
 
   remove(name) {
     this.cookies.remove(name);
     this.listDown(name);
+  }
+
+  removeAll() {
+    this.cookies
+      .get("list")
+      .split(" ")
+      .forEach((el) => {
+        this.remove(el);
+      });
   }
 
   status() {

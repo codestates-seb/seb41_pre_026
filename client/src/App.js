@@ -12,7 +12,7 @@ import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
-import Cookie from "./util/cookie";
+// import Cookie from "./util/cookie";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -22,17 +22,16 @@ const StyledFrame = styled.div`
 `;
 
 function App() {
-  const cookie = new Cookie();
-  const [isLogin, setIsLogin] = useState(cookie.get("userId"));
+  const [isLogin, setIsLogin] = useState(undefined);
   const location = useLocation().pathname;
 
-  const handleLogin = () => {
-    setIsLogin();
+  const handleLogin = (value) => {
+    setIsLogin(value);
   };
 
   return (
     <>
-      <Navigation isLogin={isLogin} />
+      <Navigation isLogin={isLogin} handleLogin={handleLogin} />
       <StyledFrame>
         <LeftSideBar isLogin={isLogin} />
         <Routes>

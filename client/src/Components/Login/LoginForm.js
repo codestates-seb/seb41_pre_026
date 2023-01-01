@@ -95,12 +95,10 @@ function LoginForm({ handleLogin }) {
         }
       )
       .then((res) => {
-        // console.log(res.headers.authorization);
-        // console.log(res.headers.refresh);
-        // console.log(res.data.memberId);
         cookie.set("access", res.headers.authorization);
         cookie.set("refresh", res.headers.refresh);
         cookie.set("userId", res.data.memberId);
+        handleLogin(cookie.get("userId"));
         navgatie("/");
       })
       .catch((e) => console.log(e));

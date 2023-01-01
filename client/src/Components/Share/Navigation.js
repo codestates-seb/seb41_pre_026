@@ -238,7 +238,7 @@ const StyledIcons = styled.ol`
   }
 `;
 
-function Navigation({ isLogin }) {
+function Navigation({ isLogin, handleLogin }) {
   const cookie = new Cookie();
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
@@ -344,10 +344,8 @@ function Navigation({ isLogin }) {
             <li>
               <button
                 onClick={() => {
-                  cookie.remove("userId");
-                  cookie.remove("refresh");
-                  cookie.remove("access");
-                  navigate(location);
+                  cookie.removeAll();
+                  handleLogin(cookie.get("userId"));
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 18 18">
