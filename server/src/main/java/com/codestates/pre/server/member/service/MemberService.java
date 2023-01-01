@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberService {
 	private final MemberRepository memberRepository;
 	private final CustomBeanUtils<Member> beanUtils;
@@ -58,6 +59,7 @@ public class MemberService {
 		return memberRepository.save(updatedMember);
 	}
 
+	@Transactional(readOnly = true)
 	public Member findMember(long memberId) {
 		Member findMember = findVerifiedMember(memberId);
 		findMember.setQuestionCount(getQuestionCount(memberId));
@@ -91,11 +93,13 @@ public class MemberService {
 			throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
 	}
 
+	@Transactional(readOnly = true)
 	public Long getQuestionCount(Long memberId) {
 		Long questionCount = questionRepository.countQuestionByMember_MemberId(memberId);
 		return questionCount;
 	}
 
+	@Transactional(readOnly = true)
 	public Long getAnswersCount(Long memberId) {
 		Long answerCount = answerRepository.countAnswerByMember_MemberId(memberId);
 		return answerCount;
