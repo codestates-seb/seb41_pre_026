@@ -70,15 +70,15 @@ public class SecurityConfiguration {
 				.antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
 				.antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
 
-				.antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER") // user만 질문 올릴 수 있도록, admin도 질문 포스팅 가능하게?
-				.antMatchers(HttpMethod.PATCH, "/*/questions/**").hasRole("USER") //질문 올린 유저만 수정 가능하도록 해야하나... 프론트에서 처리해준다 했으니까 상관없나.. "/*/questions/{question-id}"
+				.antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER")
+				.antMatchers(HttpMethod.PATCH, "/*/questions/**").hasRole("USER")
 				.antMatchers(HttpMethod.GET, "/*/questions/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/*/questions").permitAll() // question전체 조회시 페이지네이션 파라미터 받아올 필요 없을듯? -> 페이지네이션 size, page 고정으로 하자고 이야기 해보장
-				.antMatchers(HttpMethod.DELETE, "/*/questions/**").hasRole("USER") // patch랑 동일하게 고민됨 ㅋㅋ
+				.antMatchers(HttpMethod.GET, "/*/questions").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/*/questions/**").hasRole("USER")
 
 				.antMatchers(HttpMethod.POST, "/*/answers").hasRole("USER")
 				.antMatchers(HttpMethod.PATCH, "/*/answers/**").hasRole("USER")
-				.antMatchers(HttpMethod.DELETE, "/*/answers/**").hasRole("USER") // /answers로 끝내도 되나....... 모르겠음 ㅋㅋ
+				.antMatchers(HttpMethod.DELETE, "/*/answers/**").hasRole("USER")
 				// 만약 vote, tag기능 추가 된다면 해당 기능도 권한 설정 필요
 				.anyRequest().permitAll()
 			);
