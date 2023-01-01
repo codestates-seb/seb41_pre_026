@@ -12,6 +12,7 @@ import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
+import Cookie from "./util/cookie";
 // import Cookie from "./util/cookie";
 
 const StyledFrame = styled.div`
@@ -22,7 +23,8 @@ const StyledFrame = styled.div`
 `;
 
 function App() {
-  const [isLogin, setIsLogin] = useState(undefined);
+  const cookie = new Cookie();
+  const [isLogin, setIsLogin] = useState(cookie.get("userId"));
   const location = useLocation().pathname;
 
   const handleLogin = (value) => {
@@ -33,7 +35,7 @@ function App() {
     <>
       <Navigation isLogin={isLogin} handleLogin={handleLogin} />
       <StyledFrame>
-        <LeftSideBar isLogin={isLogin} />
+        {location === "/" && !isLogin ? null : <LeftSideBar />}
         <Routes>
           <Route path={"/"} element={<Home isLogin={isLogin} />} />
           <Route path={"/questions"} element={<Questions />} />
@@ -47,7 +49,7 @@ function App() {
           <Route path={"/tags"} element={<Tags />} />
           <Route path={"/member"} element={<Member />} />
         </Routes>
-        {location !== "/question" ? <RightSideBar isLogin={isLogin} /> : null}
+        {location === "/" && !isLogin ? null : <RightSideBar />}
       </StyledFrame>
     </>
   );

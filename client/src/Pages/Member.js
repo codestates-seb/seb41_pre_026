@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "../Components/Member/Header";
 import Profile from "../Components/Member/Profile";
 import Settings from "../Components/Member/Settings";
+import Cookie from "../util/cookie";
 
 const StyledMember = styled.section`
   width: 1037px;
@@ -14,6 +15,8 @@ const StyledMember = styled.section`
 function Member() {
   const [selected, setSelected] = useState("1");
   const [toEdit, setToEdit] = useState(false);
+  const cookie = new Cookie();
+  const userId = cookie.get("userId");
 
   const handleSelect = (select) => {
     setSelected(select);
@@ -25,11 +28,15 @@ function Member() {
 
   return (
     <StyledMember>
-      <Header handleSelect={handleSelect} handleToEdit={handleToEdit} />
+      <Header
+        handleSelect={handleSelect}
+        handleToEdit={handleToEdit}
+        userId={userId}
+      />
       {selected === "1" ? (
-        <Profile />
+        <Profile userId={userId} />
       ) : (
-        <Settings toEdit={toEdit} handleToEdit={handleToEdit} />
+        <Settings toEdit={toEdit} handleToEdit={handleToEdit} userId={userId} />
       )}
     </StyledMember>
   );

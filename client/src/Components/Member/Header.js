@@ -107,7 +107,7 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header({ handleSelect, handleToEdit }) {
+function Header({ handleSelect, handleToEdit, userId }) {
   const [selecBtn, setSelecBtn] = useState(1);
   const [memberInfo, setMemberInfo] = useState([]);
 
@@ -124,7 +124,7 @@ function Header({ handleSelect, handleToEdit }) {
 
   axios
     .get(
-      "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+      `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
     )
     .then(function (response) {
       setMemberInfo(response.data.data);

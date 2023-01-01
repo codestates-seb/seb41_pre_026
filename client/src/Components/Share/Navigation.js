@@ -281,7 +281,7 @@ function Navigation({ isLogin, handleLogin }) {
                   <a href="https://stackoverflow.co/">About</a>
                 </li>
                 <li>
-                  <Link to={"/member"}>Products</Link>
+                  <Link to={location}>Products</Link>
                 </li>
                 <li>
                   <a href="https://stackoverflow.co/teams/">For Teams</a>
@@ -311,7 +311,9 @@ function Navigation({ isLogin, handleLogin }) {
         {isLogin ? (
           <StyledIcons>
             <li>
-              <img src={profile} alt="profile img"></img>
+              <Link to="/member">
+                <img src={profile} alt="profile img"></img>
+              </Link>
             </li>
             <li>
               <button>
@@ -370,7 +372,7 @@ function Navigation({ isLogin, handleLogin }) {
         )}
       </StyledNav>
       <StyledDiv>
-        <TopMenu handleFold={handleFold} isFold={isFold} />
+        <TopMenu handleFold={handleFold} isFold={isFold} isLogin={isLogin} />
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>

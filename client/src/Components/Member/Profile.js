@@ -65,12 +65,12 @@ const StyledPosts = styled.div`
   flex-direction: column;
 `;
 
-function Profile() {
+function Profile({ userId }) {
   const [memberInfo, setMemberInfo] = useState([]);
 
   axios
     .get(
-      "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+      `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
     )
     .then(function (response) {
       setMemberInfo(response.data.data);

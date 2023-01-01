@@ -53,7 +53,7 @@ function LoginForm({ handleLogin }) {
   const [checkPw, setCheckPw] = useState(false);
   const idInput = useRef(null);
   const pwInput = useRef(null);
-  const navgatie = useNavigate();
+  const navigate = useNavigate();
   const cookie = new Cookie();
 
   const handleId = (e) => setId(e.target.value);
@@ -99,7 +99,7 @@ function LoginForm({ handleLogin }) {
         cookie.set("refresh", res.headers.refresh);
         cookie.set("userId", res.data.memberId);
         handleLogin(cookie.get("userId"));
-        navgatie("/");
+        navigate("/");
       })
       .catch((e) => console.log(e));
   };
