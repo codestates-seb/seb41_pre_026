@@ -28,6 +28,9 @@ import com.codestates.pre.server.auth.handler.MemberAuthenticationSuccessHandler
 import com.codestates.pre.server.auth.jwt.JwtTokenizer;
 import com.codestates.pre.server.auth.utils.CustomAuthorityUtils;
 
+
+// 해당 클래스에 우리가 원하는 인증 방식과 웹 페이지에 대한 접근 권한 설정 가능
+
 @Configuration
 public class SecurityConfiguration {
 	private final JwtTokenizer jwtTokenizer;
@@ -38,43 +41,44 @@ public class SecurityConfiguration {
 		this.authorityUtils = authorityUtils;
 	}
 
+
+	// HttpSecurity를 파라미터로 가지고, SecurityFilterChain을 리턴하는 형태의 메서드를 정의해 HTTP 보안 설정을 구성
+	// 파라미터로 지정한 HttpSecurity는 HTTP 요청에 대한 보안 설정을 구성하기 위한 핵심 클래스
+	// SecurityFilterChain을 Bean으로 등록해서 HTTP 보안 설정을 구성하는 방식 사용 (권장됨)
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.headers().frameOptions().disable()
-			.and()
-			.csrf().disable()
+			.and() // and() 메서드를 통해 Spring Security 보안 설정을 메서드 체인 형태로 구성
+			.csrf().disable() // CSRF(Cross-Site Request Forgery) 공격에 대한 Spring Security에 대한 설정을 비활성화, 원래는 csrf() 공격을 방지하기 위해 클라이언트로부터 CSRF Token을 수신 후, 검증하기 위해 설정 필요
 			.cors(withDefaults())
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.formLogin().disable()
+			.formLogin().disable() // 폼 로그인 방식 비활성화
 			.httpBasic().disable()
 			.exceptionHandling()
 			.authenticationEntryPoint(new MemberAuthenticationEntryPoint())
 			.accessDeniedHandler(new MemberAccessDeniedHandler())
 			.and()
 			.apply(new CustomFilterConfigurer())
-			.and() // 전체적으로 해당 멤버만 수정또는 삭제 가능하도록 수정되어야 할 수도 있다리 ㅋㅋ ;
-			.authorizeHttpRequests(authorize -> authorize
-				.antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
+			.and()
+			.authorizeHttpRequests(authorize -> authorize  // 클라이언트의 요청이 들어오면 접근 권한을 확인
+				// .antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll()
 
 				.antMatchers(HttpMethod.POST, "/*/members").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/*/members/**").hasRole("USER")
 				.antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
 				.antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
 
-				.antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER") // user만 질문 올릴 수 있도록, admin도 질문 포스팅 가능하게?
-				.antMatchers(HttpMethod.PATCH, "/*/questions/**").hasRole("USER") //질문 올린 유저만 수정 가능하도록 해야하나... 프론트에서 처리해준다 했으니까 상관없나.. "/*/questions/{question-id}"
+				.antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER")
+				.antMatchers(HttpMethod.PATCH, "/*/questions/**").hasRole("USER")
 				.antMatchers(HttpMethod.GET, "/*/questions/**").permitAll()
-				.antMatchers(HttpMethod.GET, "/*/questions").permitAll() // question전체 조회시 페이지네이션 파라미터 받아올 필요 없을듯? -> 페이지네이션 size, page 고정으로 하자고 이야기 해보장
-				.antMatchers(HttpMethod.DELETE, "/*/questions/**").hasRole("USER") // patch랑 동일하게 고민됨 ㅋㅋ
+				.antMatchers(HttpMethod.GET, "/*/questions").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/*/questions/**").hasRole("USER")
 
 				.antMatchers(HttpMethod.POST, "/*/answers").hasRole("USER")
 				.antMatchers(HttpMethod.PATCH, "/*/answers/**").hasRole("USER")
-				//.antMatchers(HttpMethod.PATCH, "/*/answers/{answer-id}").hasRole("USER")) 에다가 memberid로.. 수정 어쩌고..가능하게 어케 하지
-				//.antMatchers(HttpMethod.GET, "/*/answers/**").permitAll()
-				//.antMatchers(HttpMethod.GET, "/*/answers").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/*/answers/**").hasRole("USER") // /answers로 끝내도 되나....... 모르겠음 ㅋㅋ
+				.antMatchers(HttpMethod.DELETE, "/*/answers/**").hasRole("USER")
 				// 만약 vote, tag기능 추가 된다면 해당 기능도 권한 설정 필요
 				.anyRequest().permitAll()
 			);
