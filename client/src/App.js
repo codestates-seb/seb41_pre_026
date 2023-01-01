@@ -12,6 +12,7 @@ import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
+import Cookie from "./util/cookie";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -21,36 +22,22 @@ const StyledFrame = styled.div`
 `;
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [onSide, setOnSide] = useState(false);
+  const cookie = new Cookie();
+  const [isLogin, setIsLogin] = useState(cookie.get("userId"));
   const location = useLocation().pathname;
 
   const handleLogin = () => {
-    setIsLogin(!isLogin);
-  };
-
-  const handleOnside = (value = null) => {
-    value ? setOnSide(value) : setOnSide(!onSide);
+    setIsLogin();
   };
 
   return (
     <>
-      <Navigation
-        isLogin={isLogin}
-        onSide={onSide}
-        handleOnside={handleOnside}
-      />
+      <Navigation isLogin={isLogin} />
       <StyledFrame>
         <LeftSideBar isLogin={isLogin} />
         <Routes>
-          <Route
-            path={"/"}
-            element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
-          />
-          <Route
-            path={"/questions"}
-            element={<Questions setOnSide={setOnSide} />}
-          />
+          <Route path={"/"} element={<Home isLogin={isLogin} />} />
+          <Route path={"/questions"} element={<Questions />} />
           <Route path={"/question"} element={<View />} />
           <Route
             path={"/login"}
