@@ -10,7 +10,7 @@ public class MemberResponseDto {
 	private String name;
 	private String email;
 
-	// private String image;
+	private String profileImage;
 
 	/*
 	private List<Question> questions;

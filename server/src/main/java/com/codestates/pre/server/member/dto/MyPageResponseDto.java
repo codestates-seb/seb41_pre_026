@@ -9,7 +9,7 @@ public class MyPageResponseDto {
 	private long memberId;
 	private String name;
 	private String email;
-	// private String image;
+	private String profileImage;
 	private Long questionCount;
 	private Long answerCount;
 }

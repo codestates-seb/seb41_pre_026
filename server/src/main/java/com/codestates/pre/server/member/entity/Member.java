@@ -38,7 +38,7 @@ public class Member {
 	@Column(nullable = false)
 	private String password;
 
-	// private String profileImageName;
+	private String profileImage;
 
 	@Transient
 	private Long questionCount;
