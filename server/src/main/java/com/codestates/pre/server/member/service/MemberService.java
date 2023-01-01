@@ -3,8 +3,12 @@ package com.codestates.pre.server.member.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.auth.utils.CustomAuthorityUtils;
@@ -61,7 +65,11 @@ public class MemberService {
 		return findMember;
 	}
 
-	// 전체 회원 조회는 필요없다
+	@Transactional(readOnly = true)
+	public Page<Member> findMembers(int page, int size) {
+
+		return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
+	}
 
 	public void deleteMember(long memberId) {
 		Member findMember = findVerifiedMember(memberId);
