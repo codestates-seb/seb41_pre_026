@@ -37,7 +37,7 @@ const StyledUl = styled.ul`
 
 function LeftSideBar() {
   const location = useLocation().pathname;
-  const unSideList = ["/login", "/sign", "/ask", "/"];
+  const unSideList = ["/login", "/sign", "/ask"];
 
   return (
     <>

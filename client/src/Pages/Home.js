@@ -1,7 +1,7 @@
 import Questions from "./Questions";
 
-function Home({ isLogin, setOnSide }) {
-  return isLogin ? <Questions setOnSide={setOnSide}></Questions> : null;
+function Home({ isLogin }) {
+  return isLogin ? <Questions /> : null;
 }
 
 export default Home;

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { searchData } from "../../Assets/searchData";
 import profile from "../../Assets/profile.jpg";
 import TopMenu from "../Navigation/TopMenu";
+import Cookie from "../../util/cookie";
 
 const StyledNav = styled.div`
   width: 100%;
@@ -237,13 +238,13 @@ const StyledIcons = styled.ol`
   }
 `;
 
-function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
+function Navigation({ isLogin, handleLogin }) {
+  const cookie = new Cookie();
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation().pathname;
-  const unTopMenu = ["/question", "/tags"];
-  // const [iconFocuse, setIcF] = useState(false);
+  const unSideList = ["/login", "/sign", "/ask", "/"];
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.querySelector("body").addEventListener("click", (e) => {
@@ -260,7 +261,7 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
   return (
     <nav>
       <StyledNav>
-        {!unTopMenu.includes(location) ? (
+        {unSideList.includes(location) && !isLogin ? (
           <button onClick={handleFold} className="menu">
             <img src={menu} alt="menu" />
           </button>
@@ -341,7 +342,12 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
               </button>
             </li>
             <li>
-              <button onClick={() => navigate("/login")}>
+              <button
+                onClick={() => {
+                  cookie.removeAll();
+                  handleLogin(cookie.get("userId"));
+                }}
+              >
                 <svg width="18" height="18" viewBox="0 0 18 18">
                   <path d="M15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2ZM1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2Zm16-7H1v4h16V6Z"></path>
                 </svg>
@@ -364,11 +370,7 @@ function Navigation({ isLogin, onSide, handleOnside, curPageBy }) {
         )}
       </StyledNav>
       <StyledDiv>
-        <TopMenu
-          handleFold={handleFold}
-          isFold={isFold}
-          handleOnside={handleOnside}
-        />
+        <TopMenu handleFold={handleFold} isFold={isFold} />
         <StyledHistory focused={focused} onClick={(e) => e.stopPropagation()}>
           <div>
             <ul>

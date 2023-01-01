@@ -58,7 +58,7 @@ const StyledMenu = styled.div`
   }
 `;
 
-function TopMenu({ handleFold, isFold, handleOnside }) {
+function TopMenu({ handleFold, isFold }) {
   const navigate = useNavigate();
   return (
     <StyledMenu isFold={isFold}>
@@ -66,7 +66,6 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
         className="home"
         onClick={() => {
           handleFold();
-          handleOnside(true);
           navigate("/");
         }}
       >
@@ -77,7 +76,6 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
         <button
           onClick={() => {
             handleFold();
-            handleOnside(true);
             navigate("/questions");
           }}
         >
@@ -90,7 +88,6 @@ function TopMenu({ handleFold, isFold, handleOnside }) {
           className="tags"
           onClick={() => {
             handleFold();
-            handleOnside(true);
             navigate("/tags");
           }}
         >

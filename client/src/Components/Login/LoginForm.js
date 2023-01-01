@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import LoginInput from "./LoginInput";
 import axios from "axios";
+import Cookie from "../../util/cookie";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.div`
   display: flex;
@@ -51,6 +53,8 @@ function LoginForm({ handleLogin }) {
   const [checkPw, setCheckPw] = useState(false);
   const idInput = useRef(null);
   const pwInput = useRef(null);
+  const navgatie = useNavigate();
+  const cookie = new Cookie();
 
   const handleId = (e) => setId(e.target.value);
   const handlePw = (e) => setPw(e.target.value);
@@ -84,20 +88,25 @@ function LoginForm({ handleLogin }) {
 
     axios
       .post(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/",
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/member",
         {
-          username: "mino2@gmail.com",
-          password: "aaaa1111!",
+          username: id,
+          password: pw,
         }
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        cookie.set("access", res.headers.authorization);
+        cookie.set("refresh", res.headers.refresh);
+        cookie.set("userId", res.data.memberId);
+        handleLogin(cookie.get("userId"));
+        navgatie("/");
+      })
       .catch((e) => console.log(e));
   };
 
   return (
     <StyledForm>
       <LoginInput
-        value={id}
         handleId={handleId}
         place="aaa@bbb.ccc"
         label="Email"
@@ -106,7 +115,6 @@ function LoginForm({ handleLogin }) {
         handleSubmit={handleSubmit}
       />
       <LoginInput
-        value={pw}
         handlePw={handlePw}
         place="Write.."
         label="Password"
