@@ -15,9 +15,12 @@ import com.codestates.pre.server.member.repository.MemberRepository;
 import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 
+import lombok.RequiredArgsConstructor;
+
 //트랙잭션 추후에 적용 (이벤트 퍼블리셔, 회원가입 이메일 전송 로직)
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 	private final MemberRepository memberRepository;
 	private final CustomBeanUtils<Member> beanUtils;
@@ -26,19 +29,6 @@ public class MemberService {
 	//  PasswordEncoder를 이용해 패스워드를 암호화 위해 di
 	private	final PasswordEncoder passwordEncoder;
 	private final CustomAuthorityUtils authorityUtils;
-
-
-
-	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils,
-		QuestionRepository questionRepository,
-		AnswerRepository answerRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
-		this.memberRepository = memberRepository;
-		this.beanUtils = beanUtils;
-		this.questionRepository = questionRepository;
-		this.answerRepository = answerRepository;
-		this.passwordEncoder = passwordEncoder;
-		this.authorityUtils = authorityUtils;
-	}
 
 	public Member createMember(Member member) {
 		verifyExistsEmail(member.getEmail());

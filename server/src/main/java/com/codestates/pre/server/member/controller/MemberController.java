@@ -22,20 +22,17 @@ import com.codestates.pre.server.member.entity.Member;
 import com.codestates.pre.server.member.mapper.MemberMapper;
 import com.codestates.pre.server.member.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/members")
 @Validated
 @Slf4j
+@RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
 	private final MemberMapper mapper;
-
-	public MemberController(MemberService memberService, MemberMapper mapper) {
-		this.memberService = memberService;
-		this.mapper = mapper;
-	}
 
 	@PostMapping
 	public ResponseEntity postMember(@Valid @RequestBody MemberPostDto requestBody) {
