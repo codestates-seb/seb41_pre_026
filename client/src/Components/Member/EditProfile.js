@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import profile from "../../Assets/profile.jpg";
 import { StyledBlueBtn, StyledTransBlueBtn } from "../Share/Button";
 
 const StyledEdit = styled.div`
@@ -98,21 +97,23 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function EditProfile() {
+function EditProfile({ userId }) {
+  const [img, setImg] = useState("");
   const [name, setName] = useState("");
 
   useEffect(() => {
     axios
       .get(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
       )
       .then(function (response) {
         setName(response.data.data.name);
+        setImg(response.data.data.profileImage);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [userId]);
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -121,11 +122,10 @@ function EditProfile() {
   const handleSubmit = (e) => {
     axios
       .patch(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14",
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`,
         {
-          memberId: 16,
+          memberId: userId,
           name: name,
-          email: "hgd@gmail.com",
         }
       )
       .then(function (response) {
@@ -139,7 +139,7 @@ function EditProfile() {
   const handleCancel = () => {
     axios
       .get(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/14"
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
       )
       .then(function (response) {
         setName(response.data.data.name);
@@ -157,7 +157,7 @@ function EditProfile() {
         <StyleForm>
           <StyledImg>
             <p>Profile Image</p>
-            <img src={profile} alt="profile" />
+            <img src={img} alt="profile" />
             <button>Change picture</button>
           </StyledImg>
           <StyledName>

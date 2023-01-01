@@ -47,7 +47,10 @@ function App() {
           <Route path={"/sign"} element={<Sign />} />
           <Route path={"/ask"} element={<Ask />} />
           <Route path={"/tags"} element={<Tags />} />
-          <Route path={"/member"} element={<Member />} />
+          <Route
+            path={"/member"}
+            element={<Member handleLogin={handleLogin} />}
+          />
         </Routes>
         {location === "/" && !isLogin ? null : <RightSideBar />}
       </StyledFrame>
