@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
+import Editor from "../Share/Editor";
 
 const StyledProfile = styled.div`
   display: flex;
-  margin: 0px 0px 0px 10px;
+  margin: 0px 0px 200px 10px;
   padding: 10px 0px 0px 0px;
 `;
 
@@ -45,7 +46,7 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledPostsWrapper = styled.div`
+const StyledAboutWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -56,13 +57,18 @@ const StyledPostsWrapper = styled.div`
   }
 `;
 
-const StyledPosts = styled.div`
+const StyledAbout = styled.div`
   width: 727px;
-  height: 398px;
+  height: 130px;
   border: 1px solid #d6d9dc;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  padding: 3px 20px 3px 20px;
+
+  .wmde-markdown > p {
+    font-size: 15px;
+  }
 `;
 
 function Profile({ userId }) {
@@ -72,10 +78,10 @@ function Profile({ userId }) {
     .get(
       `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
     )
-    .then(function (response) {
-      setMemberInfo(response.data.data);
+    .then((res) => {
+      setMemberInfo(res.data.data);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
 
@@ -94,10 +100,14 @@ function Profile({ userId }) {
           </StyledCard>
         </StyledStats>
       </StyledStatsWrapper>
-      <StyledPostsWrapper>
-        <p>Posts</p>
-        <StyledPosts></StyledPosts>
-      </StyledPostsWrapper>
+      <StyledAboutWrapper>
+        <p>About</p>
+        <StyledAbout>
+          <Editor
+            value={"hi\n I love coding \nMy goal is to make this page prettier"}
+          />
+        </StyledAbout>
+      </StyledAboutWrapper>
     </StyledProfile>
   );
 }
