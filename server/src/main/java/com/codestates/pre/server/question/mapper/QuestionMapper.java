@@ -99,6 +99,8 @@ public interface QuestionMapper {
 				.score(answer.getScore())
 				.questionId(answer.getQuestion().getQuestionId())
 				.memberId(answer.getMember().getMemberId())
+				.profile(answer.getMember().getProfileImage())
+				.name(answer.getMember().getName())
 				.build()
 		).collect(Collectors.toList());
 	}

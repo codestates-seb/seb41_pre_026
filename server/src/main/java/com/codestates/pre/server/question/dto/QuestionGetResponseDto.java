@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class QuestionGetResponseDto {
+public class QuestionGetResponseDto { // 상세조회
 	private long id;
 	private long mid;
 	// private long answerId;
@@ -25,4 +25,7 @@ public class QuestionGetResponseDto {
 	private long answerCount;
 	private List<AnswerResponseDto> answers;
 	private long view;
+
+	private String name;
+	private String profile;
 }

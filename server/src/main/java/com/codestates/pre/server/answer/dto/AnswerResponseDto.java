@@ -24,5 +24,7 @@ public class AnswerResponseDto {
 
     private long memberId;
 
+    private String name;
 
+    private String profile;
 }

@@ -64,8 +64,7 @@ public class QuestionController {
 	}
 
 	@GetMapping("/{question-id}")
-	public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId,
-									  @RequestBody QuestionGetDto questionGetDto) {
+	public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
 		// TODO Member 엔티티 매핑 이후 @RequestParam 으로 mid(memberId)를 받아오는 코드가 추가되어야 합니다.
 
 		Question question = questionService.findQuestion(questionId);
