@@ -66,14 +66,10 @@ function Expect({
   useEffect(() => {
     setTimeout(() => {
       compRef.current[2].textarea.onfocus = () => {
-        handleOnFocus();
+        handleIsFocus(2);
       };
     }, 1);
   }, []);
-
-  const handleOnFocus = () => {
-    handleIsFocus(2);
-  };
 
   const handleOnChange = (value) => {
     handleExpect(value);

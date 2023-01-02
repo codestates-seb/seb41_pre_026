@@ -67,14 +67,10 @@ function Problem({
   useEffect(() => {
     setTimeout(() => {
       compRef.current[1].textarea.onfocus = () => {
-        handleOnFocus();
+        handleIsFocus(1);
       };
     }, 1);
   }, []);
-
-  const handleOnFocus = () => {
-    handleIsFocus(1);
-  };
 
   const handleOnChange = (value) => {
     handleProblem(value);
