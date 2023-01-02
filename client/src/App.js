@@ -15,6 +15,7 @@ import View from "./Pages/View";
 import Cookie from "./util/cookie";
 import Edit from "./Pages/Edit";
 // import Cookie from "./util/cookie";
+import Footer from "./Components/Share/Footer";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ function App() {
         </Routes>
         {<RightSideBar />}
       </StyledFrame>
+      <Footer />
     </>
   );
 }
