@@ -1,0 +1,26 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  datasource:
+    url: jdbc:h2:mem:test
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+mail:
+  address:
+    admin: pre26@gmail.com
+jwt:
+  key: 
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
