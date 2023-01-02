@@ -125,7 +125,10 @@ function Question({ question }) {
         </div>
       </SummaryStats>
       <SummaryContent>
-        <Link to={"/question"} state={{ id: question.questionId }}>
+        <Link
+          to={"/question"}
+          state={{ qid: question.questionId, mid: question.mid }}
+        >
           {question.title}
         </Link>
         <div className="content">{question.problem}</div>

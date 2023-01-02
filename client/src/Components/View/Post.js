@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../Share/Editor";
 import setDateFormat from "../../util/setDateFormat";
+import Cookie from "../../util/cookie";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
@@ -81,34 +82,51 @@ const PostContainer = styled.div`
   }
 `;
 
-function Post({ data }) {
+function Post({ data, member, isLogin }) {
+  const cookie = new Cookie();
+  let tags = [];
+
+  if (data.tags) {
+    tags = data.tags.split(" ");
+  }
+
   return (
     <PostContainer>
       <Editor value={data.problem} />
       <Editor value={data.expecting} />
       <div className="tags">
-        {/* <ul>
-          {data.tags
-            ? data.tags.map((tag, idx) => <li key={idx}>{tag}</li>)
-            : (data.tags = [])}
-        </ul> */}
+        <ul>
+          {tags
+            ? tags.map((tag, idx) => <li key={idx}>{tag}</li>)
+            : (tags = [])}
+        </ul>
       </div>
       <div className="question-footer">
         <div className="menu">
           <div>
-            <Link to="/question">Share</Link>
+            <Link to="/question" className="none">
+              Share
+            </Link>
           </div>
+          {isLogin && cookie.get("userId") === data.mid ? (
+            <div>
+              <Link to="/edit" state={{ id: data.id }}>
+                Edit
+              </Link>
+            </div>
+          ) : null}
           <div>
-            <Link to="/question">Edit</Link>
-          </div>
-          <div>
-            <Link to="/question">Follow</Link>
+            <Link to="/question" className="none">
+              Follow
+            </Link>
           </div>
         </div>
         <div className="profile">
-          <img src={data.img} alt=""></img>
-          <span>{data.mid}</span>
-          <span>asked {setDateFormat(data.created)}</span>
+          <img src={member.profileImage} alt=""></img>
+          <span>{member.name}</span>
+          <span>
+            asked {data.created ? setDateFormat(data.created) : data.created}
+          </span>
         </div>
       </div>
     </PostContainer>
