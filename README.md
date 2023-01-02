@@ -69,3 +69,5 @@
 | "design: ~ " | css와 같은 UI 수정 |
 | "docs: ~ " | 문서 수정 (ex. README.md) |
 | "remove: ~ " | 파일을 삭제만 한 경우 |
+
+
