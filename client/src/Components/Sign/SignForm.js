@@ -153,19 +153,25 @@ function SignForm() {
     }
 
     axios
-      .post(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members",
-        {
-          name: nickName,
-          email: email,
-          password: pwd,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-        navigate("/login");
-      })
-      .catch((e) => console.log(e));
+      .get("https://source.unsplash.com/random")
+      .then((res) => res.request.responseURL)
+      .then((res) =>
+        axios
+          .post(
+            "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members",
+            {
+              name: nickName,
+              email: email,
+              password: pwd,
+              profileImage: res,
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            navigate("/login");
+          })
+          .catch((e) => console.log(e))
+      );
   };
 
   return (

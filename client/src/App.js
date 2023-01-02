@@ -12,6 +12,8 @@ import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
+import Cookie from "./util/cookie";
+// import Cookie from "./util/cookie";
 
 const StyledFrame = styled.div`
   display: flex;
@@ -21,36 +23,22 @@ const StyledFrame = styled.div`
 `;
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
-  const [onSide, setOnSide] = useState(false);
+  const cookie = new Cookie();
+  const [isLogin, setIsLogin] = useState(cookie.get("userId"));
   const location = useLocation().pathname;
 
-  const handleLogin = () => {
-    setIsLogin(!isLogin);
-  };
-
-  const handleOnside = (value = null) => {
-    value ? setOnSide(value) : setOnSide(!onSide);
+  const handleLogin = (value) => {
+    setIsLogin(value);
   };
 
   return (
     <>
-      <Navigation
-        isLogin={isLogin}
-        onSide={onSide}
-        handleOnside={handleOnside}
-      />
+      <Navigation isLogin={isLogin} handleLogin={handleLogin} />
       <StyledFrame>
-        <LeftSideBar isLogin={isLogin} />
+        {location === "/" && !isLogin ? null : <LeftSideBar />}
         <Routes>
-          <Route
-            path={"/"}
-            element={<Home isLogin={isLogin} setOnSide={setOnSide} />}
-          />
-          <Route
-            path={"/questions"}
-            element={<Questions setOnSide={setOnSide} />}
-          />
+          <Route path={"/"} element={<Home isLogin={isLogin} />} />
+          <Route path={"/questions"} element={<Questions />} />
           <Route path={"/question"} element={<View />} />
           <Route
             path={"/login"}
@@ -59,9 +47,12 @@ function App() {
           <Route path={"/sign"} element={<Sign />} />
           <Route path={"/ask"} element={<Ask />} />
           <Route path={"/tags"} element={<Tags />} />
-          <Route path={"/member"} element={<Member />} />
+          <Route
+            path={"/member"}
+            element={<Member handleLogin={handleLogin} />}
+          />
         </Routes>
-        {location !== "/question" ? <RightSideBar isLogin={isLogin} /> : null}
+        {location === "/" && !isLogin ? null : <RightSideBar />}
       </StyledFrame>
     </>
   );

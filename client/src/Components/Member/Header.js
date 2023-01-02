@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 import { StyledWhiteBtn } from "../Share/Button";
-import profile from "../../Assets/profile.jpg";
 import cake from "../../Assets/cake.png";
 import clock from "../../Assets/clock.png";
 
@@ -31,8 +31,8 @@ const StyledMemberInfo = styled.div`
   align-items: center;
 
   img {
-    width: 130px;
-    height: 130px;
+    width: 145px;
+    height: 145px;
     margin: 8px 8px 8px 8px;
     border-radius: 3px;
   }
@@ -81,7 +81,7 @@ const StyledMemberInfo = styled.div`
 const StyledBtnDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0px 0px 0px 10px;
+  margin: 0px 0px 0px 9px;
 
   button {
     height: 29px;
@@ -106,27 +106,40 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header({ handleSelect }) {
+function Header({ handleSelect, handleToEdit, userId }) {
   const [selecBtn, setSelecBtn] = useState(1);
+  const [memberInfo, setMemberInfo] = useState([]);
 
-  const handleBtnColor = (e) => {
+  const handleBtn = (e) => {
     setSelecBtn(e.target.id);
-    handleSelect();
+    handleSelect(e.target.id);
   };
 
-  const handleClick = (e) => {
-    setSelecBtn(2);
-    handleSelect();
+  const handleEditBtn = (e) => {
+    setSelecBtn("2");
+    handleSelect("2");
+    handleToEdit(true);
   };
+
+  axios
+    .get(
+      `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
+    )
+    .then(function (response) {
+      setMemberInfo(response.data.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   return (
     <StyledHeader>
       <StyledMemberWrapper>
         <StyledMemberInfo>
-          <img src={profile} alt="profile" />
+          <img src={memberInfo.profileImage} alt="profile" />
           <div className="info">
             <div className="name">
-              <span>name</span>
+              <span>{memberInfo.name}</span>
             </div>
             <ul>
               <li>
@@ -141,14 +154,14 @@ function Header({ handleSelect }) {
           </div>
         </StyledMemberInfo>
         <div>
-          <StyledWhiteBtn onClick={handleClick}>Edit Profile</StyledWhiteBtn>
+          <StyledWhiteBtn onClick={handleEditBtn}>Edit Profile</StyledWhiteBtn>
         </div>
       </StyledMemberWrapper>
       <StyledBtnDiv select={selecBtn}>
-        <button id="1" onClick={handleBtnColor}>
+        <button id="1" onClick={handleBtn}>
           Profile
         </button>
-        <button id="2" onClick={handleBtnColor}>
+        <button id="2" onClick={handleBtn}>
           Settings
         </button>
       </StyledBtnDiv>

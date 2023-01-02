@@ -1,6 +1,9 @@
 import { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
+import { useNavigate } from "react-router-dom";
+import Cookie from "../../util/cookie";
 
 const StyledDelete = styled.div`
   width: 830px;
@@ -54,11 +57,32 @@ const StyledCheck = styled.div`
   }
 `;
 
-function DeleteProfile() {
+function DeleteProfile({ userId, handleLogin }) {
   const [isCheck, setIsCheck] = useState(false);
+  const navigate = useNavigate();
+  const cookie = new Cookie();
 
   const handleClick = () => {
     setIsCheck(!isCheck);
+  };
+
+  const handleDelete = () => {
+    console.log("a");
+    axios
+      .delete(
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`,
+        {
+          memberId: userId,
+        }
+      )
+      .then((res) => {
+        cookie.removeAll();
+        handleLogin(cookie.get("userId"));
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -105,7 +129,10 @@ function DeleteProfile() {
             the deletion of my profile.
           </p>
         </StyledCheck>
-        <StyledBlueBtn className={isCheck ? "checked" : ""}>
+        <StyledBlueBtn
+          className={isCheck ? "checked" : ""}
+          onClick={handleDelete}
+        >
           Delete profile
         </StyledBlueBtn>
       </div>

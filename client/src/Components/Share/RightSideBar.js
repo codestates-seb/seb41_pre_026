@@ -9,7 +9,14 @@ const StyledNav = styled.nav`
 
 function RightSideBar() {
   const location = useLocation().pathname;
-  const unSideList = ["/login", "/sign", "/ask", "/tags", "/"];
+  const unSideList = [
+    "/login",
+    "/sign",
+    "/ask",
+    "/tags",
+    "/member",
+    "/question",
+  ];
 
   return (
     <>
