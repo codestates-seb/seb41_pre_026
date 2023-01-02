@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Vote from "./Vote";
-import profile2 from "../../Assets/proimg2.jpg";
+// import profile2 from "../../Assets/proimg2.jpg";
 import Editor from "../Share/Editor";
+import setDateFormat from "../../util/setDateFormat";
 
 const AnswerContainer = styled.div`
   border-bottom: 1px solid #dadbdc;
@@ -108,9 +109,9 @@ function Answer({ answerData, id }) {
               </div>
             </div>
             <div className="profile">
-              <img src={profile2} alt=""></img>
+              <img src={answerData.img} alt=""></img>
               <span>{answerData.memberId}</span>
-              <span>answerd {answerData.creationAt}</span>
+              <span>answerd {setDateFormat(answerData.creationAt)}</span>
             </div>
           </div>
         </div>

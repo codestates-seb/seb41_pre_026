@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import profileIMG from "../../Assets/profileIMG.jpg";
 import Editor from "../Share/Editor";
+import setDateFormat from "../../util/setDateFormat";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
@@ -106,9 +106,9 @@ function Post({ data }) {
           </div>
         </div>
         <div className="profile">
-          <img src={profileIMG} alt=""></img>
+          <img src={data.img} alt=""></img>
           <span>{data.mid}</span>
-          <span>asked {data.created}</span>
+          <span>asked {setDateFormat(data.created)}</span>
         </div>
       </div>
     </PostContainer>

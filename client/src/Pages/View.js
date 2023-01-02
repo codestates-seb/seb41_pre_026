@@ -1,13 +1,14 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import RightSideBar from "../Components/Share/RightSideBar";
 import { StyledBlueBtn } from "../Components/Share/Button";
 import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import RightSideBar from "../Components/Share/RightSideBar";
+import setDateFormat from "../util/setDateFormat";
+import styled from "styled-components";
 
 const Container = styled.div`
   max-width: 1036px;
@@ -156,11 +157,15 @@ function View() {
       <div className="question-info">
         <div>
           <span className="question-info-description">Asked </span>
-          <span className="question-info-data">{data.created}</span>
+          <span className="question-info-data">
+            {setDateFormat(data.created)}
+          </span>
         </div>
         <div>
           <span className="question-info-description">Modified </span>
-          <span className="question-info-data">{data.modified}</span>
+          <span className="question-info-data">
+            {setDateFormat(data.modified)}
+          </span>
         </div>
         <div>
           <span className="question-info-description">Viewed </span>
