@@ -8,7 +8,7 @@ import Tags from "../Components/Ask/Tags";
 import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
 import { useState, useRef } from "react";
 import Cookie from "../util/cookie";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const StyledDiv = styled.div`
   margin: 0px 0px 100px 0px;
@@ -54,6 +54,7 @@ function Ask() {
   const [tags, setTags] = useState([]);
   const cookie = new Cookie();
   const compRef = useRef([]);
+  const navigate = useNavigate();
 
   const handleIsFocus = (isFocus) => {
     setIsFocus(isFocus);
@@ -122,8 +123,8 @@ function Ask() {
         }
       )
       .then((res) => {
-        Navigate({ to: "/question", state: { id: res.data.data.id } });
         console.log(res);
+        navigate("/questions");
       })
       .catch(function (error) {
         console.log(error);
