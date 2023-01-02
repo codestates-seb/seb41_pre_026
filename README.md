@@ -20,7 +20,7 @@
 
 
 ## 👨‍👩‍👧‍👦 Team
-| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | <br>김혜인(BE) | <br>전예린(FE) | <br>권해정(FE) |
+| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | 김혜인<br>(BE) | 전예린<br>(FE) | 권해정<br>(FE) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | <img alt="김태현" src="https://user-images.githubusercontent.com/96982575/210198376-8791b7b8-ceda-4248-a8b9-e820d7a68966.jpg" height="100" width="100"> | <img alt="이민훈" src="https://user-images.githubusercontent.com/96982575/210198509-d3b3be53-0542-4f01-9b4b-a34d5f4251de.jpg" height="100" width="100"> | <img alt="진희주" src="https://user-images.githubusercontent.com/96982575/210198379-c536d038-bf25-4bce-bd67-1e057626bddf.jpg" height="100" width="100"> | <img alt="김혜인" src="https://user-images.githubusercontent.com/96982575/210198512-645a7014-5d90-4f4d-83d8-ac644aa4c05c.png" height="100" width="100"> | <img alt="전예린" src="https://user-images.githubusercontent.com/96982575/210198515-b8223c5b-e652-42e9-92f5-08dba32fb832.jpeg" height="100" width="100"> |
 | [@taebong98](https://github.com/Gwanghyun-Jeon) |    [@lmimoh](https://github.com/nuuco) | [@jinhuiju](https://github.com/CHOHYUNHWA) | [@gimhae-person](https://github.com/EstelleYU) | [@sweetyr928](https://github.com/bytenari) | [@dongrri22](https://github.com/bytenari)
