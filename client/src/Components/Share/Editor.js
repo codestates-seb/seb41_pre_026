@@ -1,9 +1,7 @@
 import MDEditor from "@uiw/react-md-editor";
 import styled from "styled-components";
 
-const Container = styled.div`
-  padding-top: 16px;
-`;
+const Container = styled.div``;
 export default function Editor({ value, setValue, type }) {
   return (
     <Container>

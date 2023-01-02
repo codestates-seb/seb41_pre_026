@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { StyledBlueBtn, StyledTransBlueBtn } from "../Share/Button";
+import MDEditor from "@uiw/react-md-editor";
 
 const StyledEdit = styled.div`
   width: 830px;
@@ -69,6 +70,7 @@ const StyledImg = styled.div`
 const StyledName = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0px 0px 10px 0px;
 
   p {
     font-size: 14px;
@@ -91,32 +93,63 @@ const StyledName = styled.div`
   }
 `;
 
+const StyledAbout = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 14px;
+    margin: 0px 0px 5px 0px;
+    font-weight: 600;
+  }
+
+  .active {
+    border: 1px solid #379fef;
+    outline: 4px solid #e1ecf4;
+  }
+`;
+
 const StyledBtnDiv = styled.div`
   button:nth-child(2) {
     margin: 0px 0px 0px 16px;
   }
 `;
 
-function EditProfile({ userId }) {
+function EditProfile({ userId, handleSetChange, handleSelect, setSelectBtn }) {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
+  const [profileText, setProfileText] = useState("");
+  const [aboutFocus, setAboutFocus] = useState(false);
 
   useEffect(() => {
     axios
       .get(
         `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
       )
-      .then(function (response) {
-        setName(response.data.data.name);
-        setImg(response.data.data.profileImage);
+      .then((res) => {
+        setName(res.data.data.name);
+        setImg(res.data.data.profileImage);
+        setProfileText(res.data.data.profileText);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }, [userId]);
 
-  const handleChange = (e) => {
+  const handleName = (e) => {
     setName(e.target.value);
+  };
+
+  const handleProfileText = (value) => {
+    setProfileText(value);
+  };
+
+  const handleFocus = () => {
+    setAboutFocus(true);
+  };
+
+  const handleBlur = () => {
+    setAboutFocus(false);
   };
 
   const handleSubmit = (e) => {
@@ -126,25 +159,13 @@ function EditProfile({ userId }) {
         {
           memberId: userId,
           name: name,
+          profileText: profileText,
         }
       )
-      .then(function (response) {
-        console.log(response.data.data.name);
+      .then((res) => {
+        handleSetChange();
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  const handleCancel = () => {
-    axios
-      .get(
-        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
-      )
-      .then(function (response) {
-        setName(response.data.data.name);
-      })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -162,12 +183,30 @@ function EditProfile({ userId }) {
           </StyledImg>
           <StyledName>
             <p>Display Name</p>
-            <input value={name} onChange={handleChange}></input>
+            <input value={name} onChange={handleName}></input>
           </StyledName>
+          <StyledAbout>
+            <p>About me</p>
+            <MDEditor
+              className={aboutFocus ? "active" : ""}
+              value={profileText}
+              onChange={handleProfileText}
+              preview={"edit"}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </StyledAbout>
         </StyleForm>
         <StyledBtnDiv>
           <StyledBlueBtn onClick={handleSubmit}>Save Profile</StyledBlueBtn>
-          <StyledTransBlueBtn onClick={handleCancel}>Cancel</StyledTransBlueBtn>
+          <StyledTransBlueBtn
+            onClick={() => {
+              handleSelect("1");
+              setSelectBtn("1");
+            }}
+          >
+            Cancel
+          </StyledTransBlueBtn>
         </StyledBtnDiv>
       </StyledDiv>
     </StyledEdit>

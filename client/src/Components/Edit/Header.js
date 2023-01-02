@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const StyledHead = styled.div`
   font-size: 12px;
-  padding: 24px;
-  margin: 24px;
+  padding: 6px 20px 20px 20px;
   border: 1px solid #e6cf79;
   background-color: #fdf7e2;
 `;
