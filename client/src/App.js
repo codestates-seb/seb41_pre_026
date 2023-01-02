@@ -13,6 +13,7 @@ import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
 import Cookie from "./util/cookie";
+import Edit from "./Pages/Edit";
 // import Cookie from "./util/cookie";
 
 const StyledFrame = styled.div`
@@ -51,6 +52,7 @@ function App() {
             path={"/member"}
             element={<Member handleLogin={handleLogin} />}
           />
+          <Route path={"/edit"} element={<Edit />} />
         </Routes>
         {location === "/" && !isLogin ? null : <RightSideBar />}
       </StyledFrame>

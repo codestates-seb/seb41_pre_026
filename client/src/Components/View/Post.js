@@ -99,7 +99,7 @@ function Post({ data }) {
             <Link to="/question">Share</Link>
           </div>
           <div>
-            <Link to="/question">Edit</Link>
+            <Link to="/edit">Edit</Link>
           </div>
           <div>
             <Link to="/question">Follow</Link>
