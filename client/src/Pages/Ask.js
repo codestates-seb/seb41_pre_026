@@ -135,7 +135,7 @@ function Ask() {
     setProblem("");
     setExpect("");
     setTags(undefined);
-    setIsFocus(0);
+    handleIsFocus(0);
     setIsWritten([]);
   };
 
