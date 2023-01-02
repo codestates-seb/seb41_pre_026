@@ -12,14 +12,18 @@ import com.codestates.pre.server.question.service.QuestionService;
 import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
+@Transactional
 public class AnswerService {
 	private final AnswerRepository answerRepository;
 	private final QuestionRepository questionRepository;
@@ -29,17 +33,7 @@ public class AnswerService {
 	private final QuestionService questionService;
 	private final CustomBeanUtils<Answer> beanUtils;
 
-	public AnswerService(AnswerRepository answerRepository, QuestionRepository questionRepository,
-		MemberRepository memberRepository, MemberService memberService, QuestionService questionService,
-		CustomBeanUtils<Answer> beanUtils) {
 
-		this.answerRepository = answerRepository;
-		this.questionRepository = questionRepository;
-		this.memberRepository = memberRepository;
-		this.memberService = memberService;
-		this.questionService = questionService;
-		this.beanUtils = beanUtils;
-	}
 
 	// 답변 등록
 	public Answer createAnswer(Answer answer) {
@@ -71,6 +65,7 @@ public class AnswerService {
 	}
 
 	// 답변 전체 조회
+
 	public Page<Answer> findAnswers(int page, int size) {
 		return answerRepository.findAll(PageRequest.of(page, size,
 			Sort.by("answerId").descending()));
@@ -112,6 +107,7 @@ public class AnswerService {
 //		return updateAnswer;
 
 
+	@Transactional(readOnly = true)
 	public Answer findVerifiedAnswer(long answerId) {
 		Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
 		// 답변이 DB에 존재하는지 검증
