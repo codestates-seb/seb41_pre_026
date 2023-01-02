@@ -38,10 +38,6 @@
 
 
 
-## 🔧 Skills
-![Roobits Stack (9)](https://user-images.githubusercontent.com/73211553/195057855-ab580645-ecc4-43dd-b423-a1dd09b5bfcc.png)
-
-
 
 ### Tools
 | Git | Github | Discord |
