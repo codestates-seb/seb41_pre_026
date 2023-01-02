@@ -207,7 +207,7 @@ function SignForm() {
       </p>
       <ReCAPTCHA
         size="compact"
-        sitekey={process.env.REACT_APP_SITE_KEY}
+        sitekey={process.env.SITE_KEY}
         onChange={(e) => console.log(e.target.value)}
         className="capcha"
         lang="en"
