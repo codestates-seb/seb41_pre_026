@@ -114,7 +114,7 @@ function Question({ question }) {
     <QuestionContainer>
       <SummaryStats>
         <div className="stats-item-vote">
-          <span>{0} </span>
+          <span>{question.score} </span>
           <span>{question.vote < 2 ? "vote" : "votes"}</span>
         </div>
         <div
@@ -133,7 +133,10 @@ function Question({ question }) {
         </div>
       </SummaryStats>
       <SummaryContent>
-        <Link to={"/question"} state={{ qid: question.questionId }}>
+        <Link
+          to={"/question"}
+          state={{ id: [question.questionId, question.mid] }}
+        >
           {question.title}
         </Link>
         <div className="content">{question.problem}</div>

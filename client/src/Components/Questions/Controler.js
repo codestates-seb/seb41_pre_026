@@ -4,7 +4,7 @@ import render from "../../util/render";
 const StyledControler = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0px 0px 100px 0px;
+  margin: 0px 0px 80px 0px;
   .disabled {
     display: none;
   }
@@ -54,7 +54,14 @@ const StyledButton = styled.button`
     background-color: #d6d9dc;
   }
 `;
-function Controler({ curPage, totalPage, handleCurPage, handleSize, size }) {
+function Controler({
+  curPage,
+  totalPage,
+  handleCurPage,
+  handleSize,
+  size,
+  handleScroll,
+}) {
   let startPage = curPage - 2 > 0 ? curPage - 2 : 1;
   let endPage = startPage + 4 > totalPage ? totalPage : startPage + 4;
   const btns = render(startPage, curPage, endPage, totalPage);
@@ -63,7 +70,10 @@ function Controler({ curPage, totalPage, handleCurPage, handleSize, size }) {
       <div className="pageBtn">
         <StyledButton
           className={curPage - 1 > 0 ? "" : "disabled"}
-          onClick={() => handleCurPage(curPage - 1)}
+          onClick={() => {
+            handleScroll();
+            handleCurPage(curPage - 1);
+          }}
         >
           Prev
         </StyledButton>
@@ -73,7 +83,10 @@ function Controler({ curPage, totalPage, handleCurPage, handleSize, size }) {
               <StyledButton
                 className={curPage === el ? "cur" : null}
                 key={idx}
-                onClick={(e) => handleCurPage(e.target.textContent)}
+                onClick={(e) => {
+                  handleScroll();
+                  handleCurPage(e.target.textContent);
+                }}
               >
                 {el}
               </StyledButton>
@@ -82,7 +95,10 @@ function Controler({ curPage, totalPage, handleCurPage, handleSize, size }) {
         })}
         <StyledButton
           className={curPage + 1 <= totalPage ? "" : "disabled"}
-          onClick={() => handleCurPage(curPage + 1)}
+          onClick={() => {
+            handleScroll();
+            handleCurPage(curPage + 1);
+          }}
         >
           Next
         </StyledButton>
@@ -92,13 +108,17 @@ function Controler({ curPage, totalPage, handleCurPage, handleSize, size }) {
           className={size === 15 ? "cur" : null}
           onClick={(e) => {
             handleSize(Number(e.target.textContent));
+            handleScroll();
           }}
         >
           15
         </StyledButton>
         <StyledButton
           className={size === 30 ? "cur" : null}
-          onClick={(e) => handleSize(Number(e.target.textContent))}
+          onClick={(e) => {
+            handleSize(Number(e.target.textContent));
+            handleScroll();
+          }}
         >
           30
         </StyledButton>

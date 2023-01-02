@@ -3,12 +3,12 @@ import Question from "../Components/Questions/Question";
 import styled from "styled-components";
 import useRequest from "../Components/Share/useRequest";
 import Controler from "../Components/Questions/Controler";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
-  width: 808px;
+  width: 720px;
 `;
 
 const QuestionListContainer = styled.div`
@@ -28,19 +28,22 @@ function Questions() {
   );
   const isRef = useRef(null);
 
-  useEffect(() => {
+  const handleScroll = () => {
     if (isRef) {
       isRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     }
-  }, [curPage, size]);
+  };
+
   const handleCurPage = (page) => setCurPage(page);
   const handleSize = (size) => setSize(size);
   return (
     <StyledMain>
-      <Header isRef={isRef} />
+      {questions.pageInfo ? (
+        <Header isRef={isRef} total={questions.pageInfo.totalElements} />
+      ) : null}
       <QuestionListContainer>
         {questions.data
           ? questions.data.map((question, idx) => {
@@ -55,7 +58,7 @@ function Questions() {
           handleSize={handleSize}
           size={size}
           totalPage={Number(questions.pageInfo.totalPages)}
-          isRef={isRef}
+          handleScroll={handleScroll}
         />
       ) : null}
     </StyledMain>

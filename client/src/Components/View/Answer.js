@@ -11,15 +11,13 @@ const AnswerContainer = styled.div`
   border-bottom: 1px solid #dadbdc;
   box-sizing: border-box;
   display: block;
-  margin-top: 10px;
   padding-top: 10px;
   text-align: left;
-  vertical-align: baseline;
-  width: 727px;
+  width: 700px;
   .answer-content {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 52px 675px;
+    grid-template-columns: 52px 647px;
     text-align: left;
     vertical-align: baseline;
     .answer-content-vote {
@@ -61,7 +59,7 @@ const AnswerContainer = styled.div`
         font-size : 12px;
         border : 0px;
         color : #6a737c;
-      }
+      }727px
     }
     .profile {
       background-color: #d9eaf7;
