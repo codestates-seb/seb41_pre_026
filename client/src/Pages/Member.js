@@ -12,7 +12,7 @@ const StyledMember = styled.section`
   flex-direction: column;
 `;
 
-function Member() {
+function Member({ handleLogin }) {
   const [selected, setSelected] = useState("1");
   const [toEdit, setToEdit] = useState(false);
   const cookie = new Cookie();
@@ -36,7 +36,12 @@ function Member() {
       {selected === "1" ? (
         <Profile userId={userId} />
       ) : (
-        <Settings toEdit={toEdit} handleToEdit={handleToEdit} userId={userId} />
+        <Settings
+          toEdit={toEdit}
+          handleToEdit={handleToEdit}
+          userId={userId}
+          handleLogin={handleLogin}
+        />
       )}
     </StyledMember>
   );

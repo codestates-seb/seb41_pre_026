@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 import { StyledWhiteBtn } from "../Share/Button";
-import profile from "../../Assets/profile.jpg";
 import cake from "../../Assets/cake.png";
 import clock from "../../Assets/clock.png";
 
@@ -137,7 +136,7 @@ function Header({ handleSelect, handleToEdit, userId }) {
     <StyledHeader>
       <StyledMemberWrapper>
         <StyledMemberInfo>
-          <img src={profile} alt="profile" />
+          <img src={memberInfo.profileImage} alt="profile" />
           <div className="info">
             <div className="name">
               <span>{memberInfo.name}</span>

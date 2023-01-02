@@ -137,7 +137,7 @@ function Question({ question }) {
             </ul>
           </div>
           <div className="content-item-profile">
-            <span>{question.mid}</span>
+            <span>{question.mid} | </span>
             <span>asked {question.createdAt}</span>
           </div>
         </Info>
