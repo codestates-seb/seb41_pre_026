@@ -27,7 +27,7 @@ function App() {
   const cookie = new Cookie();
   const [isLogin, setIsLogin] = useState(cookie.get("userId"));
   const location = useLocation().pathname;
-
+  console.log(cookie.get("userId"));
   const handleLogin = (value) => {
     setIsLogin(value);
   };
@@ -40,7 +40,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home isLogin={isLogin} />} />
           <Route path={"/questions"} element={<Questions />} />
-          <Route path={"/question"} element={<View />} />
+          <Route path={"/question"} element={<View isLogin={isLogin} />} />
           <Route
             path={"/login"}
             element={<Login handleLogin={handleLogin} />}

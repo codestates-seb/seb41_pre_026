@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import RightSideBar from "../Components/Share/RightSideBar";
 import { StyledBlueBtn } from "../Components/Share/Button";
 import Vote from "../Components/View/Vote";
 import Post from "../Components/View/Post";
 import Answer from "../Components/View/Answer";
 import EditAnswer from "../Components/View/EditAnswer";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-import RightSideBar from "../Components/Share/RightSideBar";
+import setDateFormat from "../util/setDateFormat";
+
+import styled from "styled-components";
 
 const Container = styled.div`
   max-width: 1036px;
@@ -16,6 +18,9 @@ const Container = styled.div`
   padding: 20px 0px 40px 40px;
   box-sizing: border-box;
   display: block;
+  .none {
+    pointer-events: none;
+  }
   .question-header {
     box-sizing: border-box;
     display: flex;
@@ -115,27 +120,41 @@ const AnswerListContainer = styled.div`
   }
 `;
 
-function View() {
-  const [data, setData] = useState({});
+function View({ isLogin }) {
+  const [data, setData] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [member, setMember] = useState([]);
   const [change, setChange] = useState(false);
   const score = data.score;
   const vote = data.vote;
   const subject = "questions";
 
   const navigate = useNavigate();
-  const qid = useLocation().state.id;
+  const qid = useLocation().state.qid;
+  const mid = useLocation().state.mid;
+
+  if (!isLogin) {
+    console.log("로그인해라");
+  }
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://43.200.68.32:8080/questions/${qid}?mid=1`,
+      url: `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/${qid}?mid=${mid}`,
     }).then((res) => {
       setData(res.data.data);
       setAnswers(res.data.data.answers);
-      console.log(res);
+      console.log(res.data.data);
     });
-  }, [change, qid]);
+
+    axios({
+      method: "get",
+      url: `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${mid}`,
+      data: { memberId: mid },
+    }).then((res) => {
+      setMember(res.data.data);
+    });
+  }, [change, qid, mid]);
 
   const handleClick = () => {
     navigate("/ask");
@@ -156,11 +175,15 @@ function View() {
       <div className="question-info">
         <div>
           <span className="question-info-description">Asked </span>
-          <span className="question-info-data">{data.created}</span>
+          <span className="question-info-data">
+            {data.created ? setDateFormat(data.created) : data.created}
+          </span>
         </div>
         <div>
           <span className="question-info-description">Modified </span>
-          <span className="question-info-data">{data.modified}</span>
+          <span className="question-info-data">
+            {data.modified ? setDateFormat(data.modified) : data.modified}
+          </span>
         </div>
         <div>
           <span className="question-info-description">Viewed </span>
@@ -171,10 +194,16 @@ function View() {
         <div className="contents">
           <div className="question-content">
             <div className="question-content-vote">
-              <Vote score={score} vote={vote} subject={subject} qid={qid} />
+              <Vote
+                score={score}
+                vote={vote}
+                subject={subject}
+                qid={qid}
+                handleChange={handleChange}
+              />
             </div>
             <div className="question-content-post">
-              <Post data={data} />
+              <Post data={data} member={member} isLogin={isLogin} />
             </div>
           </div>
           <AnswerListContainer>
@@ -184,7 +213,7 @@ function View() {
             </div>
             {answers
               ? answers.map((answerData, idx) => (
-                  <Answer key={idx} answerData={answerData} />
+                  <Answer key={idx} answerData={answerData} isLogin={isLogin} />
                 ))
               : null}
           </AnswerListContainer>
