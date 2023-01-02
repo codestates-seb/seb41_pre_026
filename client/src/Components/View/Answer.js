@@ -82,7 +82,7 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer({ answerData, id, isLogin, handleChange }) {
+function Answer({ answerData, isLogin, data }) {
   const [content, setContent] = useState(answerData.answerContent);
   const cookie = new Cookie();
   const score = answerData.score;
@@ -111,21 +111,31 @@ function Answer({ answerData, id, isLogin, handleChange }) {
                   Share
                 </Link>
               </div>
-              {isLogin && cookie.get("userId") === answerData.memberId ? (
+              {isLogin &&
+              Number(cookie.get("userId")) === answerData.memberId ? (
                 <div>
-                  <Link to="/edit" state={{ id: aid }}>
+                  <Link to="/edit" state={{ data: [aid, "answers", data.id] }}>
                     Edit
                   </Link>
                 </div>
               ) : null}
-              <div>
-                <Link to="/question" className="none">
-                  Follow
-                </Link>
-              </div>
+              {Number(cookie.get("userId")) !== answerData.memberId ? (
+                <div>
+                  <Link to="/question" className="none">
+                    Follow
+                  </Link>
+                </div>
+              ) : null}
+              {Number(cookie.get("userId")) === answerData.memberId ? (
+                <div>
+                  <Link to="/edit" state={{ data: [data.id, "questions"] }}>
+                    Delete
+                  </Link>
+                </div>
+              ) : null}
             </div>
             <div className="profile">
-              <img src={answerData.profileImage} alt=""></img>
+              <img src={answerData.profile} alt=""></img>
               <span>{answerData.name}</span>
               <span>
                 answerd{" "}

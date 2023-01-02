@@ -156,7 +156,7 @@ function Tags({
     const filtered = selectedTags.filter((el) => el === newTag);
     if (newTag !== "" && filtered.length === 0 && e.key === "Enter") {
       setSelectedTags([...selectedTags, newTag]);
-      handleTags(selectedTags);
+      handleTags(selectedTags.join(" "));
       e.target.value = "";
     }
     handleIsWritten("Tags");

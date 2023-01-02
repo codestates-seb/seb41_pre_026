@@ -8,7 +8,7 @@ import Tags from "../Components/Edit/Tags";
 import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
 import { useState, useRef, useEffect } from "react";
 import Cookie from "../util/cookie";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StyledDiv = styled.div`
   margin: 0px 0px 100px 24px;
@@ -44,27 +44,32 @@ const StylmedMain = styled.main`
   }
 `;
 
-function Edit({ type }) {
+function Edit() {
   const [isFocus, setIsFocus] = useState(0);
   const [isWritten, setIsWritten] = useState([]);
   const [title, setTitle] = useState("");
   const [problem, setProblem] = useState("");
   const [expect, setExpect] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState("");
   const [prevTags, setPrevTags] = useState([]);
   const cookie = new Cookie();
   const compRef = useRef([]);
+  const [id, type, origin] = useLocation().state.data;
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/27"
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/${type}/${id}`
       )
       .then((res) => {
-        setTitle(res.data.data.title);
-        setProblem(res.data.data.problem);
-        setExpect(res.data.data.expecting);
-        setPrevTags(res.data.data.tags.split(" "));
+        if (type === "questions") {
+          setTitle(res.data.data.title);
+          setProblem(res.data.data.problem);
+          setExpect(res.data.data.expecting);
+          setPrevTags(res.data.data.tags.split(" "));
+          setTags(res.data.data.tags);
+        } else setProblem(res.data.data.answerContent);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -90,7 +95,6 @@ function Edit({ type }) {
         break;
     }
 
-    console.log(ref);
     ref.focus();
   };
 
@@ -114,24 +118,30 @@ function Edit({ type }) {
     setTags(tag);
   };
 
-  const renderType = () => {
-    return type === "q";
-  };
-
   const handleSubmit = () => {
+    const data =
+      type === "questions"
+        ? {
+            mid: Number(cookie.get("userId")),
+            problem: problem,
+            expecting: expect,
+            title: title,
+            tags: tags,
+          }
+        : {
+            answerId: id,
+            answerContent: problem,
+          };
+
     axios
       .patch(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/27",
-        {
-          mid: cookie.get("userId"),
-          problem: problem,
-          expecting: expect,
-          title: title,
-          tags: tags,
-        }
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/${type}/${id}`,
+        data
       )
       .then((res) => {
-        console.log(res);
+        console.log(id);
+        if (type === "questions") navigate(`/question`, { state: { qid: id } });
+        else navigate(`/question`, { state: { qid: origin } });
       })
       .catch((e) => {
         console.log(e);
@@ -150,7 +160,7 @@ function Edit({ type }) {
   return (
     <StylmedMain>
       <Header />
-      {renderType ? (
+      {type === "questions" ? (
         <div>
           <Title
             isFocus={isFocus}
@@ -163,33 +173,34 @@ function Edit({ type }) {
           />
         </div>
       ) : null}
-      {renderType ? (
-        <div>
-          <Problem
-            isFocus={isFocus}
-            handleIsFocus={handleIsFocus}
-            problem={problem}
-            handleProblem={handleProblem}
-            isWritten={isWritten}
-            handleIsWritten={handleIsWritten}
-            compRef={compRef}
-            setProblem={setProblem}
-            setIsWritten={setIsWritten}
-          />
-        </div>
-      ) : null}
       <div>
-        <Expect
+        <Problem
           isFocus={isFocus}
           handleIsFocus={handleIsFocus}
-          expect={expect}
-          handleExpect={handleExpect}
+          problem={problem}
+          handleProblem={handleProblem}
           isWritten={isWritten}
           handleIsWritten={handleIsWritten}
           compRef={compRef}
+          setProblem={setProblem}
+          setIsWritten={setIsWritten}
+          type={type}
         />
       </div>
-      {renderType ? (
+      {type === "questions" ? (
+        <div>
+          <Expect
+            isFocus={isFocus}
+            handleIsFocus={handleIsFocus}
+            expect={expect}
+            handleExpect={handleExpect}
+            isWritten={isWritten}
+            handleIsWritten={handleIsWritten}
+            compRef={compRef}
+          />
+        </div>
+      ) : null}
+      {type === "questions" ? (
         <div>
           <Tags
             isFocus={isFocus}

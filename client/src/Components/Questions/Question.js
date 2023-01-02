@@ -94,37 +94,21 @@ const Info = styled.div`
   }
 
   .content-item-profile {
-    align-items: flex-start;
     display: flex;
-    felx-wrap: wrap;
-    font-size: 13px;
-    justify-content: flex-end;
-    text-align: left;
-    vertical-align: baseline;
-    margin-left: auto;
-    padding: 4px;
-    border-radius: 3px;
+    align-items: center;
+    margin: 0px 0px 0px auto;
+    font-size: 12px;
+    color: #6a737c;
     img {
       width: 22px;
       height: 22px;
       border-radius: 2px;
-      margin: 1px;
-    }
-    span {
-      margin: 2px;
-      font-size: 12px;
-      color: #6a737c;
+      margin: 0px 5px 0px 0px;
     }
   }
 `;
 
 function Question({ question }) {
-  let tags = [];
-
-  if (question.tags) {
-    tags = question.tags.split(" ");
-  }
-
   return (
     <QuestionContainer>
       <SummaryStats>
@@ -148,25 +132,27 @@ function Question({ question }) {
         </div>
       </SummaryStats>
       <SummaryContent>
-        <Link
-          to={"/question"}
-          state={{ qid: question.questionId, mid: question.mid }}
-        >
+        <Link to={"/question"} state={{ qid: question.questionId }}>
           {question.title}
         </Link>
         <div className="content">{question.problem}</div>
         <Info>
           <div className="content-item-tags">
-            <ul>
-              {tags.map((tag, idx) => (
-                <li key={idx}>{tag}</li>
-              ))}
-            </ul>
+            {question.tags ? (
+              <ul>
+                {question.tags.split(" ").map((tag, idx) => (
+                  <li key={idx}>{tag}</li>
+                ))}
+              </ul>
+            ) : (
+              ""
+            )}
           </div>
           <div className="content-item-profile">
             <img src={question.profile} alt=""></img>
-            <span>{question.name}</span>
-            <span>asked {setDateFormat(question.createdAt)}</span>
+            <span>
+              {question.name} | {setDateFormat(question.createdAt)}
+            </span>
           </div>
         </Info>
       </SummaryContent>

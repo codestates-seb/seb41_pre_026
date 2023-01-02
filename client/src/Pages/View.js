@@ -10,6 +10,7 @@ import EditAnswer from "../Components/View/EditAnswer";
 import setDateFormat from "../util/setDateFormat";
 
 import styled from "styled-components";
+import Cookie from "../util/cookie";
 
 const Container = styled.div`
   max-width: 1036px;
@@ -128,15 +129,16 @@ function View({ isLogin }) {
   const score = data.score;
   const vote = data.vote;
   const subject = "questions";
+  const cookie = new Cookie();
 
   const navigate = useNavigate();
   const qid = useLocation().state.qid;
-  const mid = useLocation().state.mid;
+  const mid = cookie.get("userId");
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/${qid}?mid=${mid}`,
+      url: `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/${qid}`,
     }).then((res) => {
       setData(res.data.data);
       setAnswers(res.data.data.answers);
@@ -210,9 +212,9 @@ function View({ isLogin }) {
               ? answers.map((answerData, idx) => (
                   <Answer
                     key={idx}
+                    data={data}
                     answerData={answerData}
                     isLogin={isLogin}
-                    handleChange={handleChange}
                   />
                 ))
               : null}

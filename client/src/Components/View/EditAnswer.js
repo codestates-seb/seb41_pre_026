@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import Editor from "../Share/Editor";
 import axios from "axios";
+import Cookie from "../../util/cookie";
 
 const EditorContainer = styled.div`
   box-sizing: border-box;
@@ -26,13 +27,14 @@ const EditorContainer = styled.div`
 `;
 function EditAnswer({ handleChange, qid }) {
   const [value, setValue] = useState("**Hello world!!!**");
+  const cookie = new Cookie();
 
   const handleClick = () => {
     axios({
       method: "post",
       url: "http://43.200.68.32:8080/answers/",
       data: {
-        mid: 3,
+        mid: cookie.get("userId"),
         qid,
         answerContent: value,
       },
