@@ -6,11 +6,12 @@ import Problem from "../Components/Edit/Problem";
 import Expect from "../Components/Edit/Expect";
 import Tags from "../Components/Edit/Tags";
 import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Cookie from "../util/cookie";
+import { useLocation } from "react-router-dom";
 
 const StyledDiv = styled.div`
-  margin: 0px 0px 100px 0px;
+  margin: 0px 0px 100px 24px;
 
   button:nth-child(2) {
     margin: 0px 0px 0px 16px;
@@ -50,8 +51,23 @@ function Edit({ type }) {
   const [problem, setProblem] = useState("");
   const [expect, setExpect] = useState("");
   const [tags, setTags] = useState([]);
+  const [prevTags, setPrevTags] = useState([]);
   const cookie = new Cookie();
   const compRef = useRef([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/27"
+      )
+      .then((res) => {
+        setTitle(res.data.data.title);
+        setProblem(res.data.data.problem);
+        setExpect(res.data.data.expecting);
+        setPrevTags(res.data.data.tags.split(" "));
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   const handleIsFocus = (isFocus) => {
     setIsFocus(isFocus);
@@ -105,19 +121,20 @@ function Edit({ type }) {
   const handleSubmit = () => {
     axios
       .patch(
-        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions",
+        "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/27",
         {
           mid: cookie.get("userId"),
           problem: problem,
           expecting: expect,
           title: title,
+          tags: tags,
         }
       )
-      .then(function (response) {
-        console.log(response);
+      .then((res) => {
+        console.log(res);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -182,20 +199,15 @@ function Edit({ type }) {
             isWritten={isWritten}
             handleIsWritten={handleIsWritten}
             compRef={compRef}
+            prevTags={prevTags}
           />
         </div>
       ) : null}
       <StyledDiv ref={(el) => (compRef.current[4] = el)}>
-        <StyledBlueBtn
-          className={isFocus !== 4 ? "disabledBtn" : ""}
-          onClick={handleSubmit}
-        >
+        <StyledBlueBtn onClick={handleSubmit}>
           Review your question
         </StyledBlueBtn>
-        <StyledTransRedBtn
-          className={title.length < 15 ? "disabledBtn" : ""}
-          onClick={handleReset}
-        >
+        <StyledTransRedBtn onClick={handleReset}>
           Discard draft
         </StyledTransRedBtn>
       </StyledDiv>

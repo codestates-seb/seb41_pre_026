@@ -86,13 +86,7 @@ function Expect({
   };
 
   return (
-    <StyledTitleContainer
-      className={
-        isFocus !== 2 && !isWritten.find((el) => el === "Expect")
-          ? "disabledDiv"
-          : ""
-      }
-    >
+    <StyledTitleContainer>
       <StyledWrapper>
         <label htmlFor="Expect">
           What did you try and what were you expecting?

@@ -4,6 +4,7 @@ import axios from "axios";
 import { StyledWhiteBtn } from "../Share/Button";
 import cake from "../../Assets/cake.png";
 import clock from "../../Assets/clock.png";
+// import Cookie from "../../util/cookie";
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -109,6 +110,7 @@ const StyledBtnDiv = styled.div`
 function Header({ handleSelect, handleToEdit, userId }) {
   const [selecBtn, setSelecBtn] = useState(1);
   const [memberInfo, setMemberInfo] = useState([]);
+  // const cookie = new Cookie();
 
   const handleBtn = (e) => {
     setSelecBtn(e.target.id);

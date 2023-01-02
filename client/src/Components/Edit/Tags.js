@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StyledTitleContainer = styled.div`
   display: flex;
@@ -127,13 +127,16 @@ export const StyledTagsInput = styled.div`
 function Tags({
   isFocus,
   handleIsFocus,
-  tags,
   handleTags,
-  isWritten,
   handleIsWritten,
   compRef,
+  prevTags,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
+
+  useEffect(() => {
+    if (prevTags) setSelectedTags(prevTags);
+  }, [prevTags]);
 
   const handleOnFocus = () => {
     handleIsFocus(3);
@@ -161,13 +164,7 @@ function Tags({
 
   return (
     <StyledTitleContainer>
-      <div
-        className={
-          isFocus !== 3 && !isWritten.find((el) => el === "Tags")
-            ? "disabledDiv"
-            : ""
-        }
-      >
+      <div>
         <StyledWrapper>
           <label htmlFor="tags">Tags</label>
           <label htmlFor="tags">
@@ -198,11 +195,6 @@ function Tags({
                 !selectedTags.length ? "e.g. (Angular database swift)" : ""
               }
               onFocus={handleOnFocus}
-              disabled={
-                isFocus !== 3 && !isWritten.find((el) => el === "Tags")
-                  ? "disabled"
-                  : ""
-              }
             />
           </StyledTagsInput>
           {isFocus === 3 ? (
