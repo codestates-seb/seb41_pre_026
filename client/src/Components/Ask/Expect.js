@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Help from "./Help";
+import MDEditor from "@uiw/react-md-editor";
 import { StyledBlueBtn } from "../Share/Button";
+import { useEffect } from "react";
 
 const StyledTitleContainer = styled.div`
   display: flex;
@@ -16,11 +18,6 @@ const StyledTitleContainer = styled.div`
 
   .visible {
     display: "";
-  }
-
-  .disabledDiv {
-    cursor: not-allowed;
-    opacity: 0.3;
   }
 `;
 
@@ -47,42 +44,39 @@ const StyledWrapper = styled.div`
     margin: 0px 0px 4px 0px;
   }
 
-  textarea {
-    width: 760px;
-    font-size: 13px;
-    border: 1px solid #babfc3;
-    border-radius: 3px;
-    padding: 7.8px 9.1px;
-    outline-color: #0074cc;
-  }
-
-  textarea:focus {
-    border: 1px solid #379fef;
-    outline: 4px solid #e1ecf4;
-  }
-
   button {
     width: 50px;
     height: 38px;
     margin: 8px 0px 0px 0px;
   }
-`;
 
+  .active {
+    border: 1px solid #379fef;
+    outline: 4px solid #e1ecf4;
+  }
+`;
 function Expect({
   isFocus,
   handleIsFocus,
   expect,
   handleExpect,
-  isWritten,
   handleIsWritten,
   compRef,
 }) {
+  useEffect(() => {
+    setTimeout(() => {
+      compRef.current[2].textarea.onfocus = () => {
+        handleOnFocus();
+      };
+    }, 1);
+  }, []);
+
   const handleOnFocus = () => {
     handleIsFocus(2);
   };
 
-  const handleOnChange = (event) => {
-    handleExpect(event.target.value);
+  const handleOnChange = (value) => {
+    handleExpect(value);
     handleIsWritten("Expect");
   };
 
@@ -92,13 +86,7 @@ function Expect({
 
   return (
     <StyledTitleContainer>
-      <div
-        className={
-          isFocus !== 2 && !isWritten.find((el) => el === "Expect")
-            ? "disabledDiv"
-            : ""
-        }
-      >
+      <div>
         <StyledWrapper>
           <label htmlFor="Expect">
             What did you try and what were you expecting?
@@ -107,17 +95,13 @@ function Expect({
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </label>
-          <textarea
-            ref={(el) => (compRef.current[2] = el)}
-            onFocus={handleOnFocus}
-            onChange={handleOnChange}
+          <MDEditor
+            className={isFocus === 2 ? "active" : ""}
             value={expect}
-            disabled={
-              isFocus !== 2 && !isWritten.find((el) => el === "Expect")
-                ? "disabled"
-                : ""
-            }
-          ></textarea>
+            onChange={handleOnChange}
+            preview={"edit"}
+            ref={(el) => (compRef.current[2] = el)}
+          />
           {expect.length > 20 && isFocus === 2 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}
