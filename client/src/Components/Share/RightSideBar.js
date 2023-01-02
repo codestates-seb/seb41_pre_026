@@ -74,7 +74,7 @@ const BodyWrapper = styled.div`
   }
 `;
 
-const S_FaviconStack = styled.div`
+const StyledStackExchangeIcon = styled.div`
   background-position: -2px -6118px;
   &.flow {
     background-position: 0 -6156px;
@@ -90,14 +90,7 @@ const S_FaviconStack = styled.div`
 
 function RightSideBar() {
   const location = useLocation().pathname;
-  const unSideList = [
-    "/login",
-    "/sign",
-    "/ask",
-    "/tags",
-    "/member",
-    // "/question",
-  ];
+  const unSideList = ["/login", "/sign", "/ask", "/tags", "/member"];
 
   return (
     <>
@@ -140,7 +133,7 @@ function RightSideBar() {
             <StyledTitle>Featured on Meta</StyledTitle>
             <StyledBody>
               <BodyWrapper>
-                <S_FaviconStack></S_FaviconStack>
+                <StyledStackExchangeIcon />
                 Navigation and UI research starting soon
               </BodyWrapper>
             </StyledBody>
