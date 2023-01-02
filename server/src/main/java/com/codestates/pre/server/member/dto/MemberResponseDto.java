@@ -12,6 +12,7 @@ public class MemberResponseDto {
 
 	private String profileImage;
 
+
 	/*
 	private List<Question> questions;
 

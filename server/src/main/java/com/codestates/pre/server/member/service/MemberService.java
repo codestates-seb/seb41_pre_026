@@ -42,6 +42,8 @@ public class MemberService {
 		// 암호화 된 패스워드를 password 필드에 다시 할당
 		member.setPassword(encryptedPassword);
 
+		member.setProfileText("Hi, I'm " + member.getName() + "!");
+
 		// DB에 User Role 저장
 		List<String> roles = authorityUtils.createRoles(member.getEmail());
 		member.setRoles(roles);

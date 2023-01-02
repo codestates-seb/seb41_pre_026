@@ -40,6 +40,8 @@ public class Member {
 
 	private String profileImage;
 
+	private String profileText ;
+
 	@Transient
 	private Long questionCount;
 
@@ -56,10 +58,12 @@ public class Member {
 	@OneToMany(mappedBy = "member")
 	private List<Answer> answers = new ArrayList<>();
 
-	public Member(String name, String email, String password) {
+	public Member(String name, String email, String password, String profileImage, String profileText) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.profileImage = profileImage;
+		this.profileText = profileText;
 	}
 
 	//  양방향

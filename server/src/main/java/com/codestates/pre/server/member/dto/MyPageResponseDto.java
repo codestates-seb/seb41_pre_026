@@ -10,6 +10,7 @@ public class MyPageResponseDto {
 	private String name;
 	private String email;
 	private String profileImage;
+	private String profileText;
 	private Long questionCount;
 	private Long answerCount;
 }
