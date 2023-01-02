@@ -99,7 +99,6 @@ const Info = styled.div`
     margin: 0px 0px 0px auto;
     font-size: 12px;
     color: #6a737c;
-
     img {
       width: 22px;
       height: 22px;

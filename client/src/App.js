@@ -27,6 +27,7 @@ function App() {
   const cookie = new Cookie();
   const [isLogin, setIsLogin] = useState(cookie.get("userId"));
   const location = useLocation().pathname;
+
   const handleLogin = (value) => {
     setIsLogin(value);
   };

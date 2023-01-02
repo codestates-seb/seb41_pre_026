@@ -94,7 +94,13 @@ function Answer({ answerData, isLogin, data }) {
     <AnswerContainer>
       <div className="answer-content">
         <div className="answer-content-vote">
-          <Vote score={score} vote={vote} subject={subject} aid={aid} />
+          <Vote
+            score={score}
+            vote={vote}
+            subject={subject}
+            aid={aid}
+            handleChange={handleChange}
+          />
         </div>
         <div className="answer-content-post">
           <Editor value={content} setValue={setContent} />

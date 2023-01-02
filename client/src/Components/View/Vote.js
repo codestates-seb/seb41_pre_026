@@ -54,7 +54,7 @@ function Vote({ score, vote, subject, qid, aid, handleChange }) {
 
   const handleClickUp = () => {
     // isUpClicked === "u" ? setIsUpClicked(null) : setIsUpClicked("u");
-
+    console.log("up");
     axios({
       method: `post`, // `${method}`
       url: `http://43.200.68.32:8080/${subject}/upVote/${
@@ -67,7 +67,7 @@ function Vote({ score, vote, subject, qid, aid, handleChange }) {
 
   const handleClickDown = () => {
     // isDownClicked === "d" ? setIsDownClicked(null) : setIsDownClicked("d");
-
+    console.log("down");
     axios({
       method: "post", //`${method}`
       url: `http://43.200.68.32:8080/${subject}/downVote/${
@@ -82,7 +82,7 @@ function Vote({ score, vote, subject, qid, aid, handleChange }) {
 
   return (
     <VoteContainer>
-      <button onClick={handleClickUp} disabled>
+      <button onClick={handleClickUp}>
         <svg className="arrow-up">
           <path />
         </svg>
