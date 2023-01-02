@@ -28,7 +28,6 @@ public class QuestionService {
 	private final CustomBeanUtils<Question> beanUtils;
 	private final QuestionRepository questionRepository;
 	private final MemberService memberService;
-	private final AnswerRepository answerRepository;
 
 	public Question creatQuestion(Question question) {
 		verifyStrLength(question);
@@ -53,9 +52,8 @@ public class QuestionService {
 		return questionRepository.save(updatedQuestion);
 	}
 
-	public Question findQuestion(long questionsId, long mid) {
+	public Question findQuestion(long questionsId) {
 		Question findQuestion = findVerifiedQuestion(questionsId);
-		findQuestion.setMid(mid);
 		findQuestion.plusView();
 
 		return findQuestion;

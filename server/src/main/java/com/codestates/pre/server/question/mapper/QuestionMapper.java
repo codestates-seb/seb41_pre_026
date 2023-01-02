@@ -69,7 +69,7 @@ public interface QuestionMapper {
 		QuestionGetResponseDto questionGetResponseDto = new QuestionGetResponseDto();
 
 		questionGetResponseDto.setId(question.getQuestionId());
-		questionGetResponseDto.setMid(question.getMid());
+		questionGetResponseDto.setMid(question.getMember().getMemberId());
 		questionGetResponseDto.setTitle(question.getTitle());
 		questionGetResponseDto.setProblem(question.getProblem());
 		questionGetResponseDto.setExpecting(question.getExpecting());

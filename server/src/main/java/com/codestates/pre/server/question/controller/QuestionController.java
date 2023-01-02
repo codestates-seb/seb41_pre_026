@@ -7,6 +7,7 @@ import javax.validation.constraints.Positive;
 
 import com.codestates.pre.server.answer.dto.AnswerResponseDto;
 import com.codestates.pre.server.answer.entity.Answer;
+import com.codestates.pre.server.question.dto.QuestionGetDto;
 import com.codestates.pre.server.question.dto.QuestionResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -64,10 +65,10 @@ public class QuestionController {
 
 	@GetMapping("/{question-id}")
 	public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId,
-									  @RequestParam long mid) {
+									  @RequestBody QuestionGetDto questionGetDto) {
 		// TODO Member 엔티티 매핑 이후 @RequestParam 으로 mid(memberId)를 받아오는 코드가 추가되어야 합니다.
 
-		Question question = questionService.findQuestion(questionId, mid);
+		Question question = questionService.findQuestion(questionId);
 
 		return new ResponseEntity(
 				new SingleResponseDto(mapper.questionToQuestionGetResponseDto(question)), HttpStatus.OK
