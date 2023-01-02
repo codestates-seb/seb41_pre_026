@@ -3,6 +3,7 @@ package com.codestates.pre.server.question.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import com.codestates.pre.server.answer.entity.Answer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -82,6 +83,32 @@ public class QuestionService {
 			() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
 		return question;
 	}
+
+	// 질문 추천
+	public Question upVote(long questionId) {
+		Question findQuestion = findVerifiedQuestion(questionId);
+		findQuestion.setScore(findQuestion.getScore() + 1);
+		Question updateQuestion = questionRepository.save(findQuestion);
+
+		return updateQuestion;
+}
+
+	// 질문 비추천
+	public Question downVote(long questionId) {
+		Question findQuestion = findVerifiedQuestion(questionId);
+		findQuestion.setScore(findQuestion.getScore() - 1);
+		Question updateQuestion = questionRepository.save(findQuestion);
+
+		return updateQuestion;
+	}
+
+//	public Answer downVote(long answerId) {
+//		Answer findAnswer = findVerifiedAnswer(answerId);
+//		findAnswer.setScore(findAnswer.getScore() - 1);
+//		Answer updateAnswer = answerRepository.save(findAnswer);
+//
+//		return updateAnswer;
+//	}
 
 
 	private void verifyStrLength(Question question) {
