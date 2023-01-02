@@ -1,57 +1,23 @@
+// import useRequest from "./Components/Share/Request";
 import Questions from "./Pages/Questions";
-import styled from "styled-components";
-import { Route, Routes, useLocation } from "react-router-dom";
-import Navigation from "./Components/Share/Navigation";
-import LeftSideBar from "./Components/Share/LeftSideBar";
-import RightSideBar from "./Components/Share/RightSideBar";
-import { useState } from "react";
-import Login from "./Pages/Login";
-import Sign from "./Pages/Sign";
-import Ask from "./Pages/Ask";
-import Home from "./Pages/Home";
-import Tags from "./Pages/Tags";
-import Member from "./Pages/Member";
-import View from "./Pages/View";
-import Cookie from "./util/cookie";
-// import Cookie from "./util/cookie";
-
-const StyledFrame = styled.div`
-  display: flex;
-  position: relative;
-  top: 51px;
-  justify-content: center;
-`;
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const cookie = new Cookie();
-  const [isLogin, setIsLogin] = useState(cookie.get("userId"));
-  const location = useLocation().pathname;
+  // const url = "http://43.200.68.32:8080";
+  // const option = {
+  //   method: "GET",
+  //   body: "",
+  // };
 
-  const handleLogin = (value) => {
-    setIsLogin(value);
-  };
+  // console.log(useRequest(url, option));
 
   return (
-    <>
-      <Navigation isLogin={isLogin} handleLogin={handleLogin} />
-      <StyledFrame>
-        {location === "/" && !isLogin ? null : <LeftSideBar />}
-        <Routes>
-          <Route path={"/"} element={<Home isLogin={isLogin} />} />
-          <Route path={"/questions"} element={<Questions />} />
-          <Route path={"/question"} element={<View />} />
-          <Route
-            path={"/login"}
-            element={<Login handleLogin={handleLogin} />}
-          />
-          <Route path={"/sign"} element={<Sign />} />
-          <Route path={"/ask"} element={<Ask />} />
-          <Route path={"/tags"} element={<Tags />} />
-          <Route path={"/member"} element={<Member />} />
-        </Routes>
-        {location === "/" && !isLogin ? null : <RightSideBar />}
-      </StyledFrame>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<Questions />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
+
 export default App;
