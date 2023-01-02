@@ -90,6 +90,10 @@ const StyledNav = styled.div`
     font-weight: 400;
     color: #696969;
   }
+
+  .non-active {
+    pointer-events: none;
+  }
 `;
 
 const StyledSearch = styled.div`
@@ -273,7 +277,9 @@ function Navigation({ isLogin, handleLogin }) {
           <ul>
             {isLogin ? (
               <li>
-                <Link to={"/member"}>Products</Link>
+                <Link to={location} className="non-active">
+                  Products
+                </Link>
               </li>
             ) : (
               <>
@@ -281,7 +287,9 @@ function Navigation({ isLogin, handleLogin }) {
                   <a href="https://stackoverflow.co/">About</a>
                 </li>
                 <li>
-                  <Link to={location}>Products</Link>
+                  <Link to={location} className="non-active">
+                    Products
+                  </Link>
                 </li>
                 <li>
                   <a href="https://stackoverflow.co/teams/">For Teams</a>

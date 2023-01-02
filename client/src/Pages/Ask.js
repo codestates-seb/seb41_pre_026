@@ -8,6 +8,7 @@ import Tags from "../Components/Ask/Tags";
 import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
 import { useState, useRef } from "react";
 import Cookie from "../util/cookie";
+import { Navigate } from "react-router-dom";
 
 const StyledDiv = styled.div`
   margin: 0px 0px 100px 0px;
@@ -117,10 +118,12 @@ function Ask() {
           problem: problem,
           expecting: expect,
           title: title,
+          tags: tags.join(" "),
         }
       )
-      .then(function (response) {
-        console.log(response);
+      .then((res) => {
+        Navigate({ to: "/question", state: { id: res.data.data.id } });
+        console.log(res);
       })
       .catch(function (error) {
         console.log(error);

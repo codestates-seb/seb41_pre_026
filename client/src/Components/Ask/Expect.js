@@ -69,7 +69,7 @@ function Expect({
         handleIsFocus(2);
       };
     }, 1);
-  }, []);
+  }, [compRef, handleIsFocus]);
 
   const handleOnChange = (value) => {
     handleExpect(value);

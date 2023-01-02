@@ -70,7 +70,7 @@ function Problem({
         handleIsFocus(1);
       };
     }, 1);
-  }, []);
+  }, [compRef, handleIsFocus]);
 
   const handleOnChange = (value) => {
     handleProblem(value);
