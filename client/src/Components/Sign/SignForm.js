@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { StyledBlueBtn } from "../Share/Button";
 import SginInput from "./SignInput";
 import { ReCAPTCHA } from "react-google-recaptcha";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -92,13 +92,13 @@ function SignForm() {
   const [nickName, setNickName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [checkName, setCheckName] = useState(false);
-  const [checkEmail, setCheckEmail] = useState(false);
-  const [checkPwd, setCheckPwd] = useState(false);
+  const [checkName, setCheckName] = useState(true);
+  const [checkEmail, setCheckEmail] = useState(true);
+  const [checkPwd, setCheckPwd] = useState(true);
   const refs = useRef([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const handleCheck = () => {
     const idRegExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -119,7 +119,7 @@ function SignForm() {
     } else {
       setCheckPwd(false);
     }
-  }, [email, pwd, nickName]);
+  };
 
   const handleNickName = (value) => {
     setNickName(value);
@@ -137,17 +137,17 @@ function SignForm() {
   };
 
   const handleSubmit = () => {
-    if (!checkName) {
+    if (nickName.length === 0 || !checkName) {
       refs.current[0].focus();
       return;
     }
 
-    if (!checkEmail) {
+    if (email.length === 0 || !checkEmail) {
       refs.current[1].focus();
       return;
     }
 
-    if (!checkPwd) {
+    if (checkPwd.length === 0 || !checkPwd) {
       refs.current[2].focus();
       return;
     }
@@ -181,6 +181,7 @@ function SignForm() {
         handler={handleNickName}
         place="Write.."
         check={checkName}
+        handleCheck={handleCheck}
         refs={refs}
       />
       <SginInput
@@ -188,6 +189,7 @@ function SignForm() {
         handler={handleEmail}
         place="aaa@bbb.ccc"
         check={checkEmail}
+        handleCheck={handleCheck}
         refs={refs}
       />
       <SginInput
@@ -195,12 +197,13 @@ function SignForm() {
         handler={handlePwd}
         place="Write.."
         check={checkPwd}
+        handleCheck={handleCheck}
         refs={refs}
       />
       <p>
         Passwords must contain at least eight characters,
         <br />
-        including at least 1 letter and 1 number.
+        including at least 1 letter and 1 number and least 1 exclamation mark.
       </p>
       <ReCAPTCHA
         size="compact"

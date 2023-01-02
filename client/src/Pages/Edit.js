@@ -141,8 +141,8 @@ function Edit() {
       )
       .then((res) => {
         console.log(id);
-        if (type === "questions") navigate(`/question`, { state: { qid: id } });
-        else navigate(`/question`, { state: { qid: origin } });
+        if (type === "questions") navigate("/question", { state: { qid: id } });
+        else navigate("/question", { state: { qid: origin } });
       })
       .catch((e) => {
         console.log(e);

@@ -42,15 +42,18 @@ const StyledForm = styled.div`
 
   .margin {
     margin: 0px 0px 15px 0px;
-    border: 1px solid #babfc4;
+  }
+
+  .red {
+    border: 1px solid red;
   }
 `;
 
 function LoginForm({ handleLogin }) {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
-  const [checkId, setCheckId] = useState(false);
-  const [checkPw, setCheckPw] = useState(false);
+  const [checkId, setCheckId] = useState(true);
+  const [checkPw, setCheckPw] = useState(true);
   const idInput = useRef(null);
   const pwInput = useRef(null);
   const navigate = useNavigate();
@@ -60,6 +63,9 @@ function LoginForm({ handleLogin }) {
   const handlePw = (e) => setPw(e.target.value);
 
   useEffect(() => {
+    console.log(id, pw);
+  }, [id, pw]);
+  const handleCheck = () => {
     const idRegExp =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     if (idRegExp.test(id)) {
@@ -73,15 +79,15 @@ function LoginForm({ handleLogin }) {
     } else {
       setCheckPw(false);
     }
-  }, [id, pw]);
+  };
 
   const handleSubmit = () => {
-    if (!checkId) {
+    if (id.length === 0 || !checkId) {
       idInput.current.focus();
       return;
     }
 
-    if (!checkPw) {
+    if (pw.length === 0 || !checkPw) {
       pwInput.current.focus();
       return;
     }
@@ -101,24 +107,26 @@ function LoginForm({ handleLogin }) {
         handleLogin(cookie.get("userId"));
         navigate("/");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => alert("유효하지 않은 사용자 정보입니다."));
   };
 
   return (
     <StyledForm>
       <LoginInput
-        handleId={handleId}
         place="aaa@bbb.ccc"
         label="Email"
-        checkId={checkId}
+        handleVal={handleId}
+        handleCheck={handleCheck}
+        check={checkId}
         refs={[idInput, pwInput]}
         handleSubmit={handleSubmit}
       />
       <LoginInput
-        handlePw={handlePw}
         place="Write.."
         label="Password"
-        checkPw={checkPw}
+        handleVal={handlePw}
+        handleCheck={handleCheck}
+        check={checkPw}
         refs={[idInput, pwInput]}
         handleSubmit={handleSubmit}
       />

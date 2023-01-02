@@ -17,7 +17,7 @@ const StyledInput = styled.input`
     line-height: 2;
   }
 `;
-function SignInput({ label, handler, place, check, refs }) {
+function SignInput({ label, handler, place, check, refs, handleCheck }) {
   const [isFocused, setIsFocused] = useState(false);
 
   const insertRef = () => {
@@ -38,7 +38,10 @@ function SignInput({ label, handler, place, check, refs }) {
         id={label}
         onFocus={() => setIsFocused(!isFocused)}
         onBlur={() => setIsFocused(!isFocused)}
-        onChange={(e) => handler(e.target.value)}
+        onChange={(e) => {
+          handleCheck();
+          handler(e.target.value);
+        }}
         placeholder={place}
         ref={(el) => (refs.current[insertRef()] = el)}
       ></StyledInput>

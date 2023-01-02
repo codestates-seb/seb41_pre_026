@@ -15,20 +15,14 @@ const Container = styled.div`
   max-width: 1035px;
   background-color: #ffffff;
   padding: 20px 0px 0px 20px;
-  box-sizing: border-box;
   display: block;
   .none {
     pointer-events: none;
   }
   .question-header {
-    box-sizing: border-box;
     display: flex;
-    flex-flow: row nowrap;
-    text-align: left;
     justify-content: space-between;
-    margin-bottom: 0px;
-    padding: 0px;
-    line-height: 17px;
+    align-items: center;
     .question-title {
       display: block;
       margin-bottom: 8px;
@@ -37,9 +31,15 @@ const Container = styled.div`
       color: #3b4045;
       font-size: 24px;
       font-weight: 400;
+      line-height: 1.5;
+      line-break: auto;
     }
     .button-container {
       margin: 0px 0px 0px 12px;
+      button {
+        width: 103.25px;
+        height: 38px;
+      }
     }
     a {
       cursor: pointer;
@@ -80,6 +80,7 @@ const Container = styled.div`
     grid-template-columns: 52px 647px;
     text-align: left;
     vertical-align: baseline;
+    margin: 20px 0px 0px 0px;
 
     .question-content-vote {
       display: block;

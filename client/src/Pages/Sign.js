@@ -8,6 +8,7 @@ const StyledDiv = styled.div`
   align-items: center;
   width: 100%;
   height: 752px;
+  margin: 0px 0px 100px 0px;
 `;
 function Sign() {
   return (
