@@ -34,6 +34,8 @@ public class Question {
 
 	private int answerCount = 0;
 
+	private int view = 0;
+
 	private LocalDateTime createdAt;
 
 	private LocalDateTime modifiedAt = LocalDateTime.now();
@@ -65,5 +67,9 @@ public class Question {
 
 	public void minusAnswerCount () {
 		answerCount--;
+	}
+
+	public void plusView() {
+		view++;
 	}
 }

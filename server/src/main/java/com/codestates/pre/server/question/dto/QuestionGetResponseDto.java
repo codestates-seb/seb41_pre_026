@@ -20,12 +20,9 @@ public class QuestionGetResponseDto {
 	private String expecting;
 	private String tags;
 	private int score;
-	private String vote;
 	private LocalDateTime created;
 	private LocalDateTime modified;
-
 	private long answerCount;
 	private List<AnswerResponseDto> answers;
-
 	private long view;
 }
