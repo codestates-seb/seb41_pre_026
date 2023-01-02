@@ -53,17 +53,16 @@ public class QuestionService {
 		return questionRepository.save(updatedQuestion);
 	}
 
-	@Transactional(readOnly = true)
 	public Question findQuestion(long questionsId, long mid) {
 		Question findQuestion = findVerifiedQuestion(questionsId);
 		findQuestion.setMid(mid);
+		findQuestion.plusView();
+
 		return findQuestion;
 	}
 
 	@Transactional(readOnly = true)
 	public Page<Question> findQuestions(int page, int size) {
-		// todo answerCount 를 계산하는 로직이 필요합니다.
-
 		return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
 	}
 
