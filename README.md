@@ -16,6 +16,7 @@
 - **팀원 :** 김태현(팀장), 이민훈(부팀장), 진희주, 김혜인, 전예린, 권해정
 - **발표 문서 :** [💁🏻 사용자 요구사항 명세서 ](https://docs.google.com/spreadsheets/d/168JUeKaabCkAvCFBatJvYupZNaH3dFTM/edit?usp=sharing&ouid=109413448814502923968&rtpof=true&sd=true)
 - **배포 링크 :** [💁🏻 배포 링크 ](http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/)
+- **s3 배포 링크 :** [💁🏻 배포 링크 ](http://pre26.s3-website.ap-northeast-2.amazonaws.com/)
 
 
 
