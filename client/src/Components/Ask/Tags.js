@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Help from "./Help";
 import { StyledBlueBtn } from "../Share/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const StyledTitleContainer = styled.div`
   display: flex;
@@ -134,6 +134,12 @@ function Tags({
   compRef,
 }) {
   const [selectedTags, setSelectedTags] = useState([]);
+
+  useEffect(() => {
+    if (tags === undefined) {
+      setSelectedTags([]);
+    }
+  }, [tags]);
 
   const handleOnFocus = () => {
     handleIsFocus(3);
