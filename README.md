@@ -36,8 +36,10 @@
 - 자료 공유, 회의 등과 같은 모든 소통은 디스코드를 이용하고 불가피할 경우 구글미트를 사용합니다. 
 
 
+
 ## 🔧 Skills
 ![Roobits Stack (9)](https://user-images.githubusercontent.com/73211553/195057855-ab580645-ecc4-43dd-b423-a1dd09b5bfcc.png)
+
 
 
 ### Tools
