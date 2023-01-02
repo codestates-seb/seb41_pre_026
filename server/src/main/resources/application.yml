@@ -1,0 +1,26 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  datasource:
+    url: jdbc:h2:mem:test
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+mail:
+  address:
+    admin: pre26@gmail.com
+jwt:
+  key: pre261234567890q1w2e3r4a1s2d3f4g5h61579024628510284759j032958209341753-0456912443639minoiaefqwefteabongqdfasdfhuijujinasdfwegyerinzsfdfwefhaejeongafewogafdgimhaeafdeasgdasfmerong     # GITHUB의 환경변수에서 가져오도록 수정하면 자동배포시 적용됨스
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
