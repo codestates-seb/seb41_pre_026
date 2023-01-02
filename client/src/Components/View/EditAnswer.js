@@ -7,11 +7,9 @@ import Cookie from "../../util/cookie";
 
 const EditorContainer = styled.div`
   box-sizing: border-box;
-  display: block;
-  padding-top: 20px;
   text-align: left;
-  vertical-align: baseline;
-  width: 727px;
+  width: 700px;
+  padding: 20px 20px 0px 0px;
   p {
     font-size: 19px;
     font-weight: 400;

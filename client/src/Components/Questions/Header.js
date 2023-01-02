@@ -7,8 +7,9 @@ const StyledHeader = styled.header`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 15px 20px;
+  padding: 20px 0px 15px 20px;
   border-bottom: 1px solid #dadbdc;
+  margin: 0px 20px 0px 0px;
 
   .top {
     margin: 0px 0px 15px 0px;
@@ -74,7 +75,7 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header({ isRef }) {
+function Header({ isRef, total }) {
   const [selecBtn, setSelecBtn] = useState(1);
   const navigate = useNavigate();
 
@@ -91,7 +92,7 @@ function Header({ isRef }) {
         </StyledBlueBtn>
       </StyledDiv>
       <StyledDiv>
-        <StyledSpan>23,350,032 questions</StyledSpan>
+        <StyledSpan>{total} questions</StyledSpan>
         <StyledBtnDiv select={selecBtn}>
           <button id="1" onClick={handleBtnColor}>
             Newest

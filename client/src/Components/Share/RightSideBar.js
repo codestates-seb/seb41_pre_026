@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 const StyledNav = styled.nav`
-  width: 230px;
+  width: 315px;
   height: auto;
-  margin: 20px 0px 0px 10px;
+  padding: 20px 0px 0px 20px;
 `;
 
 const StyledUl = styled.ul`
@@ -15,7 +15,7 @@ const StyledUl = styled.ul`
   justify-content: flex-start;
   box-shadow: 0 1px 2px #0000000d, 0 1px 4px #0000000d, 0 2px 8px #0000000d;
   list-style: none;
-
+  border-bottom: 1px solid #f1e5bc;
   .borderTop {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
