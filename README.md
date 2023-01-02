@@ -1,30 +1,21 @@
-<h1> 🎥 신스틸러 </h1>
+<h1> 🎥 team26 - 신스틸러 </h1>
 <div  align="center">
-  <img width="40%" src=" " alt="roobits">
+  <img width="40%" src=" " alt="">
 </div>
+![스택오버플로우](https://user-images.githubusercontent.com/109403559/210197169-d2ebddb1-9ba5-4999-b759-63ce4349bc65.png)
+
 </br>
-<h3 align="center">💌 당신의 특별한 하루(D-day)를 위한 단 하나뿐인 게시판, Roobits!</h3>
+<h3 align="center"> StackOverflow Clone </h3>
 
 
 
 - **팀 명 :**  Team 신스틸러
 - **프로젝트 명 :** 스택오버플로우 클론코딩
 - **프로젝트 기간 :** 2022.12.15 - 2022.01.02
-- **한줄 소개 :** 사람들과 함께 D-day에 보여줄 비밀 메시지를 작성할 수 있는 게시판 서비스
 - **팀원 :** 김태현(팀장), 이민훈(부팀장), 진희주, 김혜인, 전예린, 권해정
 - **발표 문서 :** [💁🏻 Roobits 노션 발표 문서](https://www.notion.so/codestates/Roobits-2a698f57f0224b79a417eac587921a0b)
 - **배포 링크 :** [📮 roobits.com](http://roobits.com/)
 
-## 🛫 Intro
-> 🥲 비대면 시대, 만나기 힘든 우리… 그렇지만 특별한 날에는 모두와 추억을 남기고 싶어! 
-> 동고동락한 사람들에게 메시지를 전할 공간이 없을까?
-
-- ✍️ 특별한 날을 **D-day로 정하고** 사람들과 함께 **비밀 메시지**를 남기세요.   
-- 💌 **D-day에 공개**되는 메시지들이 추억을 더 특별하게 만들어줍니다.    
-- ❗️보낸 메시지는 **D-day 단 하루만 볼 수 있어요!** D-day가 지나면 룸이 닫히니까 서두르세요.
-
-
-![IMG_0476 JPG](https://user-images.githubusercontent.com/109403559/210196557-8d7c197b-8cf0-457c-bea9-efe7a3d3429f.jpg)
 
 
 ## 👨‍👩‍👧‍👦 Team
@@ -35,33 +26,16 @@
 |<p align="left">- 로그인 등 인증 처리<br/>- 메인 페이지<br/>- 마이룸 페이지<br/>- 메세지 조회 및 검색<br/>- 배포, 도메인 적용<br/> (S3, Route53)</p>|<p align="left">- 디자인 담당 <br/>- 유저 플로우 작성 <br/>- 룸 페이지 <br/>- 룸 종료 페이지 <br/>- 룸 생성 모달 <br/>- 루빗 생성 모달 <br/>- 기타 반응형 작업 </p>|<p align="left">- 회원 CRUD<br/>- 구글 로그인<br/>- 이메일 중복체크<br/>- 유효 e-mail 체크<br/>- ID/비밀번호 찾기<br/>- 토큰을 이용한 인증<br/>- AWS(EC2,RDS)<br/> 배포환경 구축</p>|<p align="left">- 루빗 CRUD 기능 <br/>- D-day 전/후/당일 <br/> 각각 다른 API 구현 <br/>- 관리자 기능 일부<br/>(조회, 삭제) 구현 <br/>- 룸에서 루빗 관련 <br/> 조회 기능 구현 </p>|<p align="left">- 룸 CRUD 기능<br/>- 룸 관련 제한 기능<br/>- 날씨 외부 API</p>|
 
 
+
 ### 커뮤니케이션 방식
-- 매일 13:30 부터 17:30 사이에는 온라인 상태를 유지합니다.
-- 매일 13시30분에는 진행된 개발에 대한 간단한 브리핑을 진행합니다. 이슈가 없다면 빠르게 끝냅니다.
-- 자료 공유, 회의 등과 같은 모든 소통은 디스코드를 이용하고 급한 경우에만 카카오톡을 이용합니다.
+- 매일 13:00 - 18:00 사이에는 온라인 상태를 유지합니다.
+- 매일 13시 에는 회의를 진행합니다.
+- 자료 공유, 회의 등과 같은 모든 소통은 디스코드를 이용하고 불가피할 경우 구글미트를 사용합니다. 
 
-## 📺 Demo
-![anigif](https://user-images.githubusercontent.com/76886589/195051770-6c55f0af-2212-41f6-b014-0325b18c321d.gif?raw=true)
-
-
-## ✨ Pages & Features
-|메인 페이지|로그인 / 회원가입 페이지|
-|:---:|:---:|
-|<img width="100%" alt="첫 화면 gif" src="https://user-images.githubusercontent.com/89282099/201865342-cf84ffc7-b05e-4d0b-82cd-c6acb17b983d.gif"/>|<img width="100%" alt="로그인 gif" src="https://user-images.githubusercontent.com/89282099/201867817-3740ac91-8b82-46c8-848a-5cc325a349f2.gif"/>|
-|**마이 룸 페이지**|**룸 페이지**|
-|<img width="100%" alt="마이 룸 생성 gif" src="https://user-images.githubusercontent.com/89282099/201868596-423ca88c-9764-4490-8878-29fb5455e123.gif"/>|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201869090-0cb68614-11e7-4aeb-be0f-e563203e58c2.gif"/>|
-|**날씨API 활용한 배경 변화**|**시간대별 하늘 변화**|
-|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201870211-cd6bd086-f794-49c3-bd60-6c851a08b3c9.gif"/>|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201927685-4748db01-df77-4507-9eec-ec1e1a17c915.gif"/>|
-|**루빗(메시지) 생성하기**|**D-day 루빗(메시지) 열람 & 검색**|
-|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201930288-f914ef2f-5d4e-4e65-825e-78cb14f2102e.gif"/>|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201932385-6f061340-085b-469b-8d39-91f7bd5ef072.gif"/>|
-|**룸 종료 페이지(D-day 이후)**|**유효하지 않은 룸 페이지**|
-|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201934365-b0c0fee4-4915-4e9d-ad61-f2d030c7f227.png"/>|<img width="100%" src="https://user-images.githubusercontent.com/89282099/201934412-dccf5c1a-ded9-48a3-af9c-5176d465a2a4.png"/>|
-
-## ➡️ User flow
-<img width="2800" alt="💎 루비츠 User Flow" src="https://user-images.githubusercontent.com/89282099/201778837-ddddd37c-9c2e-4ce1-b6f2-1968f3654a72.png">
 
 ## 🔧 Skills
 ![Roobits Stack (9)](https://user-images.githubusercontent.com/73211553/195057855-ab580645-ecc4-43dd-b423-a1dd09b5bfcc.png)
+
 
 ### Tools
 | Git | Github | Discord |
