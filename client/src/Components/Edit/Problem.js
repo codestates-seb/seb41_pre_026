@@ -63,6 +63,7 @@ function Problem({
   isWritten,
   handleIsWritten,
   compRef,
+  type,
 }) {
   useEffect(() => {
     setTimeout(() => {
@@ -88,7 +89,7 @@ function Problem({
   return (
     <StyledTitleContainer>
       <StyledWrapper>
-        <label htmlFor="problem">What are the details of your problem?</label>
+        <label htmlFor="problem">What are the details of your {type}?</label>
         <label htmlFor="problem">
           Introduce the problem and expand on what you put in the title. Minimum
           20 characters.

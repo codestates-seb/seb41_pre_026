@@ -82,7 +82,7 @@ const PostContainer = styled.div`
   }
 `;
 
-function Post({ data, member, isLogin }) {
+function Post({ data, member }) {
   const cookie = new Cookie();
   let tags = [];
 
@@ -108,9 +108,9 @@ function Post({ data, member, isLogin }) {
               Share
             </Link>
           </div>
-          {isLogin && cookie.get("userId") === data.mid ? (
+          {Number(cookie.get("userId")) === data.mid ? (
             <div>
-              <Link to="/edit" state={{ id: data.id }}>
+              <Link to="/edit" state={{ data: [data.id, "questions"] }}>
                 Edit
               </Link>
             </div>

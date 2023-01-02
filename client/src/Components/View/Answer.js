@@ -82,13 +82,13 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer({ answerData, id, isLogin }) {
+function Answer({ answerData, isLogin, data }) {
   const [content, setContent] = useState(answerData.answerContent);
   const cookie = new Cookie();
   const score = answerData.score;
   const vote = answerData.vote;
   const subject = "answers";
-  const aid = answerData.id;
+  const aid = answerData.answerId;
 
   return (
     <AnswerContainer>
@@ -105,9 +105,10 @@ function Answer({ answerData, id, isLogin }) {
                   Share
                 </Link>
               </div>
-              {isLogin && cookie.get("userId") === answerData.memberId ? (
+              {isLogin &&
+              Number(cookie.get("userId")) === answerData.memberId ? (
                 <div>
-                  <Link to="/edit" state={{ id: aid }}>
+                  <Link to="/edit" state={{ data: [aid, "answers", data.id] }}>
                     Edit
                   </Link>
                 </div>
@@ -119,7 +120,7 @@ function Answer({ answerData, id, isLogin }) {
               </div>
             </div>
             <div className="profile">
-              <img src={answerData.profileImage} alt=""></img>
+              <img src={answerData.profile} alt=""></img>
               <span>{answerData.name}</span>
               <span>
                 answerd{" "}
