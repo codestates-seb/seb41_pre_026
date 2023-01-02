@@ -197,7 +197,7 @@ function Navigation({ isLogin, handleLogin }) {
   const [focused, setFocused] = useState(false);
   const [isFold, setIsFold] = useState(false);
   const location = useLocation().pathname;
-  const unSideList = ["/login", "/sign", "/ask", "/"];
+  const unSideList = ["/login", "/sign", "/ask"];
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import Questions from "./Pages/Questions";
 import styled from "styled-components";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import Login from "./Pages/Login";
 import Sign from "./Pages/Sign";
 import Ask from "./Pages/Ask";
-import Home from "./Pages/Home";
+// import Home from "./Pages/Home";
 import Tags from "./Pages/Tags";
 import Member from "./Pages/Member";
 import View from "./Pages/View";
@@ -26,7 +26,7 @@ const StyledFrame = styled.div`
 function App() {
   const cookie = new Cookie();
   const [isLogin, setIsLogin] = useState(cookie.get("userId"));
-  const location = useLocation().pathname;
+  // const location = useLocation().pathname;
 
   const handleLogin = (value) => {
     setIsLogin(value);
@@ -36,9 +36,9 @@ function App() {
     <>
       <Navigation isLogin={isLogin} handleLogin={handleLogin} />
       <StyledFrame>
-        {location === "/" && !isLogin ? null : <LeftSideBar />}
+        {<LeftSideBar />}
         <Routes>
-          <Route path={"/"} element={<Home isLogin={isLogin} />} />
+          <Route path={"/"} element={<Questions />} />
           <Route path={"/questions"} element={<Questions />} />
           <Route path={"/question"} element={<View isLogin={isLogin} />} />
           <Route
@@ -54,7 +54,7 @@ function App() {
           />
           <Route path={"/edit"} element={<Edit />} />
         </Routes>
-        {location === "/" && !isLogin ? null : <RightSideBar />}
+        {<RightSideBar />}
       </StyledFrame>
     </>
   );

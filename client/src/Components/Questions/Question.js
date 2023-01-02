@@ -109,6 +109,7 @@ const Info = styled.div`
 `;
 
 function Question({ question }) {
+  console.log(question);
   return (
     <QuestionContainer>
       <SummaryStats>
