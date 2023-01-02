@@ -54,7 +54,6 @@ function Vote({ score, vote, subject, qid, aid, handleChange }) {
 
   const handleClickUp = () => {
     // isUpClicked === "u" ? setIsUpClicked(null) : setIsUpClicked("u");
-    console.log("up");
     axios({
       method: `post`, // `${method}`
       url: `http://43.200.68.32:8080/${subject}/upVote/${

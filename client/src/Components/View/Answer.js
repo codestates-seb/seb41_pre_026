@@ -5,6 +5,7 @@ import Vote from "./Vote";
 import Editor from "../Share/Editor";
 import setDateFormat from "../../util/setDateFormat";
 import Cookie from "../../util/cookie";
+import axios from "axios";
 
 const AnswerContainer = styled.div`
   border-bottom: 1px solid #dadbdc;
@@ -55,6 +56,12 @@ const AnswerContainer = styled.div`
         text-decoration: none;
         color: #6a737c;
       }
+
+      button {
+        font-size : 12px;
+        border : 0px;
+        color : #6a737c;
+      }
     }
     .profile {
       background-color: #d9eaf7;
@@ -82,13 +89,27 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer({ answerData, isLogin, data }) {
+function Answer({ answerData, isLogin, data, handleChange }) {
   const [content, setContent] = useState(answerData.answerContent);
   const cookie = new Cookie();
   const score = answerData.score;
   const vote = answerData.vote;
   const subject = "answers";
   const aid = answerData.answerId;
+
+  const handleDelete = () => {
+    axios
+      .delete(
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/answers/${aid}`,
+        {
+          data: { mid: Number(cookie.get("userId")) },
+        }
+      )
+      .then((res) => {
+        handleChange();
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <AnswerContainer>
@@ -128,9 +149,7 @@ function Answer({ answerData, isLogin, data }) {
               ) : null}
               {Number(cookie.get("userId")) === answerData.memberId ? (
                 <div>
-                  <Link to="/edit" state={{ data: [data.id, "questions"] }}>
-                    Delete
-                  </Link>
+                  <button onClick={handleDelete}>Delete</button>
                 </div>
               ) : null}
             </div>

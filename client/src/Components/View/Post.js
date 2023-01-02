@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Editor from "../Share/Editor";
 import setDateFormat from "../../util/setDateFormat";
 import Cookie from "../../util/cookie";
+import axios from "axios";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
@@ -54,6 +55,12 @@ const PostContainer = styled.div`
         text-decoration: none;
         color: #6a737c;
       }
+
+      button {
+        border: 0px;
+        color: #6a737c;
+        cursor: pointer;
+      }
     }
     .profile {
       background-color: #d9eaf7;
@@ -84,11 +91,27 @@ const PostContainer = styled.div`
 
 function Post({ data, member }) {
   const cookie = new Cookie();
+  const navigate = useNavigate();
   let tags = [];
 
   if (data.tags) {
     tags = data.tags.split(" ");
   }
+
+  const handleDelete = () => {
+    console.log(cookie.get("userId"));
+    axios
+      .delete(
+        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions/${data.id}`,
+        {
+          data: { mid: Number(cookie.get("userId")) },
+        }
+      )
+      .then((res) => {
+        navigate("/questions");
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <PostContainer>
@@ -122,9 +145,7 @@ function Post({ data, member }) {
           </div>
           {Number(cookie.get("userId")) === data.mid ? (
             <div>
-              <Link to="/edit" state={{ data: [data.id, "questions"] }}>
-                Delete
-              </Link>
+              <button onClick={handleDelete}>Delete</button>
             </div>
           ) : null}
         </div>

@@ -215,6 +215,7 @@ function View({ isLogin }) {
                     data={data}
                     answerData={answerData}
                     isLogin={isLogin}
+                    handleChange={handleChange}
                   />
                 ))
               : null}
