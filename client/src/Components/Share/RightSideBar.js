@@ -79,13 +79,13 @@ const StyledStackExchangeIcon = styled.div`
   &.flow {
     background-position: 0 -6156px;
   }
-  width: 24px;
+  width: 26px;
   height: 20px;
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: 16px;
   background-image: url("https://cdn.sstatic.net/Img/favicons-sprite16.png?v=22475cccbf39");
-  margin: 3px 0px 0px 0px;
+  margin: 4px 0px 0px 0px;
 `;
 
 function RightSideBar() {
