@@ -46,7 +46,33 @@ public interface QuestionMapper {
 
 	Question questionDeleteDtoToQuestion(QuestionDeleteDto questionDeleteDto);
 
-	QuestionResponseDto questionToQuestionResponseDto(Question question);
+	default QuestionResponseDto questionToQuestionResponseDto(Question question) {
+		if ( question == null ) {
+			return null;
+		}
+		long mid = 0L;
+
+		long questionId = question.getQuestionId();
+		String title = question.getTitle();
+		String problem = question.getProblem();
+		String expecting = question.getExpecting();
+		int score = question.getScore();
+		String tags = question.getTags();
+		long answerCount = question.getAnswerCount();
+		int view = question.getView();
+		if ( question.getMid() != null ) {
+			mid = question.getMid();
+		}
+		LocalDateTime createdAt = question.getCreatedAt();
+		LocalDateTime modifiedAt = question.getModifiedAt();
+
+		String name = question.getMember().getName();
+		String profile = question.getMember().getProfileImage();
+
+		QuestionResponseDto questionResponseDto = new QuestionResponseDto( questionId, title, problem, expecting, score, tags, answerCount, view, mid, createdAt, modifiedAt, name, profile );
+
+		return questionResponseDto;
+	}
 
 	default List<QuestionResponseDto> questionsToQuestionsResponseDto(List<Question> questions) {
 		if ( questions == null ) {
@@ -56,6 +82,8 @@ public interface QuestionMapper {
 		List<QuestionResponseDto> list = new ArrayList<QuestionResponseDto>( questions.size() );
 		for ( Question question : questions ) {
 			question.setMid(question.getMember().getMemberId());
+			question.setName(question.getMember().getName());
+			question.setProfile(question.getMember().getProfileImage());
 			list.add( questionToQuestionResponseDto( question ) );
 		}
 

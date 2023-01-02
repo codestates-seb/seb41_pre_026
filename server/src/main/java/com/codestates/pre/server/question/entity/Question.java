@@ -45,6 +45,10 @@ public class Question {
 
 	private String tags;
 
+	private String name;
+
+	private String profile;
+
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answers = new ArrayList<>();
 

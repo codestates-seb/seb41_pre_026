@@ -20,7 +20,9 @@ public class QuestionResponseDto {
 	private long answerCount;
 	private int view;
 	private long mid;
-	private String name;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
+
+	private String name;
+	private String profile;
 }
