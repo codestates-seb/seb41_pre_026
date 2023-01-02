@@ -115,7 +115,7 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function EditProfile({ userId }) {
+function EditProfile({ userId, handleSetChange, handleSelect, setSelectBtn }) {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
   const [profileText, setProfileText] = useState("");
@@ -163,20 +163,7 @@ function EditProfile({ userId }) {
         }
       )
       .then((res) => {
-        console.log(res.data.data.name);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleCancel = () => {
-    axios
-      .get(
-        `http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/members/${userId}`
-      )
-      .then((res) => {
-        setName(res.data.data.name);
+        handleSetChange();
       })
       .catch((error) => {
         console.log(error);
@@ -212,7 +199,14 @@ function EditProfile({ userId }) {
         </StyleForm>
         <StyledBtnDiv>
           <StyledBlueBtn onClick={handleSubmit}>Save Profile</StyledBlueBtn>
-          <StyledTransBlueBtn onClick={handleCancel}>Cancel</StyledTransBlueBtn>
+          <StyledTransBlueBtn
+            onClick={() => {
+              handleSelect("1");
+              setSelectBtn("1");
+            }}
+          >
+            Cancel
+          </StyledTransBlueBtn>
         </StyledBtnDiv>
       </StyledDiv>
     </StyledEdit>

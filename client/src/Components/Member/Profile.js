@@ -59,13 +59,11 @@ const StyledAboutWrapper = styled.div`
 
 const StyledAbout = styled.div`
   width: 727px;
-  height: 130px;
   border: 1px solid #d6d9dc;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  padding: 3px 20px 3px 20px;
-
+  padding: 20px;
   .wmde-markdown > p {
     font-size: 15px;
   }

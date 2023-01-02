@@ -107,18 +107,23 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Header({ handleSelect, handleToEdit, userId }) {
-  const [selecBtn, setSelecBtn] = useState(1);
+function Header({
+  handleSelect,
+  handleToEdit,
+  userId,
+  selectBtn,
+  setSelectBtn,
+}) {
   const [memberInfo, setMemberInfo] = useState([]);
   // const cookie = new Cookie();
 
   const handleBtn = (e) => {
-    setSelecBtn(e.target.id);
+    setSelectBtn(e.target.id);
     handleSelect(e.target.id);
   };
 
   const handleEditBtn = (e) => {
-    setSelecBtn("2");
+    setSelectBtn("2");
     handleSelect("2");
     handleToEdit(true);
   };
@@ -159,7 +164,7 @@ function Header({ handleSelect, handleToEdit, userId }) {
           <StyledWhiteBtn onClick={handleEditBtn}>Edit Profile</StyledWhiteBtn>
         </div>
       </StyledMemberWrapper>
-      <StyledBtnDiv select={selecBtn}>
+      <StyledBtnDiv select={selectBtn}>
         <button id="1" onClick={handleBtn}>
           Profile
         </button>

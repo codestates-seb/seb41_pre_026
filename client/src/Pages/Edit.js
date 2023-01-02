@@ -28,10 +28,11 @@ const StyledDiv = styled.div`
 `;
 
 const StylmedMain = styled.main`
-  width: 809px;
+  width: 722px;
+  padding: 20px 0px 0px 20px;
 
   .border {
-    border-bottom: 1px solid #e4e6e8;
+    border: 1px solid #e4e6e8;
   }
 
   .disabledDiv {

@@ -55,7 +55,15 @@ const StyledBtnDiv = styled.div`
   }
 `;
 
-function Settings({ toEdit, handleToEdit, userId, handleLogin }) {
+function Settings({
+  toEdit,
+  handleToEdit,
+  handleSetChange,
+  userId,
+  handleLogin,
+  handleSelect,
+  setSelectBtn,
+}) {
   const [selecBtn, setSelecBtn] = useState(1);
 
   useEffect(() => {
@@ -85,7 +93,12 @@ function Settings({ toEdit, handleToEdit, userId, handleLogin }) {
         </StyledBtnDiv>
       </StyledSideBar>
       {Number(selecBtn) === 1 || toEdit ? (
-        <EditProfile userId={userId} />
+        <EditProfile
+          userId={userId}
+          handleSetChange={handleSetChange}
+          handleSelect={handleSelect}
+          setSelectBtn={setSelectBtn}
+        />
       ) : (
         <DeleteProfile userId={userId} handleLogin={handleLogin} />
       )}

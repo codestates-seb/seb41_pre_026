@@ -43,6 +43,10 @@ const StyledMain = styled.main`
       pointer-events: none;
     }
   }
+
+  .wmde-markdown-var {
+    margin: 15px 0px 0px 0px;
+  }
 `;
 
 function Ask() {

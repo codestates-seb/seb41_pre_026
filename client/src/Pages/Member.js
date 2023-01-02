@@ -15,8 +15,14 @@ const StyledMember = styled.section`
 function Member({ handleLogin }) {
   const [selected, setSelected] = useState("1");
   const [toEdit, setToEdit] = useState(false);
+  const [change, setChange] = useState(false);
+  const [selectBtn, setSelectBtn] = useState(1);
   const cookie = new Cookie();
   const userId = cookie.get("userId");
+
+  const handleSetChange = () => {
+    setChange(!change);
+  };
 
   const handleSelect = (select) => {
     setSelected(select);
@@ -31,6 +37,8 @@ function Member({ handleLogin }) {
       <Header
         handleSelect={handleSelect}
         handleToEdit={handleToEdit}
+        selectBtn={selectBtn}
+        setSelectBtn={setSelectBtn}
         userId={userId}
       />
       {selected === "1" ? (
@@ -41,6 +49,9 @@ function Member({ handleLogin }) {
           handleToEdit={handleToEdit}
           userId={userId}
           handleLogin={handleLogin}
+          handleSetChange={handleSetChange}
+          handleSelect={handleSelect}
+          setSelectBtn={setSelectBtn}
         />
       )}
     </StyledMember>
