@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -39,6 +40,7 @@ public class AnswerService {
 	public Answer createAnswer(Answer answer) {
 		Member member = memberService.findMember(answer.getMid());
 		Question question = questionService.findVerifiedQuestion(answer.getQid());
+		answer.setCreatedAt(LocalDateTime.now());
 		answer.addMember(member);
 		answer.addQuestion(question);
 		question.plusAnswerCount();
@@ -48,10 +50,10 @@ public class AnswerService {
 	// 답변 수정
 	public Answer updateAnswer(Answer answer) {
 		Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
-
 		Answer updatingAnswer = beanUtils.copyNonNullProperties(answer, findAnswer);
 		//answer : 모든 필드를 저장할 변수,
 		//destination : 모든 필드들 중 변경한 값만 저장할 변수
+		answer.setModifiedAt(LocalDateTime.now());
 
 		return answerRepository.save(updatingAnswer);
 	}

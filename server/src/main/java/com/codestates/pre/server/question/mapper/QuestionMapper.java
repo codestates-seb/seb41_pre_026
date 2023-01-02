@@ -94,7 +94,7 @@ public interface QuestionMapper {
 				.builder()
 				.answerId(answer.getAnswerId())
 				.answerContent(answer.getAnswerContent())
-				.creationAt(answer.getCreationAt())
+				.createdAt(answer.getCreatedAt())
 				.modifiedAt(answer.getModifiedAt())
 				.score(answer.getScore())
 				.questionId(answer.getQuestion().getQuestionId())

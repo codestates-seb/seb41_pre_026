@@ -14,7 +14,7 @@ public class AnswerResponseDto {
 
     private String answerContent;
 
-    private LocalDateTime creationAt;
+    private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
 

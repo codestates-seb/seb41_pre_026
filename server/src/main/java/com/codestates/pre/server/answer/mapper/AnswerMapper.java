@@ -41,7 +41,7 @@ public interface AnswerMapper {
         answerResponseDto.questionId(answer.getQuestion().getQuestionId());
         answerResponseDto.memberId(answer.getMember().getMemberId());
         answerResponseDto.answerContent( answer.getAnswerContent() );
-        answerResponseDto.creationAt( answer.getCreationAt() );
+        answerResponseDto.createdAt( answer.getCreatedAt() );
         answerResponseDto.modifiedAt( answer.getModifiedAt() );
         answerResponseDto.score( answer.getScore() );
 

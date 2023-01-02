@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.domain.Auditable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
@@ -40,11 +39,10 @@ public class Answer {
     private int score;
 
     @Column
-    private LocalDateTime creationAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime modifiedAt = LocalDateTime.now();
-
+    private LocalDateTime modifiedAt;
 
     //question:answer = 1:n
     @ManyToOne(fetch = FetchType.LAZY)
