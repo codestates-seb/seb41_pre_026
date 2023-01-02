@@ -53,7 +53,7 @@ public class AnswerService {
 		Answer updatingAnswer = beanUtils.copyNonNullProperties(answer, findAnswer);
 		//answer : 모든 필드를 저장할 변수,
 		//destination : 모든 필드들 중 변경한 값만 저장할 변수
-		answer.setModifiedAt(LocalDateTime.now());
+		updatingAnswer.setModifiedAt(LocalDateTime.now());
 
 		return answerRepository.save(updatingAnswer);
 	}
