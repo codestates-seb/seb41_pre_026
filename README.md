@@ -1,6 +1,6 @@
 <h1> 🎥 신스틸러 </h1>
 <div  align="center">
-  <img width="40%" src="https://user-images.githubusercontent.com/89282099/201780692-70b79718-b6cb-4935-ad74-afb14c9ad0db.svg" alt="roobits">
+  <img width="40%" src="🎥" alt="roobits">
 </div>
 </br>
 <h3 align="center">💌 당신의 특별한 하루(D-day)를 위한 단 하나뿐인 게시판, Roobits!</h3>
