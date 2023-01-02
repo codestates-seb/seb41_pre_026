@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Help from "./Help";
+import MDEditor from "@uiw/react-md-editor";
 import { StyledBlueBtn } from "../Share/Button";
+import { useEffect } from "react";
 
 const StyledTitleContainer = styled.div`
   display: flex;
@@ -16,11 +18,6 @@ const StyledTitleContainer = styled.div`
 
   .visible {
     display: "";
-  }
-
-  .disabledDiv {
-    cursor: not-allowed;
-    opacity: 0.3;
   }
 `;
 
@@ -47,24 +44,15 @@ const StyledWrapper = styled.div`
     margin: 0px 0px 4px 0px;
   }
 
-  textarea {
-    width: 760px;
-    font-size: 13px;
-    border: 1px solid #babfc3;
-    border-radius: 3px;
-    padding: 7.8px 9.1px;
-    outline-color: #0074cc;
-  }
-
-  textarea:focus {
-    border: 1px solid #379fef;
-    outline: 4px solid #e1ecf4;
-  }
-
   button {
     width: 50px;
     height: 38px;
     margin: 8px 0px 0px 0px;
+  }
+
+  .active {
+    border: 1px solid #379fef;
+    outline: 4px solid #e1ecf4;
   }
 `;
 
@@ -73,16 +61,19 @@ function Problem({
   handleIsFocus,
   problem,
   handleProblem,
-  isWritten,
   handleIsWritten,
   compRef,
 }) {
-  const handleOnFocus = () => {
-    handleIsFocus(1);
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      compRef.current[1].textarea.onfocus = () => {
+        handleIsFocus(1);
+      };
+    }, 1);
+  }, [compRef, handleIsFocus]);
 
-  const handleOnChange = (event) => {
-    handleProblem(event.target.value);
+  const handleOnChange = (value) => {
+    handleProblem(value);
     handleIsWritten("Problem");
   };
 
@@ -92,30 +83,20 @@ function Problem({
 
   return (
     <StyledTitleContainer>
-      <div
-        className={
-          isFocus !== 1 && !isWritten.find((el) => el === "Problem")
-            ? "disabledDiv"
-            : ""
-        }
-      >
+      <div>
         <StyledWrapper>
           <label htmlFor="problem">What are the details of your problem?</label>
           <label htmlFor="problem">
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </label>
-          <textarea
-            ref={(el) => (compRef.current[1] = el)}
-            onFocus={handleOnFocus}
-            onChange={handleOnChange}
+          <MDEditor
+            className={isFocus === 1 ? "active" : ""}
             value={problem}
-            disabled={
-              isFocus !== 1 && !isWritten.find((el) => el === "Problem")
-                ? "disabled"
-                : ""
-            }
-          ></textarea>
+            onChange={handleOnChange}
+            preview={"edit"}
+            ref={(el) => (compRef.current[1] = el)}
+          />
           {problem.length > 20 && isFocus === 1 ? (
             <StyledBlueBtn onClick={handleBtnClick}>Next</StyledBlueBtn>
           ) : null}

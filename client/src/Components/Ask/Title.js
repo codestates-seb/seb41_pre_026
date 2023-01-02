@@ -76,13 +76,13 @@ function Title({
     handleIsFocus(0);
   };
 
-  const handleOnChange = (event) => {
-    handleTitle(event.target.value);
+  const handleOnChange = (e) => {
+    handleTitle(e.target.value);
+    handleIsWritten("Title");
   };
 
   const handleBtnClick = () => {
     handleIsFocus(1);
-    handleIsWritten("Title");
   };
 
   return (
