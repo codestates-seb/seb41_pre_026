@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import setDateFormat from "../../util/setDateFormat";
 
 const QuestionContainer = styled.div`
   display: flex;
@@ -124,7 +125,10 @@ function Question({ question }) {
         </div>
       </SummaryStats>
       <SummaryContent>
-        <Link to={"/question"} state={{ id: question.questionId }}>
+        <Link
+          to={"/question"}
+          state={{ qid: question.questionId, mid: question.mid }}
+        >
           {question.title}
         </Link>
         <div className="content">{question.problem}</div>
@@ -137,8 +141,9 @@ function Question({ question }) {
             </ul>
           </div>
           <div className="content-item-profile">
+            <img src={question.img} alt=""></img>
             <span>{question.mid} | </span>
-            <span>asked {question.createdAt}</span>
+            <span>asked {setDateFormat(question.createdAt)}</span>
           </div>
         </Info>
       </SummaryContent>

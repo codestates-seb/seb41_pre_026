@@ -48,16 +48,9 @@ const VoteContainer = styled.div`
   }
 `;
 
-function Vote({ score, vote, subject, qid, aid }) {
+function Vote({ score, vote, subject, qid, aid, handleChange }) {
   // const [isUpClicked, setIsUpClicked] = useState(vote);
   // const [isDownClicked, setIsDownClicked] = useState(null);
-  // let method = "";
-
-  // if (vote === null) {
-  //   method = "post";
-  // } else {
-  //   method = "patch";
-  // }
 
   const handleClickUp = () => {
     // isUpClicked === "u" ? setIsUpClicked(null) : setIsUpClicked("u");
@@ -68,8 +61,7 @@ function Vote({ score, vote, subject, qid, aid }) {
         subject === "questions" ? qid : aid
       }`,
     }).then((res) => {
-      console.log(res.data);
-      window.location.replace(`/question/${qid}`);
+      handleChange();
     });
   };
 
@@ -77,19 +69,20 @@ function Vote({ score, vote, subject, qid, aid }) {
     // isDownClicked === "d" ? setIsDownClicked(null) : setIsDownClicked("d");
 
     axios({
-      method: "patch", //`${method}`
+      method: "post", //`${method}`
       url: `http://43.200.68.32:8080/${subject}/downVote/${
         subject === "questions" ? qid : aid
       }`,
-    }).then((res) => {
-      console.log(res.data);
-      window.location.replace(`/question/${qid}`);
-    });
+    })
+      .then((res) => {
+        handleChange();
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <VoteContainer>
-      <button onClick={handleClickUp}>
+      <button onClick={handleClickUp} disabled>
         <svg className="arrow-up">
           <path />
         </svg>

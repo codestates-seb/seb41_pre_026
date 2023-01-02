@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Vote from "./Vote";
-import profile2 from "../../Assets/proimg2.jpg";
 import Editor from "../Share/Editor";
+import setDateFormat from "../../util/setDateFormat";
+import Cookie from "../../util/cookie";
 
 const AnswerContainer = styled.div`
   border-bottom: 1px solid #dadbdc;
@@ -80,8 +82,9 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer({ answerData, id }) {
+function Answer({ answerData, id, isLogin }) {
   const [content, setContent] = useState(answerData.answerContent);
+  const cookie = new Cookie();
   const score = answerData.score;
   const vote = answerData.vote;
   const subject = "answers";
@@ -98,19 +101,32 @@ function Answer({ answerData, id }) {
           <div className="answer-footer">
             <div className="menu">
               <div>
-                <a href="/">Share</a>
+                <Link to="/question" className="none">
+                  Share
+                </Link>
               </div>
+              {isLogin && cookie.get("userId") === answerData.memberId ? (
+                <div>
+                  <Link to="/edit" state={{ id: aid }}>
+                    Edit
+                  </Link>
+                </div>
+              ) : null}
               <div>
-                <a href="/">Edit</a>
-              </div>
-              <div>
-                <a href="/">Follow</a>
+                <Link to="/question" className="none">
+                  Follow
+                </Link>
               </div>
             </div>
             <div className="profile">
-              <img src={profile2} alt=""></img>
-              <span>{answerData.memberId}</span>
-              <span>answerd {answerData.creationAt}</span>
+              <img src={answerData.profileImage} alt=""></img>
+              <span>{answerData.name}</span>
+              <span>
+                answerd{" "}
+                {answerData.createdAt
+                  ? setDateFormat(answerData.createdAt)
+                  : answerData.createdAt}
+              </span>
             </div>
           </div>
         </div>
