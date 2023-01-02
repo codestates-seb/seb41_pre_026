@@ -7,7 +7,6 @@ import axios from "axios";
 
 const PostContainer = styled.div`
   box-sizing: border-box;
-  diplay: block;
   font-size: 15px;
   text-align: left;
   overflow-wrap: break-word;

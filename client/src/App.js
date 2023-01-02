@@ -1,6 +1,6 @@
 import Questions from "./Pages/Questions";
 import styled from "styled-components";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navigation from "./Components/Share/Navigation";
 import LeftSideBar from "./Components/Share/LeftSideBar";
 import RightSideBar from "./Components/Share/RightSideBar";
@@ -18,6 +18,7 @@ import Edit from "./Pages/Edit";
 import Footer from "./Components/Share/Footer";
 
 const StyledFrame = styled.div`
+  min-width: 1240px;
   display: flex;
   position: relative;
   top: 51px;
@@ -27,7 +28,7 @@ const StyledFrame = styled.div`
 function App() {
   const cookie = new Cookie();
   const [isLogin, setIsLogin] = useState(cookie.get("userId"));
-  // const location = useLocation().pathname;
+  const location = useLocation().pathname;
 
   const handleLogin = (value) => {
     setIsLogin(value);
@@ -55,7 +56,7 @@ function App() {
           />
           <Route path={"/edit"} element={<Edit />} />
         </Routes>
-        {<RightSideBar />}
+        {location !== "/question" ? <RightSideBar /> : null}
       </StyledFrame>
       <Footer />
     </>

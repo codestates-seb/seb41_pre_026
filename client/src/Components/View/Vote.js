@@ -48,7 +48,7 @@ const VoteContainer = styled.div`
   }
 `;
 
-function Vote({ score, vote, subject, qid, aid, handleChange }) {
+function Vote({ score, subject, qid, aid, handleChange }) {
   // const [isUpClicked, setIsUpClicked] = useState(vote);
   // const [isDownClicked, setIsDownClicked] = useState(null);
 

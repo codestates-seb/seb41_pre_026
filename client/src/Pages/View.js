@@ -10,13 +10,11 @@ import EditAnswer from "../Components/View/EditAnswer";
 import setDateFormat from "../util/setDateFormat";
 
 import styled from "styled-components";
-import Cookie from "../util/cookie";
 
 const Container = styled.div`
-  max-width: 1036px;
-  width: 1036px;
+  max-width: 1035px;
   background-color: #ffffff;
-  padding: 20px 0px 40px 40px;
+  padding: 20px 0px 0px 20px;
   box-sizing: border-box;
   display: block;
   .none {
@@ -79,7 +77,7 @@ const Container = styled.div`
   .question-content {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: 52px 675px;
+    grid-template-columns: 52px 647px;
     text-align: left;
     vertical-align: baseline;
 
@@ -99,6 +97,11 @@ const Container = styled.div`
   .flex {
     display: flex;
     justify-content: space-between;
+    margin: 0px 0px 70px 0px;
+  }
+
+  .contents {
+    width: 700px;
   }
 `;
 
@@ -108,7 +111,7 @@ const AnswerListContainer = styled.div`
   display: block;
   text-align: left;
   vertical-align: baseline;
-  width: 727px;
+  width: 700px;
   .answers-header {
     margin-top: 20px;
     padding-top: 10px;
@@ -129,11 +132,9 @@ function View({ isLogin }) {
   const score = data.score;
   const vote = data.vote;
   const subject = "questions";
-  const cookie = new Cookie();
 
   const navigate = useNavigate();
-  const qid = useLocation().state.qid;
-  const mid = cookie.get("userId");
+  const [qid, mid] = useLocation().state.id;
 
   useEffect(() => {
     axios({
