@@ -10,6 +10,7 @@ import com.codestates.pre.server.answer.service.AnswerService;
 import com.codestates.pre.server.dto.MultiResponseDto;
 import com.codestates.pre.server.dto.SingleResponseDto;
 import com.codestates.pre.server.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,20 +21,16 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/answers")
 @Validated
 public class AnswerController {
+
     private final AnswerService answerService;
     private final MemberService memberService;
     private final AnswerMapper mapper;
 
-
-    public AnswerController(AnswerService answerService, MemberService memberService, AnswerMapper mapper) {
-        this.answerService = answerService;
-        this.memberService = memberService;
-        this.mapper = mapper;
-    }
 
 
     // question의 id에 맞는 답변을 등록
