@@ -5,6 +5,8 @@
 </br>
 <h3 align="center">💌 당신의 특별한 하루(D-day)를 위한 단 하나뿐인 게시판, Roobits!</h3>
 
+🎥
+
 - **팀 명 :**  Team 신스틸러
 - **프로젝트 명 :** Roobits(루비츠)
 - **프로젝트 기간 :** 2022.09.07 - 2022.10.12
@@ -23,7 +25,7 @@
 
 
 ## 👨‍👩‍👧‍👦 Team
-| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | <br>(BE) | 염빛나리<br>(BE) |
+| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | <br>김혜인(BE) | <br>(BE) |
 | :---: | :---: | :---: | :---: | :---: |
 | <img alt="전광현" src="https://avatars.githubusercontent.com/u/73211553?v=4" height="100" width="100"> | <img alt="이유진" src="https://avatars.githubusercontent.com/u/89282099?v=4" height="100" width="100"> | <img alt="조현화" src="https://avatars.githubusercontent.com/u/104138036?v=4" height="100" width="100"> | <img alt="유하경" src="https://avatars.githubusercontent.com/u/76886589?v=4" height="100" width="100"> | <img alt="염빛나리" src="https://avatars.githubusercontent.com/u/103120984?v=4" height="100" width="100"> |
 | [@GH](https://github.com/Gwanghyun-Jeon) |    [@nuuco](https://github.com/nuuco) | [@CHOHYUNHWA](https://github.com/CHOHYUNHWA) | [@EstelleYU](https://github.com/EstelleYU) | [@bytenari](https://github.com/bytenari) |
