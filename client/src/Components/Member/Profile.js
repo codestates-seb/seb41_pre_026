@@ -103,9 +103,7 @@ function Profile({ userId }) {
       <StyledAboutWrapper>
         <p>About</p>
         <StyledAbout>
-          <Editor
-            value={"hi\n I love coding \nMy goal is to make this page prettier"}
-          />
+          <Editor value={memberInfo.profileText} />
         </StyledAbout>
       </StyledAboutWrapper>
     </StyledProfile>

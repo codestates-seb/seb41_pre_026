@@ -118,7 +118,7 @@ const StyledBtnDiv = styled.div`
 function EditProfile({ userId }) {
   const [img, setImg] = useState("");
   const [name, setName] = useState("");
-  const [about, setAbout] = useState("");
+  const [profileText, setProfileText] = useState("");
   const [aboutFocus, setAboutFocus] = useState(false);
 
   useEffect(() => {
@@ -129,6 +129,7 @@ function EditProfile({ userId }) {
       .then((res) => {
         setName(res.data.data.name);
         setImg(res.data.data.profileImage);
+        setProfileText(res.data.data.profileText);
       })
       .catch((error) => {
         console.log(error);
@@ -139,8 +140,8 @@ function EditProfile({ userId }) {
     setName(e.target.value);
   };
 
-  const handleAbout = (value) => {
-    setAbout(value);
+  const handleProfileText = (value) => {
+    setProfileText(value);
   };
 
   const handleFocus = () => {
@@ -158,7 +159,7 @@ function EditProfile({ userId }) {
         {
           memberId: userId,
           name: name,
-          about: about,
+          profileText: profileText,
         }
       )
       .then((res) => {
@@ -201,8 +202,8 @@ function EditProfile({ userId }) {
             <p>About me</p>
             <MDEditor
               className={aboutFocus ? "active" : ""}
-              value={about}
-              onChange={handleAbout}
+              value={profileText}
+              onChange={handleProfileText}
               preview={"edit"}
               onFocus={handleFocus}
               onBlur={handleBlur}
