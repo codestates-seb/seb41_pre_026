@@ -120,6 +120,13 @@ function Post({ data, member }) {
               Follow
             </Link>
           </div>
+          {Number(cookie.get("userId")) === data.mid ? (
+            <div>
+              <Link to="/edit" state={{ data: [data.id, "questions"] }}>
+                Delete
+              </Link>
+            </div>
+          ) : null}
         </div>
         <div className="profile">
           <img src={member.profileImage} alt=""></img>

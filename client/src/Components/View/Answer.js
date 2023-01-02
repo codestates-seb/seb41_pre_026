@@ -113,11 +113,20 @@ function Answer({ answerData, isLogin, data }) {
                   </Link>
                 </div>
               ) : null}
-              <div>
-                <Link to="/question" className="none">
-                  Follow
-                </Link>
-              </div>
+              {Number(cookie.get("userId")) !== answerData.memberId ? (
+                <div>
+                  <Link to="/question" className="none">
+                    Follow
+                  </Link>
+                </div>
+              ) : null}
+              {Number(cookie.get("userId")) === answerData.memberId ? (
+                <div>
+                  <Link to="/edit" state={{ data: [data.id, "questions"] }}>
+                    Delete
+                  </Link>
+                </div>
+              ) : null}
             </div>
             <div className="profile">
               <img src={answerData.profile} alt=""></img>

@@ -94,14 +94,22 @@ const Info = styled.div`
   }
 
   .content-item-profile {
+    display: flex;
+    align-items: center;
     margin: 0px 0px 0px auto;
     font-size: 12px;
     color: #6a737c;
+
+    img {
+      width: 22px;
+      height: 22px;
+      border-radius: 2px;
+      margin: 0px 5px 0px 0px;
+    }
   }
 `;
 
 function Question({ question }) {
-  const tags = ["tag1", "tag2", "tag3", "tag4", "tag5"];
   return (
     <QuestionContainer>
       <SummaryStats>
@@ -131,16 +139,21 @@ function Question({ question }) {
         <div className="content">{question.problem}</div>
         <Info>
           <div className="content-item-tags">
-            <ul>
-              {tags.map((tag, idx) => (
-                <li key={idx}>{tag}</li>
-              ))}
-            </ul>
+            {question.tags ? (
+              <ul>
+                {question.tags.split(" ").map((tag, idx) => (
+                  <li key={idx}>{tag}</li>
+                ))}
+              </ul>
+            ) : (
+              ""
+            )}
           </div>
           <div className="content-item-profile">
-            <img src={question.img} alt=""></img>
-            <span>{question.mid} | </span>
-            <span>asked {setDateFormat(question.createdAt)}</span>
+            <img src={question.profile} alt=""></img>
+            <span>
+              {question.name} | {setDateFormat(question.createdAt)}
+            </span>
           </div>
         </Info>
       </SummaryContent>
