@@ -60,7 +60,7 @@ function Settings({ toEdit, handleToEdit, userId, handleLogin }) {
 
   useEffect(() => {
     toEdit ? setSelecBtn("1") : setSelecBtn(selecBtn);
-  }, [toEdit]);
+  }, [toEdit, selecBtn]);
 
   const handleEdit = (e) => {
     setSelecBtn(e.target.id);
