@@ -20,4 +20,6 @@ public class MemberPostDto {
 	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{8,16}$",
 		message = "비밀번호는 숫자, 문자, 특수문자가 각각 1개 이상 포함되어야 하며, 최소 8자에서 최대 16자까지 허용합니다. ")
 	private String password;
+
+	private String profileImage;
 }

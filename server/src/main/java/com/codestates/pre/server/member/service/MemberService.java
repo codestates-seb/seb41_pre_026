@@ -3,8 +3,12 @@ package com.codestates.pre.server.member.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.codestates.pre.server.answer.repository.AnswerRepository;
 import com.codestates.pre.server.auth.utils.CustomAuthorityUtils;
@@ -15,9 +19,13 @@ import com.codestates.pre.server.member.repository.MemberRepository;
 import com.codestates.pre.server.question.respository.QuestionRepository;
 import com.codestates.pre.server.utils.CustomBeanUtils;
 
+import lombok.RequiredArgsConstructor;
+
 //트랙잭션 추후에 적용 (이벤트 퍼블리셔, 회원가입 이메일 전송 로직)
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class MemberService {
 	private final MemberRepository memberRepository;
 	private final CustomBeanUtils<Member> beanUtils;
@@ -26,19 +34,6 @@ public class MemberService {
 	//  PasswordEncoder를 이용해 패스워드를 암호화 위해 di
 	private	final PasswordEncoder passwordEncoder;
 	private final CustomAuthorityUtils authorityUtils;
-
-
-
-	public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils,
-		QuestionRepository questionRepository,
-		AnswerRepository answerRepository, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
-		this.memberRepository = memberRepository;
-		this.beanUtils = beanUtils;
-		this.questionRepository = questionRepository;
-		this.answerRepository = answerRepository;
-		this.passwordEncoder = passwordEncoder;
-		this.authorityUtils = authorityUtils;
-	}
 
 	public Member createMember(Member member) {
 		verifyExistsEmail(member.getEmail());
@@ -64,6 +59,7 @@ public class MemberService {
 		return memberRepository.save(updatedMember);
 	}
 
+	@Transactional(readOnly = true)
 	public Member findMember(long memberId) {
 		Member findMember = findVerifiedMember(memberId);
 		findMember.setQuestionCount(getQuestionCount(memberId));
@@ -71,7 +67,11 @@ public class MemberService {
 		return findMember;
 	}
 
-	// 전체 회원 조회는 필요없다
+	@Transactional(readOnly = true)
+	public Page<Member> findMembers(int page, int size) {
+
+		return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
+	}
 
 	public void deleteMember(long memberId) {
 		Member findMember = findVerifiedMember(memberId);
@@ -93,11 +93,13 @@ public class MemberService {
 			throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
 	}
 
+	@Transactional(readOnly = true)
 	public Long getQuestionCount(Long memberId) {
 		Long questionCount = questionRepository.countQuestionByMember_MemberId(memberId);
 		return questionCount;
 	}
 
+	@Transactional(readOnly = true)
 	public Long getAnswersCount(Long memberId) {
 		Long answerCount = answerRepository.countAnswerByMember_MemberId(memberId);
 		return answerCount;
