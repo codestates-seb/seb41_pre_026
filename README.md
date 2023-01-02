@@ -9,9 +9,9 @@
 
 - **팀 명 :**  Team 신스틸러
 - **프로젝트 명 :** 스택오버플로우 클론코딩
-- **프로젝트 기간 :** 2022.09.07 - 2022.10.12
+- **프로젝트 기간 :** 2022.12.15 - 2022.01.02
 - **한줄 소개 :** 사람들과 함께 D-day에 보여줄 비밀 메시지를 작성할 수 있는 게시판 서비스
-- **팀원 :** 전광현(팀장), 이유진, 조현화, 유하경, 염빛나리
+- **팀원 :** 김태현(팀장), 이민훈(부팀장), 진희주, 김혜인, 전예린, 권해정
 - **발표 문서 :** [💁🏻 Roobits 노션 발표 문서](https://www.notion.so/codestates/Roobits-2a698f57f0224b79a417eac587921a0b)
 - **배포 링크 :** [📮 roobits.com](http://roobits.com/)
 
@@ -25,7 +25,7 @@
 
 
 ## 👨‍👩‍👧‍👦 Team
-| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | <br>김혜인(BE) | <br>(BE) |
+| 김태현<br>(BE, 팀장) | 이민훈<br>(FE,부팀장) | 진희주<br>(BE) | <br>김혜인(BE) | <br>전예린(FE) | <br>권해정(FE) |
 | :---: | :---: | :---: | :---: | :---: |
 | <img alt="전광현" src="https://avatars.githubusercontent.com/u/73211553?v=4" height="100" width="100"> | <img alt="이유진" src="https://avatars.githubusercontent.com/u/89282099?v=4" height="100" width="100"> | <img alt="조현화" src="https://avatars.githubusercontent.com/u/104138036?v=4" height="100" width="100"> | <img alt="유하경" src="https://avatars.githubusercontent.com/u/76886589?v=4" height="100" width="100"> | <img alt="염빛나리" src="https://avatars.githubusercontent.com/u/103120984?v=4" height="100" width="100"> |
 | [@GH](https://github.com/Gwanghyun-Jeon) |    [@nuuco](https://github.com/nuuco) | [@CHOHYUNHWA](https://github.com/CHOHYUNHWA) | [@EstelleYU](https://github.com/EstelleYU) | [@bytenari](https://github.com/bytenari) |
