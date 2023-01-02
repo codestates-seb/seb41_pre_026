@@ -6,7 +6,9 @@ import Problem from "../Components/Ask/Problem";
 import Expect from "../Components/Ask/Expect";
 import Tags from "../Components/Ask/Tags";
 import { StyledBlueBtn, StyledTransRedBtn } from "../Components/Share/Button";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
+import Cookie from "../util/cookie";
+import { Navigate } from "react-router-dom";
 
 const StyledDiv = styled.div`
   margin: 0px 0px 100px 0px;
@@ -22,33 +24,69 @@ const StyledDiv = styled.div`
   .disabledBtn {
     cursor: not-allowed;
     opacity: 0.3;
+    pointer-events: none;
+  }
+`;
+
+const StyledMain = styled.main`
+  width: 809px;
+
+  .border {
+    border-bottom: 1px solid #e4e6e8;
+  }
+
+  .disabledDiv {
+    cursor: not-allowed;
+    opacity: 0.3;
+
+    .wmde-markdown-var {
+      pointer-events: none;
+    }
   }
 `;
 
 function Ask() {
-  const [isFocus, setIsFocus] = useState(0);
+  const [isFocus, setIsFocus] = useState(undefined);
   const [isWritten, setIsWritten] = useState([]);
   const [title, setTitle] = useState("");
   const [problem, setProblem] = useState("");
   const [expect, setExpect] = useState("");
   const [tags, setTags] = useState([]);
-
+  const cookie = new Cookie();
   const compRef = useRef([]);
-
-  useEffect(() => {
-    if (isFocus > 0) {
-      compRef.current[isFocus].scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-    setTimeout(() => {
-      compRef.current[isFocus].focus();
-    }, 200);
-  }, [isFocus]);
 
   const handleIsFocus = (isFocus) => {
     setIsFocus(isFocus);
+    let ref;
+
+    switch (isFocus) {
+      case 0:
+        ref = compRef.current[0];
+        break;
+      case 1:
+        ref = compRef.current[1].textarea;
+        break;
+      case 2:
+        ref = compRef.current[2].textarea;
+        break;
+      case 3:
+        ref = compRef.current[3];
+        break;
+      case 4:
+        ref = compRef.current[4];
+        break;
+      default:
+        break;
+    }
+
+    ref.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    setTimeout(() => {
+      ref.focus();
+    }, 200);
   };
 
   const handleIsWritten = (el) => {
@@ -76,14 +114,16 @@ function Ask() {
       .post(
         "http://ec2-43-200-68-32.ap-northeast-2.compute.amazonaws.com:8080/questions",
         {
-          mid: 1,
+          mid: cookie.get("userId"),
           problem: problem,
           expecting: expect,
           title: title,
+          tags: tags.join(" "),
         }
       )
-      .then(function (response) {
-        console.log(response);
+      .then((res) => {
+        Navigate({ to: "/question", state: { id: res.data.data.id } });
+        console.log(res);
       })
       .catch(function (error) {
         console.log(error);
@@ -100,48 +140,62 @@ function Ask() {
   };
 
   return (
-    <main>
-      <Header isFocus={isFocus} handleIsFocus={handleIsFocus} />
+    <StyledMain>
+      <Header />
       <div>
         <Title
           isFocus={isFocus}
           handleIsFocus={handleIsFocus}
           title={title}
           handleTitle={handleTitle}
-          isWritten={isWritten}
           handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
-      <div>
+      <div
+        className={
+          isFocus !== 1 && !isWritten.find((el) => el === "Problem")
+            ? "disabledDiv"
+            : ""
+        }
+      >
         <Problem
           isFocus={isFocus}
           handleIsFocus={handleIsFocus}
           problem={problem}
           handleProblem={handleProblem}
-          isWritten={isWritten}
           handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
-      <div>
+      <div
+        className={
+          isFocus !== 2 && !isWritten.find((el) => el === "Expect")
+            ? "disabledDiv"
+            : ""
+        }
+      >
         <Expect
           isFocus={isFocus}
           handleIsFocus={handleIsFocus}
           expect={expect}
           handleExpect={handleExpect}
-          isWritten={isWritten}
           handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
       </div>
-      <div>
+      <div
+        className={
+          isFocus !== 3 && !isWritten.find((el) => el === "Tags")
+            ? "disabledDiv"
+            : ""
+        }
+      >
         <Tags
           isFocus={isFocus}
           handleIsFocus={handleIsFocus}
           tags={tags}
           handleTags={handleTags}
-          isWritten={isWritten}
           handleIsWritten={handleIsWritten}
           compRef={compRef}
         />
@@ -160,7 +214,7 @@ function Ask() {
           Discard draft
         </StyledTransRedBtn>
       </StyledDiv>
-    </main>
+    </StyledMain>
   );
 }
 
