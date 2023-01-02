@@ -94,14 +94,37 @@ const Info = styled.div`
   }
 
   .content-item-profile {
-    margin: 0px 0px 0px auto;
-    font-size: 12px;
-    color: #6a737c;
+    align-items: flex-start;
+    display: flex;
+    felx-wrap: wrap;
+    font-size: 13px;
+    justify-content: flex-end;
+    text-align: left;
+    vertical-align: baseline;
+    margin-left: auto;
+    padding: 4px;
+    border-radius: 3px;
+    img {
+      width: 22px;
+      height: 22px;
+      border-radius: 2px;
+      margin: 1px;
+    }
+    span {
+      margin: 2px;
+      font-size: 12px;
+      color: #6a737c;
+    }
   }
 `;
 
 function Question({ question }) {
-  const tags = ["tag1", "tag2", "tag3", "tag4", "tag5"];
+  let tags = [];
+
+  if (question.tags) {
+    tags = question.tags.split(" ");
+  }
+
   return (
     <QuestionContainer>
       <SummaryStats>
@@ -141,8 +164,8 @@ function Question({ question }) {
             </ul>
           </div>
           <div className="content-item-profile">
-            <img src={question.img} alt=""></img>
-            <span>{question.mid} | </span>
+            <img src={question.profile} alt=""></img>
+            <span>{question.name}</span>
             <span>asked {setDateFormat(question.createdAt)}</span>
           </div>
         </Info>

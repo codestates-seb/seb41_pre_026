@@ -37,7 +37,6 @@ function EditAnswer({ handleChange, qid }) {
         answerContent: value,
       },
     }).then((res) => {
-      console.log(res.data);
       handleChange();
     });
   };

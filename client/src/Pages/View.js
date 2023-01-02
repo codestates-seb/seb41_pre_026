@@ -133,10 +133,6 @@ function View({ isLogin }) {
   const qid = useLocation().state.qid;
   const mid = useLocation().state.mid;
 
-  if (!isLogin) {
-    console.log("로그인해라");
-  }
-
   useEffect(() => {
     axios({
       method: "get",
@@ -144,7 +140,6 @@ function View({ isLogin }) {
     }).then((res) => {
       setData(res.data.data);
       setAnswers(res.data.data.answers);
-      console.log(res.data.data);
     });
 
     axios({
@@ -213,7 +208,12 @@ function View({ isLogin }) {
             </div>
             {answers
               ? answers.map((answerData, idx) => (
-                  <Answer key={idx} answerData={answerData} isLogin={isLogin} />
+                  <Answer
+                    key={idx}
+                    answerData={answerData}
+                    isLogin={isLogin}
+                    handleChange={handleChange}
+                  />
                 ))
               : null}
           </AnswerListContainer>

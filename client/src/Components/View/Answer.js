@@ -82,19 +82,25 @@ const AnswerContainer = styled.div`
     }
 `;
 
-function Answer({ answerData, id, isLogin }) {
+function Answer({ answerData, id, isLogin, handleChange }) {
   const [content, setContent] = useState(answerData.answerContent);
   const cookie = new Cookie();
   const score = answerData.score;
   const vote = answerData.vote;
   const subject = "answers";
-  const aid = answerData.id;
+  const aid = answerData.answerId;
 
   return (
     <AnswerContainer>
       <div className="answer-content">
         <div className="answer-content-vote">
-          <Vote score={score} vote={vote} subject={subject} aid={aid} />
+          <Vote
+            score={score}
+            vote={vote}
+            subject={subject}
+            aid={aid}
+            handleChange={handleChange}
+          />
         </div>
         <div className="answer-content-post">
           <Editor value={content} setValue={setContent} />
